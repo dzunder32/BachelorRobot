@@ -36,16 +36,7 @@
 #ifndef COMBINED_API_HPP
 #define COMBINED_API_HPP
 
-// Expose classes/methods as public in the library by using the tag 'CAPICOMMON_API'
-#ifdef _WIN32
-	#ifdef CAPICOMMON_EXPORTS
-		#define CAPICOMMON_API __declspec(dllexport)
-	#else
-		#define CAPICOMMON_API __declspec(dllimport)
-	#endif
-#else
-	#define CAPICOMMON_API __attribute__ ((visibility ("default")))
-#endif
+
 
 #include <string>
 #include <vector>
@@ -97,7 +88,7 @@ namespace CommBaudRateEnum
  *          and portability. Complexities like threading were intentionally avoided.
  *          We hope you will find this sample useful. Happy coding!
  */
-class CAPICOMMON_API CombinedApi
+class CombinedApi
 {
 public:
 	/**

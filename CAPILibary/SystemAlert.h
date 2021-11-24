@@ -36,16 +36,7 @@
 #ifndef SYSTEM_ALERT_HPP
 #define SYSTEM_ALERT_HPP
 
-// Expose classes/methods as public in the library by using the tag 'CAPICOMMON_API'
-#ifdef _WIN32
-	#ifdef CAPICOMMON_EXPORTS
-		#define CAPICOMMON_API __declspec(dllexport)
-	#else
-		#define CAPICOMMON_API __declspec(dllimport)
-	#endif
-#else
-	#define CAPICOMMON_API __attribute__ ((visibility ("default")))
-#endif
+
 
 #include <stdint.h> // for uint8_t etc...
 #include <string>
@@ -53,7 +44,7 @@
 /**
  * @brief This class represents a system condition that may impact tracking performance.
  */
-class CAPICOMMON_API SystemAlert
+class SystemAlert
 {
 public:
 	//! Returns the std::string representation of the system alert

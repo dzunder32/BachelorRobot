@@ -65,7 +65,7 @@ bool ComConnection::connect(const char* comPort)
 {
 	char portName[10] = {'\0'};
     sprintf_s( portName, "\\\\.\\%s", comPort );
-	hComm_ = CreateFile( portName,		// The file name
+    hComm_ = CreateFile( (wchar_t*)portName,		// The file name
 						GENERIC_READ | GENERIC_WRITE, // Read/Write mode
 						0,				// exclusive-access
 						0,				// no security attrs

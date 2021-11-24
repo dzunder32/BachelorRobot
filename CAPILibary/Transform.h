@@ -36,16 +36,7 @@
 #ifndef TRANSFORM_HPP
 #define TRANSFORM_HPP
 
-// Expose classes/methods as public in the library by using the tag 'CAPICOMMON_API'
-#ifdef _WIN32
-	#ifdef CAPICOMMON_EXPORTS
-		#define CAPICOMMON_API __declspec(dllexport)
-	#else
-		#define CAPICOMMON_API __declspec(dllimport)
-	#endif
-#else
-	#define CAPICOMMON_API __attribute__ ((visibility ("default")))
-#endif
+
 
 #include <string>
 #include <stdint.h> // for uint8_t etc...
@@ -61,7 +52,7 @@ static const double MAX_NEGATIVE = -3.0E28;
  * @details Be sure to check the transform status. When missing, the transform parameters are
  *          invalid and should be set to BAD_FLOAT.
  */
-class CAPICOMMON_API Transform
+class  Transform
 {
 public:
 	Transform();
@@ -101,7 +92,7 @@ public:
 namespace TransformStatus
 {
 	//! The least significant eight bits of the transform status is an error code in this list
-	enum CAPICOMMON_API values { Enabled = 0x00,
+    enum  values { Enabled = 0x00,
 				  PartiallyOutOfVolume = 0x03,
 				  OutOfVolume = 0x09,
 				  TooFewMarkers = 0x0D,
@@ -117,7 +108,7 @@ namespace TransformStatus
 				  ToolUnplugged = 0x21 };
 
 	//! Converts the given error code to its std::string representation
-	CAPICOMMON_API std::string toString(uint8_t errorCode);
+    std::string toString(uint8_t errorCode);
 }
 
 #endif // TRANSFORM_HPP

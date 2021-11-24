@@ -44,3 +44,6 @@ HEADERS += \
         GbfSystemAlert.h \
         Connection.h \
         SystemCRC.h \
+ 	capi_global.h
+
+LIBS += -lws2_32

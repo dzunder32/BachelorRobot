@@ -53,16 +53,7 @@
 #pragma warning( disable: 4251 )
 #endif
 
-// Expose classes/methods as public in the library by using the tag 'CAPICOMMON_API'
-#ifdef _WIN32
-	#ifdef CAPICOMMON_EXPORTS
-		#define CAPICOMMON_API __declspec(dllexport)
-	#else
-		#define CAPICOMMON_API __declspec(dllimport)
-	#endif
-#else
-	#define CAPICOMMON_API __attribute__ ((visibility ("default")))
-#endif
+
 
 #include <string>
 #include <vector>
@@ -77,7 +68,7 @@
  * @details Depending on how the data was gathered, some information may not be available.
  *          For example, BX returns no button information.
  */
-class CAPICOMMON_API ToolData
+class ToolData
 {
 public:
 	//! Constructor that creates an empty ToolData
@@ -138,7 +129,7 @@ public:
 
 namespace SystemStatus
 {
-	enum CAPICOMMON_API value { CommSyncError = 0x0000,
+    enum  value { CommSyncError = 0x0000,
 								// Reserved 0x0001, 0x0002
 								ProcessingException = 0x0004,
 								// Reserved 0x0008, 0x0010
@@ -148,12 +139,12 @@ namespace SystemStatus
 								TemperatureOutOfRange = 0x0100 };
 
 	//! Return the systemStatus as a string of concatenated flags. Eg: DiagnosticPending|TemperatureOutOfRange
-	CAPICOMMON_API std::string toString(uint16_t systemStatus);
+     std::string toString(uint16_t systemStatus);
 }
 
 namespace FrameType
 {
-	enum CAPICOMMON_API value { Dummy = 0x00,
+    enum  value { Dummy = 0x00,
 								ActiveWireless = 0x01,
 								Passive = 0x02,
 								Active = 0x03,
@@ -163,15 +154,15 @@ namespace FrameType
 								Magnetic = 0x07 };
 
 	//! Converts the given error code to its std::string representation
-	CAPICOMMON_API std::string toString(uint8_t frameType);
+     std::string toString(uint8_t frameType);
 }
 
 namespace ButtonState
 {
-	enum CAPICOMMON_API value {Open = 0x00, Closed = 0x01};
+    enum  value {Open = 0x00, Closed = 0x01};
 
 	//! Converts the enum to its std::string representation
-	CAPICOMMON_API std::string toString(uint8_t state);
+     std::string toString(uint8_t state);
 }
 
 #endif // TOOL_DATA_HPP

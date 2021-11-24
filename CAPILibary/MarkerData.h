@@ -36,16 +36,7 @@
 #ifndef MARKER_DATA_HPP
 #define MARKER_DATA_HPP
 
-// Expose classes/methods as public in the library by using the tag 'CAPICOMMON_API'
-#ifdef _WIN32
-	#ifdef CAPICOMMON_EXPORTS
-		#define CAPICOMMON_API __declspec(dllexport)
-	#else
-		#define CAPICOMMON_API __declspec(dllimport)
-	#endif
-#else
-	#define CAPICOMMON_API __attribute__ ((visibility ("default")))
-#endif
+
 
 #include <string>
 #include <stdint.h> // for uint8_t etc...
@@ -53,7 +44,7 @@
 /**
  * @brief This class represents the 3D location of a marker
  */
-class CAPICOMMON_API MarkerData
+class MarkerData
 {
 public:
 	MarkerData();
@@ -71,7 +62,7 @@ public:
 
 namespace MarkerStatus
 {
-	enum CAPICOMMON_API values { OK = 0x00,
+    enum values { OK = 0x00,
 				  Missing = 0x01,
 				  OutOfVolume = 0x05,
 				  PossiblePhantom = 0x06,
@@ -79,7 +70,7 @@ namespace MarkerStatus
 				  SaturatedOutOfVolume = 0x08};
 
 	//! Converts the given enum value to its std::string representation
-	CAPICOMMON_API std::string toString(uint16_t enumValue);
+     std::string toString(uint16_t enumValue);
 }
 
 

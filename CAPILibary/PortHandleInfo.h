@@ -54,16 +54,7 @@
 #pragma warning( disable: 4251 )
 #endif
 
-// Expose classes/methods as public in the library by using the tag 'CAPICOMMON_API'
-#ifdef _WIN32
-	#ifdef CAPICOMMON_EXPORTS
-		#define CAPICOMMON_API __declspec(dllexport)
-	#else
-		#define CAPICOMMON_API __declspec(dllimport)
-	#endif
-#else
-	#define CAPICOMMON_API __attribute__ ((visibility ("default")))
-#endif
+
 
 
 #include <string>
@@ -73,7 +64,7 @@
 /**
  * @brief This class stores information about a tool loaded in a specific port.
  */
-class CAPICOMMON_API PortHandleInfo
+class PortHandleInfo
 {
 public:
 	//! Constructs a PortHandleInfo with only the most basic information

@@ -68,7 +68,8 @@ PolarisV::PolarisV()
         configureUserParameters();
 
         // Various tool types are configured in slightly different ways
-        configurePassiveTools("8700248_kurzeSpitze.rom");
+        configurePassiveTools("RV6SLPolarisStift2.rom");
+        configurePassiveTools("kurze_Spitze_Test.rom");
         //configureActiveWirelessTools();
         //if (scu_hostname.length() > 0)
         //{
@@ -319,6 +320,10 @@ void PolarisV::printTrackingData()
     for (int i = 0; i < toolData.size(); i++)
     {
         printToolData(toolData[i]);
+        if(_singleFrame)
+        {
+            _tools.push_back(PolarisTool(toolData[i]));
+        }
     }
 }
 
@@ -491,6 +496,34 @@ int PolarisV::startStreaming()
     return 0;
 }
 
+int PolarisV::getFrame()
+{
+
+    // Once the system is put into tracking mode, data is returned for whatever tools are enabled
+    // Start tracking, output a few frames of data, and stop tracking
+    std::cout << std::endl << "Entering tracking mode and collecting data..." << std::endl;
+    _singleFrame = true;
+    _tools.clear();
+    onErrorPrintDebugMessage("capi.startTracking()", capi.startTracking());
+
+    printTrackingData();
+
+    _singleFrame = false;
+    // Stop tracking (back to configuration mode)
+    std::cout << std::endl << "Leaving tracking mode and returning to configuration mode..." << std::endl;
+    onErrorPrintDebugMessage("capi.stopTracking()", capi.stopTracking());
+    emit streamingStopped();
+
+//    for(int i = 0;i<(_tools.length()-1);i++)
+//    {
+//        qDebug()<<static_cast<QString>(_tools[i])<<static_cast<QQuaternion>(_tools[i])<<static_cast<QMatrix4x4>(_tools[i]);
+//    }
+
+    // Give the user a chance to view the output in the terminal before exiting
+    std::cout << "CAPI complete." << std::endl;
+    return 0;
+}
+
 int PolarisV::getData(int number)
 {
 
@@ -512,6 +545,7 @@ int PolarisV::getData(int number)
 
     // Give the user a chance to view the output in the terminal before exiting
     std::cout << "CAPI complete." << std::endl;
+
     return 0;
 }
 

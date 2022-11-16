@@ -11,10 +11,14 @@
 #include <string>
 #include <QThread>
 #include <QTimer>
+#include <QQuaternion>
+#include <QMatrix4x4>
+
 
 #include "CombinedApi.h"
 #include "PortHandleInfo.h"
 #include "ToolData.h"
+#include "polaristool.h"
 
 class PolarisV : public QObject
 {
@@ -29,12 +33,15 @@ public slots:
     int startStreaming();
     void writeCSV(std::string fileName, int numberOfLines);
     int getData(int number);
+    int getFrame();
 
 private:
     CombinedApi capi;
     bool apiSupportsBX2;
     bool _streaming;
+    bool _singleFrame = false;
     QTimer *timer = new QTimer(this);
+    QVector<PolarisTool> _tools;
 
     void sleepSeconds(unsigned numSeconds);
     void onErrorPrintDebugMessage(std::string methodName, int errorCode);

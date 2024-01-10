@@ -2,12 +2,15 @@
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>355</width>
-    <height>268</height>
+    <width>575</width>
+    <height>370</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -49,17 +52,19 @@
     </item>
    </layout>
   </widget>
-  <widget class="QMenuBar" name="menubar">
+  <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>355</width>
+     <width>575</width>
      <height>21</height>
     </rect>
    </property>
+   <property name="nativeMenuBar">
+    <bool>false</bool>
+   </property>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
  <connections/>

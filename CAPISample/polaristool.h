@@ -1,4 +1,4 @@
-#ifndef POLARISTOOL_H
+ #ifndef POLARISTOOL_H
 #define POLARISTOOL_H
 
 #include <QObject>

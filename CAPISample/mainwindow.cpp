@@ -10,37 +10,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     polaris = new PolarisV();
 
-    Widget3D *widget3d = new Widget3D();
-    widget3d->ShowAsSubWindow();
-
-    CoordinateSystem *coordSystem=new CoordinateSystem();
-    coordSystem->setLength(6000);
-    coordSystem->setNegativeAxis(false);
-    widget3d->addObject(coordSystem,QVector3D(0,0,0),QQuaternion(0,0,0,0));
-
-    RV6SL *robot =new RV6SL();
-    Rv6slKinematik* roboKin= new Rv6slKinematik(robot);
-    PolarisPenRv6sl* pen = new PolarisPenRv6sl();
-    roboKin->setTool(*pen);
-    ControlPanel *robotPanel= new ControlPanel(roboKin);
-    robotPanel->showAsSubWindow();
-    robotPanel->setWindowTitle("RV-6SL");
-
-    //Verbindung mit dem echten Roboter
-    Robot* realRobot =new Robot("143.93.135.15",10001);
-    realRobot->ConnectKinematik(roboKin);
-    RobotControl* robotControlPanel =new RobotControl(realRobot);
-    robotControlPanel->showAsSubWindow();
-    robotControlPanel->setWindowTitle("RV-6SL");
-
-    LinearAxis* linAxis =new LinearAxisRV6SL();
-
-    robot->setTranslation(QVector3D(-1600,0,0));
-    robot->addTool(pen);
-    robot->addLinearAxis(linAxis);
-
-    widget3d->addObject(robot);
-
     polaris->moveToThread(&_polarisThread);
     connect(&_polarisThread, &QThread::finished, this,&MainWindow::threadFinished);
     connect(polaris, &PolarisV::streamingStopped, this, &MainWindow::stopThread);
@@ -49,9 +18,25 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(this, &MainWindow::writeCSV, polaris, &PolarisV::writeCSV);
     connect(this, &MainWindow::getLines, polaris, &PolarisV::getData);
     connect(this, &MainWindow::getFrame, polaris, &PolarisV::getFrame);
-
     connect(ui->pbStreaming,&QPushButton::pressed,this,&MainWindow::streaming);
     connect(ui->pbMarkerposition,&QPushButton::pressed,this,&MainWindow::detektMarkers);
+//    QMenu *fileMenu = new QMenu("File", this);
+
+//    // Create a new QAction
+//    QAction *newAct = new QAction("New", this);
+
+//    // Add the QAction to the QMenu
+//    fileMenu->addAction(newAct);
+
+
+//    // Add the QMenu to the menu bar
+//    menuBar()->addMenu(fileMenu);
+
+//    // Set the menu bar for the window
+//    setMenuBar(menuBar());
+
+//    connect(newAct,&QAction::triggered,this,&MainWindow::addRomFile);
+//    connect(this,&MainWindow::sendRom,polaris,&PolarisV::setRomFile);
 
 
 }
@@ -60,7 +45,6 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
-
 
 void MainWindow::streaming()
 {
@@ -99,11 +83,60 @@ void MainWindow::stopThread()
 void MainWindow::getData(QString data)
 {
     if(!data.contains("Missing"))
-
+    {
         ui->textEdit->append(data);
+        dataList=data.split(',');
+        qDebug()<<"dataList:"<<dataList;
+//        qDebug()<<"ToolHandle"<<dataList[1];
+        for (int i=4;i<12;i++){
+            RotTransData.append(dataList[i].toDouble());
+        }
+        if (dataList[1]=="Port:1")
+        {
+             emit sendPolarisData(RotTransData);
+            qDebug()<<"worked";
+        }
+        else
+        {
+            emit sendToolData(RotTransData);
+        qDebug()<<"also worked!";
+        }
+        qDebug()<<"the Data:"<<RotTransData;
+    }
+    RotTransData.clear();
 }
 
 void MainWindow::on_pushButton_clicked()
 {
     ui->textEdit->clear();
+}
+
+void MainWindow::connectWidget(Widget3D* w)
+{
+    widget=w;
+//    widget->setFileName(polaris->getFileName());
+    connect(this,&MainWindow::sendToolData,widget,&Widget3D::getToolData);
+    connect(this,&MainWindow::sendPolarisData,widget,&Widget3D::getPolarisData);
+}
+
+void MainWindow::addRomFile()
+{
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open ROM File"), "/path/to/start/dir", tr("ROM Files(*.rom)"));
+        if (!fileName.isEmpty()) {
+        QFileInfo fileInfo(fileName);
+        QString baseName = fileInfo.baseName();
+        qDebug()<<baseName+".rom";
+        emit sendRom(baseName);
+        }
+}
+void MainWindow::changePDFName()
+{
+    QDialog *dialog = new QDialog(this);
+          QLineEdit *lineEdit = new QLineEdit(dialog);
+          QVBoxLayout *layout = new QVBoxLayout(dialog);
+          layout->addWidget(lineEdit);
+          dialog->setLayout(layout);
+          dialog->exec();
+          QString inputText = lineEdit->text();
+
 }

@@ -25,23 +25,26 @@ class PolarisV : public QObject
     Q_OBJECT
 public:
     PolarisV();
-
     void stopStreaming();
     void configurePassiveTools(QString);
 
+//    QString getFileName();
 public slots:
     int startStreaming();
     void writeCSV(std::string fileName, int numberOfLines);
     int getData(int number);
     int getFrame();
-
+//    void setRomFile(QString rom);
 private:
+//    QString fileName;
     CombinedApi capi;
     bool apiSupportsBX2;
     bool _streaming;
     bool _singleFrame = false;
     QTimer *timer = new QTimer(this);
     QVector<PolarisTool> _tools;
+//    QString passiveTool;
+//    QString default_passiveTool="5_DTrackerW.rom";
 
     void sleepSeconds(unsigned numSeconds);
     void onErrorPrintDebugMessage(std::string methodName, int errorCode);
@@ -59,6 +62,8 @@ private:
 signals:
     void streamingStopped();
     void sendData(QString);
+    void sendToolData(ToolData);
+
 };
 
 #endif // POLARISV_H

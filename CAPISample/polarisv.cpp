@@ -68,8 +68,18 @@ PolarisV::PolarisV()
         configureUserParameters();
 
         // Various tool types are configured in slightly different ways
-        configurePassiveTools("RV6SLPolarisStift2.rom");
-        configurePassiveTools("kurze_Spitze_Test.rom");
+//        if (passiveTool.isEmpty()){
+//            configurePassiveTools(default_passiveTool);
+//        }else{
+//            configurePassiveTools(passiveTool);
+//        }
+//        configurePassiveTools("4_DTracker5.rom");
+//        configurePassiveTools("4_DTracker18.rom");
+//        fileName = "5_1280_3.5mm";
+        configurePassiveTools("5_1280_3.5mm.rom");
+//        configurePassiveTools("kurze_Spitze_Test.rom");
+        configurePassiveTools("NDI_Tracker2.rom");
+
         //configureActiveWirelessTools();
         //if (scu_hostname.length() > 0)
         //{
@@ -85,6 +95,11 @@ PolarisV::PolarisV()
         initializeAndEnableTools();
     }
 }
+
+//QString PolarisV::getFileName()
+//{
+//    return fileName;
+//}
 
 
 /**
@@ -300,7 +315,9 @@ void PolarisV::printToolData(const ToolData& toolData)
     }
     std::string temp=toolDataToCSV(toolData);
     std::cout << temp << std::endl;
+    emit sendToolData(toolData);
     emit sendData(QString::fromStdString(temp));
+
 }
 
 /**
@@ -523,6 +540,16 @@ int PolarisV::getFrame()
     std::cout << "CAPI complete." << std::endl;
     return 0;
 }
+
+//void PolarisV::setRomFile(QString rom)
+//{
+//fileName=rom;
+//configurePassiveTools();
+////    passiveTool=rom+".rom";
+//initializeAndEnableTools();
+//}
+
+
 
 int PolarisV::getData(int number)
 {

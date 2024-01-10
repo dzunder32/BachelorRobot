@@ -7,13 +7,11 @@ CONFIG -= app_bundle
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-        polarispenrv6sl.cpp \
         polaristool.cpp \
         polarisv.cpp
 
 HEADERS += \
     mainwindow.h \
-    polarispenrv6sl.h \
     polaristool.h \
     polarisv.h
 
@@ -29,18 +27,19 @@ else:unix: LIBS += -L$$OUT_PWD/../CAPILibary/ -lcapi
 INCLUDEPATH += $$PWD/../CAPILibary
 DEPENDPATH += $$PWD/../CAPILibary
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../3DWidget-main/build/widget/release/ -lwidget
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../3DWidget-main/build/widget/debug/ -lwidget
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../widget/release/ -lwidget
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../widget/debug/ -lwidget
 
-INCLUDEPATH += $$PWD/../../3DWidget-main/widget
-DEPENDPATH += $$PWD/../../3DWidget-main/widget
+INCLUDEPATH += $$PWD/../widget
+DEPENDPATH += $$PWD/../widget
+
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../melfaRobots/release/ -lmelfaRobots
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../melfaRobots/debug/ -lmelfaRobots
+
+INCLUDEPATH += $$PWD/../melfaRobots
+DEPENDPATH += $$PWD/../melfaRobots
 
 FORMS += \
     mainwindow.ui
 
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../Robots-main/build/melfaRobots/release/ -lmelfaRobots
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../Robots-main/build/melfaRobots/debug/ -lmelfaRobots
-
-INCLUDEPATH += $$PWD/../../Robots-main/melfaRobots
-DEPENDPATH += $$PWD/../../Robots-main/melfaRobots

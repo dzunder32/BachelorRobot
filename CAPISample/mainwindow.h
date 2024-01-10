@@ -5,15 +5,11 @@
 #include <QThread>
 #include "polarisv.h"
 #include <QObject>
-#include "rv6sl.h"
-#include "rv6slkinematik.h"
-#include "linearaxisrv6sl.h"
 #include "widget3d.h"
-#include "coordinatesystem.h"
-#include "controlpanel.h"
-#include "robotcontrol.h"
-#include "robot.h"
-#include "polarispenrv6sl.h"
+#include "QDebug"
+#include "QVector"
+#include "QQuaternion"
+#include <QFileDialog>
 
 namespace Ui {
 class MainWindow;
@@ -27,27 +23,35 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     PolarisV* polaris;
+    Widget3D* widget;
+    QVector <double> RotTransData;
+    void connectWidget(Widget3D*);
 
+
+public slots:
+    void changePDFName();
 private slots:
     void threadFinished();
     void stopThread();
     void getData(QString);
     void streaming();
     void detektMarkers();
-
     void on_pushButton_clicked();
-
+    void addRomFile();
 private:
     Ui::MainWindow *ui;
     QThread _polarisThread;
     bool isStreaming=false;
+    QStringList dataList;
 
 signals:
     void startStreaming();
     void getFrame();
     void writeCSV(std::string name,int lines);
     void getLines(int lines);
-
+    void sendToolData(QVector <double> data);
+    void sendPolarisData(QVector <double> data);
+    void sendRom(QString rom);
 };
 
 #endif // MAINWINDOW_H

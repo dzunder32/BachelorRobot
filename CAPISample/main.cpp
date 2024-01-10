@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
     static_cast<Qt3DCore::QTransform*>(CSystem->components()[1])->setTranslation(QVector3D(200,-200,0));
 
 
-//MotherChrist
+//MotherChrist i like you
 
 
 

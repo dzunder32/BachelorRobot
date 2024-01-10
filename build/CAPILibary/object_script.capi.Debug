@@ -1,0 +1,17 @@
+debug/MarkerData.o
+debug/GbfButton1D.o
+debug/ToolData.o
+debug/SystemAlert.o
+debug/Transform.o
+debug/CombinedApi.o
+debug/TcpConnection.o
+debug/GbfFrame.o
+debug/BufferedReader.o
+debug/SystemCRC.o
+debug/GbfData6D.o
+debug/GbfSystemAlert.o
+debug/GbfContainer.o
+debug/ComConnection.o
+debug/GbfData3D.o
+debug/GbfComponent.o
+debug/PortHandleInfo.o

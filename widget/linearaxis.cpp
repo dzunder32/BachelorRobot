@@ -30,8 +30,48 @@ LinearAxisRV6SL::LinearAxisRV6SL(Qt3DCore::QEntity* parent)
     auto* tempTrans2 =new Qt3DCore::QTransform();
     tempTrans2->setTranslation(QVector3D(0,144,70.11));
     tempEnt2->addComponent(tempTrans2);
+    sled_pos_inBase();
+
     Joint7=tempTrans1;
     Sled=tempEnt2;
 
 }
+
+void LinearAxisRV6SL::showAxes(Qt3DCore::QEntity *Ent1, Qt3DCore::QEntity *Ent2)
+{
+    //Coordinaten System des Unterbaus
+    substructure_CSystem = new CoordinateSystem(_substructure);
+    substructure_CSystem->setLength(500);
+    substructure_CSystem->setNegativeAxis(false);
+
+    axis_CSystem = new CoordinateSystem(Ent1);
+    axis_CSystem->setLength(500);
+    axis_CSystem->setNegativeAxis(false);
+
+    sled_CSystem = new CoordinateSystem(Ent2);
+    sled_CSystem->setLength(500);
+    sled_CSystem->setNegativeAxis(false);
+}
+
+void LinearAxisRV6SL::sled_pos_inBase(){
+
+    auto* tempEnt3 =new Qt3DCore::QEntity(static_cast<Qt3DCore::QEntity*>(this));
+    auto* tempTrans3 =new Qt3DCore::QTransform();
+    tempEnt3->addComponent(tempTrans3);
+    QMatrix3x3 rotationMatrix =_substructure->rotation().toRotationMatrix(); // Your rotation matrix
+    //    QVector3D vector=_sled->translation() + tempTrans2->translation() + _axis->translation();
+    QVector3D vector= _axis->translation() ;
+
+    QVector4D vector4D = QVector4D(vector, 1.0);
+    QVector4D result4D = QMatrix4x4(rotationMatrix) * vector4D;
+    QVector3D result = result4D.toVector3D();
+    qDebug()<<result;
+    position = result + _substructure->translation() + QVector3D(0,144,0);
+    tempTrans3->setTranslation(position);
+    CoordinateSystem *CSystem = new CoordinateSystem(tempEnt3);
+    CSystem->setLength(500);
+    CSystem->setNegativeAxis(false);
+
+}
+
 

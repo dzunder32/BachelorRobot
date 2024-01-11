@@ -78,8 +78,9 @@ int main(int argc, char *argv[])
 
     robot2->setTranslation(QVector3D(-1600,0,0));
     robot2->addTool(camera2);
-    robot2->addLinearAxis(linAxis);
-    widget3d->addObject(robot2);
+//    robot2->addLinearAxis(linAxis);
+//    widget3d->addObject(robot2);
+    widget3d->addObject(linAxis);
 
     //Polaris als Koordinatensystem --------------------------------------------------------------
     CoordinateSystem *polaris=new CoordinateSystem;

@@ -75,12 +75,17 @@ int main(int argc, char *argv[])
     //Hinzufügen einer Linearachse
 
     LinearAxisRV6SL* linAxis =new LinearAxisRV6SL();
-
-    robot2->setTranslation(QVector3D(-1600,0,0));
+    LinearAxisRV6SL* linAxis2 =new LinearAxisRV6SL();
+//    robot2->setTranslation(QVector3D(-1600,0,0));
     robot2->addTool(camera2);
-//    robot2->addLinearAxis(linAxis);
-//    widget3d->addObject(robot2);
+    robot2->addLinearAxis(linAxis2);
+//    qDebug()<<linAxis2->rotation().toRotationMatrix();
+    linAxis2->set_sled_position(linAxis2->rotation().toRotationMatrix());
+    qDebug()<<linAxis2->sled_position;
+    widget3d->addObject(robot2);
     widget3d->addObject(linAxis);
+
+//    linAxis->setTranslation(QVector3D(-400,0,0));
 
     //Polaris als Koordinatensystem --------------------------------------------------------------
     CoordinateSystem *polaris=new CoordinateSystem;

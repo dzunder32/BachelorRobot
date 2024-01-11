@@ -60,18 +60,28 @@ void LinearAxisRV6SL::sled_pos_inBase(){
     tempEnt3->addComponent(tempTrans3);
     QMatrix3x3 rotationMatrix =_substructure->rotation().toRotationMatrix(); // Your rotation matrix
     //    QVector3D vector=_sled->translation() + tempTrans2->translation() + _axis->translation();
-    QVector3D vector= _axis->translation() ;
+     QVector3D sled_vector= _axis->translation();
 
-    QVector4D vector4D = QVector4D(vector, 1.0);
-    QVector4D result4D = QMatrix4x4(rotationMatrix) * vector4D;
-    QVector3D result = result4D.toVector3D();
-    qDebug()<<result;
-    position = result + _substructure->translation() + QVector3D(0,144,0);
-    tempTrans3->setTranslation(position);
+    sled_position = rotate_vector(sled_vector,rotationMatrix) +_substructure->translation() + QVector3D(0,144,0);
+    qDebug()<<sled_position;
+    tempTrans3->setTranslation(sled_position);
     CoordinateSystem *CSystem = new CoordinateSystem(tempEnt3);
     CSystem->setLength(500);
     CSystem->setNegativeAxis(false);
 
 }
 
+QVector3D LinearAxisRV6SL::rotate_vector(QVector3D vector,QMatrix3x3 rotationMatrix)
+{
+    QVector4D vector4D = QVector4D(vector, 1.0);
+    QVector4D result4D = QMatrix4x4(rotationMatrix) * vector4D;
+    QVector3D result = result4D.toVector3D();
 
+    return result;
+
+}
+void LinearAxisRV6SL::set_sled_position(QMatrix3x3 rotationMatrix)
+{
+    sled_position=rotate_vector(sled_position, rotationMatrix);
+    qDebug()<<sled_position;
+}

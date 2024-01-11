@@ -10,6 +10,7 @@ public:
     QVector2D Limits;
     Qt3DCore::QEntity* Sled;
 
+
 };
 
 #endif // LINEARAXIS_H

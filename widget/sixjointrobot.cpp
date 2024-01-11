@@ -67,6 +67,7 @@ void SixJointRobot::addLinearAxis(LinearAxis *axis)
     rot.rotate(90,0,0,1);
     _baseCoordSystem->setMatrix(rot);
     axis->setRotationX(90);
+
     this->append(axis->Joint7);
     _axis=axis;
 }

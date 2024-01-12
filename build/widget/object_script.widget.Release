@@ -1,7 +1,7 @@
 release/cameracontroller.o
 release/coordinatesystem.o
 release/kinectcamera.o
-release/linearaxis.o
+release/linearaxisrv6sl.o
 release/liveplot.o
 release/liveplot2.o
 release/qcustomplot.o

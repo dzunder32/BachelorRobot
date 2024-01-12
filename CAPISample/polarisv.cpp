@@ -49,7 +49,7 @@ PolarisV::PolarisV()
         // Print the error and exit if we can't connect to a device
         std::cout << "Connection Failed!" << std::endl;
         std::cout << "Press Enter to continue...";
-        std::cin.ignore();
+//        std::cin.ignore();
     }
     else
     {

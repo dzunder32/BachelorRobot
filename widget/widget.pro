@@ -12,7 +12,7 @@ SOURCES += \
     cameracontroller.cpp\
     coordinatesystem.cpp \
     kinectcamera.cpp \
-    linearaxis.cpp \
+    linearaxisrv6sl.cpp \
     liveplot.cpp \
     liveplot2.cpp \
     qcustomplot.cpp \

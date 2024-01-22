@@ -37,9 +37,11 @@ private:
     QVector3D pointRobot,pointBase;
     int counter=0;
     Qt3DCore::QTransform *trans_plane;
+    QVector3D xVec_plane,yVec_plane;
 
 
     void pointsBase2Robot(QVector<QVector3D> points_vec);
+    void pointsInPlane(QVector<QVector2D> points);
 signals:
     void passPosition(double x, double y, double z , double a, double b , double c, double l1);
 

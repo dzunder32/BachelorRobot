@@ -101,8 +101,8 @@ int main(int argc, char *argv[])
     plane->setLength(200);
     plane->setNegativeAxis(false);
     plane->setTranslation(linAxis2->sled_position+QVector3D(0,-500,700));
-    plane->setRotation(QQuaternion::fromAxisAndAngle(QVector3D(1,0,0),-90));
-    plane->setRotation(QQuaternion::fromAxisAndAngle(QVector3D(0,0,1),180));
+    plane->setRotation(QQuaternion::fromEulerAngles(QVector3D(-90,180,0)));
+//    plane->setRotation(QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180));
     widget3d->addObject(plane/*,linAxis2->sled_position+QVector3D(0,-500,700),QQuaternion::fromAxisAndAngle(QVector3D(1,0,0),-90)*/);
     qDebug()<<"trans"<<plane->translation();
     drawL->getPlane(static_cast<Qt3DCore::QTransform *>(plane));

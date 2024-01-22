@@ -28,7 +28,11 @@ DrawLetters::DrawLetters(Kinematik *robot, QWidget *parent) :
 //    pointsBase.push_back(QVector3D(0,0,600));
 //    pointsBase.push_back(QVector3D(0,0,750));
 //    pointsBase.push_back(QVector3D(0,0,800));
-
+//    QVector <QVector2D> points;
+//    for (int i = 0; i<100; i++){
+//        points.push_back(QVector2D(0,i));
+//    }
+//    pointsInPlane(points);
 
     robotMat.rotate(90,QVector3D(0,0,1));
 
@@ -94,7 +98,18 @@ void DrawLetters::getPlane(Qt3DCore::QTransform *plane)
     trans_plane=plane;
     qDebug()<<trans_plane->translation();
     qDebug()<<trans_plane->matrix();
-    qDebug()<<"x:"<<QVector3D(trans_plane->matrix().column(0));
-    qDebug()<<"y:"<<QVector3D(trans_plane->matrix().column(1));
+    /*qDebug()<<"x:"<<*/
+    xVec_plane = QVector3D(trans_plane->matrix().column(0));
+    /*qDebug()<<"y:"<<*/
+    yVec_plane = QVector3D(trans_plane->matrix().column(1));
 
+}
+
+void DrawLetters::pointsInPlane(QVector <QVector2D> points)
+{
+    pointsRobot.clear();
+    for (auto pts:points)
+    {
+        pointsRobot.push_back(trans_plane->translation() + (pts.x()*xVec_plane) + (pts.y()*yVec_plane));
+    }
 }

@@ -8,6 +8,7 @@ ControlPanel::ControlPanel(Kinematik* robot,QWidget *parent) :
 {
 
     _robot=robot;
+    _home();
     ui->setupUi(this);
     // Set Slider, Spinboxes
     connect(robot,&Kinematik::xChanged,ui->sb_x,&QDoubleSpinBox::setValue);
@@ -215,12 +216,6 @@ ControlPanel::ControlPanel(Kinematik* robot,QWidget *parent) :
     connect(ui->PB_J6_minus, &QPushButton::released, this, &ControlPanel::_updateRobot);
     connect(ui->PB_J7_minus, &QPushButton::released, this, &ControlPanel::_updateRobot);
 
-    //Next Tab:Mov2Point
-    RotatedPoint= new CoordinateSystem();
-    RotatedPoint->setLength(100);
-//    connect(ui->Invers_pushButton,&QPushButton::clicked,[=]{RotatedPoint->setTranslation(
-//    QVector3D(ui->lineEdit_X->text().toFloat(),ui->lineEdit_Y->text().toFloat(),ui->lineEdit_Z->text().toFloat()));});
-    connect(ui->Invers_pushButton,&QPushButton::clicked,this,&ControlPanel::setTransRotCoord);
 }
 
 void ControlPanel::_updateRobot()
@@ -329,14 +324,3 @@ void ControlPanel::_setKart()
     ui->spinBox_Flg2->setValue(_robot->flg2());
 }
 
-CoordinateSystem* ControlPanel::getCoord()
-{
-    return RotatedPoint;
-}
-
-void ControlPanel::setTransRotCoord()
-{
-    RotatedPoint->setTranslation(
-        QVector3D(ui->lineEdit_X->text().toFloat(),ui->lineEdit_Y->text().toFloat(),ui->lineEdit_Z->text().toFloat()));
-    RotatedPoint->setRotation(QQuaternion::fromEulerAngles(QVector3D(ui->lineEdit_B->text().toFloat(),ui->lineEdit_A->text().toFloat(),ui->lineEdit_C->text().toFloat())));
-}

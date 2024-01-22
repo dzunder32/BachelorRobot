@@ -9,7 +9,7 @@ public:
     Qt3DCore::QTransform* Joint7;
     QVector2D Limits;
     Qt3DCore::QEntity* Sled;
-
+    QVector3D sled_position;
 
 };
 

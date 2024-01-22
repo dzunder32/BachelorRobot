@@ -51,7 +51,7 @@ public:
     void setJ7(double var){RobotPosition::setJ7(var);direct();_updateKart();updateView();}
 
     void setJoints(double j1,double j2, double j3 ,double j4 ,double j5, double j6, double j7){RobotPosition::setJoints(j1,j2,j3,j4,j5,j6,j7);direct();_updateKart();updateView();}
-    void setPoint(double x,double y, double z ,double a ,double b, double c, double l1){RobotPosition::setPoint(x,y,z,a,b,c,l1);invers();_updateJoints();updateView();}
+    void setPoint(double x,double y, double z ,double a ,double b, double c, double l1){qDebug()<<"now!";RobotPosition::setPoint(x,y,z,a,b,c,l1);invers();_updateJoints();updateView();}
     void setTransformationMatrix(QMatrix4x4 T){QVector3D ew=CalculateEw(T);QVector3D xyz=CalculateXYZ(T);setPoint(xyz.x(),xyz.y(),xyz.z(),ew.x(),ew.y(),ew.z(),l1());}
 
     QVector<Qt3DCore::QTransform*>* getTransformObjectJoints(){return _joints;}

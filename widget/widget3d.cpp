@@ -12,7 +12,7 @@ Widget3D::Widget3D(QWidget *parent) : QWidget(parent)
     // Kamera
     _cameraEntity = _view->camera();
     _cameraEntity->lens()->setPerspectiveProjection(50.0f, 16.0f/9.0f, 0.1f, 2000.0f);
-    _cameraEntity->setPosition(QVector3D(0.0f, 310.0f, 1000.0f));
+    _cameraEntity->setPosition(QVector3D(-1500.0f, 1700.0f, 1500.0f));
     _cameraEntity->setUpVector(QVector3D(0, 0, 1));
     _cameraEntity->setViewCenter(QVector3D(0, 0, 0));
     _cameraEntity->setFarPlane(20000);
@@ -113,19 +113,14 @@ void Widget3D::getToolData(QVector <double> data)
 
 void Widget3D::getPolarisData(QVector <double> data)
 {
-    float pitch,yaw,roll;
-    QQuaternion(data[0],data[1],data[2],data[3]).getEulerAngles(&pitch,&yaw,&roll);
-    emit updatePlt({roundDecimalPlaces(pitch),roundDecimalPlaces(yaw),roundDecimalPlaces(roll)});
-    emit updatePlt2({data[4],data[5],data[6]});
+//    float pitch,yaw,roll;
+//    QQuaternion(data[0],data[1],data[2],data[3]).getEulerAngles(&pitch,&yaw,&roll);
+//    emit updatePlt({roundDecimalPlaces(pitch),roundDecimalPlaces(yaw),roundDecimalPlaces(roll)});
+//    emit updatePlt2({data[4],data[5],data[6]});
     PolarisMatrix=DataMatrix(PolarisVals,data);
     trans_polaris->setMatrix(trans_position->matrix()*PolarisMatrix.inverted());
 }
 
-
-void Widget3D::QuatRotation(QQuaternion quat)
-{
-    emit trans_tool->rotationChanged(quat);
-}
 
 QVector <double> Widget3D::meanVector(QVector <QVector <double>> &vec,QVector <double> data)
 {
@@ -171,3 +166,8 @@ void Widget3D::setFileName(QString name)
     livePlot2->setConfigName(name);
 }
 
+void Widget3D::setViewCenter(QVector3D point)
+{
+    _cameraEntity->setViewCenter(point);
+
+}

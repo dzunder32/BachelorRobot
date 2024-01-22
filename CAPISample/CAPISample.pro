@@ -5,12 +5,14 @@ CONFIG -= app_bundle
 
 
 SOURCES += \
+        drawletters.cpp \
         main.cpp \
         mainwindow.cpp \
         polaristool.cpp \
         polarisv.cpp
 
 HEADERS += \
+    drawletters.h \
     mainwindow.h \
     polaristool.h \
     polarisv.h
@@ -40,6 +42,7 @@ INCLUDEPATH += $$PWD/../melfaRobots
 DEPENDPATH += $$PWD/../melfaRobots
 
 FORMS += \
+    drawletters.ui \
     mainwindow.ui
 
 

@@ -16,11 +16,9 @@ class ControlPanel : public SubWindow
 public:
     explicit ControlPanel(Kinematik *robot, QWidget *parent = nullptr);
     ~ControlPanel();
-    CoordinateSystem* getCoord();
-    void setTransRotCoord();
+
 private:
     Ui::ControlPanel *ui;
-    CoordinateSystem *RotatedPoint;
     Kinematik *_robot;
 
     bool _buttonDown();

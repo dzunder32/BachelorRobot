@@ -61,7 +61,7 @@ PolarisV::PolarisV()
         // Determine if the connected device supports the BX2 command
         determineApiSupportForBX2();
 
-        // Initialize the system. This clears all previously loaded tools, unsaved settings etc...
+        // Initialize the system. This clears all pstd::cin.ignore();reviously loaded tools, unsaved settings etc...
         onErrorPrintDebugMessage("capi.initialize()", capi.initialize());
 
         // Demonstrate getting/setting user parameters

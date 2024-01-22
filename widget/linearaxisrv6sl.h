@@ -12,7 +12,7 @@ public:
     LinearAxisRV6SL(Qt3DCore::QEntity* parent=nullptr);
     void showAxes(Qt3DCore::QEntity* Ent1, Qt3DCore::QEntity* Ent2);
     void getSledPosition();
-    QVector3D sled_position;
+//    QVector3D sled_position;
     QVector3D rotate_vector(QVector3D, QMatrix3x3);
     void set_sled_position(QMatrix3x3 rotationMatrix);
 private:

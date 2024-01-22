@@ -39,10 +39,10 @@ public:
     QVector <double> meanVector(QVector <QVector <double>> &vec,QVector <double> data);
 
     void setFileName(QString name);
+    void setViewCenter(QVector3D point);
 public slots:
     void getToolData(QVector <double>);
     void getPolarisData(QVector <double>);
-    void QuatRotation(QQuaternion);
 
 private:
     bool trackData=false;

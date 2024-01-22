@@ -8,16 +8,17 @@
 #include "kinectcamera.h"
 #include "rv6slkinematik.h"
 #include "controlpanel.h"
+#include "drawletters.h"
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    MainWindow *w=new MainWindow;
+//    MainWindow *w=new MainWindow;
 
-    w->show();
+//    w->show();
     //Erstellen des Widgets -----------------------------------------------------------------------------------------
     Widget3D *widget3d = new Widget3D();
     widget3d->ShowAsSubWindow();
-    w->connectWidget(widget3d);
+//    w->connectWidget(widget3d);
 
     //Welt-Koordinatensystem im Raum --------------------------------------------------------------------------------
     CoordinateSystem *coordSystem=new CoordinateSystem();
@@ -37,29 +38,8 @@ int main(int argc, char *argv[])
     static_cast<Qt3DCore::QTransform*>(CSystem->components()[1])->setTranslation(QVector3D(200,-200,0));
 
 
-//Yes  Sir!
+//Adawakedawra
 
-
-
-
-//    qDebug()<<CSystem->components();
-//    widget3d->getTransTool(static_cast<Qt3DCore::QTransform*>(CSystem->components()[0]));
-//    auto* trans=CSystem->components()[1];
-//
-//    auto* change = static_cast<Qt3DCore::QTransform*>(trans);
-//    change->setRotationX(30);
-
-
-
-    //STL-Datei hinzufügen ------------------------------------------------------------------------------------------
-    //Aufgabe
-    //Tool.STL mit Translation und Rotation
-
-    //1. Roboter Mesh -----------------------------------------------------------------------------------------------
-//    RV4FL* robot1=new RV4FL();
-//    widget3d->addObject(robot1);
-//    robot1->setTranslation(QVector3D(1600,-1000,0));
-//    robot1->setRotationZ(30);
 
 
     //2. Roboter Mesh -----------------------------------------------------------------------------------------------
@@ -67,22 +47,35 @@ int main(int argc, char *argv[])
     Rv6slKinematik *robot2Kinematik=new Rv6slKinematik(robot2);
     ControlPanel *controlpanel=new ControlPanel(robot2Kinematik);
     controlpanel->show();
-    widget3d->addObject(controlpanel->getCoord());
-
-
+    DrawLetters *drawL = new DrawLetters(robot2Kinematik);
+    drawL->show();
     //Hinzufügen eines Tools in die Grafik
-    KinectCamera* camera2=new KinectCamera();
+    KinectCamera* camera2 = new KinectCamera();
 
     //Hinzufügen einer Linearachse
 
-    LinearAxisRV6SL* linAxis =new LinearAxisRV6SL();
-    LinearAxisRV6SL* linAxis2 =new LinearAxisRV6SL();
+    LinearAxisRV6SL* linAxis  = new LinearAxisRV6SL();
+    LinearAxisRV6SL* linAxis2 = new LinearAxisRV6SL();
 //    robot2->setTranslation(QVector3D(-1600,0,0));
     robot2->addTool(camera2);
     robot2->addLinearAxis(linAxis2);
 //    qDebug()<<linAxis2->rotation().toRotationMatrix();
     linAxis2->set_sled_position(linAxis2->rotation().toRotationMatrix());
     qDebug()<<linAxis2->sled_position;
+    drawL->setSledPos(linAxis2->sled_position);
+    widget3d->setViewCenter(linAxis2->sled_position + QVector3D(0,0,500));
+
+//    QMatrix4x4 robotMat;
+//    robotMat.rotate(90,QVector3D(0,0,1));
+//    robotMat.setColumn(3,QVector4D(linAxis2->sled_position,1));
+//    qDebug()<<"main:"<<robotMat;
+//    qDebug()<<robotMat.inverted();
+
+//    QVector3D pointRobot,pointBase;
+//    pointBase = linAxis2->sled_position + QVector3D(100,0,0);
+//    pointRobot = QVector3D(robotMat.inverted() * pointBase);
+//    qDebug()<<pointRobot;
+
     widget3d->addObject(robot2);
     widget3d->addObject(linAxis);
 
@@ -103,7 +96,16 @@ int main(int argc, char *argv[])
     widget3d->addObject(position,QVector3D(-790,0,800),QQuaternion(1,0,0,0)/*QQuaternion::fromAxisAndAngle(QVector3D(0,0,1),140)**//**//*QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180)*/);
     widget3d->setPosMatrix(static_cast<Qt3DCore::QTransform*>(position->components()[1]));
 
-
+    //Ebene zu Zeichnen
+    CoordinateSystem *plane=new CoordinateSystem;
+    plane->setLength(200);
+    plane->setNegativeAxis(false);
+    plane->setTranslation(linAxis2->sled_position+QVector3D(0,-500,700));
+    plane->setRotation(QQuaternion::fromAxisAndAngle(QVector3D(1,0,0),-90));
+    plane->setRotation(QQuaternion::fromAxisAndAngle(QVector3D(0,0,1),180));
+    widget3d->addObject(plane/*,linAxis2->sled_position+QVector3D(0,-500,700),QQuaternion::fromAxisAndAngle(QVector3D(1,0,0),-90)*/);
+    qDebug()<<"trans"<<plane->translation();
+    drawL->getPlane(static_cast<Qt3DCore::QTransform *>(plane));
 
     return a.exec();
 }

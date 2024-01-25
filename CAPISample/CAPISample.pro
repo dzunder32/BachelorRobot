@@ -5,6 +5,7 @@ CONFIG -= app_bundle
 
 
 SOURCES += \
+        draw.cpp \
         drawletters.cpp \
         main.cpp \
         mainwindow.cpp \
@@ -12,6 +13,7 @@ SOURCES += \
         polarisv.cpp
 
 HEADERS += \
+    draw.h \
     drawletters.h \
     mainwindow.h \
     polaristool.h \

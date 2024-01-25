@@ -1,29 +1,33 @@
 #include "drawletters.h"
 #include "ui_drawletters.h"
 
-DrawLetters::DrawLetters(Kinematik *robot, QWidget *parent) :
+DrawLetters::DrawLetters(Kinematik *robot, QVector3D sled_pos, Qt3DCore::QTransform* plane, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::DrawLetters)
 {
     ui->setupUi(this);
-    _robot=robot;
+//    _robot=robot;
+    _draw = new Draw(robot,sled_pos,plane);
+    _draw->moveToThread(&robotThread);
 //    _robot->moveToThread(&robotThread);
-    this->moveToThread(&robotThread);
-    connect(&robotThread,  &QThread::finished, _robot,&QObject::deleteLater);
-    timer=new QTimer;
+//    this->moveToThread(&robotThread);
+    connect(&robotThread,  &QThread::finished, _draw,&QObject::deleteLater);
+//    timer=new QTimer;
 //    timer->moveToThread(&robotThread);
-    connect(timer, &QTimer::timeout,this, &DrawLetters::onTimeout);
+//    connect(timer, &QTimer::timeout,this, &DrawLetters::onTimeout);
 //    connect(&robotThread, &QThread::started, _robot, &Kinematik::startTimer);
-    connect(this, &DrawLetters::passPosition, _robot, &Kinematik::setPoint);
+//    connect(this, &DrawLetters::passPosition, _robot, &Kinematik::setPoint);
     robotThread.start();
-    a=0;
-    b=0;
-    c=0;
-    l1=0;
+//    a=0;
+//    b=0;
+//    c=0;
+//    l1=0;
 
-    for (int i = 700;i<=1000; i+=1 ){
-        pointsBase.push_back(QVector3D(0,0,i));
-    }
+//    for (int i = 700;i<=1000; i+=1 ){
+//        pointsBase.push_back(QVector3D(0,0,i));
+//    }
+
+
 
 //    pointsBase.push_back(QVector3D(0,0,600));
 //    pointsBase.push_back(QVector3D(0,0,750));
@@ -34,7 +38,7 @@ DrawLetters::DrawLetters(Kinematik *robot, QWidget *parent) :
 //    }
 //    pointsInPlane(points);
 
-    robotMat.rotate(90,QVector3D(0,0,1));
+//    robotMat.rotate(90,QVector3D(0,0,1));
 
 }
 
@@ -52,11 +56,11 @@ void DrawLetters::setPoints(QVector<QVector3D> pts)
 
 void DrawLetters::setSledPos(QVector3D pos)
 {
-    sled_pos=pos;
-    robotMat.setColumn(3,QVector4D(sled_pos,1));
+    _sled_pos=pos;
+    robotMat.setColumn(3,QVector4D(_sled_pos,1));
     qDebug()<<"DrawLetters:"<<robotMat;
     for (auto& point:pointsBase){
-        point+=sled_pos;
+        point+=_sled_pos;
     }
     qDebug()<<"pointsBase:"<<pointsBase;
     pointsBase2Robot(pointsBase);
@@ -75,7 +79,8 @@ void DrawLetters::pointsBase2Robot(QVector <QVector3D> points_vec)
 
 void DrawLetters::on_pushButton_clicked()
 {
-    timer->start(10);
+//    timer->start(10);
+    _draw->TimerStart(ui->lineEdit->text().toInt());
 }
 
 void DrawLetters::onTimeout()
@@ -90,7 +95,8 @@ void DrawLetters::onTimeout()
 
 void DrawLetters::on_pushButton_2_clicked()
 {
-    timer->stop();
+//    timer->stop();
+    _draw->TimerStop();
 }
 
 void DrawLetters::getPlane(Qt3DCore::QTransform *plane)

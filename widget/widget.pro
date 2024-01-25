@@ -15,6 +15,7 @@ SOURCES += \
     linearaxisrv6sl.cpp \
     liveplot.cpp \
     liveplot2.cpp \
+    penholder.cpp \
     qcustomplot.cpp \
     rv4fl.cpp \
     rv6sl.cpp \
@@ -29,6 +30,7 @@ HEADERS += \
     kinectcamera.h \
     liveplot.h \
     liveplot2.h \
+    penholder.h \
     qcustomplot.h \
     rv4fl.h \
     rv6sl.h \

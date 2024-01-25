@@ -2,9 +2,9 @@
 #define DRAWLETTERS_H
 
 #include <QMainWindow>
-#include "kinematik.h"
+//#include "kinematik.h"
 #include "windows.h"
-
+#include "draw.h"
 namespace Ui {
 class DrawLetters;
 }
@@ -14,7 +14,7 @@ class DrawLetters : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit DrawLetters(Kinematik *robot, QWidget *parent = nullptr);
+    explicit DrawLetters(Kinematik *robot, QVector3D sled_pos,Qt3DCore::QTransform* plane, QWidget *parent = nullptr);
     ~DrawLetters();
     void setPoints(QVector <QVector3D>);
     void setSledPos(QVector3D);
@@ -27,12 +27,13 @@ private slots:
 
 private:
     Ui::DrawLetters *ui;
+    Draw *_draw;
     Kinematik *_robot;
     QThread robotThread;
     QTimer *timer;
     QVector <QVector3D> pointsRobot,pointsBase;
     double a,b,c,l1;
-    QVector3D sled_pos;
+    QVector3D _sled_pos;
     QMatrix4x4 robotMat;
     QVector3D pointRobot,pointBase;
     int counter=0;

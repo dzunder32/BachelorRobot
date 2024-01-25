@@ -9,6 +9,7 @@
 #include "rv6slkinematik.h"
 #include "controlpanel.h"
 #include "drawletters.h"
+#include "penholder.h"
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -47,22 +48,23 @@ int main(int argc, char *argv[])
     Rv6slKinematik *robot2Kinematik=new Rv6slKinematik(robot2);
     ControlPanel *controlpanel=new ControlPanel(robot2Kinematik);
     controlpanel->show();
-    DrawLetters *drawL = new DrawLetters(robot2Kinematik);
-    drawL->show();
+
     //Hinzufügen eines Tools in die Grafik
-    KinectCamera* camera2 = new KinectCamera();
+//    KinectCamera* camera2 = new KinectCamera();
+    PenHolder* penHolder = new PenHolder();
 
     //Hinzufügen einer Linearachse
 
     LinearAxisRV6SL* linAxis  = new LinearAxisRV6SL();
     LinearAxisRV6SL* linAxis2 = new LinearAxisRV6SL();
 //    robot2->setTranslation(QVector3D(-1600,0,0));
-    robot2->addTool(camera2);
+//    robot2->addTool(camera2);
+    robot2->addTool(penHolder);
     robot2->addLinearAxis(linAxis2);
 //    qDebug()<<linAxis2->rotation().toRotationMatrix();
     linAxis2->set_sled_position(linAxis2->rotation().toRotationMatrix());
     qDebug()<<linAxis2->sled_position;
-    drawL->setSledPos(linAxis2->sled_position);
+//    drawL->setSledPos(linAxis2->sled_position);
     widget3d->setViewCenter(linAxis2->sled_position + QVector3D(0,0,500));
 
 //    QMatrix4x4 robotMat;
@@ -105,7 +107,8 @@ int main(int argc, char *argv[])
 //    plane->setRotation(QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180));
     widget3d->addObject(plane/*,linAxis2->sled_position+QVector3D(0,-500,700),QQuaternion::fromAxisAndAngle(QVector3D(1,0,0),-90)*/);
     qDebug()<<"trans"<<plane->translation();
-    drawL->getPlane(static_cast<Qt3DCore::QTransform *>(plane));
-
+//    drawL->getPlane(static_cast<Qt3DCore::QTransform *>(plane));
+    DrawLetters *drawL = new DrawLetters(robot2Kinematik,linAxis2->sled_position,static_cast<Qt3DCore::QTransform*>(plane));
+    drawL->show();
     return a.exec();
 }

@@ -9,7 +9,7 @@ STLMesh::STLMesh(Qt3DCore::QEntity *parent)
     dir.cdUp();
     dir.cd("StlFiles");
     Directory=dir.path();
-    Directory+=QDir::separator()/*"/PolarisVega_Roboter2/StlFiles/"*/;
+    Directory+=QDir::separator()/*"/BachelorRobot/StlFiles/"*/;
 
     this->Qt3DCore::QEntity::setParent(parent);
     Material = new Qt3DExtras::QPhongMaterial();

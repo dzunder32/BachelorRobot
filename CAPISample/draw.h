@@ -3,6 +3,9 @@
 
 #include <QObject>
 #include "kinematik.h"
+#include <QFile>
+#include <QTextStream>
+#include <QString>
 
 class Draw : public QObject
 {
@@ -28,6 +31,7 @@ private:
     void plane2robotPts();
 
     void points2D_toPlane();
+    void Txt2QVector2D();
 };
 
 #endif // DRAW_H

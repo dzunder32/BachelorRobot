@@ -1,0 +1,10 @@
+debug/draw.o
+debug/drawletters.o
+debug/main.o
+debug/mainwindow.o
+debug/polaristool.o
+debug/polarisv.o
+debug/moc_draw.o
+debug/moc_drawletters.o
+debug/moc_mainwindow.o
+debug/moc_polarisv.o

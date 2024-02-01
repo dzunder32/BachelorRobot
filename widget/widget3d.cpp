@@ -171,3 +171,35 @@ void Widget3D::setViewCenter(QVector3D point)
     _cameraEntity->setViewCenter(point);
 
 }
+
+void Widget3D::drawPoint(QVector3D position, float size, QColor color)
+{
+    // Create a new entity
+    Qt3DCore::QEntity *entity = new Qt3DCore::QEntity(_rootEntity);
+    pointEntities.append(entity);
+    // Create a sphere mesh and set its radius
+    Qt3DExtras::QSphereMesh *sphere = new Qt3DExtras::QSphereMesh();
+    sphere->setRadius(size);
+    entity->addComponent(sphere);
+
+    // Create a material and set its diffuse color
+    Qt3DExtras::QPhongMaterial *material = new Qt3DExtras::QPhongMaterial();
+    material->setDiffuse(color);
+    entity->addComponent(material);
+
+    // Create a transform and set its translation
+    Qt3DCore::QTransform *transform = new Qt3DCore::QTransform();
+    transform->setTranslation(position);
+    entity->addComponent(transform);
+
+
+}
+void Widget3D::deleteAllPoints()
+{
+    for (Qt3DCore::QEntity* entity : pointEntities) {
+        delete entity;
+    }
+    pointEntities.clear();
+}
+
+

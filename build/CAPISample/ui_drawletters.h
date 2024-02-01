@@ -28,9 +28,12 @@ public:
     QWidget *centralwidget;
     QVBoxLayout *verticalLayout;
     QLineEdit *lineEdit;
+    QLineEdit *lineEdit_Letter;
     QHBoxLayout *horizontalLayout;
     QPushButton *pushButton_2;
     QPushButton *pushButton;
+    QPushButton *buttonPoint;
+    QPushButton *buttonDeletePoint;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -48,6 +51,11 @@ public:
 
         verticalLayout->addWidget(lineEdit);
 
+        lineEdit_Letter = new QLineEdit(centralwidget);
+        lineEdit_Letter->setObjectName(QString::fromUtf8("lineEdit_Letter"));
+
+        verticalLayout->addWidget(lineEdit_Letter);
+
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         pushButton_2 = new QPushButton(centralwidget);
@@ -62,6 +70,16 @@ public:
 
 
         verticalLayout->addLayout(horizontalLayout);
+
+        buttonPoint = new QPushButton(centralwidget);
+        buttonPoint->setObjectName(QString::fromUtf8("buttonPoint"));
+
+        verticalLayout->addWidget(buttonPoint);
+
+        buttonDeletePoint = new QPushButton(centralwidget);
+        buttonDeletePoint->setObjectName(QString::fromUtf8("buttonDeletePoint"));
+
+        verticalLayout->addWidget(buttonDeletePoint);
 
         DrawLetters->setCentralWidget(centralwidget);
         menubar = new QMenuBar(DrawLetters);
@@ -82,6 +100,8 @@ public:
         DrawLetters->setWindowTitle(QCoreApplication::translate("DrawLetters", "MainWindow", nullptr));
         pushButton_2->setText(QCoreApplication::translate("DrawLetters", "Stop", nullptr));
         pushButton->setText(QCoreApplication::translate("DrawLetters", "Draw", nullptr));
+        buttonPoint->setText(QCoreApplication::translate("DrawLetters", "setPoint", nullptr));
+        buttonDeletePoint->setText(QCoreApplication::translate("DrawLetters", "deletePoint", nullptr));
     } // retranslateUi
 
 };

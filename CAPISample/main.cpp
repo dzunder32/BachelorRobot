@@ -108,7 +108,7 @@ int main(int argc, char *argv[])
     widget3d->addObject(plane/*,linAxis2->sled_position+QVector3D(0,-500,700),QQuaternion::fromAxisAndAngle(QVector3D(1,0,0),-90)*/);
     qDebug()<<"trans"<<plane->translation();
 //    drawL->getPlane(static_cast<Qt3DCore::QTransform *>(plane));
-    DrawLetters *drawL = new DrawLetters(robot2Kinematik,linAxis2->sled_position,static_cast<Qt3DCore::QTransform*>(plane));
+    DrawLetters *drawL = new DrawLetters(robot2Kinematik,linAxis2->sled_position,static_cast<Qt3DCore::QTransform*>(plane),widget3d);
     drawL->show();
     return a.exec();
 }

@@ -40,9 +40,12 @@ public:
 
     void setFileName(QString name);
     void setViewCenter(QVector3D point);
+
 public slots:
     void getToolData(QVector <double>);
     void getPolarisData(QVector <double>);
+    void drawPoint(QVector3D position, float size, QColor color);
+    void deleteAllPoints();
 
 private:
     bool trackData=false;
@@ -61,6 +64,7 @@ private:
     QMatrix4x4 ToolMatrix,PolarisMatrix;
     LivePlot* livePlot;
     LivePlot2* livePlot2;
+    QVector<Qt3DCore::QEntity*> pointEntities;
     double roundDecimalPlaces(double val);
     void setDecimalPlaces(int val);
 signals:

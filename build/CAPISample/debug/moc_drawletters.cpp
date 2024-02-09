@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_DrawLetters_t {
-    QByteArrayData data[8];
-    char stringdata0[122];
+    QByteArrayData data[9];
+    char stringdata0[132];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -36,14 +36,16 @@ QT_MOC_LITERAL(0, 0, 11), // "DrawLetters"
 QT_MOC_LITERAL(1, 12, 15), // "drawPointWidget"
 QT_MOC_LITERAL(2, 28, 0), // ""
 QT_MOC_LITERAL(3, 29, 5), // "point"
-QT_MOC_LITERAL(4, 35, 17), // "deletePointWidget"
-QT_MOC_LITERAL(5, 53, 23), // "on_pushButton_2_clicked"
-QT_MOC_LITERAL(6, 77, 28), // "on_buttonDeletePoint_clicked"
-QT_MOC_LITERAL(7, 106, 15) // "pB_draw_clicked"
+QT_MOC_LITERAL(4, 35, 9), // "thickness"
+QT_MOC_LITERAL(5, 45, 17), // "deletePointWidget"
+QT_MOC_LITERAL(6, 63, 23), // "on_pushButton_2_clicked"
+QT_MOC_LITERAL(7, 87, 28), // "on_buttonDeletePoint_clicked"
+QT_MOC_LITERAL(8, 116, 15) // "pB_draw_clicked"
 
     },
     "DrawLetters\0drawPointWidget\0\0point\0"
-    "deletePointWidget\0on_pushButton_2_clicked\0"
+    "thickness\0deletePointWidget\0"
+    "on_pushButton_2_clicked\0"
     "on_buttonDeletePoint_clicked\0"
     "pB_draw_clicked"
 };
@@ -63,14 +65,14 @@ static const uint qt_meta_data_DrawLetters[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    1,   39,    2, 0x0a /* Public */,
-       4,    0,   42,    2, 0x0a /* Public */,
-       5,    0,   43,    2, 0x08 /* Private */,
-       6,    0,   44,    2, 0x08 /* Private */,
-       7,    0,   45,    2, 0x08 /* Private */,
+       1,    2,   39,    2, 0x0a /* Public */,
+       5,    0,   44,    2, 0x0a /* Public */,
+       6,    0,   45,    2, 0x08 /* Private */,
+       7,    0,   46,    2, 0x08 /* Private */,
+       8,    0,   47,    2, 0x08 /* Private */,
 
  // slots: parameters
-    QMetaType::Void, QMetaType::QVector3D,    3,
+    QMetaType::Void, QMetaType::QVector3D, QMetaType::Float,    3,    4,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -85,7 +87,7 @@ void DrawLetters::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         auto *_t = static_cast<DrawLetters *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->drawPointWidget((*reinterpret_cast< QVector3D(*)>(_a[1]))); break;
+        case 0: _t->drawPointWidget((*reinterpret_cast< QVector3D(*)>(_a[1])),(*reinterpret_cast< float(*)>(_a[2]))); break;
         case 1: _t->deletePointWidget(); break;
         case 2: _t->on_pushButton_2_clicked(); break;
         case 3: _t->on_buttonDeletePoint_clicked(); break;

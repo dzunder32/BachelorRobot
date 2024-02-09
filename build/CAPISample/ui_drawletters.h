@@ -19,6 +19,7 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSlider>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QTextEdit>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -36,6 +37,7 @@ public:
     QVBoxLayout *verticalLayout_2;
     QLineEdit *lineEdit_2;
     QLineEdit *lineEdit_Letter;
+    QTextEdit *textEdit_Letter;
     QHBoxLayout *horizontalLayout;
     QPushButton *buttonDeletePoint;
     QPushButton *pushButton_2;
@@ -91,6 +93,11 @@ public:
 
         verticalLayout_2->addWidget(lineEdit_Letter);
 
+        textEdit_Letter = new QTextEdit(centralwidget);
+        textEdit_Letter->setObjectName(QString::fromUtf8("textEdit_Letter"));
+
+        verticalLayout_2->addWidget(textEdit_Letter);
+
 
         horizontalLayout_2->addLayout(verticalLayout_2);
 
@@ -131,7 +138,7 @@ public:
         DrawLetters->setCentralWidget(centralwidget);
         menubar = new QMenuBar(DrawLetters);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 800, 21));
+        menubar->setGeometry(QRect(0, 0, 800, 20));
         DrawLetters->setMenuBar(menubar);
         statusbar = new QStatusBar(DrawLetters);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
@@ -147,6 +154,12 @@ public:
         DrawLetters->setWindowTitle(QCoreApplication::translate("DrawLetters", "MainWindow", nullptr));
         lineEdit->setText(QCoreApplication::translate("DrawLetters", "RobotSpeed", nullptr));
         lineEdit_2->setText(QCoreApplication::translate("DrawLetters", "Letter", nullptr));
+        textEdit_Letter->setHtml(QCoreApplication::translate("DrawLetters", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">HALLO ICH BIN</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">DENIS WUHU</p></body></html>", nullptr));
         buttonDeletePoint->setText(QCoreApplication::translate("DrawLetters", "deletePoint", nullptr));
         pushButton_2->setText(QCoreApplication::translate("DrawLetters", "Stop", nullptr));
         pushButton_Draw->setText(QCoreApplication::translate("DrawLetters", "Draw", nullptr));

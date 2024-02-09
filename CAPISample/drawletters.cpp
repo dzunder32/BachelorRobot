@@ -32,9 +32,11 @@ DrawLetters::~DrawLetters()
 
 void DrawLetters::pB_draw_clicked()
 {
-    if(!ui->checkBox_NextLetter->isChecked() && !ui->lineEdit_Letter->text().isEmpty()){
+    if(!ui->checkBox_NextLetter->isChecked() && !ui->textEdit_Letter->toPlainText().isEmpty()){
         //        _draw->setLetter(ui->lineEdit_Letter->text());
-        _draw->getWord(ui->lineEdit_Letter->text());
+//        ui->textEdit_Letter
+
+        _draw->getWord(ui->textEdit_Letter->toPlainText());
     }
 
 //    ui->lineEdit_Letter->setText(_draw->getLetterName());
@@ -53,29 +55,12 @@ void DrawLetters::on_buttonDeletePoint_clicked()
 
 }
 
-void DrawLetters::drawPointWidget(QVector3D point)
+void DrawLetters::drawPointWidget(QVector3D point,float thickness)
 {
-    _widget3d->drawPoint(point,1.0f,QColor(255,0,0));
+    _widget3d->drawPoint(point,thickness,QColor(0,255,255));
 }
 void DrawLetters::deletePointWidget()
 {
     _widget3d->deleteAllPoints();
 }
-
-//void DrawLetters::on_checkBox_NextLetter_stateChanged(int arg1)
-//{
-//    switch(arg1)
-//    {
-//    case 0:
-//    {
-//        qDebug()<<"letsGo!";
-//        _draw->incLetterFalse();
-//            break;
-//    }
-//    case 2:
-//        qDebug()<<"Wuhu!";
-//        _draw->incLetterTrue();
-//            break;
-//    }
-//}
 

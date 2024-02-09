@@ -19,6 +19,9 @@ public:
     void setTime(int time_ms);
     QString getLetterName();
     void getWord(QString str);
+    float LetterSize,horizontalLetterDist,verticalLetterDist;
+    void changeLetterSize();
+    float pointThickness;
 public slots:
     void draw_onTimeout();
     void draw_TimerStart(/*int time*/);
@@ -61,9 +64,8 @@ private:
     void robot_setPoint(QVector3D position);
 
     void shiftVec2BaseAndRobot();
-    void drawWord();
 signals:
-    void sendPoint(QVector3D);
+    void sendPoint(QVector3D,float);
     void deletePoints();
     void stopTimerDraw();
 };

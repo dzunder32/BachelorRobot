@@ -20,7 +20,7 @@ public:
 
 public slots:
 
-    void drawPointWidget(QVector3D point);
+    void drawPointWidget(QVector3D point,float thickness);
     void deletePointWidget();
 private slots:
 //    void on_pushButton_Draw_clicked();

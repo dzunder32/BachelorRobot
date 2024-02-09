@@ -24,6 +24,11 @@ Draw::Draw(Kinematik *robot, QVector3D sled_pos,Qt3DCore::QTransform* plane,Widg
     planeY=QVector3D(_plane->matrix().column(1));
     planeZ=QVector3D(_plane->matrix().column(2));
 
+    LetterSize=0.5;
+    horizontalLetterDist=60*LetterSize;
+    verticalLetterDist=100*LetterSize;
+    pointThickness = 2 * LetterSize;
+    changeLetterSize();
 
     Txt2QVector2D();
     points2D_toPlane();
@@ -32,6 +37,7 @@ Draw::Draw(Kinematik *robot, QVector3D sled_pos,Qt3DCore::QTransform* plane,Widg
     shiftVec2BaseAndRobot();
     inc_letter=false;
     letter=0;
+
     qDebug()<<"points2D_names size"<<points2D_names.size();
 //    getWord("MA");
 }
@@ -44,13 +50,14 @@ void Draw::draw_onTimeout()
     robot_setPoint(pointsRobot[letter][counter]+shift_vecRobot);
 
     if(drawPoint_isTrue[letter][counter])
-        emit sendPoint(pointsPlane[letter][counter]+shift_vecBase);
+        emit sendPoint(pointsPlane[letter][counter]+shift_vecBase,pointThickness);
 
     counter++;
 
     if (counter==pointsRobot[letter].length())
     {
         counter=0;
+        shift_vecPlane.setX(shift_vecPlane.x()+horizontalLetterDist);
         back:
         currentIndex++;
         if(currentIndex==LetterInputIndex.size()){
@@ -58,10 +65,15 @@ void Draw::draw_onTimeout()
         }else{
             letter=LetterInputIndex[currentIndex];
             if(letter==-1){
-                shift_vecPlane.setX(shift_vecPlane.x()+60);
+                shift_vecPlane.setX(shift_vecPlane.x()+horizontalLetterDist);
                 goto back;
             }
-            shift_vecPlane.setX(shift_vecPlane.x()+60);
+            else if(letter==-2){
+                shift_vecPlane.setX(10);
+                shift_vecPlane.setY(shift_vecPlane.y()-verticalLetterDist);
+                goto back;
+            }
+
             shiftVec2BaseAndRobot();
         }
 
@@ -79,6 +91,11 @@ void Draw::draw_onTimeout()
     }
 }
 
+void Draw::changeLetterSize()
+{
+    planeX=planeX*LetterSize;
+    planeY=planeY*LetterSize;
+}
 void Draw::shiftVec2BaseAndRobot()
 {
     QMatrix4x4 temp_planeMat =_plane->matrix();
@@ -117,6 +134,8 @@ void Draw::getWord(QString str)
 //        QChar letter = str.at(i);
         if(str.at(i)==" "){
            LetterInputIndex.push_back(-1);
+        }else if(str.at(i)=="\n"){
+            LetterInputIndex.push_back(-2);
         }else{
            LetterInput.push_back(str.at(i));
            int index = points2D_names.indexOf(str.at(i));
@@ -129,13 +148,7 @@ void Draw::getWord(QString str)
     currentIndex=0;
     letter=LetterInputIndex[currentIndex];
 }
-void Draw::drawWord()
-{
-    for (QString oneLetter:LetterInput)
-    {
 
-    }
-}
 
 void Draw::setLetter(QString str)
 {

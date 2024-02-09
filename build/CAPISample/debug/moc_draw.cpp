@@ -69,20 +69,20 @@ static const uint qt_meta_data_Draw[] = {
        3,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   59,    2, 0x06 /* Public */,
-       3,    0,   62,    2, 0x06 /* Public */,
-       4,    0,   63,    2, 0x06 /* Public */,
+       1,    2,   59,    2, 0x06 /* Public */,
+       3,    0,   64,    2, 0x06 /* Public */,
+       4,    0,   65,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       5,    0,   64,    2, 0x0a /* Public */,
-       6,    0,   65,    2, 0x0a /* Public */,
-       7,    0,   66,    2, 0x0a /* Public */,
-       8,    1,   67,    2, 0x0a /* Public */,
-      10,    0,   70,    2, 0x0a /* Public */,
-      11,    1,   71,    2, 0x0a /* Public */,
+       5,    0,   66,    2, 0x0a /* Public */,
+       6,    0,   67,    2, 0x0a /* Public */,
+       7,    0,   68,    2, 0x0a /* Public */,
+       8,    1,   69,    2, 0x0a /* Public */,
+      10,    0,   72,    2, 0x0a /* Public */,
+      11,    1,   73,    2, 0x0a /* Public */,
 
  // signals: parameters
-    QMetaType::Void, QMetaType::QVector3D,    2,
+    QMetaType::Void, QMetaType::QVector3D, QMetaType::Float,    2,    2,
     QMetaType::Void,
     QMetaType::Void,
 
@@ -103,7 +103,7 @@ void Draw::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void *
         auto *_t = static_cast<Draw *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->sendPoint((*reinterpret_cast< QVector3D(*)>(_a[1]))); break;
+        case 0: _t->sendPoint((*reinterpret_cast< QVector3D(*)>(_a[1])),(*reinterpret_cast< float(*)>(_a[2]))); break;
         case 1: _t->deletePoints(); break;
         case 2: _t->stopTimerDraw(); break;
         case 3: _t->draw_onTimeout(); break;
@@ -117,7 +117,7 @@ void Draw::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void *
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            using _t = void (Draw::*)(QVector3D );
+            using _t = void (Draw::*)(QVector3D , float );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&Draw::sendPoint)) {
                 *result = 0;
                 return;
@@ -181,9 +181,9 @@ int Draw::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void Draw::sendPoint(QVector3D _t1)
+void Draw::sendPoint(QVector3D _t1, float _t2)
 {
-    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t2))) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 

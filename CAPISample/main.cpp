@@ -46,8 +46,8 @@ int main(int argc, char *argv[])
     //2. Roboter Mesh -----------------------------------------------------------------------------------------------
     RV6SL *robot2 =new RV6SL();
     Rv6slKinematik *robot2Kinematik=new Rv6slKinematik(robot2);
-    ControlPanel *controlpanel=new ControlPanel(robot2Kinematik);
-    controlpanel->show();
+//    ControlPanel *controlpanel=new ControlPanel(robot2Kinematik);
+//    controlpanel->show();
 
     //Hinzufügen eines Tools in die Grafik
 //    KinectCamera* camera2 = new KinectCamera();
@@ -102,7 +102,7 @@ int main(int argc, char *argv[])
     CoordinateSystem *plane=new CoordinateSystem;
     plane->setLength(200);
     plane->setNegativeAxis(false);
-    plane->setTranslation(linAxis2->sled_position+QVector3D(0,-500,500));
+    plane->setTranslation(linAxis2->sled_position+QVector3D(500,-500,500));
     plane->setRotation(QQuaternion::fromEulerAngles(QVector3D(-90,180,0)));
 //    plane->setRotation(QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180));
     widget3d->addObject(plane/*,linAxis2->sled_position+QVector3D(0,-500,700),QQuaternion::fromAxisAndAngle(QVector3D(1,0,0),-90)*/);

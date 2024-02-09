@@ -23,20 +23,18 @@ public slots:
     void drawPointWidget(QVector3D point);
     void deletePointWidget();
 private slots:
-    void on_pushButton_clicked();
-
+//    void on_pushButton_Draw_clicked();
     void on_pushButton_2_clicked();
-
-    void on_buttonPoint_clicked();
-
     void on_buttonDeletePoint_clicked();
-
+//    void spinBox_valueChanged();
+    void pB_draw_clicked();
 private:
     Ui::DrawLetters *ui;
     Draw *_draw;
     Widget3D *_widget3d;
     Kinematik *_robot;
     QThread robotThread;
+
 
 };
 

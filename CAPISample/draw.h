@@ -15,41 +15,57 @@ class Draw : public QObject
     Q_OBJECT
 public:
     explicit Draw(Kinematik *robot, QVector3D sled_pos, Qt3DCore::QTransform* plane,Widget3D *widget3d);
-
-    void TimerStart(int time);
-    void TimerStop();
+    bool inc_letter;
+    void setTime(int time_ms);
+    QString getLetterName();
+    void getWord(QString str);
 public slots:
-    void setLetter(int num);
+    void draw_onTimeout();
+    void draw_TimerStart(/*int time*/);
+     void draw_TimerStop();
+    void setLetter(QString str);
+//    void incLetterTrue(){inc_letter=true;}
+//    void incLetterFalse(){inc_letter=false;}
+    void inc_letter_changeState();
+    void RobotSpeedChanged(int time_ms);
 private:
     Widget3D *_widget3d;
     Kinematik *_robot;
-    QTimer *timer;
+    QTimer *timer_draw;
+    QTimer *timer_moveBack;
+    QVector <QString> LetterInput;
+    QVector <int> LetterInputIndex;
+    int currentIndex;
     QMatrix4x4 robotMat;
-//    QVector <QVector3D> /*pointsRobot,*/pointsBase/*,pointsPlane*/;
     QVector <QVector <QVector3D>> pointsPlane,pointsRobot;
     double a,b,c,l1;
-    int counter=0;
+    int counter=0,counter_moveBack=0;
+
     Qt3DCore::QTransform* _plane;
     QVector3D planeX,planeY,planeZ;
     QVector <QVector <QVector2D>> points2D;
+    QVector <QString> points2D_names;
     QVector<Qt3DCore::QEntity*> pointEntities;
     QVector3D shift_vecPlane,shift_vecRobot,shift_vecBase;
+    QVector <QVector <bool>> drawPoint_isTrue;
     int letter;
-    void onTimeout();
+    int current_time;
 
     void plane2robotPts();
-
     void points2D_toPlane();
     void Txt2QVector2D();
     float cartDist(QVector2D point1, QVector2D point2);
-    void drawLine(QVector2D point_begin, QVector2D point_end,QVector <QVector3D> &vec);
+    void drawLine(QVector2D point_begin, QVector2D point_end,QVector <QVector3D> &vec,QVector <bool> &draw_vec);
     QVector3D calcPointInPlane(QVector2D point);
-    void drawPoint(QVector3D position, float size, QColor color);
-//    void drawPoint(QVector3D position, float size, QColor color);
     void deleteAllPoints();
+    void robot_setPoint(QVector3D position);
+
+    void shiftVec2BaseAndRobot();
+    void drawWord();
 signals:
     void sendPoint(QVector3D);
     void deletePoints();
+    void stopTimerDraw();
 };
 
 #endif // DRAW_H

@@ -284,7 +284,7 @@ void Rv6slKinematik::invers()
         _j5=((int)(q5*1000))/(double)1000.0;
         _j6=((int)(q6*1000))/(double)1000.0;
         _j7=((int)(q7*1000))/(double)1000.0;
-        qDebug()<<_j1<<_j2<<_j3<<_j4<<_j5<<_j6;
+//        qDebug()<<_j1<<_j2<<_j3<<_j4<<_j5<<_j6;
     }
     else
         qDebug()<<"E-Point is not reachable";

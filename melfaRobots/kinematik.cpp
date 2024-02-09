@@ -20,7 +20,7 @@ void Kinematik::ToolMovement(Transformations::ToolMovement movementDirection, do
     default:toolMovement.setToIdentity();
     }
     QMatrix4x4 t=getTransformationMatrix()*toolMovement;
-    qDebug()<<t;
+//    qDebug()<<t;
     setTransformationMatrix(t);
 }
 

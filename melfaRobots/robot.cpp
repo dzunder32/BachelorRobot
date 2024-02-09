@@ -29,7 +29,7 @@ void Robot::ConnectKinematik(RobotPosition* pos)
 void Robot::_positionChanged()
 {
     _connetedRobotChangePosition=true;
-    qDebug()<<_position->getTransformationMatrix();
+//    qDebug()<<_position->getTransformationMatrix();
 }
 
 void Robot::UpdatePosition()

@@ -20,7 +20,7 @@ public:
     QString getLetterName();
     void getWord(QString str);
     float LetterSize,horizontalLetterDist,verticalLetterDist;
-    void CreatePointsFromTxt();
+
     float pointThickness;
 
 public slots:
@@ -31,11 +31,11 @@ public slots:
 //    void incLetterTrue(){inc_letter=true;}
 //    void incLetterFalse(){inc_letter=false;}
     void RobotSpeedChanged(int time_ms);
+    void CreatePointsFromTxt(float size);
 private:
     Widget3D *_widget3d;
     Kinematik *_robot;
     QTimer *timer_draw;
-    QTimer *timer_moveBack;
     QVector <QString> LetterInput;
     QVector <int> LetterInputIndex;
     int currentIndex;
@@ -44,8 +44,9 @@ private:
     QVector <QVector <QVector3D>> pointsPlane,pointsRobot;
     double a,b,c,l1;
     int counter=0,counter_moveBack=0;
-
+    QVector3D prevLetter_lastPoint,nextLetter_firstPoint;
     Qt3DCore::QTransform* _plane;
+    QVector3D unit_planeX,unit_planeY,unit_planeZ;
     QVector3D planeX,planeY,planeZ;
     QVector <QVector <QVector2D>> points2D;
     QVector <QString> points2D_names;
@@ -65,6 +66,7 @@ private:
     void robot_setPoint(QVector3D position);
 
     void shiftVec2BaseAndRobot();
+    void moveInLineBetweenLetters();
 signals:
     void sendPoint(QVector3D,float);
     void deletePoints();

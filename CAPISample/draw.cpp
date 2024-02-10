@@ -1,9 +1,8 @@
-#include "draw.h"
+﻿#include "draw.h"
 
 Draw::Draw(Kinematik *robot, QVector3D sled_pos,Qt3DCore::QTransform* plane,Widget3D *widget3d)
 {
     timer_draw = new QTimer;
-    timer_moveBack   = new QTimer;
     _robot = robot;
     _robot->setJoints(0,0,90,0,90,0,0);
     _plane = plane;
@@ -20,9 +19,9 @@ Draw::Draw(Kinematik *robot, QVector3D sled_pos,Qt3DCore::QTransform* plane,Widg
     b=ew.y();
     c=ew.z();
     l1=0;
-    planeX=QVector3D(_plane->matrix().column(0));
-    planeY=QVector3D(_plane->matrix().column(1));
-    planeZ=QVector3D(_plane->matrix().column(2));
+    unit_planeX=QVector3D(_plane->matrix().column(0));
+    unit_planeY=QVector3D(_plane->matrix().column(1));
+    unit_planeZ=QVector3D(_plane->matrix().column(2));
 
     //LetterSize goes from 0.1 to 1
 //    LetterSize=0.3;
@@ -32,8 +31,8 @@ Draw::Draw(Kinematik *robot, QVector3D sled_pos,Qt3DCore::QTransform* plane,Widg
 //    IncrementCounterValue=qRound(1/LetterSize);
 //    planeX=planeX*LetterSize;
 //    planeY=planeY*LetterSize;
-    LetterSize=1;
-    CreatePointsFromTxt();
+//    LetterSize=0.1;
+    CreatePointsFromTxt(0.1);
 
 
     shift_vecPlane = QVector3D(10,10,0);
@@ -41,15 +40,12 @@ Draw::Draw(Kinematik *robot, QVector3D sled_pos,Qt3DCore::QTransform* plane,Widg
     inc_letter=false;
     letter=0;
 
-    qDebug()<<"points2D_names size"<<points2D_names.size();
-//    getWord("MA");
 }
 
 void Draw::draw_onTimeout()
 {
     if (counter==0 && currentIndex == 0)
         emit deletePoints();
-
     robot_setPoint(pointsRobot[letter][counter]+shift_vecRobot);
 
     if(drawPoint_isTrue[letter][counter])
@@ -59,22 +55,20 @@ void Draw::draw_onTimeout()
 
     if (counter>=pointsRobot[letter].length())
     {
+        prevLetter_lastPoint = pointsPlane[letter].last()+shift_vecBase;
         counter=0;
-        if(inc_letter){
-            LetterSize-=0.1;
-            CreatePointsFromTxt();
-        }
 
         shift_vecPlane.setX(shift_vecPlane.x()+horizontalLetterDist);
+        shiftVec2BaseAndRobot();
         back:
         currentIndex++;
-        if(currentIndex==LetterInputIndex.size()){
-            timer_draw->stop();
-            LetterSize=1;
-            CreatePointsFromTxt();
-        }else{
+        if(currentIndex==LetterInputIndex.size()){_robot->setJoints(0,0,90,0,90,0,0);timer_draw->stop();}
+        else
+        {
             letter=LetterInputIndex[currentIndex];
-            if(letter==-1){
+
+            if(letter==-1)
+            {
                 shift_vecPlane.setX(shift_vecPlane.x()+horizontalLetterDist);
                 goto back;
             }
@@ -83,30 +77,37 @@ void Draw::draw_onTimeout()
                 shift_vecPlane.setY(shift_vecPlane.y()-verticalLetterDist);
                 goto back;
             }
-
             shiftVec2BaseAndRobot();
+            nextLetter_firstPoint = pointsPlane[letter].first()+shift_vecBase;
+            moveInLineBetweenLetters();
+
         }
-
-
-        _robot->setJoints(0,0,90,0,90,0,0);
-
     }
 }
-
-void Draw::CreatePointsFromTxt()
+void Draw::moveInLineBetweenLetters()
 {
+    QVector <QVector3D> temp_vec;
+    QVector <bool> temp_drawVec;
 
-    horizontalLetterDist=60*LetterSize;
-    verticalLetterDist=100*LetterSize;
-    pointThickness = 2 * LetterSize;
-    IncrementCounterValue=qRound(1/LetterSize);
+//    drawLine(prevLetter_lastPoint,nextLetter_firstPoint,temp_vec,temp_drawVec);
 
-    planeX=planeX*LetterSize;
-    planeY=planeY*LetterSize;
+}
+void Draw::CreatePointsFromTxt(float size)
+{
+    qDebug()<<"Size:"<<size;
+    horizontalLetterDist=60*size;
+    verticalLetterDist=100*size;
+    pointThickness = 2 * size;
+    IncrementCounterValue=qRound(1/size);
+
+    planeX = unit_planeX*size;
+    planeY = unit_planeY*size;
+    planeZ = unit_planeZ*size;
 
     Txt2QVector2D();
     points2D_toPlane();
     plane2robotPts();
+    qDebug()<<"planes:"<<planeX<<planeY;
 
 }
 
@@ -119,7 +120,7 @@ void Draw::shiftVec2BaseAndRobot()
     shift_vecBase = QVector3D(temp_planeMat * shift_vecPlane);
 
     shift_vecRobot = QVector3D(temp_robotMat.inverted() * shift_vecBase);
-    qDebug()<<shift_vecRobot;
+//    qDebug()<<shift_vecRobot;
 }
 void Draw::robot_setPoint(QVector3D position)
 {
@@ -169,11 +170,11 @@ void Draw::setLetter(QString str)
 
     int index = points2D_names.indexOf(str);
     if (index != -1) {
-        qDebug() << "First occurrence of B is at position" << index;
+//        qDebug() << "First occurrence of B is at position" << index;
         letter = index;
     } else {
         letter=0;
-        qDebug() << "Value B not found in vector.";
+//        qDebug() << "Value B not found in vector.";
     }
 }
 
@@ -181,7 +182,7 @@ void Draw::setTime(int time_ms)
 {
     current_time = time_ms;
     timer_draw->setInterval(current_time);
-    timer_moveBack->setInterval(current_time);
+    qDebug()<<"Worked!";
 }
 void Draw::draw_TimerStart(/*int time*/)
 {
@@ -194,10 +195,9 @@ void Draw::draw_TimerStop()
     timer_draw->stop();
 }
 
-
-
 void Draw::plane2robotPts()
 {
+    pointsRobot.clear();
     QVector <QVector3D> temp_pointsRobot;
     for (QVector <QVector3D> pointsPlane_vec:pointsPlane)
     {
@@ -214,6 +214,7 @@ float Draw::cartDist(QVector2D point1,QVector2D point2)
 
 void Draw::points2D_toPlane()
 {
+   pointsPlane.clear();
    for (QVector <QVector2D> points_vec:points2D)
    {
         QVector2D prev_point=points_vec.first();
@@ -250,6 +251,7 @@ QVector3D Draw::calcPointInPlane(QVector2D point)
 
 void Draw::drawLine(QVector2D point_begin,QVector2D point_end,QVector <QVector3D> &vec,QVector <bool> &draw_vec)
 {
+
     int i;
     int plane_dist = 20;
     for (i=1;i<plane_dist;i++)
@@ -276,11 +278,13 @@ void Draw::drawLine(QVector2D point_begin,QVector2D point_end,QVector <QVector3D
 
 void Draw::Txt2QVector2D()
 {
+    points2D.clear();
+
     QDir dir =QDir::currentPath();
     dir.cdUp();
     dir.cdUp();
     dir.cd("LettersTxt");
-    qDebug()<<"directory:"<<dir;
+//    qDebug()<<"directory:"<<dir;
 
     QStringList filters;
     filters << "*.txt";
@@ -290,7 +294,7 @@ void Draw::Txt2QVector2D()
 
     foreach (QFileInfo fileInfo, fileInfos)
     {
-        qDebug() << "Found text file:" << fileInfo.baseName();
+//        qDebug() << "Found text file:" << fileInfo.baseName();
 
 //    findTxtFiles(dir.path());
 
@@ -322,11 +326,11 @@ void Draw::Txt2QVector2D()
         file.close();
     }
 //    }
-    qDebug()<<points2D_names;
-    qDebug()<<"points";
-    qDebug()<<points2D[34].mid(1,10);
-    qDebug()<<"secnd_vec";
-    qDebug()<<points2D[35].mid(1,10);
+//    qDebug()<<points2D_names;
+//    qDebug()<<"points";
+//    qDebug()<<points2D[34].mid(1,10);
+//    qDebug()<<"secnd_vec";
+//    qDebug()<<points2D[35].mid(1,10);
 
 }
 

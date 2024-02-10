@@ -32,13 +32,7 @@ DrawLetters::~DrawLetters()
 
 void DrawLetters::pB_draw_clicked()
 {
-    if(ui->checkBox_NextLetter->isChecked()){
-        _draw->inc_letter=true;
-    }else{
-        _draw->inc_letter=false;
-    }
     _draw->getWord(ui->textEdit_Letter->toPlainText());
-//    ui->lineEdit_Letter->setText(_draw->getLetterName());
     _draw->setTime(ui->robotSpeedSlider->value());
     _draw->draw_TimerStart();
 }
@@ -63,3 +57,13 @@ void DrawLetters::deletePointWidget()
     _widget3d->deleteAllPoints();
 }
 
+
+void DrawLetters::on_spinBox_LetterSize_valueChanged(int arg1)
+{
+    _draw->CreatePointsFromTxt(float(arg1)/10);
+}
+
+void DrawLetters::on_robotSpeedSlider_valueChanged(int value)
+{
+    _draw->setTime(value);
+}

@@ -28,6 +28,10 @@ private slots:
     void on_buttonDeletePoint_clicked();
 //    void spinBox_valueChanged();
     void pB_draw_clicked();
+    void on_spinBox_LetterSize_valueChanged(int arg1);
+
+    void on_robotSpeedSlider_valueChanged(int value);
+
 private:
     Ui::DrawLetters *ui;
     Draw *_draw;

@@ -24,15 +24,18 @@ Draw::Draw(Kinematik *robot, QVector3D sled_pos,Qt3DCore::QTransform* plane,Widg
     planeY=QVector3D(_plane->matrix().column(1));
     planeZ=QVector3D(_plane->matrix().column(2));
 
-    LetterSize=0.5;
-    horizontalLetterDist=60*LetterSize;
-    verticalLetterDist=100*LetterSize;
-    pointThickness = 2 * LetterSize;
-    changeLetterSize();
+    //LetterSize goes from 0.1 to 1
+//    LetterSize=0.3;
+//    horizontalLetterDist=60*LetterSize;
+//    verticalLetterDist=100*LetterSize;
+//    pointThickness = 2 * LetterSize;
+//    IncrementCounterValue=qRound(1/LetterSize);
+//    planeX=planeX*LetterSize;
+//    planeY=planeY*LetterSize;
+    LetterSize=1;
+    CreatePointsFromTxt();
 
-    Txt2QVector2D();
-    points2D_toPlane();
-    plane2robotPts();
+
     shift_vecPlane = QVector3D(10,10,0);
     shiftVec2BaseAndRobot();
     inc_letter=false;
@@ -52,16 +55,23 @@ void Draw::draw_onTimeout()
     if(drawPoint_isTrue[letter][counter])
         emit sendPoint(pointsPlane[letter][counter]+shift_vecBase,pointThickness);
 
-    counter++;
+    counter+=IncrementCounterValue;
 
-    if (counter==pointsRobot[letter].length())
+    if (counter>=pointsRobot[letter].length())
     {
         counter=0;
+        if(inc_letter){
+            LetterSize-=0.1;
+            CreatePointsFromTxt();
+        }
+
         shift_vecPlane.setX(shift_vecPlane.x()+horizontalLetterDist);
         back:
         currentIndex++;
         if(currentIndex==LetterInputIndex.size()){
             timer_draw->stop();
+            LetterSize=1;
+            CreatePointsFromTxt();
         }else{
             letter=LetterInputIndex[currentIndex];
             if(letter==-1){
@@ -77,25 +87,29 @@ void Draw::draw_onTimeout()
             shiftVec2BaseAndRobot();
         }
 
-        if(inc_letter && letter<points2D_names.size()-1)
-        {
-           letter++;
-        }
-        else if(letter==points2D_names.size()-1)
-        {
-           letter=0;
-        }
 
         _robot->setJoints(0,0,90,0,90,0,0);
 
     }
 }
 
-void Draw::changeLetterSize()
+void Draw::CreatePointsFromTxt()
 {
+
+    horizontalLetterDist=60*LetterSize;
+    verticalLetterDist=100*LetterSize;
+    pointThickness = 2 * LetterSize;
+    IncrementCounterValue=qRound(1/LetterSize);
+
     planeX=planeX*LetterSize;
     planeY=planeY*LetterSize;
+
+    Txt2QVector2D();
+    points2D_toPlane();
+    plane2robotPts();
+
 }
+
 void Draw::shiftVec2BaseAndRobot()
 {
     QMatrix4x4 temp_planeMat =_plane->matrix();
@@ -318,9 +332,6 @@ void Draw::Txt2QVector2D()
 
 
 
-void Draw::inc_letter_changeState(){
-    inc_letter=!inc_letter;
-}
 QString Draw::getLetterName()
 {
     return points2D_names[letter];

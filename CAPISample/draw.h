@@ -20,8 +20,9 @@ public:
     QString getLetterName();
     void getWord(QString str);
     float LetterSize,horizontalLetterDist,verticalLetterDist;
-    void changeLetterSize();
+    void CreatePointsFromTxt();
     float pointThickness;
+
 public slots:
     void draw_onTimeout();
     void draw_TimerStart(/*int time*/);
@@ -29,7 +30,6 @@ public slots:
     void setLetter(QString str);
 //    void incLetterTrue(){inc_letter=true;}
 //    void incLetterFalse(){inc_letter=false;}
-    void inc_letter_changeState();
     void RobotSpeedChanged(int time_ms);
 private:
     Widget3D *_widget3d;
@@ -39,6 +39,7 @@ private:
     QVector <QString> LetterInput;
     QVector <int> LetterInputIndex;
     int currentIndex;
+    int IncrementCounterValue;
     QMatrix4x4 robotMat;
     QVector <QVector <QVector3D>> pointsPlane,pointsRobot;
     double a,b,c,l1;

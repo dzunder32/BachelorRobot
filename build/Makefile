@@ -37,110 +37,136 @@ MOVE          = move
 SUBTARGETS    =  \
 		sub-CAPILibary \
 		sub-CAPISample \
+		sub-Drawing \
 		sub-widget \
 		sub-melfaRobots
 
 
 sub-CAPILibary-qmake_all:  FORCE
 	@if not exist CAPILibary\ mkdir CAPILibary\ & if not exist CAPILibary\ exit 1
-	cd CAPILibary\ && $(QMAKE) -o Makefile "C:\Users\Denis Zyulin\Desktop\Git\BachelorRobot\CAPILibary\CAPILibary.pro" -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
+	cd CAPILibary\ && $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\CAPILibary\CAPILibary.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
 	cd CAPILibary\ && $(MAKE) -f Makefile qmake_all
 sub-CAPILibary: FORCE
 	@if not exist CAPILibary\ mkdir CAPILibary\ & if not exist CAPILibary\ exit 1
-	cd CAPILibary\ && ( if not exist Makefile $(QMAKE) -o Makefile "C:\Users\Denis Zyulin\Desktop\Git\BachelorRobot\CAPILibary\CAPILibary.pro" -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile
+	cd CAPILibary\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\CAPILibary\CAPILibary.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile
 sub-CAPILibary-make_first: FORCE
 	@if not exist CAPILibary\ mkdir CAPILibary\ & if not exist CAPILibary\ exit 1
-	cd CAPILibary\ && ( if not exist Makefile $(QMAKE) -o Makefile "C:\Users\Denis Zyulin\Desktop\Git\BachelorRobot\CAPILibary\CAPILibary.pro" -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile 
+	cd CAPILibary\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\CAPILibary\CAPILibary.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile 
 sub-CAPILibary-all: FORCE
 	@if not exist CAPILibary\ mkdir CAPILibary\ & if not exist CAPILibary\ exit 1
-	cd CAPILibary\ && ( if not exist Makefile $(QMAKE) -o Makefile "C:\Users\Denis Zyulin\Desktop\Git\BachelorRobot\CAPILibary\CAPILibary.pro" -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile all
+	cd CAPILibary\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\CAPILibary\CAPILibary.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile all
 sub-CAPILibary-clean: FORCE
 	@if not exist CAPILibary\ mkdir CAPILibary\ & if not exist CAPILibary\ exit 1
-	cd CAPILibary\ && ( if not exist Makefile $(QMAKE) -o Makefile "C:\Users\Denis Zyulin\Desktop\Git\BachelorRobot\CAPILibary\CAPILibary.pro" -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile clean
+	cd CAPILibary\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\CAPILibary\CAPILibary.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile clean
 sub-CAPILibary-distclean: FORCE
 	@if not exist CAPILibary\ mkdir CAPILibary\ & if not exist CAPILibary\ exit 1
-	cd CAPILibary\ && ( if not exist Makefile $(QMAKE) -o Makefile "C:\Users\Denis Zyulin\Desktop\Git\BachelorRobot\CAPILibary\CAPILibary.pro" -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile distclean
+	cd CAPILibary\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\CAPILibary\CAPILibary.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile distclean
 sub-CAPILibary-install_subtargets: FORCE
 	@if not exist CAPILibary\ mkdir CAPILibary\ & if not exist CAPILibary\ exit 1
-	cd CAPILibary\ && ( if not exist Makefile $(QMAKE) -o Makefile "C:\Users\Denis Zyulin\Desktop\Git\BachelorRobot\CAPILibary\CAPILibary.pro" -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile install
+	cd CAPILibary\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\CAPILibary\CAPILibary.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile install
 sub-CAPILibary-uninstall_subtargets: FORCE
 	@if not exist CAPILibary\ mkdir CAPILibary\ & if not exist CAPILibary\ exit 1
-	cd CAPILibary\ && ( if not exist Makefile $(QMAKE) -o Makefile "C:\Users\Denis Zyulin\Desktop\Git\BachelorRobot\CAPILibary\CAPILibary.pro" -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile uninstall
+	cd CAPILibary\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\CAPILibary\CAPILibary.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile uninstall
 sub-CAPISample-qmake_all:  FORCE
 	@if not exist CAPISample\ mkdir CAPISample\ & if not exist CAPISample\ exit 1
-	cd CAPISample\ && $(QMAKE) -o Makefile "C:\Users\Denis Zyulin\Desktop\Git\BachelorRobot\CAPISample\CAPISample.pro" -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
+	cd CAPISample\ && $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\CAPISample\CAPISample.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
 	cd CAPISample\ && $(MAKE) -f Makefile qmake_all
 sub-CAPISample: FORCE
 	@if not exist CAPISample\ mkdir CAPISample\ & if not exist CAPISample\ exit 1
-	cd CAPISample\ && ( if not exist Makefile $(QMAKE) -o Makefile "C:\Users\Denis Zyulin\Desktop\Git\BachelorRobot\CAPISample\CAPISample.pro" -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile
+	cd CAPISample\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\CAPISample\CAPISample.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile
 sub-CAPISample-make_first: FORCE
 	@if not exist CAPISample\ mkdir CAPISample\ & if not exist CAPISample\ exit 1
-	cd CAPISample\ && ( if not exist Makefile $(QMAKE) -o Makefile "C:\Users\Denis Zyulin\Desktop\Git\BachelorRobot\CAPISample\CAPISample.pro" -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile 
+	cd CAPISample\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\CAPISample\CAPISample.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile 
 sub-CAPISample-all: FORCE
 	@if not exist CAPISample\ mkdir CAPISample\ & if not exist CAPISample\ exit 1
-	cd CAPISample\ && ( if not exist Makefile $(QMAKE) -o Makefile "C:\Users\Denis Zyulin\Desktop\Git\BachelorRobot\CAPISample\CAPISample.pro" -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile all
+	cd CAPISample\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\CAPISample\CAPISample.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile all
 sub-CAPISample-clean: FORCE
 	@if not exist CAPISample\ mkdir CAPISample\ & if not exist CAPISample\ exit 1
-	cd CAPISample\ && ( if not exist Makefile $(QMAKE) -o Makefile "C:\Users\Denis Zyulin\Desktop\Git\BachelorRobot\CAPISample\CAPISample.pro" -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile clean
+	cd CAPISample\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\CAPISample\CAPISample.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile clean
 sub-CAPISample-distclean: FORCE
 	@if not exist CAPISample\ mkdir CAPISample\ & if not exist CAPISample\ exit 1
-	cd CAPISample\ && ( if not exist Makefile $(QMAKE) -o Makefile "C:\Users\Denis Zyulin\Desktop\Git\BachelorRobot\CAPISample\CAPISample.pro" -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile distclean
+	cd CAPISample\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\CAPISample\CAPISample.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile distclean
 sub-CAPISample-install_subtargets: FORCE
 	@if not exist CAPISample\ mkdir CAPISample\ & if not exist CAPISample\ exit 1
-	cd CAPISample\ && ( if not exist Makefile $(QMAKE) -o Makefile "C:\Users\Denis Zyulin\Desktop\Git\BachelorRobot\CAPISample\CAPISample.pro" -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile install
+	cd CAPISample\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\CAPISample\CAPISample.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile install
 sub-CAPISample-uninstall_subtargets: FORCE
 	@if not exist CAPISample\ mkdir CAPISample\ & if not exist CAPISample\ exit 1
-	cd CAPISample\ && ( if not exist Makefile $(QMAKE) -o Makefile "C:\Users\Denis Zyulin\Desktop\Git\BachelorRobot\CAPISample\CAPISample.pro" -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile uninstall
+	cd CAPISample\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\CAPISample\CAPISample.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile uninstall
+sub-Drawing-qmake_all:  FORCE
+	@if not exist Drawing\ mkdir Drawing\ & if not exist Drawing\ exit 1
+	cd Drawing\ && $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\Drawing\Drawing.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
+	cd Drawing\ && $(MAKE) -f Makefile qmake_all
+sub-Drawing: FORCE
+	@if not exist Drawing\ mkdir Drawing\ & if not exist Drawing\ exit 1
+	cd Drawing\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\Drawing\Drawing.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile
+sub-Drawing-make_first: FORCE
+	@if not exist Drawing\ mkdir Drawing\ & if not exist Drawing\ exit 1
+	cd Drawing\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\Drawing\Drawing.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile 
+sub-Drawing-all: FORCE
+	@if not exist Drawing\ mkdir Drawing\ & if not exist Drawing\ exit 1
+	cd Drawing\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\Drawing\Drawing.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile all
+sub-Drawing-clean: FORCE
+	@if not exist Drawing\ mkdir Drawing\ & if not exist Drawing\ exit 1
+	cd Drawing\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\Drawing\Drawing.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile clean
+sub-Drawing-distclean: FORCE
+	@if not exist Drawing\ mkdir Drawing\ & if not exist Drawing\ exit 1
+	cd Drawing\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\Drawing\Drawing.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile distclean
+sub-Drawing-install_subtargets: FORCE
+	@if not exist Drawing\ mkdir Drawing\ & if not exist Drawing\ exit 1
+	cd Drawing\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\Drawing\Drawing.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile install
+sub-Drawing-uninstall_subtargets: FORCE
+	@if not exist Drawing\ mkdir Drawing\ & if not exist Drawing\ exit 1
+	cd Drawing\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\Drawing\Drawing.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile uninstall
 sub-widget-qmake_all:  FORCE
 	@if not exist widget\ mkdir widget\ & if not exist widget\ exit 1
-	cd widget\ && $(QMAKE) -o Makefile "C:\Users\Denis Zyulin\Desktop\Git\BachelorRobot\widget\widget.pro" -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
+	cd widget\ && $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\widget\widget.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
 	cd widget\ && $(MAKE) -f Makefile qmake_all
 sub-widget: FORCE
 	@if not exist widget\ mkdir widget\ & if not exist widget\ exit 1
-	cd widget\ && ( if not exist Makefile $(QMAKE) -o Makefile "C:\Users\Denis Zyulin\Desktop\Git\BachelorRobot\widget\widget.pro" -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile
+	cd widget\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\widget\widget.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile
 sub-widget-make_first: FORCE
 	@if not exist widget\ mkdir widget\ & if not exist widget\ exit 1
-	cd widget\ && ( if not exist Makefile $(QMAKE) -o Makefile "C:\Users\Denis Zyulin\Desktop\Git\BachelorRobot\widget\widget.pro" -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile 
+	cd widget\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\widget\widget.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile 
 sub-widget-all: FORCE
 	@if not exist widget\ mkdir widget\ & if not exist widget\ exit 1
-	cd widget\ && ( if not exist Makefile $(QMAKE) -o Makefile "C:\Users\Denis Zyulin\Desktop\Git\BachelorRobot\widget\widget.pro" -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile all
+	cd widget\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\widget\widget.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile all
 sub-widget-clean: FORCE
 	@if not exist widget\ mkdir widget\ & if not exist widget\ exit 1
-	cd widget\ && ( if not exist Makefile $(QMAKE) -o Makefile "C:\Users\Denis Zyulin\Desktop\Git\BachelorRobot\widget\widget.pro" -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile clean
+	cd widget\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\widget\widget.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile clean
 sub-widget-distclean: FORCE
 	@if not exist widget\ mkdir widget\ & if not exist widget\ exit 1
-	cd widget\ && ( if not exist Makefile $(QMAKE) -o Makefile "C:\Users\Denis Zyulin\Desktop\Git\BachelorRobot\widget\widget.pro" -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile distclean
+	cd widget\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\widget\widget.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile distclean
 sub-widget-install_subtargets: FORCE
 	@if not exist widget\ mkdir widget\ & if not exist widget\ exit 1
-	cd widget\ && ( if not exist Makefile $(QMAKE) -o Makefile "C:\Users\Denis Zyulin\Desktop\Git\BachelorRobot\widget\widget.pro" -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile install
+	cd widget\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\widget\widget.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile install
 sub-widget-uninstall_subtargets: FORCE
 	@if not exist widget\ mkdir widget\ & if not exist widget\ exit 1
-	cd widget\ && ( if not exist Makefile $(QMAKE) -o Makefile "C:\Users\Denis Zyulin\Desktop\Git\BachelorRobot\widget\widget.pro" -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile uninstall
+	cd widget\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\widget\widget.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile uninstall
 sub-melfaRobots-qmake_all:  FORCE
 	@if not exist melfaRobots\ mkdir melfaRobots\ & if not exist melfaRobots\ exit 1
-	cd melfaRobots\ && $(QMAKE) -o Makefile "C:\Users\Denis Zyulin\Desktop\Git\BachelorRobot\melfaRobots\melfaRobots.pro" -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
+	cd melfaRobots\ && $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\melfaRobots\melfaRobots.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
 	cd melfaRobots\ && $(MAKE) -f Makefile qmake_all
 sub-melfaRobots: FORCE
 	@if not exist melfaRobots\ mkdir melfaRobots\ & if not exist melfaRobots\ exit 1
-	cd melfaRobots\ && ( if not exist Makefile $(QMAKE) -o Makefile "C:\Users\Denis Zyulin\Desktop\Git\BachelorRobot\melfaRobots\melfaRobots.pro" -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile
+	cd melfaRobots\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\melfaRobots\melfaRobots.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile
 sub-melfaRobots-make_first: FORCE
 	@if not exist melfaRobots\ mkdir melfaRobots\ & if not exist melfaRobots\ exit 1
-	cd melfaRobots\ && ( if not exist Makefile $(QMAKE) -o Makefile "C:\Users\Denis Zyulin\Desktop\Git\BachelorRobot\melfaRobots\melfaRobots.pro" -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile 
+	cd melfaRobots\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\melfaRobots\melfaRobots.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile 
 sub-melfaRobots-all: FORCE
 	@if not exist melfaRobots\ mkdir melfaRobots\ & if not exist melfaRobots\ exit 1
-	cd melfaRobots\ && ( if not exist Makefile $(QMAKE) -o Makefile "C:\Users\Denis Zyulin\Desktop\Git\BachelorRobot\melfaRobots\melfaRobots.pro" -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile all
+	cd melfaRobots\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\melfaRobots\melfaRobots.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile all
 sub-melfaRobots-clean: FORCE
 	@if not exist melfaRobots\ mkdir melfaRobots\ & if not exist melfaRobots\ exit 1
-	cd melfaRobots\ && ( if not exist Makefile $(QMAKE) -o Makefile "C:\Users\Denis Zyulin\Desktop\Git\BachelorRobot\melfaRobots\melfaRobots.pro" -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile clean
+	cd melfaRobots\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\melfaRobots\melfaRobots.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile clean
 sub-melfaRobots-distclean: FORCE
 	@if not exist melfaRobots\ mkdir melfaRobots\ & if not exist melfaRobots\ exit 1
-	cd melfaRobots\ && ( if not exist Makefile $(QMAKE) -o Makefile "C:\Users\Denis Zyulin\Desktop\Git\BachelorRobot\melfaRobots\melfaRobots.pro" -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile distclean
+	cd melfaRobots\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\melfaRobots\melfaRobots.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile distclean
 sub-melfaRobots-install_subtargets: FORCE
 	@if not exist melfaRobots\ mkdir melfaRobots\ & if not exist melfaRobots\ exit 1
-	cd melfaRobots\ && ( if not exist Makefile $(QMAKE) -o Makefile "C:\Users\Denis Zyulin\Desktop\Git\BachelorRobot\melfaRobots\melfaRobots.pro" -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile install
+	cd melfaRobots\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\melfaRobots\melfaRobots.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile install
 sub-melfaRobots-uninstall_subtargets: FORCE
 	@if not exist melfaRobots\ mkdir melfaRobots\ & if not exist melfaRobots\ exit 1
-	cd melfaRobots\ && ( if not exist Makefile $(QMAKE) -o Makefile "C:\Users\Denis Zyulin\Desktop\Git\BachelorRobot\melfaRobots\melfaRobots.pro" -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile uninstall
+	cd melfaRobots\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\melfaRobots\melfaRobots.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile uninstall
 
 Makefile: ../PolarisVega_vereinfacht_3.pro C:/Qt/5.15.2/mingw81_64/mkspecs/win32-g++/qmake.conf C:/Qt/5.15.2/mingw81_64/mkspecs/features/spec_pre.prf \
 		C:/Qt/5.15.2/mingw81_64/mkspecs/qdevice.pri \
@@ -217,6 +243,8 @@ Makefile: ../PolarisVega_vereinfacht_3.pro C:/Qt/5.15.2/mingw81_64/mkspecs/win32
 		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_multimediawidgets_private.pri \
 		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_network.pri \
 		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_network_private.pri \
+		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_networkauth.pri \
+		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_networkauth_private.pri \
 		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_nfc.pri \
 		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_nfc_private.pri \
 		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_opengl.pri \
@@ -256,6 +284,10 @@ Makefile: ../PolarisVega_vereinfacht_3.pro C:/Qt/5.15.2/mingw81_64/mkspecs/win32
 		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_remoteobjects_private.pri \
 		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_repparser.pri \
 		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_repparser_private.pri \
+		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_script.pri \
+		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_script_private.pri \
+		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_scripttools.pri \
+		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_scripttools_private.pri \
 		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_scxml.pri \
 		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_scxml_private.pri \
 		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_sensors.pri \
@@ -390,6 +422,8 @@ C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_multimediawidgets.pri:
 C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_multimediawidgets_private.pri:
 C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_network.pri:
 C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_network_private.pri:
+C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_networkauth.pri:
+C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_networkauth_private.pri:
 C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_nfc.pri:
 C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_nfc_private.pri:
 C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_opengl.pri:
@@ -429,6 +463,10 @@ C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_remoteobjects.pri:
 C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_remoteobjects_private.pri:
 C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_repparser.pri:
 C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_repparser_private.pri:
+C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_script.pri:
+C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_script_private.pri:
+C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_scripttools.pri:
+C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_scripttools_private.pri:
 C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_scxml.pri:
 C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_scxml_private.pri:
 C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_sensors.pri:
@@ -490,72 +528,84 @@ C:/Qt/5.15.2/mingw81_64/mkspecs/features/lex.prf:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ..\PolarisVega_vereinfacht_3.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
 
-qmake_all: sub-CAPILibary-qmake_all sub-CAPISample-qmake_all sub-widget-qmake_all sub-melfaRobots-qmake_all FORCE
+qmake_all: sub-CAPILibary-qmake_all sub-CAPISample-qmake_all sub-Drawing-qmake_all sub-widget-qmake_all sub-melfaRobots-qmake_all FORCE
 
-make_first: sub-CAPILibary-make_first sub-CAPISample-make_first sub-widget-make_first sub-melfaRobots-make_first  FORCE
-all: sub-CAPILibary-all sub-CAPISample-all sub-widget-all sub-melfaRobots-all  FORCE
-clean: sub-CAPILibary-clean sub-CAPISample-clean sub-widget-clean sub-melfaRobots-clean  FORCE
-distclean: sub-CAPILibary-distclean sub-CAPISample-distclean sub-widget-distclean sub-melfaRobots-distclean  FORCE
+make_first: sub-CAPILibary-make_first sub-CAPISample-make_first sub-Drawing-make_first sub-widget-make_first sub-melfaRobots-make_first  FORCE
+all: sub-CAPILibary-all sub-CAPISample-all sub-Drawing-all sub-widget-all sub-melfaRobots-all  FORCE
+clean: sub-CAPILibary-clean sub-CAPISample-clean sub-Drawing-clean sub-widget-clean sub-melfaRobots-clean  FORCE
+distclean: sub-CAPILibary-distclean sub-CAPISample-distclean sub-Drawing-distclean sub-widget-distclean sub-melfaRobots-distclean  FORCE
 	-$(DEL_FILE) Makefile
 	-$(DEL_FILE) .qmake.stash
-install_subtargets: sub-CAPILibary-install_subtargets sub-CAPISample-install_subtargets sub-widget-install_subtargets sub-melfaRobots-install_subtargets FORCE
-uninstall_subtargets: sub-CAPILibary-uninstall_subtargets sub-CAPISample-uninstall_subtargets sub-widget-uninstall_subtargets sub-melfaRobots-uninstall_subtargets FORCE
+install_subtargets: sub-CAPILibary-install_subtargets sub-CAPISample-install_subtargets sub-Drawing-install_subtargets sub-widget-install_subtargets sub-melfaRobots-install_subtargets FORCE
+uninstall_subtargets: sub-CAPILibary-uninstall_subtargets sub-CAPISample-uninstall_subtargets sub-Drawing-uninstall_subtargets sub-widget-uninstall_subtargets sub-melfaRobots-uninstall_subtargets FORCE
 
 sub-CAPILibary-debug:
 	@if not exist CAPILibary\ mkdir CAPILibary\ & if not exist CAPILibary\ exit 1
-	cd CAPILibary\ && ( if not exist Makefile $(QMAKE) -o Makefile "C:\Users\Denis Zyulin\Desktop\Git\BachelorRobot\CAPILibary\CAPILibary.pro" -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile debug
+	cd CAPILibary\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\CAPILibary\CAPILibary.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile debug
 sub-CAPISample-debug:
 	@if not exist CAPISample\ mkdir CAPISample\ & if not exist CAPISample\ exit 1
-	cd CAPISample\ && ( if not exist Makefile $(QMAKE) -o Makefile "C:\Users\Denis Zyulin\Desktop\Git\BachelorRobot\CAPISample\CAPISample.pro" -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile debug
+	cd CAPISample\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\CAPISample\CAPISample.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile debug
+sub-Drawing-debug:
+	@if not exist Drawing\ mkdir Drawing\ & if not exist Drawing\ exit 1
+	cd Drawing\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\Drawing\Drawing.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile debug
 sub-widget-debug:
 	@if not exist widget\ mkdir widget\ & if not exist widget\ exit 1
-	cd widget\ && ( if not exist Makefile $(QMAKE) -o Makefile "C:\Users\Denis Zyulin\Desktop\Git\BachelorRobot\widget\widget.pro" -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile debug
+	cd widget\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\widget\widget.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile debug
 sub-melfaRobots-debug:
 	@if not exist melfaRobots\ mkdir melfaRobots\ & if not exist melfaRobots\ exit 1
-	cd melfaRobots\ && ( if not exist Makefile $(QMAKE) -o Makefile "C:\Users\Denis Zyulin\Desktop\Git\BachelorRobot\melfaRobots\melfaRobots.pro" -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile debug
-debug: sub-CAPILibary-debug sub-CAPISample-debug sub-widget-debug sub-melfaRobots-debug
+	cd melfaRobots\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\melfaRobots\melfaRobots.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile debug
+debug: sub-CAPILibary-debug sub-CAPISample-debug sub-Drawing-debug sub-widget-debug sub-melfaRobots-debug
 
 sub-CAPILibary-release:
 	@if not exist CAPILibary\ mkdir CAPILibary\ & if not exist CAPILibary\ exit 1
-	cd CAPILibary\ && ( if not exist Makefile $(QMAKE) -o Makefile "C:\Users\Denis Zyulin\Desktop\Git\BachelorRobot\CAPILibary\CAPILibary.pro" -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile release
+	cd CAPILibary\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\CAPILibary\CAPILibary.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile release
 sub-CAPISample-release:
 	@if not exist CAPISample\ mkdir CAPISample\ & if not exist CAPISample\ exit 1
-	cd CAPISample\ && ( if not exist Makefile $(QMAKE) -o Makefile "C:\Users\Denis Zyulin\Desktop\Git\BachelorRobot\CAPISample\CAPISample.pro" -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile release
+	cd CAPISample\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\CAPISample\CAPISample.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile release
+sub-Drawing-release:
+	@if not exist Drawing\ mkdir Drawing\ & if not exist Drawing\ exit 1
+	cd Drawing\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\Drawing\Drawing.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile release
 sub-widget-release:
 	@if not exist widget\ mkdir widget\ & if not exist widget\ exit 1
-	cd widget\ && ( if not exist Makefile $(QMAKE) -o Makefile "C:\Users\Denis Zyulin\Desktop\Git\BachelorRobot\widget\widget.pro" -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile release
+	cd widget\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\widget\widget.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile release
 sub-melfaRobots-release:
 	@if not exist melfaRobots\ mkdir melfaRobots\ & if not exist melfaRobots\ exit 1
-	cd melfaRobots\ && ( if not exist Makefile $(QMAKE) -o Makefile "C:\Users\Denis Zyulin\Desktop\Git\BachelorRobot\melfaRobots\melfaRobots.pro" -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile release
-release: sub-CAPILibary-release sub-CAPISample-release sub-widget-release sub-melfaRobots-release
+	cd melfaRobots\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\melfaRobots\melfaRobots.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile release
+release: sub-CAPILibary-release sub-CAPISample-release sub-Drawing-release sub-widget-release sub-melfaRobots-release
 
 sub-CAPILibary-check:
 	@if not exist CAPILibary\ mkdir CAPILibary\ & if not exist CAPILibary\ exit 1
-	cd CAPILibary\ && ( if not exist Makefile $(QMAKE) -o Makefile "C:\Users\Denis Zyulin\Desktop\Git\BachelorRobot\CAPILibary\CAPILibary.pro" -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile check
+	cd CAPILibary\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\CAPILibary\CAPILibary.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile check
 sub-CAPISample-check:
 	@if not exist CAPISample\ mkdir CAPISample\ & if not exist CAPISample\ exit 1
-	cd CAPISample\ && ( if not exist Makefile $(QMAKE) -o Makefile "C:\Users\Denis Zyulin\Desktop\Git\BachelorRobot\CAPISample\CAPISample.pro" -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile check
+	cd CAPISample\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\CAPISample\CAPISample.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile check
+sub-Drawing-check:
+	@if not exist Drawing\ mkdir Drawing\ & if not exist Drawing\ exit 1
+	cd Drawing\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\Drawing\Drawing.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile check
 sub-widget-check:
 	@if not exist widget\ mkdir widget\ & if not exist widget\ exit 1
-	cd widget\ && ( if not exist Makefile $(QMAKE) -o Makefile "C:\Users\Denis Zyulin\Desktop\Git\BachelorRobot\widget\widget.pro" -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile check
+	cd widget\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\widget\widget.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile check
 sub-melfaRobots-check:
 	@if not exist melfaRobots\ mkdir melfaRobots\ & if not exist melfaRobots\ exit 1
-	cd melfaRobots\ && ( if not exist Makefile $(QMAKE) -o Makefile "C:\Users\Denis Zyulin\Desktop\Git\BachelorRobot\melfaRobots\melfaRobots.pro" -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile check
-check: sub-CAPILibary-check sub-CAPISample-check sub-widget-check sub-melfaRobots-check
+	cd melfaRobots\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\melfaRobots\melfaRobots.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile check
+check: sub-CAPILibary-check sub-CAPISample-check sub-Drawing-check sub-widget-check sub-melfaRobots-check
 
 sub-CAPILibary-benchmark:
 	@if not exist CAPILibary\ mkdir CAPILibary\ & if not exist CAPILibary\ exit 1
-	cd CAPILibary\ && ( if not exist Makefile $(QMAKE) -o Makefile "C:\Users\Denis Zyulin\Desktop\Git\BachelorRobot\CAPILibary\CAPILibary.pro" -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile benchmark
+	cd CAPILibary\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\CAPILibary\CAPILibary.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile benchmark
 sub-CAPISample-benchmark:
 	@if not exist CAPISample\ mkdir CAPISample\ & if not exist CAPISample\ exit 1
-	cd CAPISample\ && ( if not exist Makefile $(QMAKE) -o Makefile "C:\Users\Denis Zyulin\Desktop\Git\BachelorRobot\CAPISample\CAPISample.pro" -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile benchmark
+	cd CAPISample\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\CAPISample\CAPISample.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile benchmark
+sub-Drawing-benchmark:
+	@if not exist Drawing\ mkdir Drawing\ & if not exist Drawing\ exit 1
+	cd Drawing\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\Drawing\Drawing.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile benchmark
 sub-widget-benchmark:
 	@if not exist widget\ mkdir widget\ & if not exist widget\ exit 1
-	cd widget\ && ( if not exist Makefile $(QMAKE) -o Makefile "C:\Users\Denis Zyulin\Desktop\Git\BachelorRobot\widget\widget.pro" -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile benchmark
+	cd widget\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\widget\widget.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile benchmark
 sub-melfaRobots-benchmark:
 	@if not exist melfaRobots\ mkdir melfaRobots\ & if not exist melfaRobots\ exit 1
-	cd melfaRobots\ && ( if not exist Makefile $(QMAKE) -o Makefile "C:\Users\Denis Zyulin\Desktop\Git\BachelorRobot\melfaRobots\melfaRobots.pro" -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile benchmark
-benchmark: sub-CAPILibary-benchmark sub-CAPISample-benchmark sub-widget-benchmark sub-melfaRobots-benchmark
+	cd melfaRobots\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\wolfd\Desktop\Git\BachelorRobot\melfaRobots\melfaRobots.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile benchmark
+benchmark: sub-CAPILibary-benchmark sub-CAPISample-benchmark sub-Drawing-benchmark sub-widget-benchmark sub-melfaRobots-benchmark
 install:install_subtargets  FORCE
 
 uninstall: uninstall_subtargets FORCE

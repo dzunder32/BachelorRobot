@@ -32,6 +32,9 @@ DrawLetters::~DrawLetters()
 
 void DrawLetters::pB_draw_clicked()
 {
+//    if(ui->radioButton->isChecked()){
+
+//    }
     _draw->getWord(ui->textEdit_Letter->toPlainText());
     _draw->setTime(ui->robotSpeedSlider->value());
     _draw->draw_TimerStart();
@@ -60,6 +63,8 @@ void DrawLetters::deletePointWidget()
 
 void DrawLetters::on_spinBox_LetterSize_valueChanged(int arg1)
 {
+    ui->textEdit_Letter->selectAll(); // Select all text
+    ui->textEdit_Letter->setFontPointSize(arg1+9);
     _draw->CreatePointsFromTxt(float(arg1)/10);
 }
 

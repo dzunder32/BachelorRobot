@@ -10,7 +10,7 @@
 #include "controlpanel.h"
 #include "drawletters.h"
 #include "penholder.h"
-#include "drawing.h"
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -100,7 +100,7 @@ int main(int argc, char *argv[])
     widget3d->setPosMatrix(static_cast<Qt3DCore::QTransform*>(position->components()[1]));
 
     //Ebene zu Zeichnen
-    Drawing *drawRobotUi=new Drawing;
+
     CoordinateSystem *plane=new CoordinateSystem;
     plane->setLength(200);
     plane->setNegativeAxis(false);

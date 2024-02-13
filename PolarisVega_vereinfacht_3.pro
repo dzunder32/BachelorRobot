@@ -3,7 +3,6 @@ TEMPLATE = subdirs
 SUBDIRS += \
     CAPILibary \
     CAPISample \
-    Drawing \
     widget \
     melfaRobots
 

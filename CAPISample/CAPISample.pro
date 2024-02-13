@@ -44,13 +44,6 @@ INCLUDEPATH += $$PWD/../melfaRobots
 DEPENDPATH += $$PWD/../melfaRobots
 
 
-win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../Drawing/release/ -lDrawing
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../Drawing/debug/ -lDrawing
-else:unix: LIBS += -L$$OUT_PWD/../Drawing/ -lDrawing
-
-INCLUDEPATH += $$PWD/../Drawing
-DEPENDPATH += $$PWD/../Drawing
-
 FORMS += \
     drawletters.ui \
     mainwindow.ui

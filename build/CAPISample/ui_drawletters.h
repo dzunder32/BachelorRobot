@@ -92,7 +92,7 @@ public:
         robotSpeedSlider = new QSlider(centralwidget);
         robotSpeedSlider->setObjectName(QString::fromUtf8("robotSpeedSlider"));
         robotSpeedSlider->setFont(font);
-        robotSpeedSlider->setMinimum(1);
+        robotSpeedSlider->setMinimum(0);
         robotSpeedSlider->setMaximum(50);
         robotSpeedSlider->setOrientation(Qt::Horizontal);
 

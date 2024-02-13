@@ -34,10 +34,11 @@ private:
     QTimer *timer_draw;
     QVector <QString> LetterInput;
     QVector <int> LetterInputIndex;
+    QElapsedTimer timer;
     int currentIndex;
     int IncrementCounterValue;
     QMatrix4x4 robotMat;
-    QVector <QVector <QVector3D>> pointsPlane,pointsRobot;
+    QVector <QVector <QVector3D>> pointsPlane,pointsRobot,pointsBase;
     double a,b,c,l1;
     int counter=0;
     QVector3D prevLetter_lastPoint,nextLetter_firstPoint;
@@ -47,15 +48,14 @@ private:
     QVector <QVector <QVector2D>> points2D;
     QVector <QString> points2D_names;
     QVector<Qt3DCore::QEntity*> pointEntities;
-    QVector3D shift_vecPlane,shift_vecRobot,shift_vecBase;
+    QVector3D shift_vecPlane,shift_vecRobot,shift_vecBase,prev_shiftBase,prev_shiftRobot;
     QVector <QVector <bool>> drawPoint_isTrue;
     int letter;
-
-
-    void plane2robotPts();
-    void points2D_ToBase();
+    float letterSize;
+    void Base2RobotPts();
+    void Points2DToBase();
     void Txt2QVector2D();
-
+    bool nextLetter;
     void moveInLine2DPoint(QVector2D point_begin, QVector2D point_end,QVector <QVector3D> &vec,QVector <bool> &draw_vec);
 
     QVector3D calcPointInPlane(QVector2D point)
@@ -69,6 +69,10 @@ private:
 
     void shiftVec2BaseAndRobot();
     void moveInLineBetweenLetters();
+    QVector3D Base2RobotPoint(QVector3D point3D){return QVector3D(robotMat.inverted() * point3D);}
+    QVector3D Base2PlanePoint(QVector3D point3D){return QVector3D(_plane->matrix().inverted() * point3D);}
+
+    void getPreviousVectors();
 signals:
     void sendPoint(QVector3D,float);
     void deletePoints();

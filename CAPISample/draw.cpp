@@ -25,7 +25,7 @@ Draw::Draw(Kinematik *robot, QVector3D sled_pos,Qt3DCore::QTransform* plane,Widg
 
     CreatePointsFromTxt(0.1);
 
-    shift_vecPlane = QVector3D(10,10,0);
+    letter_posPlane = QVector3D(10,10,0);
     shiftVec2BaseAndRobot();
     inc_letter=false;
     letter=0;
@@ -49,15 +49,15 @@ void Draw::draw_onTimeout()
 
     if (counter>=pointsRobot[letter].length())
     {
+
         getPreviousVectors();
-        nextLetter=!nextLetter;
 
-        CreatePointsFromTxt(letterSize);
+//        counter=0;
+        shiftLetterPosPlaneX(horizontalLetterDist);
 
-        shift_vecPlane.setX(shift_vecPlane.x()+horizontalLetterDist);
-        shiftVec2BaseAndRobot();
         back:
         currentIndex++;
+
         if(currentIndex==LetterInputIndex.size()){
             _robot->setJoints(0,0,90,0,90,0,0);
             timer_draw->stop();
@@ -68,48 +68,83 @@ void Draw::draw_onTimeout()
 
             if(letter==-1)
             {
-                shift_vecPlane.setX(shift_vecPlane.x()+horizontalLetterDist);
+                shiftLetterPosPlaneX(horizontalLetterDist);
+                shiftXcounter++;
                 goto back;
             }
             else if(letter==-2){
-                shift_vecPlane.setX(10);
-                shift_vecPlane.setY(shift_vecPlane.y()-verticalLetterDist);
+                letter_posPlane.setX(10);
+                shiftLetterPosPlaneY(verticalLetterDist);
+                shiftYcounter++;
                 goto back;
             }
-            shiftVec2BaseAndRobot();
+
+//            shiftVec2BaseAndRobot();
             nextLetter_firstPoint = pointsBase[letter].first()+shift_vecBase;
-            if(nextLetter)
-            {
-                letter=LetterInputIndex[currentIndex-1];
+            qDebug()<<"prevLetterPos:"<<prev_shiftPlane;
+            qDebug()<<"currentLetterPos:"<<letter_posPlane;
+            nextLetter = !nextLetter;
+            if(nextLetter){
+                qDebug()<<"Im in!";
+                currentIndex--;
+                letter=LetterInputIndex[currentIndex-shiftXcounter-shiftYcounter];
                 moveInLineBetweenLetters();
+                shiftXcounter=0;
+                shiftYcounter=0;
+            }
+            else{
+                counter=0;
+                CreatePointsFromTxt(letterSize);
+                letter_posPlane=save_letterPos;
+                shiftVec2BaseAndRobot();
+            }
 
-            }else{counter=0;}
-
+//            qDebug()<<"prevLetter"<<Base2PlanePoint(prevLetter_lastPoint)-prev_shiftPlane<<"nextLetter"<<Base2PlanePoint(nextLetter_firstPoint)-prev_shiftPlane;
 
         }
     }
         while(timer.nsecsElapsed()<300000){}
 
-    qint64 elapsedTime = timer.nsecsElapsed(); // Get the elapsed time in nanoseconds
+//    qint64 elapsedTime = timer.nsecsElapsed(); // Get the elapsed time in nanoseconds
 //    qDebug() << "Time taken:" << elapsedTime << "ns";
 
+}
+
+void Draw::shiftLetterPosPlaneX(float x)
+{
+    letter_posPlane+=QVector3D(x,0,0);
+    shiftVec2BaseAndRobot();
+}
+void Draw::shiftLetterPosPlaneY(float y)
+{
+    letter_posPlane-=QVector3D(0,y,0);
+    shiftVec2BaseAndRobot();
 }
 void Draw::getPreviousVectors()
 {
     prevLetter_lastPoint = pointsBase[letter].last()+shift_vecBase;
     prev_shiftBase = shift_vecBase;
     prev_shiftRobot = shift_vecRobot;
+    prev_shiftPlane = letter_posPlane;
 }
 
 void Draw::moveInLineBetweenLetters()
 {
-//    QVector <QVector3D> temp_basePoints;
-//    QVector <bool> temp_drawVec;
-    QVector3D point_Plane1 = Base2PlanePoint(prevLetter_lastPoint-prev_shiftBase);
-    QVector3D point_Plane2 = Base2PlanePoint(nextLetter_firstPoint-prev_shiftBase);
-    qDebug()<<point_Plane1 << point_Plane2;
-//    qDebug()<<
-    moveInLine2DPoint(point_Plane1.toVector2D(),point_Plane2.toVector2D(),pointsBase[letter],drawPoint_isTrue[letter]);
+    QVector <QVector3D> temp_pointsBase;
+//    QVector <bool> temp_drawVec;?
+    save_letterPos = letter_posPlane;
+    letter_posPlane=prev_shiftPlane;
+    shiftVec2BaseAndRobot();
+    QVector3D point_Plane1 = Base2PlanePoint(prevLetter_lastPoint)-prev_shiftPlane;
+    QVector3D point_Plane2 = Base2PlanePoint(nextLetter_firstPoint)-prev_shiftPlane;
+    qDebug()<<"P1,P2:"<<point_Plane1 << point_Plane2;
+    moveInLine2DPoint(point_Plane1.toVector2D(),point_Plane2.toVector2D(),temp_pointsBase,drawPoint_isTrue[letter]);
+
+    for(QVector3D basePoint:temp_pointsBase){
+        pointsRobot[letter].push_back(Base2RobotPoint(basePoint));
+        pointsBase[letter].push_back(basePoint);
+
+    }
 //    qDebug()<<temp_basePoints.length();
 //    for (int i=temp_basePoints.length();i>0;i--){
 //        pointsBase[letter].prepend(temp_basePoints[i-1]);
@@ -148,7 +183,7 @@ void Draw::shiftVec2BaseAndRobot()
     QMatrix4x4 temp_robotMat = robotMat;
     temp_robotMat.setColumn(3,QVector4D(0,0,0,1));
     temp_planeMat.setColumn(3,QVector4D(0,0,0,1));
-    shift_vecBase = QVector3D(temp_planeMat * shift_vecPlane);
+    shift_vecBase = QVector3D(temp_planeMat * letter_posPlane);
     shift_vecRobot = QVector3D(temp_robotMat.inverted() * shift_vecBase);
 }
 void Draw::robot_setPoint(QVector3D position)
@@ -164,7 +199,7 @@ void Draw::getWord(QString str)
 {
     LetterInput.clear();
     LetterInputIndex.clear();
-    shift_vecPlane = QVector3D(10,10,0);
+    letter_posPlane = QVector3D(10,10,0);
     shiftVec2BaseAndRobot();
 
     for (int i =  0; i < str.length(); ++i) {

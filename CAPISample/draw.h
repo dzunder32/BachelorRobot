@@ -24,7 +24,7 @@ public slots:
     void draw_onTimeout();
     void setLetter(QString str);
     void CreatePointsFromTxt(float size);
-    void draw_TimerStart(){timer_draw->start();}
+    void draw_TimerStart(){timer_draw->start();counter=0;}
     void draw_TimerStop(){timer_draw->stop();}
 
 
@@ -40,7 +40,7 @@ private:
     QMatrix4x4 robotMat;
     QVector <QVector <QVector3D>> pointsPlane,pointsRobot,pointsBase;
     double a,b,c,l1;
-    int counter=0;
+    int counter=0,shiftXcounter=0,shiftYcounter=0;
     QVector3D prevLetter_lastPoint,nextLetter_firstPoint;
     Qt3DCore::QTransform* _plane;
     QVector3D unit_planeX,unit_planeY,unit_planeZ;
@@ -48,7 +48,7 @@ private:
     QVector <QVector <QVector2D>> points2D;
     QVector <QString> points2D_names;
     QVector<Qt3DCore::QEntity*> pointEntities;
-    QVector3D shift_vecPlane,shift_vecRobot,shift_vecBase,prev_shiftBase,prev_shiftRobot;
+    QVector3D letter_posPlane,shift_vecRobot,shift_vecBase,prev_shiftBase,prev_shiftRobot,prev_shiftPlane,save_letterPos;
     QVector <QVector <bool>> drawPoint_isTrue;
     int letter;
     float letterSize;
@@ -73,6 +73,8 @@ private:
     QVector3D Base2PlanePoint(QVector3D point3D){return QVector3D(_plane->matrix().inverted() * point3D);}
 
     void getPreviousVectors();
+    void shiftLetterPosPlaneX(float x);
+    void shiftLetterPosPlaneY(float y);
 signals:
     void sendPoint(QVector3D,float);
     void deletePoints();

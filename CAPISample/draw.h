@@ -34,7 +34,7 @@ private:
     QTimer *timer_draw;
     QVector <QString> LetterInput;
     QVector <int> LetterInputIndex;
-    QElapsedTimer timer;
+    QElapsedTimer elapsed_timer;
     int currentIndex;
     int IncrementCounterValue;
     QMatrix4x4 robotMat;
@@ -48,10 +48,11 @@ private:
     QVector <QVector <QVector2D>> points2D;
     QVector <QString> points2D_names;
     QVector<Qt3DCore::QEntity*> pointEntities;
-    QVector3D letter_posPlane,shift_vecRobot,shift_vecBase,prev_shiftBase,prev_shiftRobot,prev_shiftPlane,save_letterPos;
+    QVector3D letter_posPlane,letter_posRobot,letter_posBase,prev_shiftBase,prev_shiftRobot,prev_shiftPlane,save_letterPos;
     QVector <QVector <bool>> drawPoint_isTrue;
     int letter;
     float letterSize;
+    void robMove2Point();
     void Base2RobotPts();
     void Points2DToBase();
     void Txt2QVector2D();
@@ -75,6 +76,7 @@ private:
     void getPreviousVectors();
     void shiftLetterPosPlaneX(float x);
     void shiftLetterPosPlaneY(float y);
+    void getNextLetter();
 signals:
     void sendPoint(QVector3D,float);
     void deletePoints();

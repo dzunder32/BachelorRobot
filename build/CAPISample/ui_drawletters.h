@@ -170,7 +170,7 @@ public:
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'MS Shell Dlg 2'; font-size:8pt;\">HALLO ICH BIN</span></p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'MS Shell Dlg 2'; font-size:8pt;\">DENIS WUHU</span></p></body></html>", nullptr));
         buttonDeletePoint->setText(QCoreApplication::translate("DrawLetters", "deletePoint", nullptr));
-        pushButton_2->setText(QCoreApplication::translate("DrawLetters", "Stop", nullptr));
+        pushButton_2->setText(QCoreApplication::translate("DrawLetters", "Start Stop", nullptr));
         pushButton_Draw->setText(QCoreApplication::translate("DrawLetters", "Draw", nullptr));
     } // retranslateUi
 

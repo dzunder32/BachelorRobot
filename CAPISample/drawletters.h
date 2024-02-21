@@ -38,6 +38,7 @@ private:
     Widget3D *_widget3d;
     Kinematik *_robot;
     QThread robotThread;
+    bool pbStop;
 
 
 };

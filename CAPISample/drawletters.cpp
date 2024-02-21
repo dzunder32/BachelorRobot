@@ -21,6 +21,7 @@ DrawLetters::DrawLetters(Kinematik *robot, QVector3D sled_pos, Qt3DCore::QTransf
     connect(_draw,&Draw::stopTimerDraw,this,&DrawLetters::on_pushButton_2_clicked);
 
     robotThread.start();
+    pbStop=true;
 }
 
 DrawLetters::~DrawLetters()
@@ -40,7 +41,13 @@ void DrawLetters::pB_draw_clicked()
 
 void DrawLetters::on_pushButton_2_clicked()
 {
-    _draw->draw_TimerStop();
+    if(pbStop){
+        _draw->draw_TimerStop();
+    }else{
+        _draw->draw_TimerStartNoReset();
+    }
+    pbStop=!pbStop;
+
 }
 
 void DrawLetters::on_buttonDeletePoint_clicked()

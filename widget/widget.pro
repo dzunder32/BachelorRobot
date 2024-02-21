@@ -16,6 +16,7 @@ SOURCES += \
     liveplot.cpp \
     liveplot2.cpp \
     penholder.cpp \
+    plane.cpp \
     qcustomplot.cpp \
     rv4fl.cpp \
     rv6sl.cpp \
@@ -31,6 +32,7 @@ HEADERS += \
     liveplot.h \
     liveplot2.h \
     penholder.h \
+    plane.h \
     qcustomplot.h \
     rv4fl.h \
     rv6sl.h \

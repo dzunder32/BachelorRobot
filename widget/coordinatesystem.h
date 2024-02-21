@@ -12,12 +12,14 @@ public:
     CoordinateSystem(Qt3DCore::QEntity* parent=nullptr);
 
     void setLength(float length);
+    void thinOut(float factor);
 
     Qt3DCore::QEntity * AxisZ;
     Qt3DCore::QEntity * AxisX;
     Qt3DCore::QEntity * AxisY;
 
     void setNegativeAxis(bool enabeld);
+
 private:
     Qt3DExtras::QCylinderMesh *_cylinder;
     Qt3DCore::QEntity * _arrowheadAxisZ;

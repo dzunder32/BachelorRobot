@@ -10,7 +10,7 @@ public:
     CoordinateSystem* CoordSystem;
     Tool(Qt3DCore::QEntity *parent=nullptr) {this->Qt3DCore::QEntity::setParent(parent);
                                              CoordSystem =new CoordinateSystem(this);
-                                             CoordSystem->setLength(1);
+                                             CoordSystem->setLength(100);
                                              this->addComponent(static_cast<Qt3DCore::QTransform*>(this));}
 
 //    void deleteCoordSystem(){}

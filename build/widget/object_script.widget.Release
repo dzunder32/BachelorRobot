@@ -5,6 +5,7 @@ release/linearaxisrv6sl.o
 release/liveplot.o
 release/liveplot2.o
 release/penholder.o
+release/plane.o
 release/qcustomplot.o
 release/rv4fl.o
 release/rv6sl.o

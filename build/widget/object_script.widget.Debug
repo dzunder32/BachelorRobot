@@ -5,6 +5,7 @@ debug/linearaxisrv6sl.o
 debug/liveplot.o
 debug/liveplot2.o
 debug/penholder.o
+debug/plane.o
 debug/qcustomplot.o
 debug/rv4fl.o
 debug/rv6sl.o

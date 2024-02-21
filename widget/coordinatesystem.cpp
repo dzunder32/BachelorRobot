@@ -72,6 +72,13 @@ void CoordinateSystem::setLength(float length)
     _arrowhead->setLength(_arrowhead->bottomRadius()*2);
 }
 
+void CoordinateSystem::thinOut(float factor)
+{
+    _arrowhead->setBottomRadius(pow(_cylinder->length(),1.0/4.0)*2*factor);
+    _arrowhead->setLength(_arrowhead->bottomRadius()*2*factor);
+    _cylinder->setRadius((pow(_cylinder->length(),1.0/4.0)/2)*factor);
+
+}
 void CoordinateSystem::setNegativeAxis(bool enabeld)
 {
     if (enabeld!=_negativeAxis)

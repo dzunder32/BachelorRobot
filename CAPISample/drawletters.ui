@@ -141,7 +141,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
          </font>
         </property>
         <property name="text">
-         <string>Stop</string>
+         <string>Start Stop</string>
         </property>
        </widget>
       </item>

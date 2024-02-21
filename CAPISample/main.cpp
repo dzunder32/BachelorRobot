@@ -10,6 +10,7 @@
 #include "controlpanel.h"
 #include "drawletters.h"
 #include "penholder.h"
+#include "plane.h"
 
 int main(int argc, char *argv[])
 {
@@ -53,7 +54,7 @@ int main(int argc, char *argv[])
     //Hinzufügen eines Tools in die Grafik
 //    KinectCamera* camera2 = new KinectCamera();
     PenHolder* penHolder = new PenHolder();
-
+    penHolder->CoordSystem->thinOut(0.5);
     //Hinzufügen einer Linearachse
 
     LinearAxisRV6SL* linAxis  = new LinearAxisRV6SL();
@@ -101,16 +102,22 @@ int main(int argc, char *argv[])
 
     //Ebene zu Zeichnen
 
-    CoordinateSystem *plane=new CoordinateSystem;
-    plane->setLength(200);
-    plane->setNegativeAxis(false);
+
+    Plane *plane = new Plane(double(1000),double(700),widget3d);
     plane->setTranslation(linAxis2->sled_position+QVector3D(500,-500,500));
     plane->setRotation(QQuaternion::fromEulerAngles(QVector3D(-90,180,0)));
-//    plane->setRotation(QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180));
-    widget3d->addObject(plane/*,linAxis2->sled_position+QVector3D(0,-500,700),QQuaternion::fromAxisAndAngle(QVector3D(1,0,0),-90)*/);
-    qDebug()<<"trans"<<plane->translation();
-//    drawL->getPlane(static_cast<Qt3DCore::QTransform *>(plane));
-    DrawLetters *drawL = new DrawLetters(robot2Kinematik,linAxis2->sled_position,static_cast<Qt3DCore::QTransform*>(plane),widget3d);
-    drawL->show();
+    widget3d->addObject(plane);
+
+//     CoordinateSystem *plane=new CoordinateSystem;
+//     plane->setLength(200);
+//     plane->setNegativeAxis(false);
+//     plane->setTranslation(linAxis2->sled_position+QVector3D(500,-500,500));
+//     plane->setRotation(QQuaternion::fromEulerAngles(QVector3D(-90,180,0)));
+// //    plane->setRotation(QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180));
+//     widget3d->addObject(plane/*,linAxis2->sled_position+QVector3D(0,-500,700),QQuaternion::fromAxisAndAngle(QVector3D(1,0,0),-90)*/);
+//     qDebug()<<"trans"<<plane->translation();
+// //    drawL->getPlane(static_cast<Qt3DCore::QTransform *>(plane));
+//     DrawLetters *drawL = new DrawLetters(robot2Kinematik,linAxis2->sled_position,static_cast<Qt3DCore::QTransform*>(plane),widget3d);
+//     drawL->show();
     return a.exec();
 }

@@ -9,12 +9,12 @@
 #include <Qt3DExtras/QSphereMesh>
 #include <Qt3DExtras/QPhongMaterial>
 #include <widget3d.h>
-
+#include <plane.h>
 class Draw : public QObject
 {
     Q_OBJECT
 public:
-    explicit Draw(Kinematik *robot, QVector3D sled_pos, Qt3DCore::QTransform* plane,Widget3D *widget3d);
+    explicit Draw(Kinematik *robot, QVector3D sled_pos, Plane* plane,Widget3D *widget3d);
     bool inc_letter;
     void setTime(int time_ms){timer_draw->setInterval(time_ms);}
     void getWord(QString str);
@@ -33,7 +33,9 @@ private:
     Widget3D *_widget3d;
     Kinematik *_robot;
     QTimer *timer_draw;
-    QVector <QString> LetterInput   ;
+    Plane* _plane;
+
+    QVector <QString> LetterInput;
     QVector <int> LetterInputIndex;
     QElapsedTimer elapsed_timer;
     int currentIndex;
@@ -43,7 +45,7 @@ private:
     double a,b,c,l1;
     int counter=0,shiftXcounter=0,shiftYcounter=0;
     QVector3D prevLetter_lastPoint,nextLetter_firstPoint;
-    Qt3DCore::QTransform* _plane;
+
     QVector3D unit_planeX,unit_planeY,unit_planeZ;
     QVector3D planeX,planeY,planeZ;
     QVector <QVector <QVector2D>> points2D;

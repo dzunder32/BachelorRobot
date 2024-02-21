@@ -11,17 +11,21 @@
 class Plane : public CoordinateSystem
 {
 public:
-    Plane(double XSize,double YSize,Widget3D *widget3d,Qt3DCore::QEntity *parent=nullptr);
+    Plane(double XSize,double YSize,Qt3DCore::QEntity *parent=nullptr);
     Qt3DCore::QEntity * upperBorderX;
     Qt3DCore::QEntity * lowerBorderX;
 
     Qt3DCore::QEntity * leftBorderY;
     Qt3DCore::QEntity * rightBorderY;
 
+    double xLimit,yLimit;
+
+    QVector3D upperPosX;
+    QVector3D lowerPosX;
+    QVector3D rightPosY;
+    QVector3D leftPosY;
 
 private:
-    double _xLimit,_yLimit;
-    Widget3D *_widget;
     Qt3DExtras::QCylinderMesh *_upperCylinderX;
     Qt3DExtras::QCylinderMesh *_lowerCylinderX;
     Qt3DExtras::QCylinderMesh *_leftCylinderY;

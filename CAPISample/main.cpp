@@ -103,7 +103,7 @@ int main(int argc, char *argv[])
     //Ebene zu Zeichnen
 
 
-    Plane *plane = new Plane(double(1000),double(700),widget3d);
+    Plane *plane = new Plane(700.0,450.0);
     plane->setTranslation(linAxis2->sled_position+QVector3D(500,-500,500));
     plane->setRotation(QQuaternion::fromEulerAngles(QVector3D(-90,180,0)));
     widget3d->addObject(plane);
@@ -117,7 +117,7 @@ int main(int argc, char *argv[])
 //     widget3d->addObject(plane/*,linAxis2->sled_position+QVector3D(0,-500,700),QQuaternion::fromAxisAndAngle(QVector3D(1,0,0),-90)*/);
 //     qDebug()<<"trans"<<plane->translation();
 // //    drawL->getPlane(static_cast<Qt3DCore::QTransform *>(plane));
-//     DrawLetters *drawL = new DrawLetters(robot2Kinematik,linAxis2->sled_position,static_cast<Qt3DCore::QTransform*>(plane),widget3d);
-//     drawL->show();
+     DrawLetters *drawL = new DrawLetters(robot2Kinematik,linAxis2->sled_position,plane,widget3d);
+     drawL->show();
     return a.exec();
 }

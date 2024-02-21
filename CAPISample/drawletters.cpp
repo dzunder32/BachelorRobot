@@ -1,7 +1,7 @@
 #include "drawletters.h"
 #include "ui_drawletters.h"
 
-DrawLetters::DrawLetters(Kinematik *robot, QVector3D sled_pos, Qt3DCore::QTransform* plane,Widget3D *widget3d, QWidget *parent) :
+DrawLetters::DrawLetters(Kinematik *robot, QVector3D sled_pos,Plane* plane,Widget3D *widget3d, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::DrawLetters)
 {

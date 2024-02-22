@@ -30,6 +30,7 @@ LinearAxisRV6SL::LinearAxisRV6SL(Qt3DCore::QEntity* parent)
     auto* tempTrans2 =new Qt3DCore::QTransform();
     tempTrans2->setTranslation(QVector3D(0,144,70.11));
     tempEnt2->addComponent(tempTrans2);
+
     sled_pos_inBase();
 
     Joint7=tempTrans1;
@@ -64,10 +65,10 @@ void LinearAxisRV6SL::sled_pos_inBase(){
 
     sled_position = rotate_vector(sled_vector,rotationMatrix) +_substructure->translation() + QVector3D(0,144,0);
     qDebug()<<sled_position;
-    tempTrans3->setTranslation(sled_position);
-    CoordinateSystem *CSystem = new CoordinateSystem(tempEnt3);
-    CSystem->setLength(500);
-    CSystem->setNegativeAxis(false);
+    // tempTrans3->setTranslation(sled_position);
+    // CoordinateSystem *CSystem = new CoordinateSystem(tempEnt3);
+    // CSystem->setLength(500);
+    // CSystem->setNegativeAxis(false);
 
 }
 

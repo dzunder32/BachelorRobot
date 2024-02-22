@@ -38,8 +38,10 @@ private:
     Plane* _plane;
 
     int Nx,Ny;
+    int lastIndexEnter,firstIndex=0;
     QVector <QString> LetterInput;
-    QVector <int> LetterInputIndex;
+    QVector <int> temp_LetterInputIndex,LetterInputIndex;
+    int prevInputLength=0;
     QElapsedTimer elapsed_timer;
     int currentIndex;
     int IncrementCounterValue;
@@ -84,6 +86,7 @@ private:
     void shiftLetterPosPlaneX(float x);
     void shiftLetterPosPlaneY(float y);
     void getNextLetter();
+    void checkPrevLetters();
 signals:
     void sendPoint(QVector3D,float);
     void deletePoints();

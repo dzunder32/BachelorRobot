@@ -18,7 +18,7 @@ public:
     bool inc_letter;
     void setTime(int time_ms){timer_draw->setInterval(time_ms);}
     void getWord(QString str);
-    float horizontalLetterDist,verticalLetterDist,pointThickness;
+    float xLetterDist,yLetterDist,pointThickness;
 
 public slots:
     void draw_onTimeout();
@@ -34,7 +34,7 @@ private:
     Kinematik *_robot;
     QTimer *timer_draw;
     Plane* _plane;
-
+    int Nx,Ny;
     QVector <QString> LetterInput;
     QVector <int> LetterInputIndex;
     QElapsedTimer elapsed_timer;

@@ -11,6 +11,8 @@
 #include "drawletters.h"
 #include "penholder.h"
 #include "plane.h"
+#include "robot.h"
+#include "robotcontrol.h"
 
 int main(int argc, char *argv[])
 {
@@ -104,9 +106,20 @@ int main(int argc, char *argv[])
 
 
     Plane *plane = new Plane(700.0,450.0);
-    plane->setTranslation(linAxis2->sled_position+QVector3D(500,-500,500));
-    plane->setRotation(QQuaternion::fromEulerAngles(QVector3D(-90,180,0)));
+    plane->setTranslation(linAxis2->sled_position+QVector3D(-100,1100,500));
+    plane->setRotation(QQuaternion::fromEulerAngles(QVector3D(-90,180,0))*QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180));
     widget3d->addObject(plane);
+
+    Robot *robot = new Robot("143.93.135.15",10001);
+
+
+    RobotControl *robControl = new RobotControl(robot);
+    robControl->show();
+
+    robot->ConnectKinematik(robot2Kinematik);
+//    robot->Connect();
+//    robot->ServoOn(true);
+//    robot->Write("1;1;EXECMVS P_Curr,-100");
 
 //     CoordinateSystem *plane=new CoordinateSystem;
 //     plane->setLength(200);
@@ -117,7 +130,7 @@ int main(int argc, char *argv[])
 //     widget3d->addObject(plane/*,linAxis2->sled_position+QVector3D(0,-500,700),QQuaternion::fromAxisAndAngle(QVector3D(1,0,0),-90)*/);
 //     qDebug()<<"trans"<<plane->translation();
 // //    drawL->getPlane(static_cast<Qt3DCore::QTransform *>(plane));
-     DrawLetters *drawL = new DrawLetters(robot2Kinematik,linAxis2->sled_position,plane,widget3d);
+     DrawLetters *drawL = new DrawLetters(robot2Kinematik,robot,linAxis2->sled_position,plane,widget3d);
      drawL->show();
     return a.exec();
 }

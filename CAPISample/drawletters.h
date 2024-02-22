@@ -14,7 +14,7 @@ class DrawLetters : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit DrawLetters(Kinematik *robot, QVector3D sled_pos,Plane* plane, Widget3D *widget3d, QWidget *parent = nullptr);
+    explicit DrawLetters(Kinematik *robotKinematik,Robot *robot, QVector3D sled_pos,Plane* plane, Widget3D *widget3d, QWidget *parent = nullptr);
     ~DrawLetters();
 
 

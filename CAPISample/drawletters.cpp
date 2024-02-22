@@ -1,14 +1,14 @@
 #include "drawletters.h"
 #include "ui_drawletters.h"
 
-DrawLetters::DrawLetters(Kinematik *robot, QVector3D sled_pos,Plane* plane,Widget3D *widget3d, QWidget *parent) :
+DrawLetters::DrawLetters(Kinematik *robotKinematik,Robot *robot, QVector3D sled_pos,Plane* plane,Widget3D *widget3d, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::DrawLetters)
 {
     ui->setupUi(this);
 
     _widget3d = widget3d;
-    _draw = new Draw(robot,sled_pos,plane,widget3d);
+    _draw = new Draw(robotKinematik,robot,sled_pos,plane,widget3d);
     _draw->moveToThread(&robotThread);
 
     connect(&robotThread,  &QThread::finished, _draw,&QObject::deleteLater);

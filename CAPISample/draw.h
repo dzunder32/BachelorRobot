@@ -10,11 +10,12 @@
 #include <Qt3DExtras/QPhongMaterial>
 #include <widget3d.h>
 #include <plane.h>
+#include "robot.h"
 class Draw : public QObject
 {
     Q_OBJECT
 public:
-    explicit Draw(Kinematik *robot, QVector3D sled_pos, Plane* plane,Widget3D *widget3d);
+    explicit Draw(Kinematik *robotKinematik,Robot *robot, QVector3D sled_pos, Plane* plane,Widget3D *widget3d);
     bool inc_letter;
     void setTime(int time_ms){timer_draw->setInterval(time_ms);}
     void getWord(QString str);
@@ -31,9 +32,11 @@ public slots:
 
 private:
     Widget3D *_widget3d;
-    Kinematik *_robot;
+    Kinematik *_robotKinematik;
+    Robot *_robot;
     QTimer *timer_draw;
     Plane* _plane;
+
     int Nx,Ny;
     QVector <QString> LetterInput;
     QVector <int> LetterInputIndex;
@@ -53,6 +56,7 @@ private:
     QVector<Qt3DCore::QEntity*> pointEntities;
     QVector3D letter_posPlane,letter_posRobot,letter_posBase,prev_shiftBase,prev_shiftRobot,prev_shiftPlane,save_letterPos;
     QVector <QVector <bool>> drawPoint_isTrue;
+
     int letter;
     float letterSize;
     void robMove2Point();

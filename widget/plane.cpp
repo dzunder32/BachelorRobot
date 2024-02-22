@@ -14,23 +14,23 @@ Plane::Plane(double XSize,double YSize,Qt3DCore::QEntity* parent)
 
     this->setLength(100);
     this->setNegativeAxis(false);
-    _lowerCylinderX =new Qt3DExtras::QCylinderMesh;
-    _upperCylinderX =new Qt3DExtras::QCylinderMesh;
+    _lowerCylinderX = new Qt3DExtras::QCylinderMesh;
+    _upperCylinderX = new Qt3DExtras::QCylinderMesh;
 
-    _leftCylinderY =new Qt3DExtras::QCylinderMesh;
-    _rightCylinderY =new Qt3DExtras::QCylinderMesh;
+    _leftCylinderY  = new Qt3DExtras::QCylinderMesh;
+    _rightCylinderY = new Qt3DExtras::QCylinderMesh;
 
     _lowerCylinderX->setRadius(1);
     _upperCylinderX->setRadius(1);
     _leftCylinderY->setRadius(1);
     _rightCylinderY->setRadius(1);
 
-    _materialY =new Qt3DExtras::QPhongMaterial();
+    _materialY = new Qt3DExtras::QPhongMaterial();
     _materialY->setAmbient(QColor(255,255,0));
-    _materialX =new Qt3DExtras::QPhongMaterial();
+    _materialX = new Qt3DExtras::QPhongMaterial();
     _materialX->setAmbient(QColor(255,0,0));
 
-    _leftTransformY = new Qt3DCore::QTransform();
+    _leftTransformY  = new Qt3DCore::QTransform();
     _rightTransformY = new Qt3DCore::QTransform();
     _upperTransformX = new Qt3DCore::QTransform();
     _lowerTransformX = new Qt3DCore::QTransform();

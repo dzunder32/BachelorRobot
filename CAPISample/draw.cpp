@@ -27,6 +27,7 @@ Draw::Draw(Kinematik *robot, QVector3D sled_pos,Plane* plane,Widget3D *widget3d)
     nextLetter=false;
 
 
+
 }
 
 void Draw::draw_onTimeout()

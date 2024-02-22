@@ -61,7 +61,7 @@ void Draw::getNextLetter()
     // qDebug()<<"letterPos:"<<letter_posPlane;
 
 //        counter=0;
-    shiftLetterPosPlaneX(horizontalLetterDist);
+    shiftLetterPosPlaneX(xLetterDist);
 
     back:
     currentIndex++;
@@ -76,13 +76,13 @@ void Draw::getNextLetter()
 
         if(letter==-1)
         {
-            shiftLetterPosPlaneX(horizontalLetterDist);
+            shiftLetterPosPlaneX(xLetterDist);
             shiftXcounter++;
             goto back;
         }
         else if(letter==-2){
             letter_posPlane.setX(10);
-            shiftLetterPosPlaneY(verticalLetterDist);
+            shiftLetterPosPlaneY(yLetterDist);
             shiftYcounter++;
             goto back;
         }
@@ -185,8 +185,8 @@ void Draw::moveInLineBetweenLetters()
 void Draw::CreatePointsFromTxt(float size)
 {
     letterSize=size;
-    horizontalLetterDist = 60*size;
-    verticalLetterDist = 100*size;
+    xLetterDist = 60*size;
+    yLetterDist = 100*size;
     pointThickness = 2 * size;
     IncrementCounterValue=qRound(1/size);
 
@@ -194,7 +194,11 @@ void Draw::CreatePointsFromTxt(float size)
     planeY = unit_planeY*size;
     planeZ = unit_planeZ*size;
 
-    letter_posPlane = QVector3D(10 * size, 10 * size, 0);
+    Nx = _plane->xLimit/xLetterDist;
+    Ny = _plane->yLimit/yLetterDist;
+    qDebug()<<"Nx,Ny"<<Nx<<Ny;
+
+    letter_posPlane = QVector3D(0, (Ny)*yLetterDist, 0);
     shiftVec2BaseAndRobot();
 
     Txt2QVector2D();
@@ -225,7 +229,7 @@ void Draw::getWord(QString str)
     LetterInput.clear();
     LetterInputIndex.clear();
     nextLetter=false;
-    letter_posPlane = QVector3D(10 * letterSize,10 * letterSize,0);
+
 //    letter_posPlane = QVector3D(10,10,0);
     shiftVec2BaseAndRobot();
 
@@ -234,9 +238,9 @@ void Draw::getWord(QString str)
         if((str.at(i)==" " || str.at(i)=="\n") && i==0)
         {
             if(str.at(0)==" ")
-                shiftLetterPosPlaneX(horizontalLetterDist);
+                shiftLetterPosPlaneX(xLetterDist);
             else
-                shiftLetterPosPlaneY(verticalLetterDist);
+                shiftLetterPosPlaneY(yLetterDist);
             str.remove(0,1);
             qDebug()<<str;
             goto checkAgain;

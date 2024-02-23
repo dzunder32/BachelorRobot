@@ -2,14 +2,14 @@
 
 Draw::Draw(Kinematik *robotKinematik,Robot *robot, QVector3D sled_pos,Plane* plane,Widget3D *widget3d)
 {
-    timer_draw = new QTimer;
+//    timer_draw = new QTimer;
     _robotKinematik = robotKinematik;
     _robotKinematik->setJoints(0,0,90,0,90,0,0);
     _robot = robot;
     _plane = plane;
     _widget3d = widget3d;
 
-    connect(timer_draw, &QTimer::timeout,this, &Draw::draw_onTimeout);
+//    connect(timer_draw, &QTimer::timeout,this, &Draw::draw_onTimeout);
 
     robotMat.rotate(90,QVector3D(0,0,1));
     robotMat.setColumn(3,QVector4D(sled_pos,1));
@@ -19,7 +19,7 @@ Draw::Draw(Kinematik *robotKinematik,Robot *robot, QVector3D sled_pos,Plane* pla
     a=ew.x();
     b=ew.y();
     c=ew.z();
-    l1=200;
+    l1=500;
     unit_planeX = QVector3D(_plane->matrix().column(0));
     unit_planeY = QVector3D(_plane->matrix().column(1));
     unit_planeZ = QVector3D(_plane->matrix().column(2));
@@ -34,8 +34,17 @@ Draw::Draw(Kinematik *robotKinematik,Robot *robot, QVector3D sled_pos,Plane* pla
 void Draw::draw_onTimeout()
 {
     elapsed_timer.start();
+
+
+
     robMove2Point();
-        while(elapsed_timer.nsecsElapsed()<300000){}
+
+    if(!_robot->IsConnected()){while(elapsed_timer.nsecsElapsed()<50000000){}}
+//    qDebug()<<isDrawing;
+    if(isDrawing)
+        draw_onTimeout();
+
+
 }
 
 void Draw::robMove2Point()
@@ -50,6 +59,8 @@ void Draw::robMove2Point()
 
     if (counter>=pointsRobot[letter].length())
         getNextLetter();
+
+
 }
 
 void Draw::getNextLetter()
@@ -64,13 +75,16 @@ void Draw::getNextLetter()
     back:
     currentIndex++;
 
-    if(currentIndex==LetterInputIndex.size()){
+    if(currentIndex==currentRowIndex.length()/*LetterInputIndex.size()*/){
         _robotKinematik->setJoints(0,0,90,0,90,0,0);
-        timer_draw->stop();
+        _robot->UpdatePosition();
+//        timer_draw->stop();
+        isDrawing=false;
     }
     else
     {
-        letter=LetterInputIndex[currentIndex];
+//        letter=LetterInputIndex[currentIndex];
+        letter=currentRowIndex[currentIndex];
 
         if(letter==-1)
         {
@@ -91,7 +105,8 @@ void Draw::getNextLetter()
         if(nextLetter){
 //            qDebug()<<"Im in!";
             currentIndex--;
-            letter=LetterInputIndex[currentIndex-shiftXcounter-shiftYcounter];
+//            letter=LetterInputIndex[currentIndex-shiftXcounter-shiftYcounter];
+            letter=currentRowIndex[currentIndex-shiftXcounter-shiftYcounter];
             moveInLineBetweenLetters();
             shiftXcounter=0;
             shiftYcounter=0;
@@ -223,14 +238,17 @@ void Draw::robot_setPoint(QVector3D position)
     _robotKinematik->ToolMovement(Transformations::Z,-199);
 
     _robot->UpdatePosition();
-//    _robotKinematik->WaitForPositionReached();
+    if(_robot->IsConnected())
+        _robotKinematik->WaitForPositionReached();
+
+
 }
 
 void Draw::getWord(QString str)
 {
     LetterInput.clear();
-    LetterInputIndex.clear();
-    temp_LetterInputIndex.clear();
+//    LetterInputIndex.clear();
+    currentRowIndex.clear();
 
     nextLetter=false;
 
@@ -248,37 +266,39 @@ void Draw::getWord(QString str)
             qDebug()<<str;
             goto checkAgain;
         }
-        if(str.at(i)==" "){temp_LetterInputIndex.push_back(-1);}
-        else if(str.at(i)=="\n"){temp_LetterInputIndex.push_back(-2);}
-        else if(i % Nx == 0){checkPrevLetters();}
+        if(str.at(i)==" "){currentRowIndex.push_back(-1);}
+        else if(str.at(i)=="\n"){currentRowIndex.push_back(-2);}
+//        else if(i % Nx == 0){checkRow();}
         else{
            LetterInput.push_back(str.at(i));
            int index = points2D_names.indexOf(str.at(i));
-           temp_LetterInputIndex.push_back(index);}
+           currentRowIndex.push_back(index);}
     }
     currentIndex=0;
     counter=0;
-    letter=LetterInputIndex[currentIndex];
+//    letter=LetterInputIndex[currentIndex];
+    letter=currentRowIndex[currentIndex];
 
     qDebug()<<"letter:"<<LetterInput;
+    draw_onTimeout();
 }
 
 
-void Draw::checkPrevLetters()
+void Draw::checkRow()
 {
 
     qDebug()<<"now!";
-    lastIndexEnter = temp_LetterInputIndex.indexOf(-2);
+    lastIndexEnter = currentRowIndex.indexOf(-2);
 
     if(lastIndexEnter==-1){
-        lastIndexEnter = temp_LetterInputIndex.lastIndexOf(-1);
-        temp_LetterInputIndex.replace(lastIndexEnter,-2);
+        lastIndexEnter = currentRowIndex.lastIndexOf(-1);
+        currentRowIndex.replace(lastIndexEnter,-2);
 
     }
-    LetterInputIndex.append(temp_LetterInputIndex);
-    temp_LetterInputIndex.remove(firstIndex,lastIndexEnter);
+    LetterInputIndex.append(currentRowIndex);
+    currentRowIndex.remove(firstIndex,lastIndexEnter);
     firstIndex = lastIndexEnter;
-    temp_LetterInputIndex.clear();
+    currentRowIndex.clear();
     // if(LetterInputIndex.length()>=Nx)
     // {
     //     prevInputLength = LetterInputIndex.length();

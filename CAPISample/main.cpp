@@ -116,7 +116,8 @@ int main(int argc, char *argv[])
 
     RobotControl *robControl = new RobotControl(robot);
     robControl->show();
-
+    ControlPanel *control = new ControlPanel(robot2Kinematik);
+    control->show();
     robot->ConnectKinematik(robot2Kinematik);
 //    robot->Connect();
 //    robot->ServoOn(true);

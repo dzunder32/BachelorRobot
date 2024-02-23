@@ -35,8 +35,9 @@ void DrawLetters::pB_draw_clicked()
 {
     _draw->CreatePointsFromTxt(float(ui->spinBox_LetterSize->value())/10);
     _draw->getWord(ui->textEdit_Letter->toPlainText());
-    _draw->setTime(ui->robotSpeedSlider->value());
-    _draw->draw_TimerStart();
+    _draw->isDrawing = true;
+//    _draw->setTime(ui->robotSpeedSlider->value());
+//    _draw->draw_TimerStart();
 }
 
 void DrawLetters::on_pushButton_2_clicked()

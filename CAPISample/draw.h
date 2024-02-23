@@ -20,7 +20,7 @@ public:
     void setTime(int time_ms){timer_draw->setInterval(time_ms);}
     void getWord(QString str);
     float xLetterDist,yLetterDist,pointThickness;
-
+    bool isDrawing = true;
 public slots:
     void draw_onTimeout();
     void setLetter(QString str);
@@ -40,7 +40,7 @@ private:
     int Nx,Ny;
     int lastIndexEnter,firstIndex=0;
     QVector <QString> LetterInput;
-    QVector <int> temp_LetterInputIndex,LetterInputIndex;
+    QVector <int> currentRowIndex,LetterInputIndex;
     int prevInputLength=0;
     QElapsedTimer elapsed_timer;
     int currentIndex;
@@ -87,6 +87,7 @@ private:
     void shiftLetterPosPlaneY(float y);
     void getNextLetter();
     void checkPrevLetters();
+    void checkRow();
 signals:
     void sendPoint(QVector3D,float);
     void deletePoints();

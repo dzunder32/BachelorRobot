@@ -92,7 +92,7 @@ public:
         robotSpeedSlider = new QSlider(centralwidget);
         robotSpeedSlider->setObjectName(QString::fromUtf8("robotSpeedSlider"));
         robotSpeedSlider->setFont(font);
-        robotSpeedSlider->setMinimum(0);
+        robotSpeedSlider->setMinimum(1);
         robotSpeedSlider->setMaximum(50);
         robotSpeedSlider->setOrientation(Qt::Horizontal);
 
@@ -143,7 +143,7 @@ public:
         DrawLetters->setCentralWidget(centralwidget);
         menubar = new QMenuBar(DrawLetters);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 800, 21));
+        menubar->setGeometry(QRect(0, 0, 800, 20));
         DrawLetters->setMenuBar(menubar);
         statusbar = new QStatusBar(DrawLetters);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
@@ -161,14 +161,11 @@ public:
         radioButton->setText(QCoreApplication::translate("DrawLetters", "PresentLetterSizes", nullptr));
         lineEdit->setText(QCoreApplication::translate("DrawLetters", "RobotSpeed", nullptr));
         textEdit_Letter->setHtml(QCoreApplication::translate("DrawLetters", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"hr { height: 1px; border-width: 0; }\n"
-"li.unchecked::marker { content: \"\\2610\"; }\n"
-"li.checked::marker { content: \"\\2612\"; }\n"
-"</style></head><body style=\" font-family:'Segoe UI'; font-size:16pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'MS Shell Dlg 2'; font-size:8pt;\">HALLO ICH BIN</span></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'MS Shell Dlg 2'; font-size:8pt;\">DENIS WUHU</span></p></body></html>", nullptr));
+"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:16pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt;\">HALLO ICH BIN</span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt;\">DENIS WUHU</span></p></body></html>", nullptr));
         buttonDeletePoint->setText(QCoreApplication::translate("DrawLetters", "deletePoint", nullptr));
         pushButton_2->setText(QCoreApplication::translate("DrawLetters", "Start Stop", nullptr));
         pushButton_Draw->setText(QCoreApplication::translate("DrawLetters", "Draw", nullptr));

@@ -11,6 +11,9 @@
 #include <widget3d.h>
 #include <plane.h>
 #include "robot.h"
+// #include <iostream>
+// #include <thread>
+#include <chrono>
 class Draw : public QObject
 {
     Q_OBJECT
@@ -20,23 +23,26 @@ public:
     void setTime(int time_ms){timer_draw->setInterval(time_ms);}
     void getWord(QString str);
     float xLetterDist,yLetterDist,pointThickness;
-    bool isDrawing = true;
+    bool isDrawing = false;
 public slots:
     void draw_onTimeout();
     void setLetter(QString str);
     void CreatePointsFromTxt(float size);
-    void draw_TimerStart(){timer_draw->start();counter=0;}
     void draw_TimerStop(){timer_draw->stop();}
     void draw_TimerStartNoReset(){timer_draw->start();}
+    void setIncrementCounterValue(int val){IncrementCounterValue=val;CounterSet=true;}
 
 
-private:
+    void StartSimulation(int);
+    void StartRobot();
+ private:
+    bool CounterSet=false;
     Widget3D *_widget3d;
     Kinematik *_robotKinematik;
     Robot *_robot;
     QTimer *timer_draw;
     Plane* _plane;
-
+    int errorCounter=0;
     int Nx,Ny;
     int lastIndexEnter,firstIndex=0;
     QVector <QString> LetterInput;
@@ -88,6 +94,8 @@ private:
     void getNextLetter();
     void checkPrevLetters();
     void checkRow();
+    void drawingDone();
+    void connectTimer();
 signals:
     void sendPoint(QVector3D,float);
     void deletePoints();

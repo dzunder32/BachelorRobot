@@ -8,7 +8,8 @@ DrawLetters::DrawLetters(Kinematik *robotKinematik,Robot *robot, QVector3D sled_
     ui->setupUi(this);
 
     _widget3d = widget3d;
-    _draw = new Draw(robotKinematik,robot,sled_pos,plane,widget3d);
+    _robot = robot;
+    _draw = new Draw(robotKinematik,_robot,sled_pos,plane,widget3d);
     _draw->moveToThread(&robotThread);
 
     connect(&robotThread,  &QThread::finished, _draw,&QObject::deleteLater);
@@ -18,8 +19,7 @@ DrawLetters::DrawLetters(Kinematik *robotKinematik,Robot *robot, QVector3D sled_
 //    connect(ui->spinBox_robotSpeed,&QSpinBox::valueChanged,_draw,&Draw::RobotSpeedChanged);
 //    connect(ui->pushButton_Draw,&QPushButton::clicked,this,&DrawLetters::spinBox_valueChanged);
     connect(ui->pushButton_Draw,&QPushButton::clicked,this,&DrawLetters::pB_draw_clicked);
-    connect(_draw,&Draw::stopTimerDraw,this,&DrawLetters::on_pushButton_2_clicked);
-
+    connect(_draw,&Draw::stopTimerDraw,this,&DrawLetters::stopTimer);
     robotThread.start();
     pbStop=true;
 }
@@ -33,11 +33,17 @@ DrawLetters::~DrawLetters()
 
 void DrawLetters::pB_draw_clicked()
 {
+    if(ui->checkBox->isChecked())
+        _draw->setIncrementCounterValue(ui->spinBox_spacePoints->value());
+
     _draw->CreatePointsFromTxt(float(ui->spinBox_LetterSize->value())/10);
     _draw->getWord(ui->textEdit_Letter->toPlainText());
     _draw->isDrawing = true;
-//    _draw->setTime(ui->robotSpeedSlider->value());
-//    _draw->draw_TimerStart();
+    if(!_robot->IsConnected()){
+        _draw->StartSimulation(ui->robotSpeedSlider->value());
+    }else{
+        _draw->StartRobot();
+    }
 }
 
 void DrawLetters::on_pushButton_2_clicked()
@@ -45,10 +51,15 @@ void DrawLetters::on_pushButton_2_clicked()
     if(pbStop){
         _draw->draw_TimerStop();
     }else{
-        _draw->draw_TimerStartNoReset();
+        _draw->StartSimulation(ui->robotSpeedSlider->value());
     }
     pbStop=!pbStop;
 
+}
+void DrawLetters::stopTimer()
+{
+    _draw->draw_TimerStop();
+    qDebug()<<"timerStopped";
 }
 
 void DrawLetters::on_buttonDeletePoint_clicked()
@@ -77,4 +88,7 @@ void DrawLetters::on_spinBox_LetterSize_valueChanged(int arg1)
 void DrawLetters::on_robotSpeedSlider_valueChanged(int value)
 {
     _draw->setTime(value);
+
 }
+
+

@@ -11,12 +11,13 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QCheckBox>
+#include <QtWidgets/QFormLayout>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QRadioButton>
 #include <QtWidgets/QSlider>
 #include <QtWidgets/QSpinBox>
 #include <QtWidgets/QStatusBar>
@@ -32,18 +33,21 @@ public:
     QWidget *centralwidget;
     QVBoxLayout *verticalLayout_3;
     QHBoxLayout *horizontalLayout_2;
-    QVBoxLayout *verticalLayout;
+    QFormLayout *formLayout;
     QLineEdit *lineEdit_2;
     QSpinBox *spinBox_LetterSize;
-    QRadioButton *radioButton;
     QLineEdit *lineEdit;
     QSlider *robotSpeedSlider;
+    QLineEdit *lineEdit_3;
+    QCheckBox *checkBox;
+    QSpinBox *spinBox_spacePoints;
     QVBoxLayout *verticalLayout_2;
     QTextEdit *textEdit_Letter;
     QHBoxLayout *horizontalLayout;
     QPushButton *buttonDeletePoint;
     QPushButton *pushButton_2;
     QPushButton *pushButton_Draw;
+    QHBoxLayout *horizontalLayout_3;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -59,15 +63,15 @@ public:
         verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        verticalLayout = new QVBoxLayout();
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        formLayout = new QFormLayout();
+        formLayout->setObjectName(QString::fromUtf8("formLayout"));
         lineEdit_2 = new QLineEdit(centralwidget);
         lineEdit_2->setObjectName(QString::fromUtf8("lineEdit_2"));
         QFont font;
         font.setPointSize(16);
         lineEdit_2->setFont(font);
 
-        verticalLayout->addWidget(lineEdit_2);
+        formLayout->setWidget(0, QFormLayout::LabelRole, lineEdit_2);
 
         spinBox_LetterSize = new QSpinBox(centralwidget);
         spinBox_LetterSize->setObjectName(QString::fromUtf8("spinBox_LetterSize"));
@@ -75,19 +79,13 @@ public:
         spinBox_LetterSize->setMinimum(1);
         spinBox_LetterSize->setMaximum(10);
 
-        verticalLayout->addWidget(spinBox_LetterSize);
-
-        radioButton = new QRadioButton(centralwidget);
-        radioButton->setObjectName(QString::fromUtf8("radioButton"));
-        radioButton->setFont(font);
-
-        verticalLayout->addWidget(radioButton);
+        formLayout->setWidget(1, QFormLayout::LabelRole, spinBox_LetterSize);
 
         lineEdit = new QLineEdit(centralwidget);
         lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
         lineEdit->setFont(font);
 
-        verticalLayout->addWidget(lineEdit);
+        formLayout->setWidget(0, QFormLayout::FieldRole, lineEdit);
 
         robotSpeedSlider = new QSlider(centralwidget);
         robotSpeedSlider->setObjectName(QString::fromUtf8("robotSpeedSlider"));
@@ -96,10 +94,27 @@ public:
         robotSpeedSlider->setMaximum(50);
         robotSpeedSlider->setOrientation(Qt::Horizontal);
 
-        verticalLayout->addWidget(robotSpeedSlider);
+        formLayout->setWidget(1, QFormLayout::FieldRole, robotSpeedSlider);
+
+        lineEdit_3 = new QLineEdit(centralwidget);
+        lineEdit_3->setObjectName(QString::fromUtf8("lineEdit_3"));
+        lineEdit_3->setFont(font);
+
+        formLayout->setWidget(2, QFormLayout::LabelRole, lineEdit_3);
+
+        checkBox = new QCheckBox(centralwidget);
+        checkBox->setObjectName(QString::fromUtf8("checkBox"));
+
+        formLayout->setWidget(2, QFormLayout::FieldRole, checkBox);
+
+        spinBox_spacePoints = new QSpinBox(centralwidget);
+        spinBox_spacePoints->setObjectName(QString::fromUtf8("spinBox_spacePoints"));
+        spinBox_spacePoints->setFont(font);
+
+        formLayout->setWidget(3, QFormLayout::FieldRole, spinBox_spacePoints);
 
 
-        horizontalLayout_2->addLayout(verticalLayout);
+        horizontalLayout_2->addLayout(formLayout);
 
         verticalLayout_2 = new QVBoxLayout();
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
@@ -140,10 +155,15 @@ public:
 
         verticalLayout_3->addLayout(horizontalLayout);
 
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
+
+        verticalLayout_3->addLayout(horizontalLayout_3);
+
         DrawLetters->setCentralWidget(centralwidget);
         menubar = new QMenuBar(DrawLetters);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 800, 20));
+        menubar->setGeometry(QRect(0, 0, 800, 21));
         DrawLetters->setMenuBar(menubar);
         statusbar = new QStatusBar(DrawLetters);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
@@ -158,14 +178,18 @@ public:
     {
         DrawLetters->setWindowTitle(QCoreApplication::translate("DrawLetters", "MainWindow", nullptr));
         lineEdit_2->setText(QCoreApplication::translate("DrawLetters", "LetterSize", nullptr));
-        radioButton->setText(QCoreApplication::translate("DrawLetters", "PresentLetterSizes", nullptr));
         lineEdit->setText(QCoreApplication::translate("DrawLetters", "RobotSpeed", nullptr));
+        lineEdit_3->setText(QCoreApplication::translate("DrawLetters", "Space between Points ", nullptr));
+        checkBox->setText(QCoreApplication::translate("DrawLetters", "Set Space to Slider Value", nullptr));
         textEdit_Letter->setHtml(QCoreApplication::translate("DrawLetters", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:16pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt;\">HALLO ICH BIN</span></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt;\">DENIS WUHU</span></p></body></html>", nullptr));
+"hr { height: 1px; border-width: 0; }\n"
+"li.unchecked::marker { content: \"\\2610\"; }\n"
+"li.checked::marker { content: \"\\2612\"; }\n"
+"</style></head><body style=\" font-family:'Segoe UI'; font-size:16pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'MS Shell Dlg 2'; font-size:8pt;\">HALLO ICH BIN</span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'MS Shell Dlg 2'; font-size:8pt;\">DENIS WUHU</span></p></body></html>", nullptr));
         buttonDeletePoint->setText(QCoreApplication::translate("DrawLetters", "deletePoint", nullptr));
         pushButton_2->setText(QCoreApplication::translate("DrawLetters", "Start Stop", nullptr));
         pushButton_Draw->setText(QCoreApplication::translate("DrawLetters", "Draw", nullptr));

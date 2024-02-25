@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Draw_t {
-    QByteArrayData data[13];
-    char stringdata0[151];
+    QByteArrayData data[16];
+    char stringdata0[191];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -42,15 +42,19 @@ QT_MOC_LITERAL(6, 58, 9), // "setLetter"
 QT_MOC_LITERAL(7, 68, 3), // "str"
 QT_MOC_LITERAL(8, 72, 19), // "CreatePointsFromTxt"
 QT_MOC_LITERAL(9, 92, 4), // "size"
-QT_MOC_LITERAL(10, 97, 15), // "draw_TimerStart"
-QT_MOC_LITERAL(11, 113, 14), // "draw_TimerStop"
-QT_MOC_LITERAL(12, 128, 22) // "draw_TimerStartNoReset"
+QT_MOC_LITERAL(10, 97, 14), // "draw_TimerStop"
+QT_MOC_LITERAL(11, 112, 22), // "draw_TimerStartNoReset"
+QT_MOC_LITERAL(12, 135, 24), // "setIncrementCounterValue"
+QT_MOC_LITERAL(13, 160, 3), // "val"
+QT_MOC_LITERAL(14, 164, 15), // "StartSimulation"
+QT_MOC_LITERAL(15, 180, 10) // "StartRobot"
 
     },
     "Draw\0sendPoint\0\0deletePoints\0stopTimerDraw\0"
     "draw_onTimeout\0setLetter\0str\0"
-    "CreatePointsFromTxt\0size\0draw_TimerStart\0"
-    "draw_TimerStop\0draw_TimerStartNoReset"
+    "CreatePointsFromTxt\0size\0draw_TimerStop\0"
+    "draw_TimerStartNoReset\0setIncrementCounterValue\0"
+    "val\0StartSimulation\0StartRobot"
 };
 #undef QT_MOC_LITERAL
 
@@ -60,7 +64,7 @@ static const uint qt_meta_data_Draw[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       9,   14, // methods
+      11,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -68,17 +72,19 @@ static const uint qt_meta_data_Draw[] = {
        3,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    2,   59,    2, 0x06 /* Public */,
-       3,    0,   64,    2, 0x06 /* Public */,
-       4,    0,   65,    2, 0x06 /* Public */,
+       1,    2,   69,    2, 0x06 /* Public */,
+       3,    0,   74,    2, 0x06 /* Public */,
+       4,    0,   75,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       5,    0,   66,    2, 0x0a /* Public */,
-       6,    1,   67,    2, 0x0a /* Public */,
-       8,    1,   70,    2, 0x0a /* Public */,
-      10,    0,   73,    2, 0x0a /* Public */,
-      11,    0,   74,    2, 0x0a /* Public */,
-      12,    0,   75,    2, 0x0a /* Public */,
+       5,    0,   76,    2, 0x0a /* Public */,
+       6,    1,   77,    2, 0x0a /* Public */,
+       8,    1,   80,    2, 0x0a /* Public */,
+      10,    0,   83,    2, 0x0a /* Public */,
+      11,    0,   84,    2, 0x0a /* Public */,
+      12,    1,   85,    2, 0x0a /* Public */,
+      14,    1,   88,    2, 0x0a /* Public */,
+      15,    0,   91,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::QVector3D, QMetaType::Float,    2,    2,
@@ -91,6 +97,8 @@ static const uint qt_meta_data_Draw[] = {
     QMetaType::Void, QMetaType::Float,    9,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,   13,
+    QMetaType::Void, QMetaType::Int,    2,
     QMetaType::Void,
 
        0        // eod
@@ -108,9 +116,11 @@ void Draw::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void *
         case 3: _t->draw_onTimeout(); break;
         case 4: _t->setLetter((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 5: _t->CreatePointsFromTxt((*reinterpret_cast< float(*)>(_a[1]))); break;
-        case 6: _t->draw_TimerStart(); break;
-        case 7: _t->draw_TimerStop(); break;
-        case 8: _t->draw_TimerStartNoReset(); break;
+        case 6: _t->draw_TimerStop(); break;
+        case 7: _t->draw_TimerStartNoReset(); break;
+        case 8: _t->setIncrementCounterValue((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 9: _t->StartSimulation((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 10: _t->StartRobot(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -168,13 +178,13 @@ int Draw::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 9)
+        if (_id < 11)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 9;
+        _id -= 11;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 9)
+        if (_id < 11)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 9;
+        _id -= 11;
     }
     return _id;
 }

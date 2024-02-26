@@ -40,16 +40,22 @@ void Draw::draw_onTimeout()
     if(counter >= 0 && counter<pointsRobot[letter].length()){
         robMove2Point();
         errorCounter = 0;
-    }else{
+    }else
+    {
         errorCounter++;
         qDebug()<<errorCounter;
     }
 }
 void Draw::StartRobot()
 {
+    qDebug()<<isDrawing;
+    qDebug()<<"counter"<<counter;
     while(isDrawing)
     {
+        qDebug()<<"before Timeout";
         draw_onTimeout();
+        qDebug()<<"after Timeout;";
+
     }
 }
 
@@ -59,8 +65,11 @@ void Draw::robMove2Point()
         emit deletePoints();
 
     // qDebug()<<"counter:"<<counter;
-    pointsRobot[letter][counter];
+//    pointsRobot[letter][counter];
+    qDebug()<<"robot setPoint";
     robot_setPoint(pointsRobot[letter][counter]+letter_posRobot-QVector3D(l1,0,0));
+    qDebug()<<"robot Point set";
+
 
     if(drawPoint_isTrue[letter][counter])
         emit sendPoint(pointsBase[letter][counter]+letter_posBase,pointThickness);
@@ -120,15 +129,18 @@ void Draw::getNextLetter()
 void Draw::drawingDone()
 {
     _robotKinematik->setJoints(0,0,90,0,90,0,0);
-    if(!_robot->IsConnected()){
+//    if(!_robot->IsConnected()){
         emit stopTimerDraw();
         qDebug()<<"sleep for 1 sec";
         std::this_thread::sleep_for(std::chrono::seconds(1));
         qDebug()<<"done";
-    }else{
+//    }else{
+        if(_robot->IsConnected())
+        {
         _robot->UpdatePosition();
         isDrawing=false;
-    }
+        }
+//    }
 }
 
 
@@ -232,15 +244,25 @@ void Draw::robot_setPoint(QVector3D position)
                      position.z(),
                      a,b,c,l1);
 
+//    while (true){
+
+//    }
+
     _robotKinematik->ToolMovement(Transformations::Z,-199);
 
 
-    if(_robot->IsConnected()){
-        _robotKinematik->WaitForPositionReached();
+    if(_robot->IsConnected())
+    {
+        qDebug()<<"here!";
         _robot->UpdatePosition();
+        _robotKinematik->WaitForPositionReached();
     }
+//        while(_robot->running())
+//        {
 
+//        }
 
+        qDebug()<<"doesntWork";
 }
 
 void Draw::getWord(QString str)

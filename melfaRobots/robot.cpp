@@ -128,7 +128,11 @@ void Robot::run()
                     QString command = _commandList.takeFirst();
                     writeToRobot(command);
                 }
-            }
+            }/*else
+            {
+                getPosition();
+                getJoints();
+            }*/
         }
         else
         {
@@ -261,6 +265,7 @@ void Robot::_alternativeCommand(QString command)
     command.remove(0,4);
     if(command=="PositionChanged")
     {
+        qDebug()<<_position;
         if(_position!=nullptr)
             _position->Reached();
         _connetedRobotChangePosition=false;

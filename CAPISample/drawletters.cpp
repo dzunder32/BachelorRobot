@@ -39,11 +39,12 @@ void DrawLetters::pB_draw_clicked()
     _draw->CreatePointsFromTxt(float(ui->spinBox_LetterSize->value())/10);
     _draw->getWord(ui->textEdit_Letter->toPlainText());
     _draw->isDrawing = true;
-    if(!_robot->IsConnected()){
+//    if(!_robot->IsConnected()){
         _draw->StartSimulation(ui->robotSpeedSlider->value());
-    }else{
-        _draw->StartRobot();
-    }
+//    }else
+//    {
+//        _draw->StartRobot();
+//    }
 }
 
 void DrawLetters::on_pushButton_2_clicked()

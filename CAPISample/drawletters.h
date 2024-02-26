@@ -22,6 +22,7 @@ public slots:
 
     void drawPointWidget(QVector3D point,float thickness);
     void deletePointWidget();
+    void stopTimer();
 private slots:
 //    void on_pushButton_Draw_clicked();
     void on_pushButton_2_clicked();
@@ -32,12 +33,14 @@ private slots:
 
     void on_robotSpeedSlider_valueChanged(int value);
 
+
 private:
     Ui::DrawLetters *ui;
     Draw *_draw;
     Widget3D *_widget3d;
-    Kinematik *_robot;
+    // Kinematik *_robotKin;
     QThread robotThread;
+    Robot *_robot;
     bool pbStop;
 
 

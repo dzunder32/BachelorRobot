@@ -384,7 +384,7 @@ void Draw::Points2DToBase()
         for (QVector2D point:points_vec)
         {
 
-            if(cartDist(prev_point,point)>5)
+            if(cartDist(prev_point,point)>8)
             {
                 moveInLine2DPoint(prev_point,point,temp_pointsBase,temp_drawPoint_isTrue);
                 temp_pointsBase.push_back(calcPointInPlane(point));

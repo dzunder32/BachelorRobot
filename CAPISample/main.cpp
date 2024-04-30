@@ -32,15 +32,15 @@ int main(int argc, char *argv[])
     widget3d->addObject(coordSystem,QVector3D(0,0,0),QQuaternion(0,0,0,0));
 
 
-    CoordinateSystem *CSystem=new CoordinateSystem();
-    CSystem->setLength(100);
-    CSystem->setNegativeAxis(false);
-//    CSystem->setTranslation(QVector3D(100,100,0));
-    STLMesh* toolMesh= new STLMesh(CSystem);
-    toolMesh->setSource("Tool.STL");
-    widget3d->addObject(CSystem);
-    widget3d->addTransTool(CSystem);
-    static_cast<Qt3DCore::QTransform*>(CSystem->components()[1])->setTranslation(QVector3D(200,-200,0));
+//    CoordinateSystem *CSystem=new CoordinateSystem();
+//    CSystem->setLength(100);
+//    CSystem->setNegativeAxis(false);
+////    CSystem->setTranslation(QVector3D(100,100,0));
+//    STLMesh* toolMesh= new STLMesh(CSystem);
+//    toolMesh->setSource("Tool.STL");
+//    widget3d->addObject(CSystem);
+//    widget3d->addTransTool(CSystem);
+//    static_cast<Qt3DCore::QTransform*>(CSystem->components()[1])->setTranslation(QVector3D(200,-200,0));
 
 
 //Adawakedawra
@@ -88,19 +88,19 @@ int main(int argc, char *argv[])
 //    linAxis->setTranslation(QVector3D(-400,0,0));
 
     //Polaris als Koordinatensystem --------------------------------------------------------------
-    CoordinateSystem *polaris=new CoordinateSystem;
-    polaris->setLength(200);
-    polaris->setNegativeAxis(false);
-    widget3d->addObject(polaris);
-    widget3d->addTransPolaris(polaris);
+//    CoordinateSystem *polaris=new CoordinateSystem;
+//    polaris->setLength(200);
+//    polaris->setNegativeAxis(false);
+//    widget3d->addObject(polaris);
+//    widget3d->addTransPolaris(polaris);
 
     //Position des Polaris-Tools
-    CoordinateSystem *position=new CoordinateSystem;
-    position->setLength(100);
-//    position->AxisX->setEnabled(false);
-    position->setNegativeAxis(false);
-    widget3d->addObject(position,QVector3D(-790,0,800),QQuaternion(1,0,0,0)/*QQuaternion::fromAxisAndAngle(QVector3D(0,0,1),140)**//**//*QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180)*/);
-    widget3d->setPosMatrix(static_cast<Qt3DCore::QTransform*>(position->components()[1]));
+//    CoordinateSystem *position=new CoordinateSystem;
+//    position->setLength(100);
+////    position->AxisX->setEnabled(false);
+//    position->setNegativeAxis(false);
+//    widget3d->addObject(position,QVector3D(-790,0,800),QQuaternion(1,0,0,0)/*QQuaternion::fromAxisAndAngle(QVector3D(0,0,1),140)**//**//*QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180)*/);
+//    widget3d->setPosMatrix(static_cast<Qt3DCore::QTransform*>(position->components()[1]));
 
     //Ebene zu Zeichnen
 

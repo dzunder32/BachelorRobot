@@ -71,7 +71,7 @@ void DrawLetters::on_buttonDeletePoint_clicked()
 
 void DrawLetters::drawPointWidget(QVector3D point,float thickness)
 {
-    _widget3d->drawPoint(point,thickness,QColor(0,255,255));
+    _widget3d->drawPoint(point,thickness,QColor(255,255,255));
 }
 void DrawLetters::deletePointWidget()
 {

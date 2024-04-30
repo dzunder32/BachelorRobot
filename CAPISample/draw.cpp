@@ -244,7 +244,10 @@ void Draw::robot_setPoint(QVector3D position)
                      position.z(),
                      a,b,c,l1);
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> c7f6b62da4ffaccb271073a37864ef0a7ad45ec6
     _robotKinematik->ToolMovement(Transformations::Z,-199);
 
 
@@ -254,6 +257,10 @@ void Draw::robot_setPoint(QVector3D position)
         _robotKinematik->WaitForPositionReached();
     }
 
+<<<<<<< HEAD
+=======
+        qDebug()<<"doesntWork";
+>>>>>>> c7f6b62da4ffaccb271073a37864ef0a7ad45ec6
 }
 
 void Draw::getWord(QString str)

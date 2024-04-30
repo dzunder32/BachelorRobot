@@ -220,7 +220,7 @@ void Draw::CreatePointsFromTxt(float size)
     Nx = _plane->xLimit/xLetterDist;
     Ny = _plane->yLimit/yLetterDist;
 
-    letter_posPlane = QVector3D(0, (Ny-1)*yLetterDist, 0);
+    letter_posPlane = QVector3D(10, (Ny-1)*yLetterDist, 0);
     shiftVec2BaseAndRobot();
 
     Txt2QVector2D();
@@ -257,10 +257,6 @@ void Draw::robot_setPoint(QVector3D position)
         _robot->UpdatePosition();
         _robotKinematik->WaitForPositionReached();
     }
-//        while(_robot->running())
-//        {
-
-//        }
 
         qDebug()<<"doesntWork";
 }

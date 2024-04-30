@@ -17,13 +17,13 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-//    MainWindow *w=new MainWindow;
+    MainWindow *w=new MainWindow;
 
-//    w->show();
+    w->show();
     //Erstellen des Widgets -----------------------------------------------------------------------------------------
     Widget3D *widget3d = new Widget3D();
     widget3d->ShowAsSubWindow();
-//    w->connectWidget(widget3d);
+    w->connectWidget(widget3d);
 
     //Welt-Koordinatensystem im Raum --------------------------------------------------------------------------------
     CoordinateSystem *coordSystem=new CoordinateSystem();

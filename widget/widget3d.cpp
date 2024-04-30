@@ -39,17 +39,17 @@ Widget3D::Widget3D(QWidget *parent) : QWidget(parent)
     _camController->setLookSpeed( -2000.0f );
     _camController->setCamera(_cameraEntity);
 
-    trans_tool=new Qt3DCore::QTransform();
-    trans_polaris=new Qt3DCore::QTransform();
-    trans_position=new Qt3DCore::QTransform();
+    trans_tool     = new Qt3DCore::QTransform();
+    trans_polaris  = new Qt3DCore::QTransform();
+    trans_position = new Qt3DCore::QTransform();
     if (trackData)
     {
-        livePlot=new LivePlot();
+        livePlot = new LivePlot();
         connect(this,&Widget3D::updatePlt,livePlot,&LivePlot::addPts);
         livePlot->show();
         setDecimalPlaces(3);
 
-        livePlot2=new LivePlot2();
+        livePlot2 = new LivePlot2();
         connect(this,&Widget3D::updatePlt2,livePlot2,&LivePlot2::addPts);
         livePlot2->show();
         connect(livePlot,&LivePlot::sendConfigName,livePlot2,&LivePlot2::getConfigName);
@@ -76,7 +76,6 @@ void Widget3D::addObject(Qt3DCore::QEntity *entity)
     entity->Qt3DCore::QEntity::setParent(static_cast<Qt3DCore::QEntity*>(_rootEntity));
 }
 
-
 QWidget *Widget3D::getQWidget() const
 {
     return _widget3D;
@@ -84,7 +83,7 @@ QWidget *Widget3D::getQWidget() const
 
 void Widget3D::setDecimalPlaces(int val)
 {
-    decimalPlaces=val;
+    decimalPlaces = val;
     livePlot->setDecimalPlaces(val);
 }
 
@@ -101,13 +100,13 @@ void Widget3D::addTransPolaris(Qt3DCore::QEntity *entity)
 
 void Widget3D::setPosMatrix(Qt3DCore::QTransform *pos)
 {
-    trans_position=pos;
+    trans_position = pos;
 }
 
 
 void Widget3D::getToolData(QVector <double> data)
 {
-    ToolMatrix=DataMatrix(ToolVals,data);
+    ToolMatrix = DataMatrix(ToolVals,data);
     trans_tool->setMatrix(trans_polaris->matrix()*ToolMatrix);
 }
 
@@ -117,7 +116,7 @@ void Widget3D::getPolarisData(QVector <double> data)
 //    QQuaternion(data[0],data[1],data[2],data[3]).getEulerAngles(&pitch,&yaw,&roll);
 //    emit updatePlt({roundDecimalPlaces(pitch),roundDecimalPlaces(yaw),roundDecimalPlaces(roll)});
 //    emit updatePlt2({data[4],data[5],data[6]});
-    PolarisMatrix=DataMatrix(PolarisVals,data);
+    PolarisMatrix = DataMatrix(PolarisVals,data);
     trans_polaris->setMatrix(trans_position->matrix()*PolarisMatrix.inverted());
 }
 
@@ -134,13 +133,13 @@ QVector <double> Widget3D::meanVector(QVector <QVector <double>> &vec,QVector <d
         ind=0;
         for (auto j:i)
         {
-            mVec[ind]=mVec[ind]+j;
+            mVec[ind] = mVec[ind]+j;
             ind++;
         }
     }
     for (auto &i:mVec)
     {
-        i=i/vec.size();
+        i = i/vec.size();
     }
     return mVec;
 }
@@ -148,7 +147,7 @@ QMatrix4x4 Widget3D::DataMatrix(QVector <QVector <double>> &vals,QVector <double
 {
     QMatrix4x4 mat;
     QVector <double> meanData;
-    meanData=meanVector(vals,data);
+    meanData = meanVector(vals,data);
 //    mat.rotate(QQuaternion::fromEulerAngles())
     mat.rotate(QQuaternion(meanData[0],meanData[1],meanData[2],meanData[3]));
     mat.setColumn(3,QVector4D(meanData[4],meanData[5],meanData[6],1));
@@ -157,9 +156,10 @@ QMatrix4x4 Widget3D::DataMatrix(QVector <QVector <double>> &vals,QVector <double
 
 double Widget3D::roundDecimalPlaces(double val)
 {
-    double multi=qPow(10,decimalPlaces);
+    double multi = qPow(10,decimalPlaces);
     return qRound(val*multi)/multi;
 }
+
 void Widget3D::setFileName(QString name)
 {
     livePlot->setConfigName(name);
@@ -169,7 +169,6 @@ void Widget3D::setFileName(QString name)
 void Widget3D::setViewCenter(QVector3D point)
 {
     _cameraEntity->setViewCenter(point);
-
 }
 
 void Widget3D::drawPoint(QVector3D position, float size, QColor color)
@@ -192,8 +191,8 @@ void Widget3D::drawPoint(QVector3D position, float size, QColor color)
     transform->setTranslation(position);
     entity->addComponent(transform);
 
-
 }
+
 void Widget3D::deleteAllPoints()
 {
     for (Qt3DCore::QEntity* entity : pointEntities) {

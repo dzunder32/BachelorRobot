@@ -244,10 +244,6 @@ void Draw::robot_setPoint(QVector3D position)
                      position.z(),
                      a,b,c,l1);
 
-//    while (true){
-
-//    }
-
     _robotKinematik->ToolMovement(Transformations::Z,-199);
 
 

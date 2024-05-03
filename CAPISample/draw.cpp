@@ -246,7 +246,7 @@ void Draw::robot_setPoint(QVector3D position)
 
     _robotKinematik->ToolMovement(Transformations::Z,-199);
 
-
+//Mathafacka
     if(_robot->IsConnected())
     {
         qDebug()<<"here!";

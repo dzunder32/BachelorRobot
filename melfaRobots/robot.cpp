@@ -59,6 +59,10 @@ void Robot::MoveToPosition(Position* pos)
     Write("1;1;EXECMOV J81");
 }
 
+void Robot::MoveInLine(double P1, double P2, double P3, double a, double b, double c, double l1){
+    Write("1;1;EDATA")
+}
+
 void Robot::Connect()
 {
     this->start();
@@ -128,11 +132,7 @@ void Robot::run()
                     QString command = _commandList.takeFirst();
                     writeToRobot(command);
                 }
-            }/*else
-            {
-                getPosition();
-                getJoints();
-            }*/
+            }
         }
         else
         {

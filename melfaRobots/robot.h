@@ -52,6 +52,7 @@ public:
     Robot(QString ip,int port);
     void ConnectKinematik(RobotPosition *pos);
     void MoveToPosition(Position* pos);
+    void MoveInLine(double P1, double P2, double P3, double a, double b, double c, double l1);
 signals:
     void robotAnswer(QString);
     void robotCommand(QString);

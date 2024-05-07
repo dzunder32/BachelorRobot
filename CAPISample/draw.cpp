@@ -173,34 +173,63 @@ void Draw::moveInLineBetweenLetters()
     QVector3D point_Plane1 = Base2PlanePoint(prevLetter_lastPoint)-prev_shiftPlane;
     QVector3D point_Plane2 = Base2PlanePoint(nextLetter_firstPoint)-prev_shiftPlane;
     QVector3D vec_between = point_Plane2-point_Plane1;
+    QVector3D planeOffset = QVector3D(0,0,20*letterSize);
 
-   for (int heigth; heigth < 20; heigth++){
-       point_Plane1+=QVector3D(0,0,letterSize); 
-       basePoint1 = Plane2BasePoint(point_Plane1);
-       pointsRobot[letter].push_back(Base2RobotPoint(basePoint1));
-       pointsBase[letter].push_back(basePoint1);
-       drawPoint_isTrue[letter].push_back(false);
-   }
-
-   for(float len = 0; len<vec_between.length(); len+=letterSize)
+    if(simulation_isTrue)
     {
-        point_Plane1+=vec_between.normalized()*letterSize;
+        for (int heigth; heigth < 20; heigth++){
+            point_Plane1+=QVector3D(0,0,letterSize);
+            basePoint1 = Plane2BasePoint(point_Plane1);
+            pointsRobot[letter].push_back(Base2RobotPoint(basePoint1));
+            pointsBase[letter].push_back(basePoint1);
+            drawPoint_isTrue[letter].push_back(false);
+        }
+
+        for(float len = 0; len<vec_between.length(); len+=letterSize)
+        {
+            point_Plane1+=vec_between.normalized()*letterSize;
+            basePoint1 = Plane2BasePoint(point_Plane1);
+            pointsRobot[letter].push_back(Base2RobotPoint(basePoint1));
+            pointsBase[letter].push_back(basePoint1);
+            drawPoint_isTrue[letter].push_back(false);
+        }
+
+        for(int heigth = 20;heigth>0;heigth--)
+        {
+            point_Plane1-=QVector3D(0,0,letterSize);
+            basePoint1 = Plane2BasePoint(point_Plane1);
+            pointsRobot[letter].push_back(Base2RobotPoint(basePoint1));
+            pointsBase[letter].push_back(basePoint1);
+            drawPoint_isTrue[letter].push_back(false);
+        }
+
+    }else
+    {
+        point_Plane1+=planeOffset;
+        basePoint1 = Plane2BasePoint(point_Plane1);
+        pointsRobot[letter].push_back(Base2RobotPoint(basePoint1));
+        pointsBase[letter].push_back(basePoint1);
+        drawPoint_isTrue[letter].push_back(false);
+
+
+//        point_Plane1+=vec_between.normalized()*letterSize;
+
+        point_Plane1+=vec_between;
+        basePoint1 = Plane2BasePoint(point_Plane1);
+        pointsRobot[letter].push_back(Base2RobotPoint(basePoint1));
+        pointsBase[letter].push_back(basePoint1);
+        drawPoint_isTrue[letter].push_back(false);
+
+        point_Plane1-=planeOffset;
         basePoint1 = Plane2BasePoint(point_Plane1);
         pointsRobot[letter].push_back(Base2RobotPoint(basePoint1));
         pointsBase[letter].push_back(basePoint1);
         drawPoint_isTrue[letter].push_back(false);
     }
 
-   for(int heigth = 20;heigth>0;heigth--)
-    {
-       point_Plane1-=QVector3D(0,0,letterSize);
-       basePoint1 = Plane2BasePoint(point_Plane1);
-       pointsRobot[letter].push_back(Base2RobotPoint(basePoint1));
-       pointsBase[letter].push_back(basePoint1);
-       drawPoint_isTrue[letter].push_back(false);
-    }
-
 }
+
+
 void Draw::CreatePointsFromTxt(float size)
 {
     letterSize=size;
@@ -244,12 +273,12 @@ void Draw::robot_setPoint(QVector3D position)
                      position.z(),
                      a,b,c,l1);
 
+
     _robotKinematik->ToolMovement(Transformations::Z,-199);
 
 //Mathafacka
     if(_robot->IsConnected())
     {
-        qDebug()<<"here!";
         _robot->UpdatePosition();
         _robotKinematik->WaitForPositionReached();
     }
@@ -421,6 +450,7 @@ void Draw::moveInLine2DPoint(QVector2D point_begin,QVector2D point_end,QVector <
     }
 }
 
+//void Draw::moveInLine2DPoint_Sim()
 
 void Draw::Txt2QVector2D()
 {

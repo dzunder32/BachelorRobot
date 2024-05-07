@@ -59,9 +59,9 @@ void Robot::MoveToPosition(Position* pos)
     Write("1;1;EXECMOV J81");
 }
 
-void Robot::MoveInLine(double P1, double P2, double P3, double a, double b, double c, double l1){
-    Write("1;1;EDATA")
-}
+//void Robot::MoveInLine(double P1, double P2, double P3, double a, double b, double c, double l1){
+//    Write("1;1;EDATA")
+//}
 
 void Robot::Connect()
 {

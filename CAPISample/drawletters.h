@@ -34,6 +34,8 @@ private slots:
     void on_robotSpeedSlider_valueChanged(int value);
 
 
+    void on_checkBox_2_clicked();
+
 private:
     Ui::DrawLetters *ui;
     Draw *_draw;

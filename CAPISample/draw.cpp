@@ -66,9 +66,7 @@ void Draw::robMove2Point()
 
     // qDebug()<<"counter:"<<counter;
 //    pointsRobot[letter][counter];
-    qDebug()<<"robot setPoint";
     robot_setPoint(pointsRobot[letter][counter]+letter_posRobot-QVector3D(l1,0,0));
-    qDebug()<<"robot Point set";
 
 
     if(drawPoint_isTrue[letter][counter])
@@ -177,6 +175,7 @@ void Draw::moveInLineBetweenLetters()
 
     if(simulation_isTrue)
     {
+        qDebug()<<"imTrue";
         for (int heigth; heigth < 20; heigth++){
             point_Plane1+=QVector3D(0,0,letterSize);
             basePoint1 = Plane2BasePoint(point_Plane1);
@@ -203,8 +202,11 @@ void Draw::moveInLineBetweenLetters()
             drawPoint_isTrue[letter].push_back(false);
         }
 
-    }else
+    }
+    else
     {
+
+        qDebug()<<"imFalse";
         point_Plane1+=planeOffset;
         basePoint1 = Plane2BasePoint(point_Plane1);
         pointsRobot[letter].push_back(Base2RobotPoint(basePoint1));
@@ -283,7 +285,6 @@ void Draw::robot_setPoint(QVector3D position)
         _robotKinematik->WaitForPositionReached();
     }
 
-        qDebug()<<"doesntWork";
 }
 
 void Draw::getWord(QString str)
@@ -306,7 +307,6 @@ void Draw::getWord(QString str)
             else
                 shiftLetterPosPlaneY(yLetterDist);
             str.remove(0,1);
-            qDebug()<<str;
             goto checkAgain;
         }
 

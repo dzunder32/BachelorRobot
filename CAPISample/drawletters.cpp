@@ -93,7 +93,6 @@ void DrawLetters::on_robotSpeedSlider_valueChanged(int value)
 }
 
 
-
 void DrawLetters::on_checkBox_2_clicked()
 {
     _draw->simulation_isTrue = ui->checkBox_2->isChecked();

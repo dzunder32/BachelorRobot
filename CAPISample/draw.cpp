@@ -42,6 +42,9 @@ void Draw::draw_onTimeout()
         errorCounter = 0;
     }else
     {
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+        qDebug()<<counter;
+        qDebug()<<pointsRobot[letter].length();
         errorCounter++;
         qDebug()<<errorCounter;
     }
@@ -66,9 +69,7 @@ void Draw::robMove2Point()
 
     // qDebug()<<"counter:"<<counter;
 //    pointsRobot[letter][counter];
-    qDebug()<<"robot setPoint";
     robot_setPoint(pointsRobot[letter][counter]+letter_posRobot-QVector3D(l1,0,0));
-    qDebug()<<"robot Point set";
 
 
     if(drawPoint_isTrue[letter][counter])
@@ -283,7 +284,6 @@ void Draw::robot_setPoint(QVector3D position)
         _robotKinematik->WaitForPositionReached();
     }
 
-        qDebug()<<"doesntWork";
 }
 
 void Draw::getWord(QString str)

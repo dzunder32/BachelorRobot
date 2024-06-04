@@ -59,9 +59,64 @@ void Robot::MoveToPosition(Position* pos)
     Write("1;1;EXECMOV J81");
 }
 
-//void Robot::MoveInLine(double P1, double P2, double P3, double a, double b, double c, double l1){
-//    Write("1;1;EDATA")
-//}
+void Robot::MoveInCircle(QVector3D P1,QVector3D P2,QVector3D P3,double ew1, double ew2, double ew3, double l1)
+{
+    Write("1;1;EXECP1=(" +QString::number(P1.x())+","
+                         +QString::number(P1.y())+","
+                         +QString::number(P1.z())+","
+                         +QString::number(ew1)+","
+                         +QString::number(ew2)+","
+                         +QString::number(ew3)+","
+                         +QString::number(l1)+")");
+
+    Write("1;1;EXECP2=(" +QString::number(P2.x())+","
+                         +QString::number(P2.y())+","
+                         +QString::number(P2.z())+","
+                         +QString::number(ew1)+","
+                         +QString::number(ew2)+","
+                         +QString::number(ew3)+","
+                         +QString::number(l1)+")");
+
+    Write("1;1;EXECP3=(" +QString::number(P3.x())+","
+                         +QString::number(P3.y())+","
+                         +QString::number(P3.z())+","
+                         +QString::number(ew1)+","
+                         +QString::number(ew2)+","
+                         +QString::number(ew3)+","
+                         +QString::number(l1)+")");
+
+    Write("1;1;EXECMVC P1,P2,P3");
+}
+
+void Robot::MoveInCircleJ(QVector <double> joints1,QVector <double> joints2,QVector <double> joints3,double joint7)
+{
+    Write("1;1;EXECJ1=(" +QString::number(joints1.at(0))+","
+                         +QString::number(joints1.at(1))+","
+                         +QString::number(joints1.at(2))+","
+                         +QString::number(joints1.at(3))+","
+                         +QString::number(joints1.at(4))+","
+                         +QString::number(joints1.at(5))+","
+                         +QString::number(joint7)+")");
+
+    Write("1;1;EXECJ2=(" +QString::number(joints2.at(0))+","
+                         +QString::number(joints2.at(1))+","
+                         +QString::number(joints2.at(2))+","
+                         +QString::number(joints2.at(3))+","
+                         +QString::number(joints2.at(4))+","
+                         +QString::number(joints2.at(5))+","
+                         +QString::number(joint7)+")");
+
+    Write("1;1;EXECJ1=(" +QString::number(joints3.at(0))+","
+                         +QString::number(joints3.at(1))+","
+                         +QString::number(joints3.at(2))+","
+                         +QString::number(joints3.at(3))+","
+                         +QString::number(joints3.at(4))+","
+                         +QString::number(joints3.at(5))+","
+                         +QString::number(joint7)+")");
+
+    Write("1;1;EXECMVC J1,J2,J3");
+}
+
 
 void Robot::Connect()
 {

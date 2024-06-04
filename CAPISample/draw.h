@@ -35,7 +35,7 @@ public slots:
 
 
     void StartSimulation(int);
-    void StartRobot();
+//    void StartRobot();
  private:
 
     bool CounterSet=false;

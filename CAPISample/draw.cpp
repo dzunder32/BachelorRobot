@@ -27,9 +27,9 @@ Draw::Draw(Kinematik *robotKinematik,Robot *robot, QVector3D sled_pos,Plane* pla
     letter=0;
     nextLetter=false;
 
-
-
 }
+
+
 void Draw::StartSimulation(int time_ms)
 {
     timer_draw->start(time_ms);
@@ -49,26 +49,24 @@ void Draw::draw_onTimeout()
         qDebug()<<errorCounter;
     }
 }
-void Draw::StartRobot()
-{
-    qDebug()<<isDrawing;
-    qDebug()<<"counter"<<counter;
-    while(isDrawing)
-    {
-        qDebug()<<"before Timeout";
-        draw_onTimeout();
-        qDebug()<<"after Timeout;";
+//void Draw::StartRobot()
+//{
+//    qDebug()<<isDrawing;
+//    qDebug()<<"counter"<<counter;
+//    while(isDrawing)
+//    {
+//        qDebug()<<"before Timeout";
+//        draw_onTimeout();
+//        qDebug()<<"after Timeout;";
 
-    }
-}
+//    }
+//}
 
 void Draw::robMove2Point()
 {
     if (counter==0 && currentIndex == 0)
         emit deletePoints();
 
-    // qDebug()<<"counter:"<<counter;
-//    pointsRobot[letter][counter];
     robot_setPoint(pointsRobot[letter][counter]+letter_posRobot-QVector3D(l1,0,0));
 
 
@@ -130,16 +128,14 @@ void Draw::getNextLetter()
 void Draw::drawingDone()
 {
     _robotKinematik->setJoints(0,0,90,0,90,0,0);
-//    if(!_robot->IsConnected()){
         emit stopTimerDraw();
         qDebug()<<"sleep for 1 sec";
         std::this_thread::sleep_for(std::chrono::seconds(1));
         qDebug()<<"done";
-//    }else{
         if(_robot->IsConnected())
         {
         _robot->UpdatePosition();
-        isDrawing=false;
+//        isDrawing=false;
         }
 //    }
 }
@@ -178,7 +174,7 @@ void Draw::moveInLineBetweenLetters()
 
     if(simulation_isTrue)
     {
-        qDebug()<<"imTrue";
+//        qDebug()<<"imTrue";
         for (int heigth; heigth < 20; heigth++){
             point_Plane1+=QVector3D(0,0,letterSize);
             basePoint1 = Plane2BasePoint(point_Plane1);
@@ -209,7 +205,7 @@ void Draw::moveInLineBetweenLetters()
     else
     {
 
-        qDebug()<<"imFalse";
+//        qDebug()<<"imFalse";
         point_Plane1+=planeOffset;
         basePoint1 = Plane2BasePoint(point_Plane1);
         pointsRobot[letter].push_back(Base2RobotPoint(basePoint1));

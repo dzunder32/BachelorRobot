@@ -178,6 +178,7 @@ void Draw::moveInLineBetweenLetters()
 
     if(simulation_isTrue)
     {
+        qDebug()<<"imTrue";
         for (int heigth; heigth < 20; heigth++){
             point_Plane1+=QVector3D(0,0,letterSize);
             basePoint1 = Plane2BasePoint(point_Plane1);
@@ -204,8 +205,11 @@ void Draw::moveInLineBetweenLetters()
             drawPoint_isTrue[letter].push_back(false);
         }
 
-    }else
+    }
+    else
     {
+
+        qDebug()<<"imFalse";
         point_Plane1+=planeOffset;
         basePoint1 = Plane2BasePoint(point_Plane1);
         pointsRobot[letter].push_back(Base2RobotPoint(basePoint1));
@@ -306,7 +310,6 @@ void Draw::getWord(QString str)
             else
                 shiftLetterPosPlaneY(yLetterDist);
             str.remove(0,1);
-            qDebug()<<str;
             goto checkAgain;
         }
 

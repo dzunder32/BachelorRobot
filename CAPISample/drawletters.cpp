@@ -71,7 +71,7 @@ void DrawLetters::on_buttonDeletePoint_clicked()
 
 void DrawLetters::drawPointWidget(QVector3D point,float thickness)
 {
-    _widget3d->drawPoint(point,thickness,QColor(0,255,255));
+    _widget3d->drawPoint(point,thickness,QColor(255,255,255));
 }
 void DrawLetters::deletePointWidget()
 {
@@ -92,4 +92,10 @@ void DrawLetters::on_robotSpeedSlider_valueChanged(int value)
 
 }
 
+
+void DrawLetters::on_checkBox_2_clicked()
+{
+    _draw->simulation_isTrue = ui->checkBox_2->isChecked();
+    qDebug()<<_draw->simulation_isTrue;
+}
 

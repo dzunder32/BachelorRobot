@@ -41,6 +41,7 @@ public:
     QLineEdit *lineEdit_3;
     QCheckBox *checkBox;
     QSpinBox *spinBox_spacePoints;
+    QCheckBox *checkBox_2;
     QVBoxLayout *verticalLayout_2;
     QTextEdit *textEdit_Letter;
     QHBoxLayout *horizontalLayout;
@@ -113,6 +114,11 @@ public:
 
         formLayout->setWidget(3, QFormLayout::FieldRole, spinBox_spacePoints);
 
+        checkBox_2 = new QCheckBox(centralwidget);
+        checkBox_2->setObjectName(QString::fromUtf8("checkBox_2"));
+
+        formLayout->setWidget(3, QFormLayout::LabelRole, checkBox_2);
+
 
         horizontalLayout_2->addLayout(formLayout);
 
@@ -181,6 +187,7 @@ public:
         lineEdit->setText(QCoreApplication::translate("DrawLetters", "RobotSpeed", nullptr));
         lineEdit_3->setText(QCoreApplication::translate("DrawLetters", "Space between Points ", nullptr));
         checkBox->setText(QCoreApplication::translate("DrawLetters", "Set Space to Slider Value", nullptr));
+        checkBox_2->setText(QCoreApplication::translate("DrawLetters", "CheckBox", nullptr));
         textEdit_Letter->setHtml(QCoreApplication::translate("DrawLetters", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"

@@ -24,6 +24,7 @@ public:
     void getWord(QString str);
     float xLetterDist,yLetterDist,pointThickness;
     bool isDrawing = false;
+    bool simulation_isTrue=true;
 public slots:
     void draw_onTimeout();
     void setLetter(QString str);
@@ -34,8 +35,9 @@ public slots:
 
 
     void StartSimulation(int);
-    void StartRobot();
+//    void StartRobot();
  private:
+
     bool CounterSet=false;
     Widget3D *_widget3d;
     Kinematik *_robotKinematik;

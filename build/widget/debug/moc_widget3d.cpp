@@ -23,8 +23,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Widget3D_t {
-    QByteArrayData data[13];
-    char stringdata0[127];
+    QByteArrayData data[17];
+    char stringdata0[187];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -45,13 +45,19 @@ QT_MOC_LITERAL(8, 81, 9), // "drawPoint"
 QT_MOC_LITERAL(9, 91, 8), // "position"
 QT_MOC_LITERAL(10, 100, 4), // "size"
 QT_MOC_LITERAL(11, 105, 5), // "color"
-QT_MOC_LITERAL(12, 111, 15) // "deleteAllPoints"
+QT_MOC_LITERAL(12, 111, 15), // "deleteAllPoints"
+QT_MOC_LITERAL(13, 127, 14), // "deleteAllLines"
+QT_MOC_LITERAL(14, 142, 24), // "addCylinderBetweenPoints"
+QT_MOC_LITERAL(15, 167, 10), // "startPoint"
+QT_MOC_LITERAL(16, 178, 8) // "endPoint"
 
     },
     "Widget3D\0updatePlt\0\0QVector<double>\0"
     "values\0updatePlt2\0getToolData\0"
     "getPolarisData\0drawPoint\0position\0"
-    "size\0color\0deleteAllPoints"
+    "size\0color\0deleteAllPoints\0deleteAllLines\0"
+    "addCylinderBetweenPoints\0startPoint\0"
+    "endPoint"
 };
 #undef QT_MOC_LITERAL
 
@@ -61,7 +67,7 @@ static const uint qt_meta_data_Widget3D[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       6,   14, // methods
+       8,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -69,14 +75,16 @@ static const uint qt_meta_data_Widget3D[] = {
        2,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   44,    2, 0x06 /* Public */,
-       5,    1,   47,    2, 0x06 /* Public */,
+       1,    1,   54,    2, 0x06 /* Public */,
+       5,    1,   57,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       6,    1,   50,    2, 0x0a /* Public */,
-       7,    1,   53,    2, 0x0a /* Public */,
-       8,    3,   56,    2, 0x0a /* Public */,
-      12,    0,   63,    2, 0x0a /* Public */,
+       6,    1,   60,    2, 0x0a /* Public */,
+       7,    1,   63,    2, 0x0a /* Public */,
+       8,    3,   66,    2, 0x0a /* Public */,
+      12,    0,   73,    2, 0x0a /* Public */,
+      13,    0,   74,    2, 0x0a /* Public */,
+      14,    2,   75,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3,    4,
@@ -87,6 +95,8 @@ static const uint qt_meta_data_Widget3D[] = {
     QMetaType::Void, 0x80000000 | 3,    2,
     QMetaType::Void, QMetaType::QVector3D, QMetaType::Float, QMetaType::QColor,    9,   10,   11,
     QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::QVector3D, QMetaType::QVector3D,   15,   16,
 
        0        // eod
 };
@@ -103,6 +113,8 @@ void Widget3D::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         case 3: _t->getPolarisData((*reinterpret_cast< QVector<double>(*)>(_a[1]))); break;
         case 4: _t->drawPoint((*reinterpret_cast< QVector3D(*)>(_a[1])),(*reinterpret_cast< float(*)>(_a[2])),(*reinterpret_cast< QColor(*)>(_a[3]))); break;
         case 5: _t->deleteAllPoints(); break;
+        case 6: _t->deleteAllLines(); break;
+        case 7: _t->addCylinderBetweenPoints((*reinterpret_cast< const QVector3D(*)>(_a[1])),(*reinterpret_cast< const QVector3D(*)>(_a[2]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -185,13 +197,13 @@ int Widget3D::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 6)
+        if (_id < 8)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 6;
+        _id -= 8;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 6)
+        if (_id < 8)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 6;
+        _id -= 8;
     }
     return _id;
 }

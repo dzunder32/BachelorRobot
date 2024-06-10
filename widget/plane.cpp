@@ -6,10 +6,10 @@ Plane::Plane(double XSize,double YSize,Qt3DCore::QEntity* parent)
     xLimit = XSize;
     yLimit = YSize;
 
-    upperPosX = QVector3D(xLimit/2,yLimit,0);
-    lowerPosX = QVector3D(xLimit/2,-yLimit,0);
-    rightPosY = QVector3D(xLimit,0,0);
-    leftPosY  = QVector3D(0,0,0);
+    upperPosX = QVector3D(0,yLimit/2,0);
+    lowerPosX = QVector3D(0,-yLimit/2,0);
+    rightPosY = QVector3D(xLimit/2,0,0);
+    leftPosY  = QVector3D(-xLimit/2,0,0);
 
 
     this->setLength(100);
@@ -44,8 +44,8 @@ Plane::Plane(double XSize,double YSize,Qt3DCore::QEntity* parent)
 
     _upperCylinderX->setLength(xLimit);
     _lowerCylinderX->setLength(xLimit);
-    _rightCylinderY->setLength(yLimit*2);
-    _leftCylinderY->setLength(yLimit*2);
+    _rightCylinderY->setLength(yLimit);
+    _leftCylinderY->setLength(yLimit);
 
     upperBorderX = new Qt3DCore::QEntity(static_cast<Qt3DCore::QEntity*>(this));
     upperBorderX->addComponent(_upperCylinderX);

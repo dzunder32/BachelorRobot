@@ -22,7 +22,9 @@ public slots:
 
     void drawPointWidget(QVector3D point,float thickness);
     void deletePointWidget();
+    void deleteLineWidget();
     void stopTimer();
+    void drawLineWidget(QVector3D startPoint, QVector3D endPoint);
 private slots:
 //    void on_pushButton_Draw_clicked();
     void on_pushButton_2_clicked();
@@ -44,7 +46,6 @@ private:
     QThread robotThread;
     Robot *_robot;
     bool pbStop;
-
 
 };
 

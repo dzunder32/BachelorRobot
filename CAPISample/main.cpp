@@ -9,6 +9,7 @@
 #include "rv6slkinematik.h"
 #include "controlpanel.h"
 #include "drawletters.h"
+#include "robotdrawui.h"
 #include "penholder.h"
 #include "plane.h"
 #include "robot.h"
@@ -31,7 +32,7 @@ int main(int argc, char *argv[])
     coordSystem->setNegativeAxis(true);
     widget3d->addObject(coordSystem,QVector3D(0,0,0),QQuaternion(0,0,0,0));
 
-
+    widget3d->addCylinderBetweenPoints(QVector3D(0,0,0),QVector3D(100,100,100));
 //    CoordinateSystem *CSystem=new CoordinateSystem();
 //    CSystem->setLength(100);
 //    CSystem->setNegativeAxis(false);
@@ -105,7 +106,7 @@ int main(int argc, char *argv[])
     //Ebene zu Zeichnen
 
 
-    Plane *plane = new Plane(700.0,450.0);
+    Plane *plane = new Plane(450.0,450.0);
     plane->setTranslation(linAxis2->sled_position+QVector3D(-100,1000,500));
     // plane->setRotation(QQuaternion::fromEulerAngles(QVector3D(-90,180,0)));
     plane->setRotation(QQuaternion::fromEulerAngles(QVector3D(-90,180,0)) * QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180));
@@ -132,7 +133,7 @@ int main(int argc, char *argv[])
 //     widget3d->addObject(plane/*,linAxis2->sled_position+QVector3D(0,-500,700),QQuaternion::fromAxisAndAngle(QVector3D(1,0,0),-90)*/);
 //     qDebug()<<"trans"<<plane->translation();
 // //    drawL->getPlane(static_cast<Qt3DCore::QTransform *>(plane));
-     DrawLetters *drawL = new DrawLetters(robot2Kinematik,robot,linAxis2->sled_position,plane,widget3d);
+     RobotDrawUi *drawL = new RobotDrawUi(robot2Kinematik,robot,linAxis2->sled_position,plane,widget3d);
      drawL->show();
     return a.exec();
 }

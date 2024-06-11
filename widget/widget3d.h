@@ -46,6 +46,8 @@ public slots:
     void getPolarisData(QVector <double>);
     void drawPoint(QVector3D position, float size, QColor color);
     void deleteAllPoints();
+    void deleteAllLines();
+    void addCylinderBetweenPoints(const QVector3D &startPoint, const QVector3D &endPoint);
 
 private:
     bool trackData=false;
@@ -64,7 +66,7 @@ private:
     QMatrix4x4 ToolMatrix,PolarisMatrix;
     LivePlot* livePlot;
     LivePlot2* livePlot2;
-    QVector<Qt3DCore::QEntity*> pointEntities;
+    QVector<Qt3DCore::QEntity*> pointEntities,lineEntities;
     double roundDecimalPlaces(double val);
     void setDecimalPlaces(int val);
 signals:

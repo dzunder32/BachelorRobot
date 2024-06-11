@@ -3,6 +3,7 @@
 Draw::Draw(Kinematik *robotKinematik,Robot *robot, QVector3D sled_pos,Plane* plane,Widget3D *widget3d)
 {
      timer_draw = new QTimer;
+    _letters = new Letters;
     _robotKinematik = robotKinematik;
     _robotKinematik->setJoints(0,0,90,0,90,0,0);
     _robot = robot;
@@ -23,7 +24,7 @@ Draw::Draw(Kinematik *robotKinematik,Robot *robot, QVector3D sled_pos,Plane* pla
     unit_planeX = QVector3D(_plane->matrix().column(0));
     unit_planeY = QVector3D(_plane->matrix().column(1));
     unit_planeZ = QVector3D(_plane->matrix().column(2));
-
+    qDebug()<<unit_planeZ;
     letter=0;
     nextLetter=false;
 
@@ -33,21 +34,45 @@ Draw::Draw(Kinematik *robotKinematik,Robot *robot, QVector3D sled_pos,Plane* pla
 void Draw::StartSimulation(int time_ms)
 {
     timer_draw->start(time_ms);
+    timerStopped=false;
 }
 void Draw::draw_onTimeout()
 {
 
-    if(counter >= 0 && counter<pointsRobot[letter].length()){
-        robMove2Point();
-        errorCounter = 0;
-    }else
+    if(simLine_isTrue)
     {
+<<<<<<< HEAD
         std::this_thread::sleep_for(std::chrono::seconds(1));
         qDebug()<<counter;
         qDebug()<<pointsRobot[letter].length();
         errorCounter++;
         qDebug()<<errorCounter;
+=======
+        if(lineCounter >=0 && lineCounter<_letters->F.length() || !timerStopped)
+        {
+            robDrawLine();
+            errorCounter = 0;
+        }
+        else
+        {
+            errorCounter++;
+            qDebug()<<errorCounter;
+        }
+
+>>>>>>> 5e1e6185dfaf4167fb41a4c83c0a3a7d5ee60f60
     }
+    else
+    {
+        if(counter >= 0 && counter<pointsRobot[letter].length()){
+            robMove2Point();
+            errorCounter = 0;
+        }else
+        {
+            errorCounter++;
+            qDebug()<<errorCounter;
+        }
+    }
+
 }
 //void Draw::StartRobot()
 //{
@@ -70,13 +95,60 @@ void Draw::robMove2Point()
     robot_setPoint(pointsRobot[letter][counter]+letter_posRobot-QVector3D(l1,0,0));
 
 
-    if(drawPoint_isTrue[letter][counter])
+    if( drawPoint_isTrue[letter][counter])
         emit sendPoint(pointsBase[letter][counter]+letter_posBase,pointThickness);
 
     counter+=IncrementCounterValue;
 
     if (counter>=pointsRobot[letter].length())
         getNextLetter();
+}
+
+void Draw::robDrawLine()
+{
+    QVector3D start_plane = _letters->F[lineCounter][0];
+    QVector3D end_plane   = _letters->F[lineCounter][1];
+
+    auto start_base  = Plane2BasePoint(start_plane);
+    auto end_base    = Plane2BasePoint(end_plane);
+    auto start_robot = Base2RobotPoint(start_base);
+    auto end_robot   = Base2RobotPoint(end_base);
+
+
+    robot_setPoint(start_robot-QVector3D(l1,0,0));
+    qDebug()<<"sleep for 1 sec";
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+    robot_setPoint(end_robot-QVector3D(l1,0,0));
+
+    emit sendLine(start_base,end_base);
+
+
+    if(lineCounter==_letters->F.length()-1)
+    {
+        emit deleteLines();
+        drawingDone();
+        lineCounter = 0;
+    }
+    else
+    {
+        // connectLines(end_plane,_letters->F[lineCounter][0]);
+        lineCounter++;
+        qDebug()<<"lineCounter"<<lineCounter;
+    }
+
+
+
+
+}
+
+void Draw::connectLines(QVector3D prevPoint,QVector3D nextPoint)
+{
+    qDebug()<<"connectLines";
+
+    robot_setPoint(Plane2RobotPoint(prevPoint+QVector3D(0,0,10))-QVector3D(l1,0,0));
+    qDebug()<<"sleep for 1 sec";
+    robot_setPoint(Plane2RobotPoint(nextPoint+QVector3D(0,0,10))-QVector3D(l1,0,0));
+
 }
 
 void Draw::getNextLetter()
@@ -128,15 +200,16 @@ void Draw::getNextLetter()
 void Draw::drawingDone()
 {
     _robotKinematik->setJoints(0,0,90,0,90,0,0);
-        emit stopTimerDraw();
-        qDebug()<<"sleep for 1 sec";
-        std::this_thread::sleep_for(std::chrono::seconds(1));
-        qDebug()<<"done";
-        if(_robot->IsConnected())
-        {
+    emit stopTimerDraw();
+    timerStopped = true;
+    qDebug()<<"sleep for 1 sec";
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+    qDebug()<<"done";
+    if(_robot->IsConnected())
+    {
         _robot->UpdatePosition();
 //        isDrawing=false;
-        }
+    }
 //    }
 }
 
@@ -277,7 +350,6 @@ void Draw::robot_setPoint(QVector3D position)
 
     _robotKinematik->ToolMovement(Transformations::Z,-199);
 
-//Mathafacka
     if(_robot->IsConnected())
     {
         _robot->UpdatePosition();
@@ -332,47 +404,40 @@ void Draw::getWord(QString str)
 }
 
 
-void Draw::checkRow()
-{
-    QVector <int> EndRowIndex,SpaceIndex,RowDistance,temp_Index;
-    int index=0;
-    for (int i:LetterInputIndex){
-        if(i==-2)
-            EndRowIndex.push_back(index);
-        index++;
-        if(i==-1)
-            SpaceIndex.push_back(index);
-    }
-    EndRowIndex.push_back(LetterInputIndex.length());
-    qDebug()<<"EndRowIndex"<<EndRowIndex;
+// void Draw::checkRow()
+// {
+//     QVector <int> EndRowIndex,SpaceIndex,RowDistance,temp_Index;
+//     int index=0;
+//     for (int i:LetterInputIndex){
+//         if(i==-2)
+//             EndRowIndex.push_back(index);
+//         index++;
+//         if(i==-1)
+//             SpaceIndex.push_back(index);
+//     }
+//     EndRowIndex.push_back(LetterInputIndex.length());
+//     qDebug()<<"EndRowIndex"<<EndRowIndex;
 
-    temp_Index=EndRowIndex;
-    temp_Index.prepend(0);
-    temp_Index.removeLast();
-    qDebug()<<"tempIndex"<<temp_Index;
-    int index2=0;
-    for (int i=0;i<EndRowIndex.length();i++)
-    {
-        RowDistance.push_back(EndRowIndex[i]-temp_Index[i]);
-    }
+//     temp_Index=EndRowIndex;
+//     temp_Index.prepend(0);chrome://settings/search
 
-    for(int dist:RowDistance)
-    {
-        if(dist>Nx){
+//     temp_    Index.removeLast();
+//     qDebug()<<"tempIndex"<<temp_Index;
+//     int index2=0;
+//     for (int i=0;i<EndRowIndex.length();i++)
+//     {
+//         RowDistance.push_back(EndRowIndex[i]-temp_Index[i]);
+//     }
 
-        }
-    }
-    qDebug()<<RowDistance;
-}
+//     for(int dist:RowDistance)
+//     {
+//         if(dist>Nx){
 
+//         }
+//     }
+//     qDebug()<<RowDistance;
+// }
 
-void Draw::setLetter(QString str)
-{
-    int index = points2D_names.indexOf(str);
-
-    if (index != -1){letter = index;}
-    else            {letter=0;      }
-}
 
 
 void Draw::Base2RobotPts()
@@ -388,7 +453,6 @@ void Draw::Base2RobotPts()
         pointsRobot.push_back(temp_pointsRobot);
     }
 }
-
 
 
 void Draw::Points2DToBase()

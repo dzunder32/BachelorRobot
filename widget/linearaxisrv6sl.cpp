@@ -31,6 +31,7 @@ LinearAxisRV6SL::LinearAxisRV6SL(Qt3DCore::QEntity* parent)
     tempTrans2->setTranslation(QVector3D(0,144,70.11));
     tempEnt2->addComponent(tempTrans2);
 
+    sled_ptr = &sled_position;
     sled_pos_inBase();
 
     Joint7=tempTrans1;
@@ -56,9 +57,9 @@ void LinearAxisRV6SL::showAxes(Qt3DCore::QEntity *Ent1, Qt3DCore::QEntity *Ent2)
 
 void LinearAxisRV6SL::sled_pos_inBase(){
 
-    auto* tempEnt3 =new Qt3DCore::QEntity(static_cast<Qt3DCore::QEntity*>(this));
-    auto* tempTrans3 =new Qt3DCore::QTransform();
-    tempEnt3->addComponent(tempTrans3);
+//    auto* tempEnt3 =new Qt3DCore::QEntity(static_cast<Qt3DCore::QEntity*>(this));
+//    auto* tempTrans3 =new Qt3DCore::QTransform();
+//    tempEnt3->addComponent(tempTrans3);
     QMatrix3x3 rotationMatrix =_substructure->rotation().toRotationMatrix(); // Your rotation matrix
     //    QVector3D vector=_sled->translation() + tempTrans2->translation() + _axis->translation();
     QVector3D sled_vector= _axis->translation();
@@ -83,6 +84,6 @@ QVector3D LinearAxisRV6SL::rotate_vector(QVector3D vector,QMatrix3x3 rotationMat
 }
 void LinearAxisRV6SL::set_sled_position(QMatrix3x3 rotationMatrix)
 {
-    sled_position=rotate_vector(sled_position, rotationMatrix);
+    sled_position = rotate_vector(sled_position, rotationMatrix);
     qDebug()<<sled_position;
 }

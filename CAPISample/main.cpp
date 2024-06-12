@@ -107,10 +107,19 @@ int main(int argc, char *argv[])
 
 
     Plane *plane = new Plane(450.0,450.0);
-    plane->setTranslation(linAxis2->sled_position+QVector3D(-100,1000,500));
+//    qDebug()<<linAxis2->sled_position;
+    plane->setTranslation(linAxis2->sled_position+QVector3D(0,700,500));
     // plane->setRotation(QQuaternion::fromEulerAngles(QVector3D(-90,180,0)));
     plane->setRotation(QQuaternion::fromEulerAngles(QVector3D(-90,180,0)) * QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180));
     widget3d->addObject(plane);
+
+    qDebug()<<plane->getCornerPoints();
+    qDebug()<<plane->rotation().toRotationMatrix()(0,2);
+    qDebug()<<plane->rotation().toRotationMatrix()(1,2);
+    qDebug()<<plane->rotation().toRotationMatrix()(2,2);
+//    qDebug()<<plane->rotation().toRotationMatrix().operator (2)(0);
+//    qDebug()<<plane->rotation().toRotationMatrix().operator (2)(0);
+
 
     Robot *robot = new Robot("143.93.135.15",10001);
 

@@ -19,7 +19,7 @@ RobotDraw::RobotDraw(Kinematik *robotKinematik,Robot *robot, QVector3D sled_pos,
     a=ew.x();
     b=ew.y();
     c=ew.z();
-    l1=500;
+    l1=0;
 
     getLetter();
 }
@@ -40,4 +40,20 @@ void RobotDraw::getLetter()
     currentLetter = _letters->F;
 }
 
+void RobotDraw::robot_setPoint(QVector3D position)
+{
+    _robotKinematik->setPoint(position.x(),
+                              position.y(),
+                              position.z(),
+                              a,b,c,l1);
 
+
+    _robotKinematik->ToolMovement(Transformations::Z,-199);
+
+    if(_robot->IsConnected())
+    {
+        _robot->UpdatePosition();
+        _robotKinematik->WaitForPositionReached();
+    }
+
+}

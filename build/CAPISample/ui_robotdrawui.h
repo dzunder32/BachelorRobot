@@ -46,6 +46,7 @@ public:
         timerSpeedSlider = new QSlider(centralwidget);
         timerSpeedSlider->setObjectName(QString::fromUtf8("timerSpeedSlider"));
         timerSpeedSlider->setGeometry(QRect(100, 140, 16, 160));
+        timerSpeedSlider->setMinimum(1);
         timerSpeedSlider->setMaximum(400);
         timerSpeedSlider->setOrientation(Qt::Vertical);
         RobotDrawUi->setCentralWidget(centralwidget);

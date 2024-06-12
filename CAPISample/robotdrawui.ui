@@ -49,6 +49,9 @@
       <height>160</height>
      </rect>
     </property>
+    <property name="minimum">
+     <number>1</number>
+    </property>
     <property name="maximum">
      <number>400</number>
     </property>

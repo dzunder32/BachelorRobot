@@ -70,11 +70,36 @@ Plane::Plane(double XSize,double YSize,Qt3DCore::QEntity* parent)
     leftBorderY->addComponent(_leftTransformY);
     leftBorderY->addComponent(_materialY);
     leftBorderY->setEnabled(true);
-
-
-
 }
 
+QVector <QVector3D> Plane::getCornerPoints()
+{
+    QVector3D trans = this->translation();
+    QVector <QVector3D> cornerPoints;
+
+    QMatrix4x4 rotPlane;
+    rotPlane.rotate(this->rotation());
+
+    QVector3D xPlaneBase=QVector3D(rotPlane.column(0));
+    QVector3D yPlaneBase=QVector3D(rotPlane.column(1));
+
+    QVector3D upperLeftCorner = -(xPlaneBase * xLimit/2) + trans + (yPlaneBase * yLimit/2);
+    QVector3D upperRightCorner = (xPlaneBase * xLimit/2) + trans + (yPlaneBase * yLimit/2);
+    QVector3D lowerLeftCorner = -(xPlaneBase * xLimit/2) + trans - (yPlaneBase * yLimit/2);
+    QVector3D lowerRightCorner = (xPlaneBase * xLimit/2) + trans - (yPlaneBase * yLimit/2);
+
+    qDebug()<<"W"<<xPlaneBase;
+    qDebug()<<upperLeftCorner;
+
+
+    cornerPoints.append(upperLeftCorner);
+    cornerPoints.append(upperRightCorner);
+    cornerPoints.append(lowerLeftCorner);
+    cornerPoints.append(lowerRightCorner);
+
+    return cornerPoints;
+//    qDebug()<<"whathtehell";
+}
 void Plane::DrawPlaneLimits()
 {
 

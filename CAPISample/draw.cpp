@@ -41,6 +41,11 @@ void Draw::draw_onTimeout()
 
     if(simLine_isTrue)
     {
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+        qDebug()<<counter;
+        qDebug()<<pointsRobot[letter].length();
+        errorCounter++;
+        qDebug()<<errorCounter;
         if(lineCounter >=0 && lineCounter<_letters->F.length() || !timerStopped)
         {
             robDrawLine();

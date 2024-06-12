@@ -10,6 +10,7 @@ public:
     QVector2D Limits;
     Qt3DCore::QEntity* Sled;
     QVector3D sled_position;
+    QVector3D* sled_ptr;
 
 };
 

@@ -12,6 +12,8 @@ RobotDrawUi::RobotDrawUi(Kinematik *robotKinematik,Robot *robot, QVector3D sled_
     _robDraw->moveToThread(&robotThread);
 
     connect(&robotThread,  &QThread::finished, _robDraw,&QObject::deleteLater);
+    connect(_robDraw, &RobotDraw::startTimer,this, &RobotDrawUi::startDrawTimer);
+    connect(_robDraw, &RobotDraw::stopTimer,this, &RobotDrawUi::stopDrawTimer);
 
     robotThread.start();
 }
@@ -25,16 +27,16 @@ RobotDrawUi::~RobotDrawUi()
 
 void RobotDrawUi::on_pushButtonStart_clicked()
 {
-    _robDraw->startTimer();
-
+    startDrawTimer();
 
 }
 
 
 void RobotDrawUi::on_pushButtonDelete_clicked()
 {
-    _robDraw->stopTimer();
-    qDebug()<<"TimerStopped";
+
+    stopDrawTimer();
+
 }
 
 
@@ -43,4 +45,3 @@ void RobotDrawUi::on_timerSpeedSlider_sliderMoved(int position)
     _robDraw->setTimerTime(position);
     qDebug()<<position;
 }
-

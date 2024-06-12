@@ -32,6 +32,9 @@ private:
 signals:
     void startDrawing();
     void stopDrawing();
+public slots:
+    void startDrawTimer(){_robDraw->_timer->start();}
+    void stopDrawTimer(){_robDraw->_timer->stop();qDebug()<<"TimerStopped";}
 };
 
 #endif // ROBOTDRAWUI_H

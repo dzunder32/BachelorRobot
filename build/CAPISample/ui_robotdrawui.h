@@ -65,6 +65,7 @@ public:
     QPushButton *pushButtonStart;
     QPushButton *pushButtonDelete;
     QPushButton *pushButton;
+    QPushButton *pushButton_History;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -87,7 +88,7 @@ public:
         timerSpeedSlider = new QSlider(centralwidget);
         timerSpeedSlider->setObjectName(QString::fromUtf8("timerSpeedSlider"));
         timerSpeedSlider->setMinimum(4);
-        timerSpeedSlider->setMaximum(400);
+        timerSpeedSlider->setMaximum(1000);
         timerSpeedSlider->setValue(200);
         timerSpeedSlider->setOrientation(Qt::Vertical);
 
@@ -253,6 +254,11 @@ public:
 
         verticalLayout_6->addWidget(pushButton);
 
+        pushButton_History = new QPushButton(centralwidget);
+        pushButton_History->setObjectName(QString::fromUtf8("pushButton_History"));
+
+        verticalLayout_6->addWidget(pushButton_History);
+
 
         horizontalLayout_5->addLayout(verticalLayout_6);
 
@@ -293,6 +299,7 @@ public:
         pushButtonStart->setText(QCoreApplication::translate("RobotDrawUi", "Start", nullptr));
         pushButtonDelete->setText(QCoreApplication::translate("RobotDrawUi", "Stop", nullptr));
         pushButton->setText(QCoreApplication::translate("RobotDrawUi", "PushButton", nullptr));
+        pushButton_History->setText(QCoreApplication::translate("RobotDrawUi", "previous Sequence", nullptr));
     } // retranslateUi
 
 };

@@ -31,6 +31,12 @@ private slots:
 
     void on_pushButton_addLine_clicked();
 
+    void on_pushButton_addP1_clicked();
+
+    void on_pushButton_addP2_clicked();
+
+    void on_pushButton_History_clicked();
+
 private:
     Ui::RobotDrawUi *ui;
     RobotDraw *_robDraw;
@@ -39,12 +45,15 @@ private:
     Robot *_robot;
     QVector3D P1,P2;
     QString P1X_Str,P1Y_Str,P2X_Str,P2Y_Str;
+    QString historyText;
+    void insertRobotSequenceText(QString str);
+    void initBuffers();
 signals:
     void startDrawing();
     void stopDrawing();
 public slots:
-    void startDrawTimer(){_robDraw->_timer->start();}
-    void stopDrawTimer(){_robDraw->_timer->stop();qDebug()<<"TimerStopped";}
+    void startDrawTimer();
+    void stopDrawTimer();
     void drawLineWidget(QVector3D start,QVector3D end){_widget3d->addCylinderBetweenPoints(start,end);}
 };
 

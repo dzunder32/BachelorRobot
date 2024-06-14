@@ -23,6 +23,10 @@ private slots:
 
     void on_timerSpeedSlider_sliderMoved(int position);
 
+    void on_pushButton_setP1_clicked();
+
+    void on_pushButton_setP2_clicked();
+
 private:
     Ui::RobotDrawUi *ui;
     RobotDraw *_robDraw;

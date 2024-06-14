@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_RobotDrawUi_t {
-    QByteArrayData data[10];
-    char stringdata0[163];
+    QByteArrayData data[12];
+    char stringdata0[219];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -40,15 +40,19 @@ QT_MOC_LITERAL(4, 38, 26), // "on_pushButtonStart_clicked"
 QT_MOC_LITERAL(5, 65, 27), // "on_pushButtonDelete_clicked"
 QT_MOC_LITERAL(6, 93, 31), // "on_timerSpeedSlider_sliderMoved"
 QT_MOC_LITERAL(7, 125, 8), // "position"
-QT_MOC_LITERAL(8, 134, 14), // "startDrawTimer"
-QT_MOC_LITERAL(9, 149, 13) // "stopDrawTimer"
+QT_MOC_LITERAL(8, 134, 27), // "on_pushButton_setP1_clicked"
+QT_MOC_LITERAL(9, 162, 27), // "on_pushButton_setP2_clicked"
+QT_MOC_LITERAL(10, 190, 14), // "startDrawTimer"
+QT_MOC_LITERAL(11, 205, 13) // "stopDrawTimer"
 
     },
     "RobotDrawUi\0startDrawing\0\0stopDrawing\0"
     "on_pushButtonStart_clicked\0"
     "on_pushButtonDelete_clicked\0"
     "on_timerSpeedSlider_sliderMoved\0"
-    "position\0startDrawTimer\0stopDrawTimer"
+    "position\0on_pushButton_setP1_clicked\0"
+    "on_pushButton_setP2_clicked\0startDrawTimer\0"
+    "stopDrawTimer"
 };
 #undef QT_MOC_LITERAL
 
@@ -58,7 +62,7 @@ static const uint qt_meta_data_RobotDrawUi[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       7,   14, // methods
+       9,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -66,15 +70,17 @@ static const uint qt_meta_data_RobotDrawUi[] = {
        2,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   49,    2, 0x06 /* Public */,
-       3,    0,   50,    2, 0x06 /* Public */,
+       1,    0,   59,    2, 0x06 /* Public */,
+       3,    0,   60,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       4,    0,   51,    2, 0x08 /* Private */,
-       5,    0,   52,    2, 0x08 /* Private */,
-       6,    1,   53,    2, 0x08 /* Private */,
-       8,    0,   56,    2, 0x0a /* Public */,
-       9,    0,   57,    2, 0x0a /* Public */,
+       4,    0,   61,    2, 0x08 /* Private */,
+       5,    0,   62,    2, 0x08 /* Private */,
+       6,    1,   63,    2, 0x08 /* Private */,
+       8,    0,   66,    2, 0x08 /* Private */,
+       9,    0,   67,    2, 0x08 /* Private */,
+      10,    0,   68,    2, 0x0a /* Public */,
+      11,    0,   69,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void,
@@ -84,6 +90,8 @@ static const uint qt_meta_data_RobotDrawUi[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, QMetaType::Int,    7,
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
 
@@ -101,8 +109,10 @@ void RobotDrawUi::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 2: _t->on_pushButtonStart_clicked(); break;
         case 3: _t->on_pushButtonDelete_clicked(); break;
         case 4: _t->on_timerSpeedSlider_sliderMoved((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 5: _t->startDrawTimer(); break;
-        case 6: _t->stopDrawTimer(); break;
+        case 5: _t->on_pushButton_setP1_clicked(); break;
+        case 6: _t->on_pushButton_setP2_clicked(); break;
+        case 7: _t->startDrawTimer(); break;
+        case 8: _t->stopDrawTimer(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -153,13 +163,13 @@ int RobotDrawUi::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 7)
+        if (_id < 9)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 9;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 7)
+        if (_id < 9)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 7;
+        _id -= 9;
     }
     return _id;
 }

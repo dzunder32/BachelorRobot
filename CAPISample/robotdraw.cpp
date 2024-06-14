@@ -13,8 +13,6 @@ RobotDraw::RobotDraw(Kinematik *robotKinematik,Robot *robot, QVector3D sled_pos,
     connect(_timer, &QTimer::timeout,this, &RobotDraw::robDraw_onTimeout);
 
 
-
-
     QVector3D ew = CalculateEw(_plane->matrix()*QMatrix4x4(QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),90).toRotationMatrix()));
     a=ew.x();
     b=ew.y();
@@ -25,18 +23,34 @@ RobotDraw::RobotDraw(Kinematik *robotKinematik,Robot *robot, QVector3D sled_pos,
 
     getLetter();
 
-    cornerPoints = _plane->getCornerPoints();
+//    PointsBuffer = _plane->getCornerPoints();
 }
 
 
 void RobotDraw::robDraw_onTimeout()
 {
+    QVector <QVector3D> test = {_plane->translation()+QVector3D(100,100,0),_plane->translation()+QVector3D(100,-100,0)};
+    robot_drawLine(test);
 
-    if(counter<=cornerPoints.length()-1)
+    if(counter<=robotSequence.length()-1)
     {
+        switch (robotSequence[counter])
+        {
+        case 1:
+            QVector3D basePoint = PointsBuffer[counter];
+            robot_setPoint(Base2RobotPoint(basePoint));
+            break;
+//        case 2:
+//            // statements_2;
+//            break;
+//        case 3:
+//            break;
+//        default:
+//            qDebug()<<"no valid Value";
+//            break;
+        }
         qDebug()<<counter;
-        QVector3D basePoint = cornerPoints[counter];
-        robot_setPoint(Base2RobotPoint(basePoint));
+
         counter++;
     }
     else
@@ -47,7 +61,7 @@ void RobotDraw::robDraw_onTimeout()
         {
             qDebug()<<"inWhile!";
         }
-
+        _widget3d->deleteAllPoints();
         robot_moveHome();
         counter=0;
     }
@@ -79,7 +93,28 @@ void RobotDraw::robot_setPoint(QVector3D position)
 
 }
 
+void RobotDraw::robot_drawLine(QVector <QVector3D> linePts)
+{
+    QVector3D start = linePts[0];
+    QVector3D end   = linePts[1];
 
+    robot_setPoint(Base2RobotPoint(start));
+    qDebug()<<"first PT";
+    stopTimer();
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+    robot_setPoint(Base2RobotPoint(end));
+    qDebug()<<"second PT";
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+    startTimer();
+}
+
+void RobotDraw::UpdatePointsBuffer(QVector <QVector3D> pts)
+{
+    PointsBuffer = pts;
+    for(auto i:pts){
+        robotSequence.append(1);
+    }
+}
 
 void RobotDraw::robot_moveHome()
 {

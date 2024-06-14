@@ -193,12 +193,62 @@ void Widget3D::drawPoint(QVector3D position, float size, QColor color)
 
 }
 
+// void Widget3D::drawLine()
+// {
+//      Qt3DCore::QEntity *entity = new Qt3DCore::QEntity(_rootEntity);
+//     lineEntities.append(entity);
+
+// }
+
+
+void Widget3D::addCylinderBetweenPoints(const QVector3D& startPoint, const QVector3D& endPoint)
+{
+    Qt3DCore::QEntity *cylinderEntity = new Qt3DCore::QEntity(_rootEntity);
+    lineEntities.append(cylinderEntity);
+    // Create the cylinder mesh
+    auto cylinder = new Qt3DExtras::QCylinderMesh(cylinderEntity);
+
+    cylinder->setLength(endPoint.distanceToPoint(startPoint)); // Set the length based on the distance between the points
+    cylinder->setRadius(1.0f); // Set the radius of the cylinder
+
+    // Calculate the midpoint and rotation angles
+    auto midPoint = (startPoint + endPoint) / 2;
+    auto transPoint = endPoint - startPoint;
+    auto xAngle = atan(sqrt(pow(transPoint.z(), 2) + pow(transPoint.x(), 2)) / transPoint.y()) / M_PI * 180;
+    auto yAngle = (transPoint.x() == 0 && transPoint.z() == 0)? 0 : atan(transPoint.x() / transPoint.z()) / M_PI * 180;
+
+    // Create and configure the transformation node
+    auto transform = new Qt3DCore::QTransform(cylinderEntity);
+    transform->setRotationX(xAngle);
+    transform->setRotationY(yAngle);
+    transform->setTranslation(midPoint);
+
+    // Add material to the cylinder
+    auto material = new Qt3DExtras::QPhongMaterial(cylinderEntity);
+    material->setDiffuse("#ffff00"); // Set the color of the cylinder
+
+    // Add components to the entity
+    cylinderEntity->addComponent(cylinder);
+    cylinderEntity->addComponent(transform);
+    cylinderEntity->addComponent(material);
+}
+
+
 void Widget3D::deleteAllPoints()
 {
     for (Qt3DCore::QEntity* entity : pointEntities) {
         delete entity;
     }
     pointEntities.clear();
-}
 
+}
+void Widget3D::deleteAllLines()
+{
+//    qDebug()<<"Here!";
+    for (Qt3DCore::QEntity* entity : lineEntities) {
+        delete entity;
+    }
+    lineEntities.clear();
+//    qDebug()<<"its aight!";
+}
 

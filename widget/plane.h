@@ -25,6 +25,7 @@ public:
     QVector3D rightPosY;
     QVector3D leftPosY;
 
+    QVector<QVector3D> getCornerPoints();
 private:
     Qt3DExtras::QCylinderMesh *_upperCylinderX;
     Qt3DExtras::QCylinderMesh *_lowerCylinderX;
@@ -37,8 +38,6 @@ private:
     Qt3DCore::QTransform * _lowerTransformX;
     Qt3DCore::QTransform *_leftTransformY;
     Qt3DCore::QTransform *_rightTransformY;
-
-
 
     void DrawPlaneLimits();
 

@@ -14,7 +14,9 @@ DrawLetters::DrawLetters(Kinematik *robotKinematik,Robot *robot, QVector3D sled_
 
     connect(&robotThread,  &QThread::finished, _draw,&QObject::deleteLater);
     connect(_draw, &Draw::sendPoint,this, &DrawLetters::drawPointWidget);
+    connect(_draw, &Draw::sendLine,this, &DrawLetters::drawLineWidget);
     connect(_draw, &Draw::deletePoints,this, &DrawLetters::deletePointWidget);
+    connect(_draw, &Draw::deleteLines,this, &DrawLetters::deleteLineWidget);
 //    connect(ui->checkBox_NextLetter,&QCheckBox::stateChanged,_draw,&Draw::inc_letter_changeState);
 //    connect(ui->spinBox_robotSpeed,&QSpinBox::valueChanged,_draw,&Draw::RobotSpeedChanged);
 //    connect(ui->pushButton_Draw,&QPushButton::clicked,this,&DrawLetters::spinBox_valueChanged);
@@ -73,11 +75,19 @@ void DrawLetters::drawPointWidget(QVector3D point,float thickness)
 {
     _widget3d->drawPoint(point,thickness,QColor(255,255,255));
 }
+
+void DrawLetters::drawLineWidget(QVector3D startPoint,QVector3D endPoint)
+{
+    _widget3d->addCylinderBetweenPoints(startPoint,endPoint);
+}
 void DrawLetters::deletePointWidget()
 {
     _widget3d->deleteAllPoints();
 }
-
+void DrawLetters::deleteLineWidget()
+{
+    _widget3d->deleteAllLines();
+}
 
 void DrawLetters::on_spinBox_LetterSize_valueChanged(int arg1)
 {

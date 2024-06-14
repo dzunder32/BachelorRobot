@@ -11,6 +11,7 @@
 #include <widget3d.h>
 #include <plane.h>
 #include "robot.h"
+#include "letters.h"
 // #include <iostream>
 // #include <thread>
 #include <chrono>
@@ -27,7 +28,6 @@ public:
     bool simulation_isTrue=true;
 public slots:
     void draw_onTimeout();
-    void setLetter(QString str);
     void CreatePointsFromTxt(float size);
     void draw_TimerStop(){timer_draw->stop();}
     void draw_TimerStartNoReset(){timer_draw->start();}
@@ -35,10 +35,11 @@ public slots:
 
 
     void StartSimulation(int);
-//    void StartRobot();
- private:
+    //    void StartRobot();
 
-    bool CounterSet=false;
+private:
+    Letters *_letters;
+    bool CounterSet=false, simLine_isTrue=true;
     Widget3D *_widget3d;
     Kinematik *_robotKinematik;
     Robot *_robot;
@@ -56,7 +57,7 @@ public slots:
     QMatrix4x4 robotMat;
     QVector <QVector <QVector3D>> pointsPlane,pointsRobot,pointsBase;
     double a,b,c,l1;
-    int counter=0,shiftXcounter=0,shiftYcounter=0;
+    int counter=0,shiftXcounter=0,shiftYcounter=0,lineCounter=0;
     QVector3D prevLetter_lastPoint,nextLetter_firstPoint;
 
     QVector3D unit_planeX,unit_planeY,unit_planeZ;
@@ -66,6 +67,8 @@ public slots:
     QVector<Qt3DCore::QEntity*> pointEntities;
     QVector3D letter_posPlane,letter_posRobot,letter_posBase,prev_shiftBase,prev_shiftRobot,prev_shiftPlane,save_letterPos;
     QVector <QVector <bool>> drawPoint_isTrue;
+    QVector3D lastLinePoint;
+    bool timerStopped=false;
 
     int letter;
     float letterSize;
@@ -76,7 +79,7 @@ public slots:
     bool nextLetter;
     void moveInLine2DPoint(QVector2D point_begin, QVector2D point_end,QVector <QVector3D> &vec,QVector <bool> &draw_vec);
 
-    QVector3D calcPointInPlane(QVector2D point)
+    QVector3D  calcPointInPlane(QVector2D point)
     {return _plane->translation()+(point.x()*planeX)+(point.y()*planeY);}
 
     float cartDist(QVector2D point1, QVector2D point2)
@@ -84,12 +87,15 @@ public slots:
 
     void deleteAllPoints();
     void robot_setPoint(QVector3D position);
+    void robDrawLine();
 
     void shiftVec2BaseAndRobot();
     void moveInLineBetweenLetters();
-    QVector3D Base2RobotPoint(QVector3D point3D){return QVector3D(robotMat.inverted() * point3D);}
-    QVector3D Base2PlanePoint(QVector3D point3D){return QVector3D(_plane->matrix().inverted() * point3D);}
-    QVector3D Plane2BasePoint(QVector3D point3D){return QVector3D(_plane->matrix() * point3D);}
+    QVector3D Base2RobotPoint (QVector3D point3D){return QVector3D(robotMat.inverted() * point3D);}
+    QVector3D Base2PlanePoint (QVector3D point3D){return QVector3D(_plane->matrix().inverted() * point3D);}
+    QVector3D Plane2BasePoint (QVector3D point3D){return QVector3D(_plane->matrix() * point3D);}
+    QVector3D Plane2RobotPoint(QVector3D point3D){return Base2RobotPoint(Plane2BasePoint(point3D));}
+
     void getPreviousVectors();
     void shiftLetterPosPlaneX(float x);
     void shiftLetterPosPlaneY(float y);
@@ -98,9 +104,12 @@ public slots:
     void checkRow();
     void drawingDone();
     void connectTimer();
+    void connectLines(QVector3D,QVector3D);
 signals:
     void sendPoint(QVector3D,float);
+    void sendLine(QVector3D,QVector3D);
     void deletePoints();
+    void deleteLines();
     void stopTimerDraw();
 };
 

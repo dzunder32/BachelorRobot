@@ -7,17 +7,23 @@ CONFIG -= app_bundle
 SOURCES += \
         draw.cpp \
         drawletters.cpp \
+        letters.cpp \
         main.cpp \
         mainwindow.cpp \
         polaristool.cpp \
-        polarisv.cpp
+        polarisv.cpp \
+        robotdraw.cpp \
+        robotdrawui.cpp
 
 HEADERS += \
     draw.h \
     drawletters.h \
+    letters.h \
     mainwindow.h \
     polaristool.h \
-    polarisv.h
+    polarisv.h \
+    robotdraw.h \
+    robotdrawui.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -46,7 +52,8 @@ DEPENDPATH += $$PWD/../melfaRobots
 
 FORMS += \
     drawletters.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    robotdrawui.ui
 
 
 

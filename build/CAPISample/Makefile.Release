@@ -9968,10 +9968,14 @@ release/robotdrawui.o: ../../CAPISample/robotdrawui.cpp ../../CAPISample/robotdr
 		../../CAPISample/letters.h \
 		ui_robotdrawui.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QApplication \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QFormLayout \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QHBoxLayout \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QMenuBar \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QPushButton \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QSlider \
-		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QStatusBar
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QStatusBar \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QTextEdit \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QVBoxLayout
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\robotdrawui.o ..\..\CAPISample\robotdrawui.cpp
 
 release/moc_draw.o: release/moc_draw.cpp 

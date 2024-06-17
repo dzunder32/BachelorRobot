@@ -59,10 +59,13 @@ public:
     QPushButton *pushButton_addP1;
     QPushButton *pushButton_addP2;
     QPushButton *pushButton_addLine;
-    QTextEdit *textEdit;
+    QTextEdit *textEdit_Sequence;
+    QVBoxLayout *verticalLayout_6;
     QHBoxLayout *horizontalLayout;
     QPushButton *pushButtonStart;
     QPushButton *pushButtonDelete;
+    QPushButton *pushButton;
+    QPushButton *pushButton_History;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -85,7 +88,8 @@ public:
         timerSpeedSlider = new QSlider(centralwidget);
         timerSpeedSlider->setObjectName(QString::fromUtf8("timerSpeedSlider"));
         timerSpeedSlider->setMinimum(4);
-        timerSpeedSlider->setMaximum(400);
+        timerSpeedSlider->setMaximum(1000);
+        timerSpeedSlider->setValue(200);
         timerSpeedSlider->setOrientation(Qt::Vertical);
 
         verticalLayout->addWidget(timerSpeedSlider);
@@ -220,14 +224,16 @@ public:
 
         verticalLayout_5->addWidget(pushButton_addLine);
 
-        textEdit = new QTextEdit(centralwidget);
-        textEdit->setObjectName(QString::fromUtf8("textEdit"));
+        textEdit_Sequence = new QTextEdit(centralwidget);
+        textEdit_Sequence->setObjectName(QString::fromUtf8("textEdit_Sequence"));
 
-        verticalLayout_5->addWidget(textEdit);
+        verticalLayout_5->addWidget(textEdit_Sequence);
 
 
         horizontalLayout_5->addLayout(verticalLayout_5);
 
+        verticalLayout_6 = new QVBoxLayout();
+        verticalLayout_6->setObjectName(QString::fromUtf8("verticalLayout_6"));
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         pushButtonStart = new QPushButton(centralwidget);
@@ -241,12 +247,25 @@ public:
         horizontalLayout->addWidget(pushButtonDelete);
 
 
-        horizontalLayout_5->addLayout(horizontalLayout);
+        verticalLayout_6->addLayout(horizontalLayout);
+
+        pushButton = new QPushButton(centralwidget);
+        pushButton->setObjectName(QString::fromUtf8("pushButton"));
+
+        verticalLayout_6->addWidget(pushButton);
+
+        pushButton_History = new QPushButton(centralwidget);
+        pushButton_History->setObjectName(QString::fromUtf8("pushButton_History"));
+
+        verticalLayout_6->addWidget(pushButton_History);
+
+
+        horizontalLayout_5->addLayout(verticalLayout_6);
 
         RobotDrawUi->setCentralWidget(centralwidget);
         menubar = new QMenuBar(RobotDrawUi);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 800, 21));
+        menubar->setGeometry(QRect(0, 0, 800, 20));
         RobotDrawUi->setMenuBar(menubar);
         statusbar = new QStatusBar(RobotDrawUi);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
@@ -272,16 +291,15 @@ public:
         pushButton_addP1->setText(QCoreApplication::translate("RobotDrawUi", "Add P1 ", nullptr));
         pushButton_addP2->setText(QCoreApplication::translate("RobotDrawUi", "Add P2 ", nullptr));
         pushButton_addLine->setText(QCoreApplication::translate("RobotDrawUi", "Add Line", nullptr));
-        textEdit->setHtml(QCoreApplication::translate("RobotDrawUi", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
+        textEdit_Sequence->setHtml(QCoreApplication::translate("RobotDrawUi", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"hr { height: 1px; border-width: 0; }\n"
-"li.unchecked::marker { content: \"\\2610\"; }\n"
-"li.checked::marker { content: \"\\2612\"; }\n"
-"</style></head><body style=\" font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Robot Sequence:</p></body></html>", nullptr));
+"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Segoe UI'; font-size:9pt;\">Robot Sequence:</span></p></body></html>", nullptr));
         pushButtonStart->setText(QCoreApplication::translate("RobotDrawUi", "Start", nullptr));
         pushButtonDelete->setText(QCoreApplication::translate("RobotDrawUi", "Stop", nullptr));
+        pushButton->setText(QCoreApplication::translate("RobotDrawUi", "PushButton", nullptr));
+        pushButton_History->setText(QCoreApplication::translate("RobotDrawUi", "previous Sequence", nullptr));
     } // retranslateUi
 
 };

@@ -240,14 +240,15 @@ void Widget3D::deleteAllPoints()
         delete entity;
     }
     pointEntities.clear();
+
 }
 void Widget3D::deleteAllLines()
 {
-    qDebug()<<"Here!";
+//    qDebug()<<"Here!";
     for (Qt3DCore::QEntity* entity : lineEntities) {
         delete entity;
     }
-    pointEntities.clear();
-    qDebug()<<"its aight!";
+    lineEntities.clear();
+//    qDebug()<<"its aight!";
 }
 

@@ -14,6 +14,7 @@ RobotDrawUi::RobotDrawUi(Kinematik *robotKinematik,Robot *robot, QVector3D sled_
     connect(&robotThread,  &QThread::finished, _robDraw,&QObject::deleteLater);
     connect(_robDraw, &RobotDraw::startTimer,this, &RobotDrawUi::startDrawTimer);
     connect(_robDraw, &RobotDraw::stopTimer,this, &RobotDrawUi::stopDrawTimer);
+    connect(_robDraw, &RobotDraw::drawLine,this, &RobotDrawUi::drawLineWidget);
 
     robotThread.start();
 }
@@ -27,12 +28,15 @@ RobotDrawUi::~RobotDrawUi()
 
 void RobotDrawUi::on_pushButtonStart_clicked()
 {
+//    _robDraw->connectTimer();
     startDrawTimer();
+//    disconnect(_robDraw->_timer, &QTimer::timeout,this, &RobotDraw::robDraw_onTimeout);
 }
 
 
 void RobotDrawUi::on_pushButtonDelete_clicked()
 {
+//    _robDraw->disconnectTimer();
     stopDrawTimer();
 }
 
@@ -46,19 +50,99 @@ void RobotDrawUi::on_timerSpeedSlider_sliderMoved(int position)
 void RobotDrawUi::on_pushButton_setP1_clicked()
 {
     ui->lineEdit_P1Data->setText("P1:(" + ui->lineEdit_P1X->text()+ "; " + ui->lineEdit_P1Y->text() + ")");
-    QVector3D planePoint = QVector3D(ui->lineEdit_P1X->text().toFloat(),ui->lineEdit_P1Y->text().toFloat(),0);
-    qDebug()<<planePoint;
-    _robDraw->AddPoint2Buffer(_robDraw->Plane2BasePoint(planePoint));
-    _widget3d->drawPoint(_robDraw->Plane2BasePoint(planePoint),5,QColor(255,255,0));
+    P1X_Str = ui->lineEdit_P1X->text();
+    P1Y_Str = ui->lineEdit_P1Y->text();
+    P1 = QVector3D(P1X_Str.toFloat(),P1Y_Str.toFloat(),0);
 }
 
 
 void RobotDrawUi::on_pushButton_setP2_clicked()
 {
     ui->lineEdit_P2Data->setText("P2:(" + ui->lineEdit_P2X->text()+ "; " + ui->lineEdit_P2Y->text() + ")");
-    QVector3D planePoint = QVector3D(ui->lineEdit_P2X->text().toFloat(),ui->lineEdit_P2Y->text().toFloat(),0);
-    qDebug()<<planePoint;
-    _robDraw->AddPoint2Buffer(_robDraw->Plane2BasePoint(planePoint));
-    _widget3d->drawPoint(_robDraw->Plane2BasePoint(planePoint),5,QColor(255,0,255));
+    P2X_Str = ui->lineEdit_P2X->text();
+    P2Y_Str = ui->lineEdit_P2Y->text();
+    P2 = QVector3D(P2X_Str.toFloat(),P2Y_Str.toFloat(),0);
 }
 
+void RobotDrawUi::stopDrawTimer(){
+    _robDraw->_timer->stop();
+    historyText = ui->textEdit_Sequence->toPlainText();
+    ui->textEdit_Sequence->setText("Robot Sequence:");
+    qDebug()<<"TimerStopped";
+}
+void RobotDrawUi::on_pushButton_clicked()
+{
+    qDebug()<<_robDraw->_timer->isActive();
+    _widget3d->deleteAllLines();
+    _widget3d->deleteAllPoints();
+
+}
+
+void RobotDrawUi::on_pushButton_addLine_clicked()
+{
+    _robDraw->AddLine2Buffer({_robDraw->Plane2BasePoint(P1),_robDraw->Plane2BasePoint(P2)});
+    insertRobotSequenceText("Line: Start("+P1X_Str+ "," + P1Y_Str + ")"
+                            + "End("+ P2X_Str+ "," + P2Y_Str + ")" );
+    _widget3d->drawPoint(_robDraw->Plane2BasePoint(P1),5,QColor(0,255,255));
+    _widget3d->drawPoint(_robDraw->Plane2BasePoint(P2),5,QColor(0,255,255));
+
+}
+
+void RobotDrawUi::on_pushButton_addP1_clicked()
+{
+    QVector3D basePoint = _robDraw->Plane2BasePoint(P1);
+    _robDraw->AddPoint2Buffer(basePoint);
+    _widget3d->drawPoint(basePoint,5,QColor(255,0,255));
+    insertRobotSequenceText("P2:(" + P1X_Str + ", " + P1Y_Str + ")");
+}
+
+void RobotDrawUi::on_pushButton_addP2_clicked()
+{
+    QVector3D basePoint = _robDraw->Plane2BasePoint(P2);
+    _robDraw->AddPoint2Buffer(basePoint);
+    _widget3d->drawPoint(basePoint,5,QColor(255,0,255));
+    insertRobotSequenceText("P2:(" + P2X_Str + ", " + P2Y_Str + ")");
+
+}
+
+
+void RobotDrawUi::insertRobotSequenceText(QString str)
+{
+    ui->textEdit_Sequence->moveCursor(QTextCursor::End);
+    ui->textEdit_Sequence->insertPlainText("\n");
+    ui->textEdit_Sequence->insertPlainText(str);
+}
+
+void RobotDrawUi::startDrawTimer()
+{
+    _robDraw->_timer->start();
+    _robDraw->safeCurrentSequence();
+}
+
+void RobotDrawUi::on_pushButton_History_clicked()
+{
+    qDebug()<<ui->textEdit_Sequence->toPlainText();
+    if(ui->textEdit_Sequence->toPlainText()=="Robot Sequence:"){
+        initBuffers();
+        qDebug()<<"initialized";
+    }else{
+        ui->textEdit_Sequence->setText(historyText);
+        _robDraw->setPreviousSequence();
+
+    }
+
+
+}
+
+void RobotDrawUi::initBuffers()
+{
+    for (int i=0;i<50;i+=10){
+        QVector3D basePoint = _robDraw->Plane2BasePoint(QVector3D(i,i,0));
+        _robDraw->AddPoint2Buffer(basePoint);
+    }
+
+    for (int k=0;k<50;k+=10){
+        _robDraw->AddLine2Buffer({_robDraw->Plane2BasePoint(QVector3D(50,k,0)),_robDraw->Plane2BasePoint(QVector3D(-50,k,0))});
+    }
+
+}

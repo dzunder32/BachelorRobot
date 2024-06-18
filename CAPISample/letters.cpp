@@ -8,8 +8,14 @@ Letters::Letters()
 
 void Letters::createLetters()
 {
-    F = {{QVector3D(0,0,0),QVector3D(0,100,0)},
+    // F.append(QVariantList(QVariant ,QVariant))
+    F = {{QVector3D(0,0,0),QVector3D(1,0,0)},
          {QVector3D(0,100,0),QVector3D(100,100,0)},
          {QVector3D(0,50,0),QVector3D(100,50,0)}};
+
+    B = {{QVector3D(0,0,0),QVector3D(0,100,0)},
+         {QVector3D(0,100,0),QVector3D(100,100,0)},
+         {QVector3D(0,50,0),QVector3D(100,50,0)}};
+
 }
 

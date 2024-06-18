@@ -8,12 +8,14 @@ class Letters
 {
 public:
     Letters();
-    QVector <QVector <QVector3D>> F;
+    // QVector <QVariantList> F,B;
+    QVector <QVector<QVector3D>> F,B;
 
 private:
 
     void createLetters();
     float scalingFactor;
+
 };
 
 #endif // LETTERS_H

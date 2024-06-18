@@ -27,18 +27,34 @@ RobotDraw::RobotDraw(Kinematik *robotKinematik,Robot *robot, QVector3D sled_pos,
 
 
 
-    // QVariantList mixedList;
-    // mixedList.append(20);
-    // mixedList.append(QVector2D(100, 40)); // Store the value, not the pointer
-    // mixedList.append(QVector2D(-90, 90)); // Directly appending QVector2D is fine here
+    QVariantList mixedList;
+    mixedList.append(20);
+    mixedList.append(QVector2D(100, 40)); // Store the value, not the pointer
+    mixedList.append(QVector2D(-90, 90)); // Directly appending QVector2D is fine here
 
-    // // Accessing the QVector2D stored in the QVariantList
-    // QVector2D retrievedCenter = mixedList[1].value<QVector2D>(); // No need for a pointer
-    // qDebug() << "retrievedCenter" << retrievedCenter;
+    // Accessing the QVector2D stored in the QVariantList
+    QVector2D retrievedCenter = mixedList[1].value<QVector2D>(); // No need for a pointer
+    qDebug() << "retrievedCenter" << retrievedCenter;
 
-    // CircleBuffer.append(mixedList);
+    CircleBuffer.append(mixedList);
 
-    // qDebug()<<"circleBuffer"<<CircleBuffer[0][1];
+    QVariantList mixedList2;
+    // mixedList2.append(QVector2D(100, 40)); // Store the value, not the pointer
+    // mixedList2.append(QVector2D(-90, 90));
+    mixedList2 << QVector2D(100, 40) << QVector2D(-90, 90);
+    CircleBuffer.append(mixedList2);
+
+    qDebug()<<"circleBuffer"<<CircleBuffer;
+
+
+    QVector <QVector <QVector3D>> A;
+    A.append({QVector3D(0,0,0)});
+    A.append({QVector3D(0,0,0),QVector3D(0,0,0)});
+
+    qDebug()<<"len1:"<<A[0].length();
+    qDebug()<<"len2:"<<A[1].length();
+
+
 
     // robotSequence.append(3);
 }

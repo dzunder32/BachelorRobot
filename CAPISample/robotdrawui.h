@@ -37,6 +37,8 @@ private slots:
 
     void on_pushButton_History_clicked();
 
+    void widgetDrawPoint(QVector3D point , float thickness, QColor color){_widget3d->drawPoint(point,thickness,color);}
+
 private:
     Ui::RobotDrawUi *ui;
     RobotDraw *_robDraw;

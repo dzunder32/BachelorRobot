@@ -8,6 +8,8 @@
 #include "robot.h"
 #include "letters.h"
 #include <chrono>
+#include <QVariant>
+#include <QtMath>
 
 class RobotDraw : public QObject
 {
@@ -16,7 +18,7 @@ public:
     RobotDraw(Kinematik *robotKinematik,Robot *robot, QVector3D sled_pos,Plane* plane, Widget3D *widget3d);
     QTimer *_timer;
     void setTimerTime(int time_ms){_timer->setInterval(time_ms);}
-    void robot_moveHome();
+    void stopTimer_goHome();
     void UpdatePointsBuffer(QVector<QVector3D> pts);
     void AddPoint2Buffer(QVector3D pointBase){PointsBuffer.append(pointBase);robotSequence.append(1);}
     void AddLine2Buffer(QVector <QVector3D> lineBase){LinesBuffer.append(lineBase);robotSequence.append(2);}
@@ -43,18 +45,21 @@ private:
     QVector<QVector3D> PointsBuffer, PointsBuffer_hist;
     QVector <QVector <QVector3D>> LinesBuffer, LinesBuffer_hist;
     QList <int> robotSequence, robotSequence_hist;
+    QVector <QVariantList> CircleBuffer;
 
     void getLetter();
 
     void robot_setPoint(QVector3D position);
 
 
+    void drawCircle();
 public slots:
 
 signals:
     void stopTimer();
     void startTimer();
     void drawLine(QVector3D start,QVector3D end);
+    void drawPoint_Widget(QVector3D point , float thickness, QColor color);
 
 };
 

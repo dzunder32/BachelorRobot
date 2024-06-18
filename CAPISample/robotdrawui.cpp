@@ -15,6 +15,7 @@ RobotDrawUi::RobotDrawUi(Kinematik *robotKinematik,Robot *robot, QVector3D sled_
     connect(_robDraw, &RobotDraw::startTimer,this, &RobotDrawUi::startDrawTimer);
     connect(_robDraw, &RobotDraw::stopTimer,this, &RobotDrawUi::stopDrawTimer);
     connect(_robDraw, &RobotDraw::drawLine,this, &RobotDrawUi::drawLineWidget);
+    connect(_robDraw, &RobotDraw::drawPoint_Widget,this, &RobotDrawUi::widgetDrawPoint);
 
     robotThread.start();
 }
@@ -29,7 +30,10 @@ RobotDrawUi::~RobotDrawUi()
 void RobotDrawUi::on_pushButtonStart_clicked()
 {
 //    _robDraw->connectTimer();
+    _widget3d->deleteAllLines();
+    _widget3d->deleteAllPoints();
     startDrawTimer();
+
 //    disconnect(_robDraw->_timer, &QTimer::timeout,this, &RobotDraw::robDraw_onTimeout);
 }
 
@@ -67,7 +71,7 @@ void RobotDrawUi::on_pushButton_setP2_clicked()
 void RobotDrawUi::stopDrawTimer(){
     _robDraw->_timer->stop();
     historyText = ui->textEdit_Sequence->toPlainText();
-    ui->textEdit_Sequence->setText("Robot Sequence:");
+//    ui->textEdit_Sequence->setText("Robot Sequence:");
     qDebug()<<"TimerStopped";
 }
 void RobotDrawUi::on_pushButton_clicked()

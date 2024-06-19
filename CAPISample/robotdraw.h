@@ -11,6 +11,10 @@
 #include <QVariant>
 #include <QtMath>
 
+#define POINT 1
+#define LINE 2
+#define CIRCLE 3
+
 class RobotDraw : public QObject
 {
       Q_OBJECT
@@ -20,12 +24,9 @@ public:
     void setTimerTime(int time_ms){_timer->setInterval(time_ms);}
     void stopTimer_goHome();
     void UpdatePointsBuffer(QVector<QVector3D> pts);
-    void AddPoint2Buffer(QVector3D pointBase){PointsBuffer.append(pointBase);robotSequence.append(1);}
-    void AddLine2Buffer(QVector <QVector3D> lineBase){LinesBuffer.append(lineBase);robotSequence.append(2);}
-    QVector3D Base2RobotPoint (QVector3D point3D){return QVector3D(robotMat.inverted() * point3D);}
-    QVector3D Base2PlanePoint (QVector3D point3D){return QVector3D(_plane->matrix().inverted() * point3D);}
-    QVector3D Plane2BasePoint (QVector3D point3D){return QVector3D(_plane->matrix() * point3D);}
-    QVector3D Plane2RobotPoint(QVector3D point3D){return Base2RobotPoint(Plane2BasePoint(point3D));}
+    void AddPoint2Buffer(QVector3D pointPlane){PointsBuffer.append(Plane2BasePoint(pointPlane));robotSequence.append(POINT);}
+    void AddLine2Buffer(QVector <QVector3D> linePlane){LinesBuffer.append(linePlane);robotSequence.append(LINE);}
+    void AddLine2Circle(QVariantList circleList){CircleBuffer.append(circleList);robotSequence.append(CIRCLE);}
     void robDraw_onTimeout();
     void safeCurrentSequence();
     void setPreviousSequence();
@@ -37,6 +38,7 @@ private:
     Plane* _plane;
 
     bool line_isTrue = false;
+    bool simulation_isTrue = true;
     QVector3D firstLinePoint;
     double a,b,c,l1;
     QMatrix4x4 robotMat;
@@ -47,12 +49,20 @@ private:
     QList <int> robotSequence, robotSequence_hist;
     QVector <QVariantList> CircleBuffer;
 
-    void getLetter();
+
+
+    QVector3D Base2RobotPoint (QVector3D point3D){return QVector3D(robotMat.inverted() * point3D);}
+    QVector3D Base2PlanePoint (QVector3D point3D){return QVector3D(_plane->matrix().inverted() * point3D);}
+    QVector3D Plane2BasePoint (QVector3D point3D){return QVector3D(_plane->matrix() * point3D);}
+    QVector3D Plane2RobotPoint(QVector3D point3D){return Base2RobotPoint(Plane2BasePoint(point3D));}
 
     void robot_setPoint(QVector3D position);
 
 
-    void drawCircle();
+
+    void robotDrawCircle();
+    void robotDrawPoint();
+    void robotDrawLine();
 public slots:
 
 signals:

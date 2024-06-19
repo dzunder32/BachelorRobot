@@ -60,6 +60,7 @@ private:
     Qt3DCore::QTransform *trans_tool;
     Qt3DCore::QTransform *trans_polaris;
     Qt3DCore::QTransform *trans_position;
+    Qt3DCore::QTransform *trans_point;
     int meanVal=20,decimalPlaces;
     QVector <QVector <double>> PolarisVals,ToolVals;
     QVector <double> meanDataT=QVector <double>(meanVal,0),meanDataP=QVector <double>(meanVal,0);
@@ -67,6 +68,8 @@ private:
     LivePlot* livePlot;
     LivePlot2* livePlot2;
     QVector<Qt3DCore::QEntity*> pointEntities,lineEntities;
+    QVector3D point_position;
+
     double roundDecimalPlaces(double val);
     void setDecimalPlaces(int val);
 signals:

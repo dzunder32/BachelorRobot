@@ -1,5 +1,7 @@
 #include "robotdraw.h"
 
+
+
 RobotDraw::RobotDraw(Kinematik *robotKinematik,Robot *robot, QVector3D sled_pos,Plane* plane, Widget3D *widget3d)
 {
     _letters = new Letters;
@@ -22,23 +24,23 @@ RobotDraw::RobotDraw(Kinematik *robotKinematik,Robot *robot, QVector3D sled_pos,
     robotMat.rotate(90,QVector3D(0,0,1));
 
     setTimerTime(500);
-    getLetter();
 
 
-    QVariantList mixedList;
-    mixedList.append(10);
-    mixedList.append(QVector2D(20, 40)); // Store the value, not the pointer
-    mixedList.append(QVector2D(-90, 90)); // Directly appending QVector2D is fine here
 
-    // Accessing the QVector2D stored in the QVariantList
-    QVector2D retrievedCenter = mixedList[1].value<QVector2D>(); // No need for a pointer
-    qDebug() << "retrievedCenter" << retrievedCenter;
+    // QVariantList mixedList;
+    // mixedList.append(20);
+    // mixedList.append(QVector2D(100, 40)); // Store the value, not the pointer
+    // mixedList.append(QVector2D(-90, 90)); // Directly appending QVector2D is fine here
 
-    CircleBuffer.append(mixedList);
+    // // Accessing the QVector2D stored in the QVariantList
+    // QVector2D retrievedCenter = mixedList[1].value<QVector2D>(); // No need for a pointer
+    // qDebug() << "retrievedCenter" << retrievedCenter;
 
-    qDebug()<<"circleBuffer"<<CircleBuffer[0][1];
+    // CircleBuffer.append(mixedList);
 
-    robotSequence.append(3);
+    // qDebug()<<"circleBuffer"<<CircleBuffer[0][1];
+
+    // robotSequence.append(3);
 }
 
 
@@ -50,44 +52,16 @@ void RobotDraw::robDraw_onTimeout()
     {
         switch (robotSequence.takeFirst())
         {
-        case 1:
-            if(!PointsBuffer.isEmpty())
-            {
-                qDebug()<<"Point";
-                QVector3D basePoint = PointsBuffer.takeFirst();
-                robot_setPoint(Base2RobotPoint(basePoint));
-                if(line_isTrue)
-                {
-                    drawLine(firstLinePoint,basePoint);
-                    line_isTrue = false;
-                }
-            }else
-            {
-                stopTimer_goHome();
-            }
+        case POINT:
+            robotDrawPoint();
         break;
 
-        case 2:
-            if(!LinesBuffer.isEmpty())
-            {
-                qDebug()<<"Line";
-                auto line = LinesBuffer.takeFirst();
-                //save first Point
-                firstLinePoint = line[0];
-                robot_setPoint(Base2RobotPoint(firstLinePoint));
-                //add second Line Point to Buffer as a Point
-                PointsBuffer.prepend(line[1]);
-                robotSequence.prepend(1);
-                line_isTrue = true;
-            }else
-            {
-                stopTimer_goHome();
-            }
+        case LINE:
+            robotDrawLine();
             break;
 
-        case 3:
-
-            drawCircle();
+        case CIRCLE:
+            robotDrawCircle();
             break;
         }
 
@@ -105,6 +79,73 @@ void RobotDraw::robDraw_onTimeout()
 
 }
 
+void RobotDraw::robotDrawPoint()
+{
+
+
+    if(!PointsBuffer.isEmpty())
+    {
+        qDebug()<<"Point";
+        QVector3D basePoint = PointsBuffer.takeFirst();
+        robot_setPoint(Base2RobotPoint(basePoint));
+        drawPoint_Widget( basePoint,1,QColor(0,255,0));
+        if(line_isTrue)
+        {
+            drawLine(firstLinePoint,basePoint);
+            line_isTrue = false;
+        }
+    }else
+    {
+        stopTimer_goHome();
+    }
+}
+
+void RobotDraw::robotDrawLine()
+{
+    if(!LinesBuffer.isEmpty())
+    {
+        qDebug()<<"Line";
+        auto line = LinesBuffer.takeFirst();
+        //save first Point
+        firstLinePoint = Plane2BasePoint(line[0]);
+        robot_setPoint(Base2RobotPoint(firstLinePoint));
+        //add second Line Point to Buffer as a Point
+        PointsBuffer.prepend(Plane2BasePoint(line[1]));
+        robotSequence.prepend(1);
+        line_isTrue = true;
+    }else
+    {
+        stopTimer_goHome();
+    }
+}
+
+void RobotDraw::robotDrawCircle()
+{
+
+    QVariantList currCircle = CircleBuffer.takeFirst();
+
+    float radius = currCircle[0].toFloat();
+    QVector2D center = currCircle[1].value<QVector2D>();
+    QVector2D angleLimits = currCircle[2].value<QVector2D>();
+
+    for (float angle = angleLimits[0]; angle <angleLimits[1];angle+=10)
+    {
+        QVector3D circlePt;
+        circlePt.setX(center.x() + (radius * qCos(qDegreesToRadians(angle))));
+        circlePt.setY(center.y() + (radius * qSin(qDegreesToRadians(angle))));
+        circlePt.setZ(0);
+        if(_robot->IsConnected())
+        {
+            drawPoint_Widget(Plane2BasePoint(circlePt),1,QColor(255,0,0));
+        }else
+        {
+            robotSequence.append(POINT);
+            PointsBuffer.append(Plane2BasePoint(circlePt));
+        }
+    }
+}
+
+
 void RobotDraw::safeCurrentSequence()
 {
      PointsBuffer_hist  = PointsBuffer;
@@ -118,10 +159,6 @@ void RobotDraw::setPreviousSequence()
      robotSequence = robotSequence_hist;
 }
 
-void RobotDraw::getLetter()
-{
-    currentLetter = _letters->F;
-}
 
 void RobotDraw::robot_setPoint(QVector3D position)
 {
@@ -141,23 +178,9 @@ void RobotDraw::robot_setPoint(QVector3D position)
 
 }
 
-void RobotDraw::drawCircle()
-{
-    QVariantList currCircle = CircleBuffer.takeFirst();
 
-    float radius = currCircle[0].toFloat();
-    QVector2D center = currCircle[1].value<QVector2D>();
-    QVector2D angleLimits = currCircle[2].value<QVector2D>();
 
-    for (float angle = angleLimits[0]; angle <angleLimits[1];angle+=10)
-    {
-        QVector3D circlePt;
-        circlePt.setX(center.x() + (radius * qCos(qDegreesToRadians(angle))));
-        circlePt.setY(center.y() + (radius * qSin(qDegreesToRadians(angle))));
-        circlePt.setZ(0);
-        drawPoint_Widget(Plane2BasePoint(circlePt),1,QColor(255,0,0));
-    }
-}
+
 
 void RobotDraw::UpdatePointsBuffer(QVector <QVector3D> pts)
 {

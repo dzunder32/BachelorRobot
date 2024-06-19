@@ -27,8 +27,6 @@ private slots:
 
     void on_pushButton_setP2_clicked();
 
-    void on_pushButton_clicked();
-
     void on_pushButton_addLine_clicked();
 
     void on_pushButton_addP1_clicked();
@@ -38,6 +36,10 @@ private slots:
     void on_pushButton_History_clicked();
 
     void widgetDrawPoint(QVector3D point , float thickness, QColor color){_widget3d->drawPoint(point,thickness,color);}
+
+    void on_pushButton_addCircle_clicked();
+
+    void on_horizontalScrollBar_XChange_valueChanged(int value);
 
 private:
     Ui::RobotDrawUi *ui;

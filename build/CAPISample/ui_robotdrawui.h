@@ -17,10 +17,10 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QScrollBar>
 #include <QtWidgets/QSlider>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTextEdit>
+#include <QtWidgets/QToolBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -30,23 +30,22 @@ class Ui_RobotDrawUi
 {
 public:
     QWidget *centralwidget;
-    QGridLayout *gridLayout_2;
+    QVBoxLayout *verticalLayout_3;
     QGridLayout *gridLayout;
-    QLineEdit *lineEdit_3;
-    QLineEdit *lineEdit;
     QLineEdit *lineEdit_P1X;
-    QLineEdit *lineEdit_2;
+    QLineEdit *lineEdit;
+    QLineEdit *lineEdit_P2Y;
     QLineEdit *lineEdit_P1Y;
+    QLineEdit *lineEdit_3;
+    QLineEdit *lineEdit_2;
+    QLineEdit *lineEdit_8;
+    QLineEdit *lineEdit_4;
+    QPushButton *pushButton_setP2;
+    QLineEdit *lineEdit_P2X;
     QPushButton *pushButton_setP1;
     QLineEdit *lineEdit_P1Data;
-    QLineEdit *lineEdit_4;
-    QLineEdit *lineEdit_8;
-    QLineEdit *lineEdit_P2X;
-    QLineEdit *lineEdit_9;
-    QLineEdit *lineEdit_P2Y;
-    QPushButton *pushButton_setP2;
     QLineEdit *lineEdit_P2Data;
-    QHBoxLayout *horizontalLayout_2;
+    QLineEdit *lineEdit_9;
     QHBoxLayout *horizontalLayout;
     QPushButton *pushButton_addP1;
     QPushButton *pushButton_addLine;
@@ -54,21 +53,20 @@ public:
     QVBoxLayout *verticalLayout;
     QLineEdit *lineEdit_6;
     QLineEdit *lineEdit_Radius;
+    QPushButton *pushButton;
+    QHBoxLayout *horizontalLayout_2;
     QVBoxLayout *verticalLayout_2;
-    QLineEdit *lineEdit_11;
-    QScrollBar *horizontalScrollBar_XChange;
-    QVBoxLayout *verticalLayout_3;
-    QLineEdit *lineEdit_10;
-    QScrollBar *horizontalScrollBar_YChange;
     QLineEdit *lineEdit_5;
-    QTextEdit *textEdit_Sequence;
     QSlider *timerSpeedSlider;
+    QTextEdit *textEdit_Sequence;
+    QTextEdit *textEdit_textInput;
     QHBoxLayout *horizontalLayout_3;
     QPushButton *pushButton_History;
     QPushButton *pushButtonStart;
     QPushButton *pushButtonDelete;
     QMenuBar *menubar;
     QStatusBar *statusbar;
+    QToolBar *toolBar;
 
     void setupUi(QMainWindow *RobotDrawUi)
     {
@@ -77,34 +75,59 @@ public:
         RobotDrawUi->resize(800, 600);
         centralwidget = new QWidget(RobotDrawUi);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
-        gridLayout_2 = new QGridLayout(centralwidget);
-        gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
+        verticalLayout_3 = new QVBoxLayout(centralwidget);
+        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
         gridLayout = new QGridLayout();
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        lineEdit_3 = new QLineEdit(centralwidget);
-        lineEdit_3->setObjectName(QString::fromUtf8("lineEdit_3"));
+        lineEdit_P1X = new QLineEdit(centralwidget);
+        lineEdit_P1X->setObjectName(QString::fromUtf8("lineEdit_P1X"));
 
-        gridLayout->addWidget(lineEdit_3, 0, 0, 1, 1);
+        gridLayout->addWidget(lineEdit_P1X, 0, 2, 1, 1);
 
         lineEdit = new QLineEdit(centralwidget);
         lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
 
         gridLayout->addWidget(lineEdit, 0, 1, 1, 1);
 
-        lineEdit_P1X = new QLineEdit(centralwidget);
-        lineEdit_P1X->setObjectName(QString::fromUtf8("lineEdit_P1X"));
+        lineEdit_P2Y = new QLineEdit(centralwidget);
+        lineEdit_P2Y->setObjectName(QString::fromUtf8("lineEdit_P2Y"));
 
-        gridLayout->addWidget(lineEdit_P1X, 0, 2, 1, 1);
+        gridLayout->addWidget(lineEdit_P2Y, 1, 4, 1, 1);
+
+        lineEdit_P1Y = new QLineEdit(centralwidget);
+        lineEdit_P1Y->setObjectName(QString::fromUtf8("lineEdit_P1Y"));
+
+        gridLayout->addWidget(lineEdit_P1Y, 0, 4, 1, 1);
+
+        lineEdit_3 = new QLineEdit(centralwidget);
+        lineEdit_3->setObjectName(QString::fromUtf8("lineEdit_3"));
+
+        gridLayout->addWidget(lineEdit_3, 0, 0, 1, 1);
 
         lineEdit_2 = new QLineEdit(centralwidget);
         lineEdit_2->setObjectName(QString::fromUtf8("lineEdit_2"));
 
         gridLayout->addWidget(lineEdit_2, 0, 3, 1, 1);
 
-        lineEdit_P1Y = new QLineEdit(centralwidget);
-        lineEdit_P1Y->setObjectName(QString::fromUtf8("lineEdit_P1Y"));
+        lineEdit_8 = new QLineEdit(centralwidget);
+        lineEdit_8->setObjectName(QString::fromUtf8("lineEdit_8"));
 
-        gridLayout->addWidget(lineEdit_P1Y, 0, 4, 1, 1);
+        gridLayout->addWidget(lineEdit_8, 1, 1, 1, 1);
+
+        lineEdit_4 = new QLineEdit(centralwidget);
+        lineEdit_4->setObjectName(QString::fromUtf8("lineEdit_4"));
+
+        gridLayout->addWidget(lineEdit_4, 1, 0, 1, 1);
+
+        pushButton_setP2 = new QPushButton(centralwidget);
+        pushButton_setP2->setObjectName(QString::fromUtf8("pushButton_setP2"));
+
+        gridLayout->addWidget(pushButton_setP2, 1, 5, 1, 1);
+
+        lineEdit_P2X = new QLineEdit(centralwidget);
+        lineEdit_P2X->setObjectName(QString::fromUtf8("lineEdit_P2X"));
+
+        gridLayout->addWidget(lineEdit_P2X, 1, 2, 1, 1);
 
         pushButton_setP1 = new QPushButton(centralwidget);
         pushButton_setP1->setObjectName(QString::fromUtf8("pushButton_setP1"));
@@ -116,46 +139,19 @@ public:
 
         gridLayout->addWidget(lineEdit_P1Data, 0, 6, 1, 1);
 
-        lineEdit_4 = new QLineEdit(centralwidget);
-        lineEdit_4->setObjectName(QString::fromUtf8("lineEdit_4"));
+        lineEdit_P2Data = new QLineEdit(centralwidget);
+        lineEdit_P2Data->setObjectName(QString::fromUtf8("lineEdit_P2Data"));
 
-        gridLayout->addWidget(lineEdit_4, 1, 0, 1, 1);
-
-        lineEdit_8 = new QLineEdit(centralwidget);
-        lineEdit_8->setObjectName(QString::fromUtf8("lineEdit_8"));
-
-        gridLayout->addWidget(lineEdit_8, 1, 1, 1, 1);
-
-        lineEdit_P2X = new QLineEdit(centralwidget);
-        lineEdit_P2X->setObjectName(QString::fromUtf8("lineEdit_P2X"));
-
-        gridLayout->addWidget(lineEdit_P2X, 1, 2, 1, 1);
+        gridLayout->addWidget(lineEdit_P2Data, 1, 6, 1, 1);
 
         lineEdit_9 = new QLineEdit(centralwidget);
         lineEdit_9->setObjectName(QString::fromUtf8("lineEdit_9"));
 
         gridLayout->addWidget(lineEdit_9, 1, 3, 1, 1);
 
-        lineEdit_P2Y = new QLineEdit(centralwidget);
-        lineEdit_P2Y->setObjectName(QString::fromUtf8("lineEdit_P2Y"));
 
-        gridLayout->addWidget(lineEdit_P2Y, 1, 4, 1, 1);
+        verticalLayout_3->addLayout(gridLayout);
 
-        pushButton_setP2 = new QPushButton(centralwidget);
-        pushButton_setP2->setObjectName(QString::fromUtf8("pushButton_setP2"));
-
-        gridLayout->addWidget(pushButton_setP2, 1, 5, 1, 1);
-
-        lineEdit_P2Data = new QLineEdit(centralwidget);
-        lineEdit_P2Data->setObjectName(QString::fromUtf8("lineEdit_P2Data"));
-
-        gridLayout->addWidget(lineEdit_P2Data, 1, 6, 1, 1);
-
-
-        gridLayout_2->addLayout(gridLayout, 0, 1, 1, 2);
-
-        horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         pushButton_addP1 = new QPushButton(centralwidget);
@@ -188,53 +184,22 @@ public:
 
         horizontalLayout->addLayout(verticalLayout);
 
+        pushButton = new QPushButton(centralwidget);
+        pushButton->setObjectName(QString::fromUtf8("pushButton"));
 
-        horizontalLayout_2->addLayout(horizontalLayout);
+        horizontalLayout->addWidget(pushButton);
 
+
+        verticalLayout_3->addLayout(horizontalLayout);
+
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
         verticalLayout_2 = new QVBoxLayout();
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
-        lineEdit_11 = new QLineEdit(centralwidget);
-        lineEdit_11->setObjectName(QString::fromUtf8("lineEdit_11"));
-
-        verticalLayout_2->addWidget(lineEdit_11);
-
-        horizontalScrollBar_XChange = new QScrollBar(centralwidget);
-        horizontalScrollBar_XChange->setObjectName(QString::fromUtf8("horizontalScrollBar_XChange"));
-        horizontalScrollBar_XChange->setOrientation(Qt::Horizontal);
-
-        verticalLayout_2->addWidget(horizontalScrollBar_XChange);
-
-
-        horizontalLayout_2->addLayout(verticalLayout_2);
-
-        verticalLayout_3 = new QVBoxLayout();
-        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
-        lineEdit_10 = new QLineEdit(centralwidget);
-        lineEdit_10->setObjectName(QString::fromUtf8("lineEdit_10"));
-
-        verticalLayout_3->addWidget(lineEdit_10);
-
-        horizontalScrollBar_YChange = new QScrollBar(centralwidget);
-        horizontalScrollBar_YChange->setObjectName(QString::fromUtf8("horizontalScrollBar_YChange"));
-        horizontalScrollBar_YChange->setOrientation(Qt::Horizontal);
-
-        verticalLayout_3->addWidget(horizontalScrollBar_YChange);
-
-
-        horizontalLayout_2->addLayout(verticalLayout_3);
-
-
-        gridLayout_2->addLayout(horizontalLayout_2, 1, 0, 1, 3);
-
         lineEdit_5 = new QLineEdit(centralwidget);
         lineEdit_5->setObjectName(QString::fromUtf8("lineEdit_5"));
 
-        gridLayout_2->addWidget(lineEdit_5, 2, 0, 1, 2);
-
-        textEdit_Sequence = new QTextEdit(centralwidget);
-        textEdit_Sequence->setObjectName(QString::fromUtf8("textEdit_Sequence"));
-
-        gridLayout_2->addWidget(textEdit_Sequence, 2, 2, 2, 1);
+        verticalLayout_2->addWidget(lineEdit_5);
 
         timerSpeedSlider = new QSlider(centralwidget);
         timerSpeedSlider->setObjectName(QString::fromUtf8("timerSpeedSlider"));
@@ -243,7 +208,23 @@ public:
         timerSpeedSlider->setValue(200);
         timerSpeedSlider->setOrientation(Qt::Vertical);
 
-        gridLayout_2->addWidget(timerSpeedSlider, 3, 0, 1, 1);
+        verticalLayout_2->addWidget(timerSpeedSlider);
+
+
+        horizontalLayout_2->addLayout(verticalLayout_2);
+
+        textEdit_Sequence = new QTextEdit(centralwidget);
+        textEdit_Sequence->setObjectName(QString::fromUtf8("textEdit_Sequence"));
+
+        horizontalLayout_2->addWidget(textEdit_Sequence);
+
+        textEdit_textInput = new QTextEdit(centralwidget);
+        textEdit_textInput->setObjectName(QString::fromUtf8("textEdit_textInput"));
+
+        horizontalLayout_2->addWidget(textEdit_textInput);
+
+
+        verticalLayout_3->addLayout(horizontalLayout_2);
 
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
@@ -263,7 +244,7 @@ public:
         horizontalLayout_3->addWidget(pushButtonDelete);
 
 
-        gridLayout_2->addLayout(horizontalLayout_3, 4, 1, 1, 2);
+        verticalLayout_3->addLayout(horizontalLayout_3);
 
         RobotDrawUi->setCentralWidget(centralwidget);
         menubar = new QMenuBar(RobotDrawUi);
@@ -273,6 +254,9 @@ public:
         statusbar = new QStatusBar(RobotDrawUi);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
         RobotDrawUi->setStatusBar(statusbar);
+        toolBar = new QToolBar(RobotDrawUi);
+        toolBar->setObjectName(QString::fromUtf8("toolBar"));
+        RobotDrawUi->addToolBar(Qt::TopToolBarArea, toolBar);
 
         retranslateUi(RobotDrawUi);
 
@@ -282,20 +266,19 @@ public:
     void retranslateUi(QMainWindow *RobotDrawUi)
     {
         RobotDrawUi->setWindowTitle(QCoreApplication::translate("RobotDrawUi", "MainWindow", nullptr));
-        lineEdit_3->setText(QCoreApplication::translate("RobotDrawUi", "Set first Point", nullptr));
         lineEdit->setText(QCoreApplication::translate("RobotDrawUi", "X Coordinate", nullptr));
+        lineEdit_3->setText(QCoreApplication::translate("RobotDrawUi", "Set first Point", nullptr));
         lineEdit_2->setText(QCoreApplication::translate("RobotDrawUi", "Y Coordinate", nullptr));
-        pushButton_setP1->setText(QCoreApplication::translate("RobotDrawUi", "Set P1", nullptr));
-        lineEdit_4->setText(QCoreApplication::translate("RobotDrawUi", "Set Second Point", nullptr));
         lineEdit_8->setText(QCoreApplication::translate("RobotDrawUi", "X Coordinate", nullptr));
-        lineEdit_9->setText(QCoreApplication::translate("RobotDrawUi", "Y Coordinate", nullptr));
+        lineEdit_4->setText(QCoreApplication::translate("RobotDrawUi", "Set Second Point", nullptr));
         pushButton_setP2->setText(QCoreApplication::translate("RobotDrawUi", "Set P2", nullptr));
+        pushButton_setP1->setText(QCoreApplication::translate("RobotDrawUi", "Set P1", nullptr));
+        lineEdit_9->setText(QCoreApplication::translate("RobotDrawUi", "Y Coordinate", nullptr));
         pushButton_addP1->setText(QCoreApplication::translate("RobotDrawUi", "Add P1 ", nullptr));
         pushButton_addLine->setText(QCoreApplication::translate("RobotDrawUi", "Add Line (P1,P2)", nullptr));
         pushButton_addCircle->setText(QCoreApplication::translate("RobotDrawUi", "Add Circle", nullptr));
         lineEdit_6->setText(QCoreApplication::translate("RobotDrawUi", "Circle Radius: ", nullptr));
-        lineEdit_11->setText(QCoreApplication::translate("RobotDrawUi", "adjust X Coordinate P1", nullptr));
-        lineEdit_10->setText(QCoreApplication::translate("RobotDrawUi", "adjust Y Coordinate P1", nullptr));
+        pushButton->setText(QCoreApplication::translate("RobotDrawUi", "Draw Text", nullptr));
         lineEdit_5->setText(QCoreApplication::translate("RobotDrawUi", "Speed", nullptr));
         textEdit_Sequence->setHtml(QCoreApplication::translate("RobotDrawUi", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
@@ -308,6 +291,7 @@ public:
         pushButton_History->setText(QCoreApplication::translate("RobotDrawUi", "previous Sequence", nullptr));
         pushButtonStart->setText(QCoreApplication::translate("RobotDrawUi", "Start", nullptr));
         pushButtonDelete->setText(QCoreApplication::translate("RobotDrawUi", "Stop", nullptr));
+        toolBar->setWindowTitle(QCoreApplication::translate("RobotDrawUi", "toolBar", nullptr));
     } // retranslateUi
 
 };

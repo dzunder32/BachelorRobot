@@ -31,7 +31,7 @@ private slots:
 
     void on_pushButton_addP1_clicked();
 
-    void on_pushButton_addP2_clicked();
+    // void on_pushButton_addP2_clicked();
 
     void on_pushButton_History_clicked();
 
@@ -41,13 +41,15 @@ private slots:
 
     void on_horizontalScrollBar_XChange_valueChanged(int value);
 
+    void on_pushButton_clicked();
+
 private:
     Ui::RobotDrawUi *ui;
     RobotDraw *_robDraw;
     Widget3D *_widget3d;
     QThread robotThread;
     Robot *_robot;
-    QVector3D P1,P2;
+    QVector2D P1,P2;
     QString P1X_Str,P1Y_Str,P2X_Str,P2Y_Str;
     QString historyText;
     void insertRobotSequenceText(QString str);

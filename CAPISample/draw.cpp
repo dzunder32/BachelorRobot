@@ -48,7 +48,7 @@ void Draw::draw_onTimeout()
         qDebug()<<errorCounter;
         if(lineCounter >=0 && lineCounter<_letters->F.length() || !timerStopped)
         {
-            robDrawLine();
+            // robDrawLine();
             errorCounter = 0;
         }
         else
@@ -101,42 +101,42 @@ void Draw::robMove2Point()
         getNextLetter();
 }
 
-void Draw::robDrawLine()
-{
-    QVector3D start_plane = _letters->F[lineCounter][0];
-    QVector3D end_plane   = _letters->F[lineCounter][1];
+// void Draw::robDrawLine()
+// {
+//     QVector3D start_plane = _letters->F[lineCounter][0];
+//     QVector3D end_plane   = _letters->F[lineCounter][1];
 
-    auto start_base  = Plane2BasePoint(start_plane);
-    auto end_base    = Plane2BasePoint(end_plane);
-    auto start_robot = Base2RobotPoint(start_base);
-    auto end_robot   = Base2RobotPoint(end_base);
-
-
-    robot_setPoint(start_robot-QVector3D(l1,0,0));
-    qDebug()<<"sleep for 1 sec";
-    std::this_thread::sleep_for(std::chrono::seconds(1));
-    robot_setPoint(end_robot-QVector3D(l1,0,0));
-
-    emit sendLine(start_base,end_base);
+//     auto start_base  = Plane2BasePoint(start_plane);
+//     auto end_base    = Plane2BasePoint(end_plane);
+//     auto start_robot = Base2RobotPoint(start_base);
+//     auto end_robot   = Base2RobotPoint(end_base);
 
 
-    if(lineCounter==_letters->F.length()-1)
-    {
-        emit deleteLines();
-        drawingDone();
-        lineCounter = 0;
-    }
-    else
-    {
-        // connectLines(end_plane,_letters->F[lineCounter][0]);
-        lineCounter++;
-        qDebug()<<"lineCounter"<<lineCounter;
-    }
+//     robot_setPoint(start_robot-QVector3D(l1,0,0));
+//     qDebug()<<"sleep for 1 sec";
+//     std::this_thread::sleep_for(std::chrono::seconds(1));
+//     robot_setPoint(end_robot-QVector3D(l1,0,0));
+
+//     emit sendLine(start_base,end_base);
+
+
+//     if(lineCounter==_letters->F.length()-1)
+//     {
+//         emit deleteLines();
+//         drawingDone();
+//         lineCounter = 0;
+//     }
+//     else
+//     {
+//         // connectLines(end_plane,_letters->F[lineCounter][0]);
+//         lineCounter++;
+//         qDebug()<<"lineCounter"<<lineCounter;
+//     }
 
 
 
 
-}
+// }
 
 void Draw::connectLines(QVector3D prevPoint,QVector3D nextPoint)
 {

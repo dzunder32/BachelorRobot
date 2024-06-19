@@ -24,12 +24,13 @@ public:
     void setTimerTime(int time_ms){_timer->setInterval(time_ms);}
     void stopTimer_goHome();
     void UpdatePointsBuffer(QVector<QVector3D> pts);
-    void AddPoint2Buffer(QVector3D pointPlane){PointsBuffer.append(Plane2BasePoint(pointPlane));robotSequence.append(POINT);}
-    void AddLine2Buffer(QVector <QVector3D> linePlane){LinesBuffer.append(linePlane);robotSequence.append(LINE);}
-    void AddLine2Circle(QVariantList circleList){CircleBuffer.append(circleList);robotSequence.append(CIRCLE);}
+    void AddPoint2Buffer(QVector2D pointPlane);
+    void AddLine2Buffer(QVector2D linePlane1, QVector2D linePlane2);
+    void AddCircle2Buffer(QVariantList circleList);
     void robDraw_onTimeout();
     void safeCurrentSequence();
     void setPreviousSequence();
+    void constructLetters(QString letter_Str);
 private:
     Letters *_letters;
     Widget3D *_widget3d;
@@ -47,7 +48,8 @@ private:
     QVector<QVector3D> PointsBuffer, PointsBuffer_hist;
     QVector <QVector <QVector3D>> LinesBuffer, LinesBuffer_hist;
     QList <int> robotSequence, robotSequence_hist;
-    QVector <QVariantList> CircleBuffer;
+    QVector <QVariantList> CircleBuffer,CircleBuffer_hist;
+    QVector <QVariantList> testLetter;
 
     QVector3D Base2RobotPoint (QVector3D point3D){return QVector3D(robotMat.inverted() * point3D);}
     QVector3D Base2PlanePoint (QVector3D point3D){return QVector3D(_plane->matrix().inverted() * point3D);}
@@ -58,6 +60,7 @@ private:
     void robotDrawCircle();
     void robotDrawPoint();
     void robotDrawLine();
+    void robotDrawLetter();
 public slots:
 
 signals:

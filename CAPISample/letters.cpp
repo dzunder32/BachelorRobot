@@ -3,23 +3,18 @@
 Letters::Letters()
 {
     scalingFactor = 1;
+    LetterSizeX = 70;
+    LetterSizeY = 100;
     createLetters();
 }
 
 void Letters::createLetters()
 {
-    // F.append(QVariantList(QVariant ,QVariant))
     F = {{QVector3D(0,0,0),QVector3D(1,0,0)},
          {QVector3D(0,100,0),QVector3D(100,100,0)},
          {QVector3D(0,50,0),QVector3D(100,50,0)}};
 
-    // B = {{QVector3D(0,0,0),QVector3D(0,100,0)},
-    //      {QVector3D(0,100,0),QVector3D(100,100,0)},
-    //      {QVector3(0,50,0),QVector3D(100,50,0)}};
-    float factorB =  100/3.5;
-    // QVariantList addString;
-    // addString<<"B";
-    // B.append(addString);
+    float factorB =  LetterSizeY/3.5;
 
     str_LetterVector.append('B');
     addLine2Letter(B, QVector2D(0,0), QVector2D(1,0),factorB);
@@ -36,25 +31,27 @@ void Letters::createLetters()
 
 
     str_LetterVector.append('I');
-    addLine2Letter(I,QVector2D(35,0), QVector2D(100,35),1);
+    addLine2Letter(I,QVector2D(35,0), QVector2D(35,100),1);
     m_Letters.append(I);
 
+}
 
-    QVector <QVector3D> test1,test2;
-    test1 ={QVector3D(4,2,2),QVector3D(0,0,0)};
-    test2 = {QVector3D(0,0,0),QVector3D(1,0,0)};
+QVector <QVariantList> Letters::getLetterVec(QChar char_letter)
+{
+    int pos = getLetterPosInVec(char_letter);
+    QVariantList errorList;
+    errorList << "no Letter found";
+    QVector <QVariantList> returnList;
 
-    for (auto it = test2.rbegin(); it!= test2.rend(); ++it) {
-        qDebug() << "TEST" <<*it;
-        test1.prepend(*it);
-    }
-    // test1.prepend(test2);
+    if(pos==-1)
+    {returnList.append(errorList);}
+    else
+    {returnList = m_Letters[pos];}
 
-    qDebug()<<"test1"<<test1;
-    // qDebug()<<QVector2D(1,1);
-
+    return returnList;
 
 }
+
 void Letters::addLine2Letter(QVector <QVariantList>& letter, QVector2D startPt,QVector2D endPt,float factor)
 {
     QVariantList list;
@@ -77,5 +74,38 @@ int Letters::getLetterPosInVec(QChar char_letter)
         if(char_letter==str_LetterVector[i]){position = i;}
     }
     return position;
+}
 
+void Letters::shiftLetter(QVector <QVariantList> &letter, QVector2D shiftVec)
+{
+    for (QVariantList &list:letter)
+    {
+        if(list.first()==LINE){
+            list[1] = list[1].value<QVector2D>() + shiftVec;
+            list[2] = list[2].value<QVector2D>() + shiftVec;
+        }
+        else{
+            list[2] = list[2].value<QVector2D>() + shiftVec;
+        }
+    }
+}
+
+void Letters::changeLetterSize(/*QVector <QVariantList> &letter,*/ float factor)
+{
+    LetterSizeX *= factor;
+    LetterSizeY *= factor;
+
+    for(auto& list_vec:m_Letters)
+    {
+        for (QVariantList &list:list_vec)
+        {
+            if(list.first()==LINE){
+                list[1] = list[1].value<QVector2D>() * factor;
+                list[2] = list[2].value<QVector2D>() * factor;
+            }else{
+                list[1] = list[1].value<float>()     * factor;
+                list[2] = list[2].value<QVector2D>() * factor;
+            }
+        }
+    }
 }

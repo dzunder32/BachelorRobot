@@ -12,7 +12,6 @@ RobotDraw::RobotDraw(Kinematik *robotKinematik,Robot *robot, QVector3D sled_pos,
     _widget3d = widget3d;
     _timer = new QTimer;
     connect(_timer, &QTimer::timeout,this, &RobotDraw::robDraw_onTimeout);
-//    connectTimer();
 
     QVector3D ew = CalculateEw(_plane->matrix()*QMatrix4x4(QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),90).toRotationMatrix()));
     a=ew.x();
@@ -25,39 +24,7 @@ RobotDraw::RobotDraw(Kinematik *robotKinematik,Robot *robot, QVector3D sled_pos,
 
     setTimerTime(500);
 
-    testLetter = _letters->getLetterB();
-    robotDrawLetter();
-
-    // QVariantList mixedList;
-    // mixedList.append(20);
-    // mixedList.append(QVector2D(100, 40)); // Store the value, not the pointer
-    // mixedList.append(QVector2D(-90, 90)); // Directly appending QVector2D is fine here
-
-    // // Accessing the QVector2D stored in the QVariantList
-    // QVector2D retrievedCenter = mixedList[1].value<QVector2D>(); // No need for a pointer
-    // qDebug() << "retrievedCenter" << retrievedCenter;
-
-    // CircleBuffer.append(mixedList);
-
-    // QVariantList mixedList2;
-    // // mixedList2.append(QVector2D(100, 40)); // Store the value, not the pointer
-    // // mixedList2.append(QVector2D(-90, 90));
-    // mixedList2 << QVector2D(100, 40) << QVector2D(-90, 90);
-    // CircleBuffer.append(mixedList2);
-
-    // qDebug()<<"circleBuffer"<<CircleBuffer;
-
-
-    // QVector <QVector <QVector3D>> A;
-    // A.append({QVector3D(0,0,0)});
-    // A.append({QVector3D(0,0,0),QVector3D(0,0,0)});
-
-    // qDebug()<<"len1:"<<A[0].length();
-    // qDebug()<<"len2:"<<A[1].length();
-
-
-
-    // robotSequence.append(3);
+    initLetterSize(0.5);
 }
 
 
@@ -82,19 +49,11 @@ void RobotDraw::robDraw_onTimeout()
             robotDrawCircle();
             break;
         }
-
     }
     else
     {
-//        emit stopTimer();
-//        _widget3d->deleteAllPoints();
-//        _widget3d->deleteAllLines();
-//        robot_moveHome();
         stopTimer_goHome();
-
     }
-
-
 }
 
 void RobotDraw::robotDrawPoint()
@@ -166,16 +125,48 @@ void RobotDraw::robotDrawCircle()
         {
             LinesBuffer.prepend({Plane2BasePoint(circlePt.toVector3D()),Plane2BasePoint(prev_circlePt.toVector3D())});
             robotSequence.prepend(LINE);
-            // PointsBuffer.prepend(Plane2BasePoint(circlePt));
-            // robotSequence.prepend(POINT);
-                prev_circlePt=circlePt;
+            prev_circlePt = circlePt;
         }
     }
 }
 
-void RobotDraw::robotDrawLetter()
+void RobotDraw::constructLetters(QString letter_Str)
 {
-    for (QVariantList list:testLetter)
+    for (int i =  0; i < letter_Str.length(); ++i)
+    {
+        getLetterData(letter_Str.at(i));
+    }
+}
+
+void RobotDraw::initLetterSize(float sizeFactor)
+{
+
+    shiftVector.setX(-_plane->xLimit/2);
+    shiftVector.setY( _plane->yLimit/2 - _letters->LetterSizeY);
+    //    _letters->changeLetterSize(currentLetter,1);
+    _letters->changeLetterSize(0.5);
+}
+
+void RobotDraw::getLetterData(QChar char_letter)
+{
+    currentLetter = _letters->getLetterVec(char_letter);
+
+    _letters->shiftLetter(currentLetter,shiftVector);
+
+    if(currentLetter[0][0]=="no Letter found")
+    {
+        qDebug()<<"you fucked up";
+    }
+    else
+    {
+        addLetter2Buffer();
+        shiftVector+=QVector2D(_letters->LetterSizeX,0);
+    }
+}
+
+void RobotDraw::addLetter2Buffer()
+{
+    for (QVariantList list:currentLetter)
     {
         if(list.first()==LINE)
         {
@@ -191,6 +182,7 @@ void RobotDraw::robotDrawLetter()
         }
     }
 }
+
 
 void RobotDraw::AddPoint2Buffer(QVector2D pointPlane)
 {
@@ -215,30 +207,18 @@ void RobotDraw::AddCircle2Buffer(QVariantList circleList)
     robotSequence.append(CIRCLE);
 }
 
-
-void RobotDraw::constructLetters(QString letter_Str)
-{
-    for (int i =  0; i < letter_Str.length(); ++i)
-    {
-        int pos = _letters->getLetterPosInVec(letter_Str.at(i));
-        qDebug()<<letter_Str.at(i);
-        qDebug()<<"pos"<<pos;
-    }
-}
-
 void RobotDraw::RobotDraw::safeCurrentSequence()
 {
-     PointsBuffer_hist  = PointsBuffer;
-     LinesBuffer_hist   = LinesBuffer;
-     CircleBuffer_hist   = CircleBuffer;
-     robotSequence_hist = robotSequence;
+    PointsBuffer_hist  = PointsBuffer; LinesBuffer_hist   = LinesBuffer;
+    CircleBuffer_hist  = CircleBuffer; robotSequence_hist = robotSequence;
 }
+
 void RobotDraw::setPreviousSequence()
 {
-     PointsBuffer  = PointsBuffer_hist;
-     LinesBuffer   = LinesBuffer_hist;
-     CircleBuffer   = CircleBuffer_hist;
-     robotSequence = robotSequence_hist;
+    PointsBuffer  = PointsBuffer_hist;
+    LinesBuffer   = LinesBuffer_hist;
+    CircleBuffer  = CircleBuffer_hist;
+    robotSequence = robotSequence_hist;
 }
 
 
@@ -248,7 +228,6 @@ void RobotDraw::robot_setPoint(QVector3D position)
                               position.y(),
                               position.z(),
                               a,b,c,l1);
-
 
     _robotKinematik->ToolMovement(Transformations::Z,-199);
 
@@ -261,33 +240,19 @@ void RobotDraw::robot_setPoint(QVector3D position)
 }
 
 
-
-
-
 void RobotDraw::UpdatePointsBuffer(QVector <QVector3D> pts)
 {
     PointsBuffer = pts;
-    for(auto i:pts){
-        robotSequence.append(1);
-    }
+    for(auto i:pts){robotSequence.append(1);}
 }
 
 void RobotDraw::stopTimer_goHome()
 {
     stopTimer();
-    while(_timer->isActive())
-    {
-        qDebug()<<"inWhile!";
-    }
+    while(_timer->isActive()) {qDebug()<<"inWhile!";}
     _robotKinematik->setJoints(0,0,90,0,90,0,0);
     qDebug()<<"imHome";
-
-    if(_robot->IsConnected())
-    {
-        _robot->UpdatePosition();
-        //        isDrawing=false;
-    }
-    //    }
+    if(_robot->IsConnected()) {_robot->UpdatePosition();}
 }
 
 

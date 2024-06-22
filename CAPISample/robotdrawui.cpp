@@ -113,6 +113,7 @@ void RobotDrawUi::insertRobotSequenceText(QString str)
 
 void RobotDrawUi::startDrawTimer()
 {
+    _robDraw->resetShiftVector();
     _robDraw->_timer->start();
     _robDraw->safeCurrentSequence();
 }
@@ -168,6 +169,14 @@ void RobotDrawUi::on_horizontalScrollBar_XChange_valueChanged(int value)
 void RobotDrawUi::on_pushButton_clicked()
 {
     QString textInput = ui->textEdit_textInput->toPlainText();
+    qDebug()<<textInput;
     _robDraw->constructLetters(textInput);
+}
+
+
+void RobotDrawUi::on_verticalSlider_sliderMoved(int position)
+{
+    qDebug()<<float(position)/10;
+    _robDraw->initLetterSize(float(position)/10);
 }
 

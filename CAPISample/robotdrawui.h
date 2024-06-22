@@ -43,6 +43,8 @@ private slots:
 
     void on_pushButton_clicked();
 
+    void on_verticalSlider_sliderMoved(int position);
+
 private:
     Ui::RobotDrawUi *ui;
     RobotDraw *_robDraw;

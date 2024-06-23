@@ -25,6 +25,8 @@ RobotDraw::RobotDraw(Kinematik *robotKinematik,Robot *robot, QVector3D sled_pos,
     setTimerTime(500);
 
     initLetterSize(0.5);
+
+    drawGrid();
 }
 
 
@@ -101,73 +103,127 @@ void RobotDraw::robotDrawLine()
 void RobotDraw::robotDrawCircle()
 {
 
-    QVariantList currCircle = CircleBuffer.takeFirst();
-
-    float radius = currCircle[0].toFloat();
-    QVector2D center = currCircle[1].value<QVector2D>();
-    QVector2D angleLimits = currCircle[2].value<QVector2D>();
-
-    float prev_angle= angleLimits[1];
-
-    QVector2D prev_circlePt;
-    prev_circlePt.setX(center.x() + (radius * qCos(qDegreesToRadians(prev_angle))));
-    prev_circlePt.setY(center.y() + (radius * qSin(qDegreesToRadians(prev_angle))));
-
-
-
-    for (float angle = angleLimits[1]-angleStep; angle >angleLimits[0];angle-=angleStep)
+    if(!CircleBuffer.isEmpty())
     {
-        QVector2D circlePt;
-        circlePt.setX(center.x() + (radius * qCos(qDegreesToRadians(angle))));
-        circlePt.setY(center.y() + (radius * qSin(qDegreesToRadians(angle))));
+        QVariantList currCircle = CircleBuffer.takeFirst();
 
-        if(_robot->IsConnected())
+        float radius = currCircle[0].toFloat();
+        QVector2D center = currCircle[1].value<QVector2D>();
+        QVector2D angleLimits = currCircle[2].value<QVector2D>();
+
+        float prev_angle= angleLimits[1];
+
+        QVector2D prev_circlePt;
+        prev_circlePt.setX(center.x() + (radius * qCos(qDegreesToRadians(prev_angle))));
+        prev_circlePt.setY(center.y() + (radius * qSin(qDegreesToRadians(prev_angle))));
+
+
+        for (float angle = angleLimits[1]-angleStep; angle >angleLimits[0];angle-=angleStep)
         {
-            drawPoint_Widget(Plane2BasePoint(circlePt.toVector3D()),1,QColor(255,0,0));
-        }else
-        {
-            LinesBuffer.prepend({Plane2BasePoint(circlePt.toVector3D()),Plane2BasePoint(prev_circlePt.toVector3D())});
-            robotSequence.prepend(LINE);
-            prev_circlePt = circlePt;
+            QVector2D circlePt;
+            circlePt.setX(center.x() + (radius * qCos(qDegreesToRadians(angle))));
+            circlePt.setY(center.y() + (radius * qSin(qDegreesToRadians(angle))));
+
+            if(_robot->IsConnected())
+            {
+                drawPoint_Widget(Plane2BasePoint(circlePt.toVector3D()),1,QColor(255,0,0));
+            }else
+            {
+                LinesBuffer.prepend({Plane2BasePoint(circlePt.toVector3D()),Plane2BasePoint(prev_circlePt.toVector3D())});
+                robotSequence.prepend(LINE);
+                prev_circlePt = circlePt;
+            }
         }
-    }
-    // drawPoint_Widget(Plane2BasePoint(prev_circlePt.toVector3D()),1,QColor(0,255,255));
-    // drawPoint_Widget(endLinePoint,1,QColor(0,0,255));
 
-    LinesBuffer.prepend({endLinePoint,Plane2BasePoint(prev_circlePt.toVector3D())});
-    robotSequence.prepend(LINE);
+        LinesBuffer.prepend({endLinePoint,Plane2BasePoint(prev_circlePt.toVector3D())});
+        robotSequence.prepend(LINE);
+    }else
+    {
+        stopTimer_goHome();
+    }
+
 }
 
 void RobotDraw::constructLetters(QString letter_Str)
 {
     for (int i =  0; i < letter_Str.length(); ++i)
     {
-        getLetterData(letter_Str.at(i));
+        if(plane_isFull){plane_isFull = false;qDebug()<<"whatString:"<<letter_Str.at(i); break;}
+        else{
+            getLetterData(letter_Str.at(i));
+        }
     }
 }
 
 void RobotDraw::initLetterSize(float sizeFactor)
 {
-
     _letters->changeLetterSize(sizeFactor);
-    resetShiftVector();
-    //    _letters->changeLetterSize(currentLetter,1);
 
+    xSpace = _letters->LetterSizeX *0.1;
+    ySpace = _letters->LetterSizeY *0.1;
+    xBoxSize = _letters->LetterSizeX * 1.2;
+    yBoxSize = _letters->LetterSizeY * 1.2;
+
+    resetShiftVector();
+}
+
+void RobotDraw::drawGrid()
+{
+    double Nx = qRound(_plane->xLimit/xBoxSize);
+    double Ny = qRound(_plane->yLimit/yBoxSize);
+    qDebug()<<"Nx:"<<Nx<<"Ny:"<<Ny;
+
+    for (float yi = _plane->yLimit/2; yi>=-_plane->yLimit/2+yBoxSize;yi-=yBoxSize)
+    {
+        AddLine2Buffer(QVector2D(-_plane->xLimit/2,yi),QVector2D(_plane->xLimit/2,yi));
+    }
+    for(float xi =-_plane->xLimit/2; xi<=_plane->xLimit/2-xBoxSize;xi+=xBoxSize)
+    {
+        AddLine2Buffer(QVector2D(xi,-_plane->yLimit/2),QVector2D(xi,_plane->yLimit/2));
+    }
+}
+
+void RobotDraw::gotoNextBox()
+{
+    if(shiftVector.x()>=_plane->xLimit/2-xBoxSize)
+    {
+        shiftVector.setX(-_plane->xLimit/2 + xSpace);
+        shiftVector-=QVector2D(0,yBoxSize);
+    }
+    else if(shiftVector.y()<=-_plane->yLimit/2)
+    {
+        qDebug()<<"Plane is Full!!";
+        plane_isFull = true;
+    }
+    else
+    {
+        qDebug()<<"everythin aight";
+        shiftVector+=QVector2D(xBoxSize,0);
+    }
+}
+
+void RobotDraw::resetShiftVector()
+{
+    shiftVector.setX(-_plane->xLimit/2 + xSpace);
+    shiftVector.setY( _plane->yLimit/2 - yBoxSize + ySpace);
+    qDebug()<<shiftVector;
 }
 
 void RobotDraw::getLetterData(QChar char_letter)
 {
 
-    if(char_letter == ' ' && shiftVector.x() <_plane->xLimit/2 - _letters->LetterSizeX)
+    if(char_letter == ' ' && shiftVector.x() <_plane->xLimit/2 - xBoxSize)
     {
-        shiftVector+=QVector2D(_letters->LetterSizeX,0);
+        // shiftVector+=QVector2D(_letters->LetterSizeX,0);
+        gotoNextBox();
     }
     else if(char_letter == '\n')
     {
-        shiftVector.setX(-_plane->xLimit/2);
-        shiftVector-=QVector2D(0,_letters->LetterSizeY);
+        shiftVector.setX(_plane->xLimit/2);
+        // shiftVector-=QVector2D(0,_letters->LetterSizeY);
+        gotoNextBox();
     }
-    else
+    else if(shiftVec_inPlane())
     {
         currentLetter = _letters->getLetterVec(char_letter);
 
@@ -180,25 +236,20 @@ void RobotDraw::getLetterData(QChar char_letter)
         else
         {
             addLetter2Buffer();
-            if(shiftVector.x() >_plane->xLimit/2 - _letters->LetterSizeX)
-            {
-                shiftVector.setX(-_plane->xLimit/2);
-                shiftVector-=QVector2D(0,_letters->LetterSizeY);
-            }else
-            {
-                shiftVector+=QVector2D(_letters->LetterSizeX,0);
-            }
+            gotoNextBox();
+            // if(shiftVector.x() >_plane->xLimit/2 - _letters->LetterSizeX)
+            // {
+            //     shiftVector.setX(-_plane->xLimit/2);
+            //     shiftVector-=QVector2D(0,_letters->LetterSizeY);
+            // }else
+            // {
+            //     shiftVector+=QVector2D(_letters->LetterSizeX,0);
+            // }
         }
     }
 }
 
 
-void RobotDraw::resetShiftVector()
-{
-    shiftVector.setX(-_plane->xLimit/2);
-    shiftVector.setY( _plane->yLimit/2 - _letters->LetterSizeY);
-    qDebug()<<shiftVector;
-}
 void RobotDraw::addLetter2Buffer()
 {
     for (QVariantList list:currentLetter)

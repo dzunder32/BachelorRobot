@@ -3,7 +3,7 @@
 Letters::Letters()
 {
     scalingFactor = 1;
-    LetterSizeX = 70;
+    LetterSizeX = 60;
     LetterSizeY = 100;
     createLetters();
 }
@@ -25,6 +25,8 @@ void Letters::createLetters()
     addLine2Letter(B, QVector2D(0,3.5), QVector2D(0,0),factorB);
 
     m_Letters.append(B);
+
+
 
 
     str_LetterVector.append('I');
@@ -60,8 +62,8 @@ void Letters::createLetters()
     m_Letters.append(D);
 
     str_LetterVector.append('G');
-    addLine2Letter(G,QVector2D(2,3.5), QVector2D(1,3.5),factorB);
-    addCircle2Letter(G,1 , QVector2D(1,2.5),QVector2D(90,180),factorB);
+    addLine2Letter(G,QVector2D(2,2.5), QVector2D(2,2.5),factorB);
+    addCircle2Letter(G,1 , QVector2D(1,2.5),QVector2D(0,180),factorB);
     addLine2Letter(G,QVector2D(0,2.5), QVector2D(0,1),factorB);
     addCircle2Letter(G,1 , QVector2D(1,1),QVector2D(180,360),factorB);
     addLine2Letter(G,QVector2D(2,1), QVector2D(2,1.5),factorB);
@@ -202,6 +204,26 @@ void Letters::createLetters()
     addLine2Letter(Z,QVector2D(0.5,1.75), QVector2D(1.5,1.75),factorB);
     m_Letters.append(Z);
 
+
+    float factorHeart = 70/4;
+    str_LetterVector.append('*');
+    addLine2Letter(Heart,QVector2D(2,1), QVector2D(2,1),factorHeart);
+    addCircle2Letter(Heart,2 , QVector2D(2,3),QVector2D(-90,180),factorHeart);
+    addCircle2Letter(Heart,2 , QVector2D(-2,3),QVector2D(0,270),factorHeart);
+    // double r_Heart = 5;
+    // QVector2D centerHeart_vec;
+    // centerHeart_vec.setX(2-r_Heart*qCos(qDegreesToRadians(135.0)));
+    // centerHeart_vec.setY(1-r_Heart*qSin(qDegreesToRadians(135.0)));
+    // double inputArg = -centerHeart_vec.x()/r_Heart;
+    // qDebug()<<inputArg;
+    // double endCircleAngle = qRadiansToDegrees(qAcos(inputArg));
+    // qDebug()<<"now comes the real shit";
+    // qDebug()<<centerHeart_vec;
+    // qDebug()<<endCircleAngle;
+    addCircle2Letter(Heart,3 , QVector2D(2,-2),QVector2D(90,131.8),factorHeart);
+    addCircle2Letter(Heart,3 , QVector2D(-2,-2),QVector2D(48.2,90),factorHeart);
+    addLine2Letter(Heart,QVector2D(-2,1), QVector2D(-2,1),factorHeart);
+    m_Letters.append(Heart);
     changed_Letters=m_Letters;
 
 }

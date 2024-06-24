@@ -55,6 +55,7 @@ public:
     QLineEdit *lineEdit_Radius;
     QPushButton *pushButton;
     QHBoxLayout *horizontalLayout_2;
+    QSlider *verticalSlider;
     QVBoxLayout *verticalLayout_2;
     QLineEdit *lineEdit_5;
     QSlider *timerSpeedSlider;
@@ -194,6 +195,13 @@ public:
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        verticalSlider = new QSlider(centralwidget);
+        verticalSlider->setObjectName(QString::fromUtf8("verticalSlider"));
+        verticalSlider->setMaximum(10);
+        verticalSlider->setOrientation(Qt::Vertical);
+
+        horizontalLayout_2->addWidget(verticalSlider);
+
         verticalLayout_2 = new QVBoxLayout();
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         lineEdit_5 = new QLineEdit(centralwidget);

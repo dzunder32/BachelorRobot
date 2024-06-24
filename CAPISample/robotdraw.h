@@ -31,6 +31,10 @@ public:
     void safeCurrentSequence();
     void setPreviousSequence();
     void constructLetters(QString letter_Str);
+    void changeAngleStep(float step){angleStep = step;}
+    void resetShiftVector();
+    void initLetterSize(float sizeFactor);
+    void drawGrid();
 private:
     Letters *_letters;
     Widget3D *_widget3d;
@@ -40,7 +44,8 @@ private:
 
     bool line_isTrue = false;
     bool simulation_isTrue = true;
-    QVector3D firstLinePoint;
+    bool plane_isFull = false;
+    QVector3D startLinePoint, endLinePoint;
     double a,b,c,l1;
     QMatrix4x4 robotMat;
     QVector<QVector3D> cornerPoints;
@@ -50,19 +55,23 @@ private:
     QVector <QVariantList> CircleBuffer,CircleBuffer_hist;
     QVector <QVariantList> currentLetter;
     QVector2D shiftVector;
+    float angleStep=10;
+    float xBoxSize,yBoxSize,xSpace,ySpace;
 
     QVector3D Base2RobotPoint (QVector3D point3D){return QVector3D(robotMat.inverted() * point3D);}
     QVector3D Base2PlanePoint (QVector3D point3D){return QVector3D(_plane->matrix().inverted() * point3D);}
     QVector3D Plane2BasePoint (QVector3D point3D){return QVector3D(_plane->matrix() * point3D);}
     QVector3D Plane2RobotPoint(QVector3D point3D){return Base2RobotPoint(Plane2BasePoint(point3D));}
 
+    bool shiftVec_inPlane(){return (shiftVector.x()>=_plane->xLimit/2-xBoxSize || shiftVector.y()<=-_plane->yLimit/2);}
     void robot_setPoint(QVector3D position);
     void robotDrawCircle();
     void robotDrawPoint();
     void robotDrawLine();
     void addLetter2Buffer();
     void getLetterData(QChar char_letter);
-    void initLetterSize(float sizeFactor);
+
+    void gotoNextBox();
 public slots:
 
 signals:

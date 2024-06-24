@@ -106,7 +106,7 @@ int main(int argc, char *argv[])
     //Ebene zu Zeichnen
 
 
-    Plane *plane = new Plane(450.0,450.0);
+    Plane *plane = new Plane(300.0,300.0);
 //    qDebug()<<linAxis2->sled_position;
     plane->setTranslation(linAxis2->sled_position+QVector3D(0,700,500));
     // plane->setRotation(QQuaternion::fromEulerAngles(QVector3D(-90,180,0)));

@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_RobotDrawUi_t {
-    QByteArrayData data[27];
-    char stringdata0[504];
+    QByteArrayData data[28];
+    char stringdata0[519];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -52,13 +52,14 @@ QT_MOC_LITERAL(16, 310, 5), // "color"
 QT_MOC_LITERAL(17, 316, 31), // "on_pushButton_addCircle_clicked"
 QT_MOC_LITERAL(18, 348, 43), // "on_horizontalScrollBar_XChang..."
 QT_MOC_LITERAL(19, 392, 5), // "value"
-QT_MOC_LITERAL(20, 398, 21), // "on_pushButton_clicked"
-QT_MOC_LITERAL(21, 420, 29), // "on_verticalSlider_sliderMoved"
-QT_MOC_LITERAL(22, 450, 14), // "startDrawTimer"
-QT_MOC_LITERAL(23, 465, 13), // "stopDrawTimer"
-QT_MOC_LITERAL(24, 479, 14), // "drawLineWidget"
-QT_MOC_LITERAL(25, 494, 5), // "start"
-QT_MOC_LITERAL(26, 500, 3) // "end"
+QT_MOC_LITERAL(20, 398, 26), // "on_pushButton_draw_clicked"
+QT_MOC_LITERAL(21, 425, 34), // "on_spinBox_letterSize_valueCh..."
+QT_MOC_LITERAL(22, 460, 4), // "arg1"
+QT_MOC_LITERAL(23, 465, 14), // "startDrawTimer"
+QT_MOC_LITERAL(24, 480, 13), // "stopDrawTimer"
+QT_MOC_LITERAL(25, 494, 14), // "drawLineWidget"
+QT_MOC_LITERAL(26, 509, 5), // "start"
+QT_MOC_LITERAL(27, 515, 3) // "end"
 
     },
     "RobotDrawUi\0startDrawing\0\0stopDrawing\0"
@@ -73,9 +74,9 @@ QT_MOC_LITERAL(26, 500, 3) // "end"
     "widgetDrawPoint\0point\0thickness\0color\0"
     "on_pushButton_addCircle_clicked\0"
     "on_horizontalScrollBar_XChange_valueChanged\0"
-    "value\0on_pushButton_clicked\0"
-    "on_verticalSlider_sliderMoved\0"
-    "startDrawTimer\0stopDrawTimer\0"
+    "value\0on_pushButton_draw_clicked\0"
+    "on_spinBox_letterSize_valueChanged\0"
+    "arg1\0startDrawTimer\0stopDrawTimer\0"
     "drawLineWidget\0start\0end"
 };
 #undef QT_MOC_LITERAL
@@ -111,9 +112,9 @@ static const uint qt_meta_data_RobotDrawUi[] = {
       18,    1,  124,    2, 0x08 /* Private */,
       20,    0,  127,    2, 0x08 /* Private */,
       21,    1,  128,    2, 0x08 /* Private */,
-      22,    0,  131,    2, 0x0a /* Public */,
-      23,    0,  132,    2, 0x0a /* Public */,
-      24,    2,  133,    2, 0x0a /* Public */,
+      23,    0,  131,    2, 0x0a /* Public */,
+      24,    0,  132,    2, 0x0a /* Public */,
+      25,    2,  133,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void,
@@ -132,10 +133,10 @@ static const uint qt_meta_data_RobotDrawUi[] = {
     QMetaType::Void,
     QMetaType::Void, QMetaType::Int,   19,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,    7,
+    QMetaType::Void, QMetaType::Int,   22,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QVector3D, QMetaType::QVector3D,   25,   26,
+    QMetaType::Void, QMetaType::QVector3D, QMetaType::QVector3D,   26,   27,
 
        0        // eod
 };
@@ -159,8 +160,8 @@ void RobotDrawUi::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 10: _t->widgetDrawPoint((*reinterpret_cast< QVector3D(*)>(_a[1])),(*reinterpret_cast< float(*)>(_a[2])),(*reinterpret_cast< QColor(*)>(_a[3]))); break;
         case 11: _t->on_pushButton_addCircle_clicked(); break;
         case 12: _t->on_horizontalScrollBar_XChange_valueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 13: _t->on_pushButton_clicked(); break;
-        case 14: _t->on_verticalSlider_sliderMoved((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 13: _t->on_pushButton_draw_clicked(); break;
+        case 14: _t->on_spinBox_letterSize_valueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 15: _t->startDrawTimer(); break;
         case 16: _t->stopDrawTimer(); break;
         case 17: _t->drawLineWidget((*reinterpret_cast< QVector3D(*)>(_a[1])),(*reinterpret_cast< QVector3D(*)>(_a[2]))); break;

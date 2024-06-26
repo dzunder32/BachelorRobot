@@ -10,6 +10,8 @@
 #include <chrono>
 #include <QVariant>
 #include <QtMath>
+#include <QMatrix4x4>
+#include <QVector4D>
 
 #define POINT 1
 #define LINE 2
@@ -55,15 +57,19 @@ private:
     QVector <QVariantList> CircleBuffer,CircleBuffer_hist;
     QVector <QVariantList> currentLetter;
     QVector2D shiftVector;
+    QVector <QVector2D> robotCirclePts_vec;
     float angleStep=10;
     float xBoxSize,yBoxSize,xSpace,ySpace;
+    QMatrix4x4 rotation_plane;
+    bool drawFirstLine=true,alreadyDrawn=false;
 
     QVector3D Base2RobotPoint (QVector3D point3D){return QVector3D(robotMat.inverted() * point3D);}
     QVector3D Base2PlanePoint (QVector3D point3D){return QVector3D(_plane->matrix().inverted() * point3D);}
     QVector3D Plane2BasePoint (QVector3D point3D){return QVector3D(_plane->matrix() * point3D);}
     QVector3D Plane2RobotPoint(QVector3D point3D){return Base2RobotPoint(Plane2BasePoint(point3D));}
 
-    bool shiftVec_inPlane(){return (shiftVector.x()>=_plane->xLimit/2-xBoxSize || shiftVector.y()<=-_plane->yLimit/2);}
+    double cartDistance(QVector3D V1,QVector3D V2){QVector3D V_diff=V2-V1;qDebug()<<"V_DIFF:"<<V_diff;return V_diff.length();}
+    bool shiftVec_inPlane();
     void robot_setPoint(QVector3D position);
     void robotDrawCircle();
     void robotDrawPoint();
@@ -72,6 +78,7 @@ private:
     void getLetterData(QChar char_letter);
 
     void gotoNextBox();
+    void moveTipAbove();
 public slots:
 
 signals:

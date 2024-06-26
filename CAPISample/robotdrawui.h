@@ -41,9 +41,9 @@ private slots:
 
     void on_horizontalScrollBar_XChange_valueChanged(int value);
 
-    void on_pushButton_clicked();
+    void on_pushButton_draw_clicked();
 
-    void on_verticalSlider_sliderMoved(int position);
+    void on_spinBox_letterSize_valueChanged(int arg1);
 
 private:
     Ui::RobotDrawUi *ui;

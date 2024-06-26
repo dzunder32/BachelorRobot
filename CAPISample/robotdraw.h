@@ -55,6 +55,7 @@ private:
     QVector <QVariantList> CircleBuffer,CircleBuffer_hist;
     QVector <QVariantList> currentLetter;
     QVector2D shiftVector;
+    QVector <QVector2D> robotCirclePts_vec;
     float angleStep=10;
     float xBoxSize,yBoxSize,xSpace,ySpace;
 
@@ -63,7 +64,8 @@ private:
     QVector3D Plane2BasePoint (QVector3D point3D){return QVector3D(_plane->matrix() * point3D);}
     QVector3D Plane2RobotPoint(QVector3D point3D){return Base2RobotPoint(Plane2BasePoint(point3D));}
 
-    bool shiftVec_inPlane(){return (shiftVector.x()>=_plane->xLimit/2-xBoxSize || shiftVector.y()<=-_plane->yLimit/2);}
+    double cartDistance(QVector3D V1,QVector3D V2){QVector3D V_diff=V2-V1;V_diff.length();}
+    bool shiftVec_inPlane();
     void robot_setPoint(QVector3D position);
     void robotDrawCircle();
     void robotDrawPoint();
@@ -72,6 +74,7 @@ private:
     void getLetterData(QChar char_letter);
 
     void gotoNextBox();
+    void moveTipAbove();
 public slots:
 
 signals:

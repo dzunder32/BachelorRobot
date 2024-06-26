@@ -33,7 +33,6 @@ void RobotDrawUi::on_pushButtonStart_clicked()
     _widget3d->deleteAllLines();
     _widget3d->deleteAllPoints();
     startDrawTimer();
-
 //    disconnect(_robDraw->_timer, &QTimer::timeout,this, &RobotDraw::robDraw_onTimeout);
 }
 
@@ -166,17 +165,18 @@ void RobotDrawUi::on_horizontalScrollBar_XChange_valueChanged(int value)
 }
 
 
-void RobotDrawUi::on_pushButton_clicked()
+void RobotDrawUi::on_pushButton_draw_clicked()
 {
     QString textInput = ui->textEdit_textInput->toPlainText();
     qDebug()<<textInput;
+    if(ui->radioButton_grid->isChecked())
+        _robDraw->drawGrid();
     _robDraw->constructLetters(textInput);
 }
 
 
-void RobotDrawUi::on_verticalSlider_sliderMoved(int position)
+void RobotDrawUi::on_spinBox_letterSize_valueChanged(int arg1)
 {
-    qDebug()<<float(position)/10;
-    _robDraw->initLetterSize(float(position)/10);
+    _robDraw->initLetterSize(float(arg1)/10);
 }
 

@@ -17,7 +17,9 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QRadioButton>
 #include <QtWidgets/QSlider>
+#include <QtWidgets/QSpinBox>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTextEdit>
 #include <QtWidgets/QToolBar>
@@ -30,7 +32,7 @@ class Ui_RobotDrawUi
 {
 public:
     QWidget *centralwidget;
-    QVBoxLayout *verticalLayout_3;
+    QVBoxLayout *verticalLayout;
     QGridLayout *gridLayout;
     QLineEdit *lineEdit_P1X;
     QLineEdit *lineEdit;
@@ -50,12 +52,14 @@ public:
     QPushButton *pushButton_addP1;
     QPushButton *pushButton_addLine;
     QPushButton *pushButton_addCircle;
-    QVBoxLayout *verticalLayout;
+    QGridLayout *gridLayout_2;
     QLineEdit *lineEdit_6;
+    QLineEdit *lineEdit_7;
+    QPushButton *pushButton_draw;
     QLineEdit *lineEdit_Radius;
-    QPushButton *pushButton;
+    QSpinBox *spinBox_letterSize;
+    QRadioButton *radioButton_grid;
     QHBoxLayout *horizontalLayout_2;
-    QSlider *verticalSlider;
     QVBoxLayout *verticalLayout_2;
     QLineEdit *lineEdit_5;
     QSlider *timerSpeedSlider;
@@ -76,8 +80,8 @@ public:
         RobotDrawUi->resize(800, 600);
         centralwidget = new QWidget(RobotDrawUi);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
-        verticalLayout_3 = new QVBoxLayout(centralwidget);
-        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
+        verticalLayout = new QVBoxLayout(centralwidget);
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         gridLayout = new QGridLayout();
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         lineEdit_P1X = new QLineEdit(centralwidget);
@@ -151,7 +155,7 @@ public:
         gridLayout->addWidget(lineEdit_9, 1, 3, 1, 1);
 
 
-        verticalLayout_3->addLayout(gridLayout);
+        verticalLayout->addLayout(gridLayout);
 
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
@@ -170,38 +174,46 @@ public:
 
         horizontalLayout->addWidget(pushButton_addCircle);
 
-        verticalLayout = new QVBoxLayout();
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        gridLayout_2 = new QGridLayout();
+        gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
         lineEdit_6 = new QLineEdit(centralwidget);
         lineEdit_6->setObjectName(QString::fromUtf8("lineEdit_6"));
 
-        verticalLayout->addWidget(lineEdit_6);
+        gridLayout_2->addWidget(lineEdit_6, 0, 0, 1, 1);
+
+        lineEdit_7 = new QLineEdit(centralwidget);
+        lineEdit_7->setObjectName(QString::fromUtf8("lineEdit_7"));
+
+        gridLayout_2->addWidget(lineEdit_7, 0, 1, 1, 1);
+
+        pushButton_draw = new QPushButton(centralwidget);
+        pushButton_draw->setObjectName(QString::fromUtf8("pushButton_draw"));
+
+        gridLayout_2->addWidget(pushButton_draw, 0, 2, 1, 1);
 
         lineEdit_Radius = new QLineEdit(centralwidget);
         lineEdit_Radius->setObjectName(QString::fromUtf8("lineEdit_Radius"));
 
-        verticalLayout->addWidget(lineEdit_Radius);
+        gridLayout_2->addWidget(lineEdit_Radius, 1, 0, 1, 1);
+
+        spinBox_letterSize = new QSpinBox(centralwidget);
+        spinBox_letterSize->setObjectName(QString::fromUtf8("spinBox_letterSize"));
+
+        gridLayout_2->addWidget(spinBox_letterSize, 1, 1, 1, 1);
+
+        radioButton_grid = new QRadioButton(centralwidget);
+        radioButton_grid->setObjectName(QString::fromUtf8("radioButton_grid"));
+
+        gridLayout_2->addWidget(radioButton_grid, 1, 2, 1, 1);
 
 
-        horizontalLayout->addLayout(verticalLayout);
-
-        pushButton = new QPushButton(centralwidget);
-        pushButton->setObjectName(QString::fromUtf8("pushButton"));
-
-        horizontalLayout->addWidget(pushButton);
+        horizontalLayout->addLayout(gridLayout_2);
 
 
-        verticalLayout_3->addLayout(horizontalLayout);
+        verticalLayout->addLayout(horizontalLayout);
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        verticalSlider = new QSlider(centralwidget);
-        verticalSlider->setObjectName(QString::fromUtf8("verticalSlider"));
-        verticalSlider->setMaximum(10);
-        verticalSlider->setOrientation(Qt::Vertical);
-
-        horizontalLayout_2->addWidget(verticalSlider);
-
         verticalLayout_2 = new QVBoxLayout();
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         lineEdit_5 = new QLineEdit(centralwidget);
@@ -232,7 +244,7 @@ public:
         horizontalLayout_2->addWidget(textEdit_textInput);
 
 
-        verticalLayout_3->addLayout(horizontalLayout_2);
+        verticalLayout->addLayout(horizontalLayout_2);
 
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
@@ -252,7 +264,7 @@ public:
         horizontalLayout_3->addWidget(pushButtonDelete);
 
 
-        verticalLayout_3->addLayout(horizontalLayout_3);
+        verticalLayout->addLayout(horizontalLayout_3);
 
         RobotDrawUi->setCentralWidget(centralwidget);
         menubar = new QMenuBar(RobotDrawUi);
@@ -286,7 +298,9 @@ public:
         pushButton_addLine->setText(QCoreApplication::translate("RobotDrawUi", "Add Line (P1,P2)", nullptr));
         pushButton_addCircle->setText(QCoreApplication::translate("RobotDrawUi", "Add Circle", nullptr));
         lineEdit_6->setText(QCoreApplication::translate("RobotDrawUi", "Circle Radius: ", nullptr));
-        pushButton->setText(QCoreApplication::translate("RobotDrawUi", "Draw Text", nullptr));
+        lineEdit_7->setText(QCoreApplication::translate("RobotDrawUi", "LetterSize", nullptr));
+        pushButton_draw->setText(QCoreApplication::translate("RobotDrawUi", "Draw Text", nullptr));
+        radioButton_grid->setText(QCoreApplication::translate("RobotDrawUi", "Draw Grid", nullptr));
         lineEdit_5->setText(QCoreApplication::translate("RobotDrawUi", "Speed", nullptr));
         textEdit_Sequence->setHtml(QCoreApplication::translate("RobotDrawUi", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"

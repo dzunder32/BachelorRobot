@@ -44,6 +44,7 @@ private:
     Robot *_robot;
     Plane* _plane;
 
+    int moveAboveCounter = 2;
     bool line_isTrue = false;
     bool simulation_isTrue = true;
     bool plane_isFull = false;
@@ -57,7 +58,6 @@ private:
     QVector <QVariantList> CircleBuffer,CircleBuffer_hist;
     QVector <QVariantList> currentLetter;
     QVector2D shiftVector;
-    QVector <QVector2D> robotCirclePts_vec;
     float angleStep=10;
     float xBoxSize,yBoxSize,xSpace,ySpace;
     QMatrix4x4 rotation_plane;
@@ -79,6 +79,7 @@ private:
 
     void gotoNextBox();
     void moveTipAbove();
+    void robot_moveInCircle(QVector<QVector2D> circlePoints);
 public slots:
 
 signals:

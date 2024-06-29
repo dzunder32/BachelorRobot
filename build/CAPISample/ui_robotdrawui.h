@@ -225,7 +225,8 @@ public:
         timerSpeedSlider->setObjectName(QString::fromUtf8("timerSpeedSlider"));
         timerSpeedSlider->setMinimum(4);
         timerSpeedSlider->setMaximum(1000);
-        timerSpeedSlider->setValue(200);
+        timerSpeedSlider->setValue(500);
+        timerSpeedSlider->setSliderPosition(500);
         timerSpeedSlider->setOrientation(Qt::Vertical);
 
         verticalLayout_2->addWidget(timerSpeedSlider);

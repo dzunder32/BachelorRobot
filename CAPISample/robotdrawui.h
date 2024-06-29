@@ -39,7 +39,6 @@ private slots:
 
     void on_pushButton_addCircle_clicked();
 
-    void on_horizontalScrollBar_XChange_valueChanged(int value);
 
     void on_pushButton_draw_clicked();
 
@@ -56,6 +55,8 @@ private:
     QString historyText;
     void insertRobotSequenceText(QString str);
     void initBuffers();
+    void setTimerSpeed(int time_ms);
+    void increaseTimerSpeed(float factor);
 signals:
     void startDrawing();
     void stopDrawing();

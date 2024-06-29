@@ -16,6 +16,7 @@ RobotDrawUi::RobotDrawUi(Kinematik *robotKinematik,Robot *robot, QVector3D sled_
     connect(_robDraw, &RobotDraw::stopTimer,this, &RobotDrawUi::stopDrawTimer);
     connect(_robDraw, &RobotDraw::drawLine,this, &RobotDrawUi::drawLineWidget);
     connect(_robDraw, &RobotDraw::drawPoint_Widget,this, &RobotDrawUi::widgetDrawPoint);
+    connect(_robDraw, &RobotDraw::changeTimerSpeed,this, &RobotDrawUi::increaseTimerSpeed);
 
     robotThread.start();
 }
@@ -27,12 +28,25 @@ RobotDrawUi::~RobotDrawUi()
     delete ui;
 }
 
+void RobotDrawUi::setTimerSpeed(int time_ms){
+//    _robDraw->prev_timerTime = _robDraw->_timer->interval();
+//    _robDraw->_timer->setInterval(time_ms);
+    _robDraw->_timer->setInterval(time_ms);
+}
+
+void RobotDrawUi::increaseTimerSpeed(float factor)
+{
+    setTimerSpeed(qRound(ui->timerSpeedSlider->value()*factor));
+    qDebug()<<"currSpeed:"<<qRound(ui->timerSpeedSlider->value()*factor);
+}
+
 void RobotDrawUi::on_pushButtonStart_clicked()
 {
 //    _robDraw->connectTimer();
     _widget3d->deleteAllLines();
     _widget3d->deleteAllPoints();
     startDrawTimer();
+    setTimerSpeed(ui->timerSpeedSlider->value());
 //    disconnect(_robDraw->_timer, &QTimer::timeout,this, &RobotDraw::robDraw_onTimeout);
 }
 
@@ -46,7 +60,7 @@ void RobotDrawUi::on_pushButtonDelete_clicked()
 
 void RobotDrawUi::on_timerSpeedSlider_sliderMoved(int position)
 {
-    _robDraw->setTimerTime(position);
+    setTimerSpeed(position);
     qDebug()<<position;
 }
 
@@ -156,13 +170,6 @@ void RobotDrawUi::on_pushButton_addCircle_clicked()
     _robDraw->AddCircle2Buffer(circleList);
 }
 
-
-void RobotDrawUi::on_horizontalScrollBar_XChange_valueChanged(int value)
-{
-    qDebug()<<value;
-    // P1
-    // _widget3d->drawPoint()
-}
 
 
 void RobotDrawUi::on_pushButton_draw_clicked()

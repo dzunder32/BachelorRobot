@@ -23,7 +23,8 @@ class RobotDraw : public QObject
 public:
     RobotDraw(Kinematik *robotKinematik,Robot *robot, QVector3D sled_pos,Plane* plane, Widget3D *widget3d);
     QTimer *_timer;
-    void setTimerTime(int time_ms){_timer->setInterval(time_ms);}
+    int prev_timerTime;
+//    void setTimerTime(int time_ms){_timer->setInterval(time_ms);}
     void stopTimer_goHome();
     void UpdatePointsBuffer(QVector<QVector3D> pts);
     void AddPoint2Buffer(QVector2D pointPlane);
@@ -62,13 +63,16 @@ private:
     float xBoxSize,yBoxSize,xSpace,ySpace;
     QMatrix4x4 rotation_plane;
     bool drawFirstLine=true,alreadyDrawn=false;
+    float circlePoints_number;
+    int circlePoints_counter;
+
 
     QVector3D Base2RobotPoint (QVector3D point3D){return QVector3D(robotMat.inverted() * point3D);}
     QVector3D Base2PlanePoint (QVector3D point3D){return QVector3D(_plane->matrix().inverted() * point3D);}
     QVector3D Plane2BasePoint (QVector3D point3D){return QVector3D(_plane->matrix() * point3D);}
     QVector3D Plane2RobotPoint(QVector3D point3D){return Base2RobotPoint(Plane2BasePoint(point3D));}
 
-    double cartDistance(QVector3D V1,QVector3D V2){QVector3D V_diff=V2-V1;qDebug()<<"V_DIFF:"<<V_diff;return V_diff.length();}
+    double cartDistance(QVector3D V1,QVector3D V2){QVector3D V_diff=V2-V1;return V_diff.length();}
     bool shiftVec_inPlane();
     void robot_setPoint(QVector3D position);
     void robotDrawCircle();
@@ -80,11 +84,13 @@ private:
     void gotoNextBox();
     void moveTipAbove();
     void robot_moveInCircle(QVector<QVector2D> circlePoints);
+    void initCirclePointsSpeedUp(float range);
 public slots:
 
 signals:
     void stopTimer();
     void startTimer();
+    void changeTimerSpeed(float factor);
     void drawLine(QVector3D start,QVector3D end);
     void drawPoint_Widget(QVector3D point , float thickness, QColor color);
 

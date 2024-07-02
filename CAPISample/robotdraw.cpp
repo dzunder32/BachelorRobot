@@ -25,15 +25,13 @@ RobotDraw::RobotDraw(Kinematik *robotKinematik,Robot *robot, QVector3D sled_pos,
     rotation_plane = _plane->matrix();
     rotation_plane.setColumn(3,QVector4D(0,0,0,1));
 
-    setTimerTime(500);
-
-    initLetterSize(0.5);
+    initLetterSize(1);
 }
 
 
 void RobotDraw::robDraw_onTimeout()
 {
-    qDebug()<<robotSequence;
+//    qDebug()<<robotSequence;
 
     if(!robotSequence.isEmpty())
     {
@@ -64,17 +62,19 @@ void RobotDraw::robotDrawPoint()
 
     if(!PointsBuffer.isEmpty())
     {
-        qDebug()<<"Point";
+//        qDebug()<<"Point";
         QVector3D basePoint = PointsBuffer.takeFirst();
         robot_setPoint(Base2RobotPoint(basePoint));
         if(moveAboveCounter<2)
         {drawPoint_Widget(basePoint,2,QColor(0,255,0));moveAboveCounter++;}
-        else{drawPoint_Widget(basePoint,2,QColor(255,0,0));}
+//        else{drawPoint_Widget(basePoint,2,QColor(255,0,0));}
         if(line_isTrue)
         {
             drawLine(startLinePoint,basePoint);
             line_isTrue = false;
         }
+
+
     }
     else {stopTimer_goHome();}
 }
@@ -83,7 +83,7 @@ void RobotDraw::robotDrawLine()
 {
     if(!LinesBuffer.isEmpty())
     {
-        qDebug()<<"Line";
+//        qDebug()<<"Line";
         QVector <QVector3D> line = LinesBuffer.takeFirst();
         //save first Point
         startLinePoint = line[0];
@@ -105,7 +105,11 @@ void RobotDraw::robotDrawLine()
             robotSequence.prepend(POINT);
             line_isTrue = true;
             alreadyDrawn=true;
-
+            if(circlePoints_counter>=circlePoints_number-1)
+            {changeTimerSpeed(1);qDebug()<<"no speed!!"<<_timer->interval();}
+            else{
+                circlePoints_counter++;
+            }
         }
 
     }else
@@ -154,7 +158,7 @@ void RobotDraw::robotDrawCircle()
         prev_circlePt.setX(center.x() + (radius * qCos(qDegreesToRadians(end_angle))));
         prev_circlePt.setY(center.y() + (radius * qSin(qDegreesToRadians(end_angle))));
 
-        if(!_robot->IsConnected())
+        if(_robot->IsConnected())
         {
             QVector2D end_circlePt, mid_circlePt, start_circlePt;
             start_circlePt.setX(center.x() + (radius * qCos(qDegreesToRadians(start_angle))));
@@ -193,12 +197,18 @@ void RobotDraw::robotDrawCircle()
             }
             LinesBuffer.prepend({endLinePoint,Plane2BasePoint(prev_circlePt.toVector3D())});
             robotSequence.prepend(LINE);
+            initCirclePointsSpeedUp(angle_range);
         }
     }else{stopTimer_goHome();}
 
 }
 
-
+void RobotDraw::initCirclePointsSpeedUp(float angle_range){
+    circlePoints_number = qRound(angle_range/angleStep);
+    circlePoints_counter = 0;
+    changeTimerSpeed(0.1);
+    qDebug()<<"superSonicSpeed"<<_timer->interval();
+}
 void RobotDraw::initLetterSize(float sizeFactor)
 {
     _letters->changeLetterSize(sizeFactor);
@@ -373,11 +383,14 @@ void RobotDraw::setPreviousSequence()
 
 void RobotDraw::robot_setPoint(QVector3D position)
 {
-    _robotKinematik->setPoint(position.x(),
-                              position.y(),
-                              position.z(),
-                              a,b,c,l1);
-
+//    _robotKinematik->setPoint(position.x(),
+//                              position.y(),
+//                              position.z(),
+//                              a,b,c,l1);
+    _robotKinematik->RobotPosition::setPoint(position.x(),
+                                             position.y(),
+                                             position.z(),
+                                             a,b,c,l1);
     _robotKinematik->ToolMovement(Transformations::Z,-199);
 
     if(_robot->IsConnected())
@@ -416,7 +429,7 @@ void RobotDraw::UpdatePointsBuffer(QVector <QVector3D> pts)
 void RobotDraw::stopTimer_goHome()
 {
     stopTimer();
-    while(_timer->isActive()) {qDebug()<<"inWhile!";}
+    while(_timer->isActive()) {/*qDebug()<<"inWhile!";*/}
     _robotKinematik->setJoints(0,0,90,0,90,0,0);
     qDebug()<<"imHome";
     if(_robot->IsConnected()) {_robot->UpdatePosition();}

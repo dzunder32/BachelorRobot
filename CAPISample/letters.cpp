@@ -183,7 +183,80 @@ void Letters::createLetters()
     addLine2Letter(Z,QVector2D(0.5,1.75), QVector2D(1.5,1.75),factorB);
     m_Letters.append(Z);
 
-    changed_Letters=m_Letters;
+    str_LetterVector.append('0');
+    l_0 = O;
+    addLine2Letter(l_0,QVector2D(0,1), QVector2D(2,2.5),factorB);
+    m_Letters.append(l_0);
+
+    str_LetterVector.append('1');
+    addLine2Letter(l_1,QVector2D(0,2), QVector2D(1,3.5),factorB);
+    addLine2Letter(l_1,QVector2D(1,3.5), QVector2D(1,0),factorB);
+    m_Letters.append(l_1);
+
+    str_LetterVector.append('2');
+    addLine2Letter(l_2,QVector2D(2,0), QVector2D(0,0),factorB);
+    addLine2Letter(l_2,QVector2D(0,0), QVector2D(0,0),factorB);
+    addCircle2Letter(l_2,1 , QVector2D(1,2.5),QVector2D(-45,180),factorB);
+    addLine2Letter(l_2,QVector2D(0,2.5), QVector2D(0,2.5),factorB);
+    m_Letters.append(l_2);
+
+    str_LetterVector.append('3');
+    addLine2Letter  (l_3,QVector2D(0,0), QVector2D(1.125,0),factorB);
+    addCircle2Letter(l_3,0.875 , QVector2D(1.125,0.875),QVector2D(-90,90),factorB);
+    addLine2Letter  (l_3,QVector2D(1.125,1.75), QVector2D(0.8,1.75),factorB);
+    addCircle2Letter(l_3,0.875 , QVector2D(1.125,2.625),QVector2D(-90,90),factorB);
+    addLine2Letter  (l_3,QVector2D(1.125,3.5), QVector2D(0,3.5),factorB);
+    m_Letters.append(l_3);
+
+    str_LetterVector.append('4');
+    addLine2Letter(l_4,QVector2D(1.5,0), QVector2D(1.5,3.5),factorB);
+    addLine2Letter(l_4,QVector2D(2,1.5), QVector2D(0,1.5),factorB);
+    addLine2Letter(l_4,QVector2D(0,1.5), QVector2D(0,3.5),factorB);
+    m_Letters.append(l_4);
+
+    str_LetterVector.append('5');
+    addLine2Letter(l_5,QVector2D(0,0), QVector2D(1,0),factorB);
+    addCircle2Letter(l_5,1 , QVector2D(1,1),QVector2D(-90,90),factorB);
+    addLine2Letter(l_5,QVector2D(1,2), QVector2D(0,2),factorB);
+    addLine2Letter(l_5,QVector2D(0,2), QVector2D(0,3.5),factorB);
+    addLine2Letter(l_5,QVector2D(0,3.5), QVector2D(2,3.5),factorB);
+    m_Letters.append(l_5);
+
+    str_LetterVector.append('6');
+    addLine2Letter(l_6,QVector2D(2,3.5), QVector2D(1.5,3.5),factorB);
+//    addLine2Letter(l_6,QVector2D(2,3.5), QVector2D(1,3.5),factorB);
+//    addCircle2Letter(l_6,1 , QVector2D(1,2.5),QVector2D(90,180),factorB);
+    addCircle2Letter(l_6,1.5 , QVector2D(1.5,2),QVector2D(90,180),factorB);
+    addLine2Letter(l_6,QVector2D(0,2), QVector2D(0,1),factorB);
+    addCircle2Letter(l_6,1 , QVector2D(1,1),QVector2D(180,570),factorB);
+    addLine2Letter(l_6,QVector2D(0,1), QVector2D(0,1),factorB);
+    m_Letters.append(l_6);
+
+    str_LetterVector.append('7');
+    addLine2Letter(l_7,QVector2D(0,3.5), QVector2D(2,3.5),factorB);
+    addLine2Letter(l_7,QVector2D(2,3.5), QVector2D(0,0),factorB);
+    m_Letters.append(l_7);
+
+    str_LetterVector.append('8');
+    addLine2Letter(l_8,QVector2D(0.875,0), QVector2D(1.125,0),factorB);
+    addCircle2Letter(l_8,0.875 , QVector2D(1.125,0.875),QVector2D(-90,90),factorB);
+    addLine2Letter(l_8,QVector2D(1.125,1.75), QVector2D(0.875,1.75),factorB);
+    addCircle2Letter(l_8,0.875 , QVector2D(0.875,0.875),QVector2D(90,270),factorB);
+    addLine2Letter(l_8,QVector2D(1.125,1.75), QVector2D(1.125,1.75),factorB);
+    addCircle2Letter(l_8,0.875 , QVector2D(1.125,2.625),QVector2D(-90,90),factorB);
+    addLine2Letter(l_8,QVector2D(1.125,3.5), QVector2D(0.875,3.5),factorB);
+    addCircle2Letter(l_8,0.875 , QVector2D(0.875,2.625),QVector2D(90,270),factorB);
+    m_Letters.append(l_8);
+
+    str_LetterVector.append('9');
+    addLine2Letter(l_9,QVector2D(0,1), QVector2D(0,1),factorB);
+    addCircle2Letter(l_9,1 , QVector2D(1,1),QVector2D(180,360),factorB);
+    addLine2Letter(l_9,QVector2D(2,1), QVector2D(2,2.5),factorB);
+    addCircle2Letter(l_9,1 , QVector2D(1,2.5),QVector2D(0,360),factorB);
+    addLine2Letter(l_9,QVector2D(2,2.5), QVector2D(2,2.5),factorB);
+    m_Letters.append(l_9);
+
+    changed_Letters = m_Letters;
 
 }
 

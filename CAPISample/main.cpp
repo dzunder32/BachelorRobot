@@ -32,7 +32,6 @@ int main(int argc, char *argv[])
     coordSystem->setNegativeAxis(true);
     widget3d->addObject(coordSystem,QVector3D(0,0,0),QQuaternion(0,0,0,0));
 
-    widget3d->addCylinderBetweenPoints(QVector3D(0,0,0),QVector3D(100,100,100));
 //    CoordinateSystem *CSystem=new CoordinateSystem();
 //    CSystem->setLength(100);
 //    CSystem->setNegativeAxis(false);
@@ -47,7 +46,6 @@ int main(int argc, char *argv[])
 //Adawakedawra
 
 
-
     //2. Roboter Mesh -----------------------------------------------------------------------------------------------
     RV6SL *robot2 =new RV6SL();
     Rv6slKinematik *robot2Kinematik=new Rv6slKinematik(robot2);
@@ -60,7 +58,6 @@ int main(int argc, char *argv[])
     penHolder->CoordSystem->thinOut(0.5);
     //Hinzufügen einer Linearachse
 
-    LinearAxisRV6SL* linAxis  = new LinearAxisRV6SL();
     LinearAxisRV6SL* linAxis2 = new LinearAxisRV6SL();
 //    robot2->setTranslation(QVector3D(-1600,0,0));
 //    robot2->addTool(camera2);
@@ -84,7 +81,6 @@ int main(int argc, char *argv[])
 //    qDebug()<<pointRobot;
 
     widget3d->addObject(robot2);
-    widget3d->addObject(linAxis);
 
 //    linAxis->setTranslation(QVector3D(-400,0,0));
 

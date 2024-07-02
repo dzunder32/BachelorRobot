@@ -38,6 +38,7 @@ public:
     void resetShiftVector();
     void initLetterSize(float sizeFactor);
     void drawGrid();
+    void clearBuffers(){CircleBuffer.clear();PointsBuffer.clear();LinesBuffer.clear();robotSequence.clear();line_isTrue=false;}
 private:
     Letters *_letters;
     Widget3D *_widget3d;

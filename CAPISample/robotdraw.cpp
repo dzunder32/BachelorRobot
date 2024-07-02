@@ -65,16 +65,9 @@ void RobotDraw::robotDrawPoint()
 //        qDebug()<<"Point";
         QVector3D basePoint = PointsBuffer.takeFirst();
         robot_setPoint(Base2RobotPoint(basePoint));
-        if(moveAboveCounter<2)
-        {drawPoint_Widget(basePoint,2,QColor(0,255,0));moveAboveCounter++;}
+        if(moveAboveCounter<2){drawPoint_Widget(basePoint,2,QColor(0,255,0));moveAboveCounter++;}
 //        else{drawPoint_Widget(basePoint,2,QColor(255,0,0));}
-        if(line_isTrue)
-        {
-            drawLine(startLinePoint,basePoint);
-            line_isTrue = false;
-        }
-
-
+        if(line_isTrue){drawLine(startLinePoint,basePoint);line_isTrue = false;}
     }
     else {stopTimer_goHome();}
 }
@@ -83,37 +76,32 @@ void RobotDraw::robotDrawLine()
 {
     if(!LinesBuffer.isEmpty())
     {
-//        qDebug()<<"Line";
         QVector <QVector3D> line = LinesBuffer.takeFirst();
         //save first Point
         startLinePoint = line[0];
-        // qDebug()<<"end:"<<endLinePoint<<"start"<<startLinePoint;
-        // qDebug()<<"cartDist:"<<cartDistance(endLinePoint,startLinePoint);
+        //check wether the distance between endPoint of current Line is bigger than 5
         if(cartDistance(endLinePoint,startLinePoint)>5 && alreadyDrawn)
         {
-
             LinesBuffer.prepend(line);robotSequence.prepend(LINE);
+            //when distance is too big, move Tip above the plane
             moveTipAbove();qDebug()<<"now!";
-            alreadyDrawn=false;
-            // endLinePoint   = line[1];
+            alreadyDrawn = false;
         }
         else{
+            //save second Point
             endLinePoint   = line[1];
             robot_setPoint(Base2RobotPoint(startLinePoint));
             //add second Line Point to Buffer as a Point
             PointsBuffer.prepend(endLinePoint);
             robotSequence.prepend(POINT);
-            line_isTrue = true;
-            alreadyDrawn=true;
-            if(circlePoints_counter>=circlePoints_number-1)
+            line_isTrue  = true;
+            alreadyDrawn = true;
+            //speed up, when currently drawing a circle
+            if(circlePoints_counter>=circlePoints_number)
             {changeTimerSpeed(1);qDebug()<<"no speed!!"<<_timer->interval();}
-            else{
-                circlePoints_counter++;
-            }
+            else{circlePoints_counter++;}
         }
-
-    }else
-    {stopTimer_goHome();}
+    }else{stopTimer_goHome();}
 }
 
 void RobotDraw::moveTipAbove()
@@ -127,12 +115,9 @@ void RobotDraw::moveTipAbove()
     QVector3D lifted_prevPoint = prev_linePt + liftVecBase;
     QVector3D lifted_nextPoint = next_linePt + liftVecBase;
 
-
-    // robot_setPoint(Base2RobotPoint(lifted_nextPoint));
     PointsBuffer.prepend(lifted_nextPoint);
     robotSequence.prepend(POINT);
 
-    // robot_setPoint(Base2RobotPoint(lifted_prevPoint));
     PointsBuffer.prepend(lifted_prevPoint);
     robotSequence.prepend(POINT);
     moveAboveCounter = 0;
@@ -149,8 +134,8 @@ void RobotDraw::robotDrawCircle()
         QVector2D center = currCircle[1].value<QVector2D>();
         QVector2D angleLimits = currCircle[2].value<QVector2D>();
 
-        float start_angle   = angleLimits[0];
-        float end_angle  = angleLimits[1];
+        float start_angle  = angleLimits[0];
+        float end_angle   = angleLimits[1];
         float angle_range = end_angle - start_angle;
         float mid_angle   = angle_range/2 + start_angle;
 
@@ -226,6 +211,7 @@ void RobotDraw::drawGrid()
     double Nx = qRound(_plane->xLimit/xBoxSize);
     double Ny = qRound(_plane->yLimit/yBoxSize);
     qDebug()<<"Nx:"<<Nx<<"Ny:"<<Ny;
+    qDebug()<<"max Letters: "<< Nx*Ny;
 
     for (float yi = _plane->yLimit/2-yBoxSize; yi>=-_plane->yLimit/2+yBoxSize;yi-=yBoxSize)
     {AddLine2Buffer(QVector2D(-_plane->xLimit/2,yi),QVector2D(_plane->xLimit/2,yi));}
@@ -307,17 +293,16 @@ bool RobotDraw::shiftVec_inPlane()
     qDebug()<<"shift"<<shiftVector;
 
     bool x_inPlane =  (shiftVector.x() >= -_plane->xLimit/2 + xSpace) && (shiftVector.x() <= _plane->xLimit/2-xBoxSize);
-    bool y_inPlane =  (shiftVector.y() >= -_plane->yLimit/2) && (shiftVector.y()<=_plane->yLimit/2 - yBoxSize + ySpace);
+    bool y_inPlane =  (shiftVector.y() >= -_plane->yLimit/2) && (shiftVector.y()<=_plane->yLimit/2 - yBoxSize + ySpace + 1);
 
     qDebug()<<"left Limit:"<<-_plane->xLimit/2 + xSpace;
     qDebug()<<"right Limit"<<_plane->xLimit/2;
-    qDebug()<<"lower Limit "<<-_plane->yLimit/2;
-    qDebug()<<"upper Limit"<<_plane->yLimit/2 - yBoxSize+ ySpace;
+    qDebug()<<"lower Limit "<<-_plane->yLimit/2<<(shiftVector.y() >= -_plane->yLimit/2);
+    qDebug()<<"upper Limit"<<_plane->yLimit/2 - yBoxSize+ ySpace<< (shiftVector.y()<=_plane->yLimit/2 - yBoxSize + ySpace + 1);
 
     qDebug()<<"xOut"<<x_inPlane;
     qDebug()<<"yOut"<<y_inPlane;
 
-//    if(!x_inPlane)
     return (y_inPlane);
 }
 
@@ -356,8 +341,9 @@ void RobotDraw::AddLine2Buffer(QVector2D linePlane1, QVector2D linePlane2)
     QVector3D lineBasePt1=Plane2BasePoint(linePlane1.toVector3D());
     QVector3D lineBasePt2=Plane2BasePoint(linePlane2.toVector3D());
     LinesBuffer.append({lineBasePt1,lineBasePt2});
-    drawPoint_Widget(lineBasePt1,2,QColor(0,255,0));
-    drawPoint_Widget(lineBasePt2,2,QColor(0,255,0));
+//    drawPoint_Widget(lineBasePt1,2,QColor(0,255,0));
+//    drawPoint_Widget(lineBasePt2,2,QColor(0,255,0));
+    drawLine(lineBasePt1,lineBasePt2);
     robotSequence.append(LINE);
 }
 void RobotDraw::AddCircle2Buffer(QVariantList circleList)
@@ -365,6 +351,7 @@ void RobotDraw::AddCircle2Buffer(QVariantList circleList)
     CircleBuffer.append(circleList);
     robotSequence.append(CIRCLE);
 }
+
 
 void RobotDraw::RobotDraw::safeCurrentSequence()
 {
@@ -409,11 +396,13 @@ void RobotDraw::robot_moveInCircle(QVector <QVector2D> circlePoints)
     for(QVector2D point: circlePoints)
     {
         QVector3D pointRobot = Plane2RobotPoint(point.toVector3D());
-        _robotKinematik->setPoint(pointRobot.x(),
+        _robotKinematik->RobotPosition::setPoint(pointRobot.x(),
                                   pointRobot.y(),
                                   pointRobot.z(),
                                   a,b,c,l1);
-        _robotKinematik->ToolMovement(Transformations::Z,-199);
+        QMatrix4x4 pointT = _robotKinematik->getTransformationMatrix()*MatrixTranslationZ(199);
+
+//        _robotKinematik->ToolMovement(Transformations::Z,-199);
         J_Vec.append({_robotKinematik->j1(),_robotKinematik->j2(),_robotKinematik->j3(),_robotKinematik->j4(),_robotKinematik->j5(),_robotKinematik->j6(),_robotKinematik->j7()});
     }
     qDebug()<<"the Joints :D"<<J_Vec;

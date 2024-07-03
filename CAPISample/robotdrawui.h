@@ -53,6 +53,7 @@ private:
     QVector2D P1,P2;
     QString P1X_Str,P1Y_Str,P2X_Str,P2Y_Str;
     QString historyText;
+    bool preview_isDrawn = false;
     void insertRobotSequenceText(QString str);
     void initBuffers();
     void setTimerSpeed(int time_ms);

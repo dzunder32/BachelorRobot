@@ -43,8 +43,11 @@ void RobotDrawUi::increaseTimerSpeed(float factor)
 void RobotDrawUi::on_pushButtonStart_clicked()
 {
 //    _robDraw->connectTimer();
-    _widget3d->deleteAllLines();
-    _widget3d->deleteAllPoints();
+    if(preview_isDrawn){
+        _widget3d->deleteAllLines();
+        _widget3d->deleteAllPoints();
+        preview_isDrawn = false;
+    }
     startDrawTimer();
     setTimerSpeed(ui->timerSpeedSlider->value());
 //    disconnect(_robDraw->_timer, &QTimer::timeout,this, &RobotDraw::robDraw_onTimeout);
@@ -126,7 +129,6 @@ void RobotDrawUi::insertRobotSequenceText(QString str)
 
 void RobotDrawUi::startDrawTimer()
 {
-    _robDraw->resetShiftVector();
     _robDraw->_timer->start();
     _robDraw->safeCurrentSequence();
 }
@@ -174,11 +176,16 @@ void RobotDrawUi::on_pushButton_addCircle_clicked()
 
 void RobotDrawUi::on_pushButton_draw_clicked()
 {
+    _widget3d->deleteAllLines();
+    _widget3d->deleteAllPoints();
+    _robDraw->resetShiftVector();
+    _robDraw->clearBuffers();
     QString textInput = ui->textEdit_textInput->toPlainText();
     qDebug()<<textInput;
     if(ui->radioButton_grid->isChecked())
         _robDraw->drawGrid();
     _robDraw->constructLetters(textInput);
+    preview_isDrawn = true;
 }
 
 

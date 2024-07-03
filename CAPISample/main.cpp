@@ -1,12 +1,13 @@
 #include "mainwindow.h"
 #include <QApplication>
 #include "linearaxisrv6sl.h"
-#include "rv6sl.h"
+#include "rv6slkinematik.h".h"
+#include "rv4flkinematik.h"
 #include "rv4fl.h"
+#include "rv6sl.h"
 #include "widget3d.h"
 #include "coordinatesystem.h"
 #include "kinectcamera.h"
-#include "rv6slkinematik.h"
 #include "controlpanel.h"
 #include "drawletters.h"
 #include "robotdrawui.h"
@@ -32,7 +33,6 @@ int main(int argc, char *argv[])
     coordSystem->setNegativeAxis(true);
     widget3d->addObject(coordSystem,QVector3D(0,0,0),QQuaternion(0,0,0,0));
 
-    widget3d->addCylinderBetweenPoints(QVector3D(0,0,0),QVector3D(100,100,100));
 //    CoordinateSystem *CSystem=new CoordinateSystem();
 //    CSystem->setLength(100);
 //    CSystem->setNegativeAxis(false);
@@ -47,10 +47,11 @@ int main(int argc, char *argv[])
 //Adawakedawra
 
 
-
     //2. Roboter Mesh -----------------------------------------------------------------------------------------------
     RV6SL *robot2 =new RV6SL();
     Rv6slKinematik *robot2Kinematik=new Rv6slKinematik(robot2);
+    // RV4FL *robot2 =new RV4FL();
+    // Rv4flKinematik *robot2Kinematik=new Rv4flKinematik(robot2);
 //    ControlPanel *controlpanel=new ControlPanel(robot2Kinematik);
 //    controlpanel->show();
 
@@ -60,7 +61,6 @@ int main(int argc, char *argv[])
     penHolder->CoordSystem->thinOut(0.5);
     //Hinzufügen einer Linearachse
 
-    LinearAxisRV6SL* linAxis  = new LinearAxisRV6SL();
     LinearAxisRV6SL* linAxis2 = new LinearAxisRV6SL();
 //    robot2->setTranslation(QVector3D(-1600,0,0));
 //    robot2->addTool(camera2);
@@ -84,7 +84,6 @@ int main(int argc, char *argv[])
 //    qDebug()<<pointRobot;
 
     widget3d->addObject(robot2);
-    widget3d->addObject(linAxis);
 
 //    linAxis->setTranslation(QVector3D(-400,0,0));
 
@@ -106,11 +105,13 @@ int main(int argc, char *argv[])
     //Ebene zu Zeichnen
 
 
-    Plane *plane = new Plane(300.0,300.0);
+    Plane *plane = new Plane(600.0,800.0);
 //    qDebug()<<linAxis2->sled_position;
-    plane->setTranslation(linAxis2->sled_position+QVector3D(0,700,500));
+    plane->setTranslation(linAxis2->sled_position+QVector3D(0,-900,500));
     // plane->setRotation(QQuaternion::fromEulerAngles(QVector3D(-90,180,0)));
-    plane->setRotation(QQuaternion::fromEulerAngles(QVector3D(-90,180,0)) * QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180));
+    // plane->setRotation(QQuaternion::fromEulerAngles(QVector3D(-90,180,0)) * QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180));
+    plane->setRotation(QQuaternion::fromEulerAngles(QVector3D(-90,180,0)) /** QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),130)*/);
+
     widget3d->addObject(plane);
 
     // qDebug()<<plane->getCornerPoints();

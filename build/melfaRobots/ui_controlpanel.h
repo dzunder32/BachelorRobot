@@ -17,7 +17,6 @@
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
-#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSlider>
 #include <QtWidgets/QSpacerItem>
@@ -81,7 +80,7 @@ public:
     QLabel *label_FL2;
     QTabWidget *MovementMethod;
     QWidget *JointTab;
-    QHBoxLayout *horizontalLayout_3;
+    QGridLayout *gridLayout_4;
     QVBoxLayout *verticalLayout_10;
     QLabel *label_Joint1;
     QLabel *label_Joint2;
@@ -166,32 +165,6 @@ public:
     QPushButton *PB_ToolZ_minus;
     QPushButton *PB_ToolA_plus;
     QPushButton *PB_ToolX_plus;
-    QWidget *DirectKinematic;
-    QWidget *layoutWidget;
-    QGridLayout *gridLayout_5;
-    QLabel *label_5;
-    QLabel *label_6;
-    QLabel *label_7;
-    QLineEdit *lineEdit_A;
-    QLineEdit *lineEdit_B;
-    QLineEdit *lineEdit_C;
-    QWidget *layoutWidget1;
-    QGridLayout *gridLayout_4;
-    QLabel *label_2;
-    QLabel *label_3;
-    QLabel *label_4;
-    QLineEdit *lineEdit_X;
-    QLineEdit *lineEdit_Y;
-    QLineEdit *lineEdit_Z;
-    QWidget *layoutWidget2;
-    QGridLayout *gridLayout_6;
-    QLineEdit *lineEdit_F1;
-    QLabel *label_8;
-    QLineEdit *lineEdit_F2;
-    QLabel *label_9;
-    QLineEdit *lineEdit_L1;
-    QLabel *label_10;
-    QPushButton *Invers_pushButton;
 
     void setupUi(QWidget *ControlPanel)
     {
@@ -233,7 +206,7 @@ public:
         horizontalLayout_8->addWidget(PB_Phome);
 
 
-        gridLayout_2->addLayout(horizontalLayout_8, 2, 0, 1, 1);
+        gridLayout_2->addLayout(horizontalLayout_8, 1, 0, 1, 1);
 
         frame_Values = new QFrame(ControlPanel);
         frame_Values->setObjectName(QString::fromUtf8("frame_Values"));
@@ -652,7 +625,7 @@ public:
         verticalLayout_5->addLayout(horizontalLayout_19);
 
 
-        gridLayout_2->addWidget(frame_Values, 0, 1, 3, 1);
+        gridLayout_2->addWidget(frame_Values, 0, 1, 2, 1);
 
         MovementMethod = new QTabWidget(ControlPanel);
         MovementMethod->setObjectName(QString::fromUtf8("MovementMethod"));
@@ -665,8 +638,8 @@ public:
         MovementMethod->setMaximumSize(QSize(16777215, 261));
         JointTab = new QWidget();
         JointTab->setObjectName(QString::fromUtf8("JointTab"));
-        horizontalLayout_3 = new QHBoxLayout(JointTab);
-        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
+        gridLayout_4 = new QGridLayout(JointTab);
+        gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
         verticalLayout_10 = new QVBoxLayout();
         verticalLayout_10->setObjectName(QString::fromUtf8("verticalLayout_10"));
         label_Joint1 = new QLabel(JointTab);
@@ -736,7 +709,7 @@ public:
         verticalLayout_10->addWidget(label_Joint7);
 
 
-        horizontalLayout_3->addLayout(verticalLayout_10);
+        gridLayout_4->addLayout(verticalLayout_10, 0, 0, 1, 1);
 
         gridLayout_7 = new QGridLayout();
         gridLayout_7->setObjectName(QString::fromUtf8("gridLayout_7"));
@@ -976,7 +949,7 @@ public:
         gridLayout_7->addWidget(SliderJ7, 6, 2, 1, 1);
 
 
-        horizontalLayout_3->addLayout(gridLayout_7);
+        gridLayout_4->addLayout(gridLayout_7, 0, 1, 1, 1);
 
         MovementMethod->addTab(JointTab, QString());
         BaseTab = new QWidget();
@@ -1469,130 +1442,14 @@ public:
         horizontalLayout_5->addLayout(gridLayout_3);
 
         MovementMethod->addTab(ToolTab, QString());
-        DirectKinematic = new QWidget();
-        DirectKinematic->setObjectName(QString::fromUtf8("DirectKinematic"));
-        layoutWidget = new QWidget(DirectKinematic);
-        layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
-        layoutWidget->setGeometry(QRect(9, 72, 309, 57));
-        gridLayout_5 = new QGridLayout(layoutWidget);
-        gridLayout_5->setObjectName(QString::fromUtf8("gridLayout_5"));
-        gridLayout_5->setContentsMargins(0, 0, 0, 0);
-        label_5 = new QLabel(layoutWidget);
-        label_5->setObjectName(QString::fromUtf8("label_5"));
-
-        gridLayout_5->addWidget(label_5, 0, 0, 1, 1);
-
-        label_6 = new QLabel(layoutWidget);
-        label_6->setObjectName(QString::fromUtf8("label_6"));
-
-        gridLayout_5->addWidget(label_6, 0, 1, 1, 1);
-
-        label_7 = new QLabel(layoutWidget);
-        label_7->setObjectName(QString::fromUtf8("label_7"));
-
-        gridLayout_5->addWidget(label_7, 0, 2, 1, 1);
-
-        lineEdit_A = new QLineEdit(layoutWidget);
-        lineEdit_A->setObjectName(QString::fromUtf8("lineEdit_A"));
-
-        gridLayout_5->addWidget(lineEdit_A, 1, 0, 1, 1);
-
-        lineEdit_B = new QLineEdit(layoutWidget);
-        lineEdit_B->setObjectName(QString::fromUtf8("lineEdit_B"));
-
-        gridLayout_5->addWidget(lineEdit_B, 1, 1, 1, 1);
-
-        lineEdit_C = new QLineEdit(layoutWidget);
-        lineEdit_C->setObjectName(QString::fromUtf8("lineEdit_C"));
-
-        gridLayout_5->addWidget(lineEdit_C, 1, 2, 1, 1);
-
-        layoutWidget1 = new QWidget(DirectKinematic);
-        layoutWidget1->setObjectName(QString::fromUtf8("layoutWidget1"));
-        layoutWidget1->setGeometry(QRect(9, 9, 309, 57));
-        gridLayout_4 = new QGridLayout(layoutWidget1);
-        gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
-        gridLayout_4->setContentsMargins(0, 0, 0, 0);
-        label_2 = new QLabel(layoutWidget1);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
-
-        gridLayout_4->addWidget(label_2, 0, 0, 1, 1);
-
-        label_3 = new QLabel(layoutWidget1);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
-
-        gridLayout_4->addWidget(label_3, 0, 1, 1, 1);
-
-        label_4 = new QLabel(layoutWidget1);
-        label_4->setObjectName(QString::fromUtf8("label_4"));
-
-        gridLayout_4->addWidget(label_4, 0, 2, 1, 1);
-
-        lineEdit_X = new QLineEdit(layoutWidget1);
-        lineEdit_X->setObjectName(QString::fromUtf8("lineEdit_X"));
-
-        gridLayout_4->addWidget(lineEdit_X, 1, 0, 1, 1);
-
-        lineEdit_Y = new QLineEdit(layoutWidget1);
-        lineEdit_Y->setObjectName(QString::fromUtf8("lineEdit_Y"));
-
-        gridLayout_4->addWidget(lineEdit_Y, 1, 1, 1, 1);
-
-        lineEdit_Z = new QLineEdit(layoutWidget1);
-        lineEdit_Z->setObjectName(QString::fromUtf8("lineEdit_Z"));
-
-        gridLayout_4->addWidget(lineEdit_Z, 1, 2, 1, 1);
-
-        layoutWidget2 = new QWidget(DirectKinematic);
-        layoutWidget2->setObjectName(QString::fromUtf8("layoutWidget2"));
-        layoutWidget2->setGeometry(QRect(10, 147, 291, 86));
-        gridLayout_6 = new QGridLayout(layoutWidget2);
-        gridLayout_6->setObjectName(QString::fromUtf8("gridLayout_6"));
-        gridLayout_6->setContentsMargins(0, 0, 0, 0);
-        lineEdit_F1 = new QLineEdit(layoutWidget2);
-        lineEdit_F1->setObjectName(QString::fromUtf8("lineEdit_F1"));
-
-        gridLayout_6->addWidget(lineEdit_F1, 1, 0, 1, 1);
-
-        label_8 = new QLabel(layoutWidget2);
-        label_8->setObjectName(QString::fromUtf8("label_8"));
-
-        gridLayout_6->addWidget(label_8, 0, 0, 1, 1);
-
-        lineEdit_F2 = new QLineEdit(layoutWidget2);
-        lineEdit_F2->setObjectName(QString::fromUtf8("lineEdit_F2"));
-
-        gridLayout_6->addWidget(lineEdit_F2, 1, 1, 1, 1);
-
-        label_9 = new QLabel(layoutWidget2);
-        label_9->setObjectName(QString::fromUtf8("label_9"));
-
-        gridLayout_6->addWidget(label_9, 0, 1, 1, 1);
-
-        lineEdit_L1 = new QLineEdit(layoutWidget2);
-        lineEdit_L1->setObjectName(QString::fromUtf8("lineEdit_L1"));
-
-        gridLayout_6->addWidget(lineEdit_L1, 1, 2, 1, 1);
-
-        label_10 = new QLabel(layoutWidget2);
-        label_10->setObjectName(QString::fromUtf8("label_10"));
-
-        gridLayout_6->addWidget(label_10, 0, 2, 1, 1);
-
-        MovementMethod->addTab(DirectKinematic, QString());
 
         gridLayout_2->addWidget(MovementMethod, 0, 0, 1, 1);
-
-        Invers_pushButton = new QPushButton(ControlPanel);
-        Invers_pushButton->setObjectName(QString::fromUtf8("Invers_pushButton"));
-
-        gridLayout_2->addWidget(Invers_pushButton, 1, 0, 1, 1);
 
 
         retranslateUi(ControlPanel);
 
         cb_Flg1->setCurrentIndex(7);
-        MovementMethod->setCurrentIndex(2);
+        MovementMethod->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(ControlPanel);
@@ -1692,17 +1549,6 @@ public:
         PB_ToolA_plus->setText(QCoreApplication::translate("ControlPanel", "+", nullptr));
         PB_ToolX_plus->setText(QCoreApplication::translate("ControlPanel", "+", nullptr));
         MovementMethod->setTabText(MovementMethod->indexOf(ToolTab), QCoreApplication::translate("ControlPanel", "Tool", nullptr));
-        label_5->setText(QCoreApplication::translate("ControlPanel", "A", nullptr));
-        label_6->setText(QCoreApplication::translate("ControlPanel", "B", nullptr));
-        label_7->setText(QCoreApplication::translate("ControlPanel", "C", nullptr));
-        label_2->setText(QCoreApplication::translate("ControlPanel", "X", nullptr));
-        label_3->setText(QCoreApplication::translate("ControlPanel", "Y", nullptr));
-        label_4->setText(QCoreApplication::translate("ControlPanel", "Z", nullptr));
-        label_8->setText(QCoreApplication::translate("ControlPanel", "Flg1", nullptr));
-        label_9->setText(QCoreApplication::translate("ControlPanel", "Flg2", nullptr));
-        label_10->setText(QCoreApplication::translate("ControlPanel", "L1", nullptr));
-        MovementMethod->setTabText(MovementMethod->indexOf(DirectKinematic), QCoreApplication::translate("ControlPanel", "Invers kinematic", nullptr));
-        Invers_pushButton->setText(QCoreApplication::translate("ControlPanel", "Invers Trafo", nullptr));
     } // retranslateUi
 
 };

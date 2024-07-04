@@ -17,7 +17,7 @@ RobotDraw::RobotDraw(Kinematik *robotKinematik,Robot *robot, QVector3D sled_pos,
     a=ew.x();
     b=ew.y();
     c=ew.z();
-    l1=-20;
+    l1=-250;
 
     robotMat.setColumn(3,QVector4D((sled_pos+QVector3D(0,l1,0)),1));
     robotMat.rotate(90,QVector3D(0,0,1));
@@ -66,7 +66,7 @@ void RobotDraw::robotDrawPoint()
         QVector3D basePoint = PointsBuffer.takeFirst();
         robot_setPoint(Base2RobotPoint(basePoint));
         if(moveAboveCounter<2){drawPoint_Widget(basePoint,2,QColor(0,255,0));moveAboveCounter++;}
-//        else{drawPoint_Widget(basePoint,2,QColor(255,0,0));}
+       // else{drawPoint_Widget(basePoint,2,QColor(255,0,0));}
         if(line_isTrue){drawLine(startLinePoint,basePoint);line_isTrue = false;}
     }
     else {stopTimer_goHome();}
@@ -340,6 +340,8 @@ void RobotDraw::AddLine2Buffer(QVector2D linePlane1, QVector2D linePlane2)
 {
     QVector3D lineBasePt1=Plane2BasePoint(linePlane1.toVector3D());
     QVector3D lineBasePt2=Plane2BasePoint(linePlane2.toVector3D());
+    qDebug()<<"Base1:"<<lineBasePt1<<"Plane1:"<<linePlane1;
+    qDebug()<<"Base2:"<<lineBasePt2<<"Plane2:"<<linePlane2;
     LinesBuffer.append({lineBasePt1,lineBasePt2});
 //    drawPoint_Widget(lineBasePt1,2,QColor(0,255,0));
 //    drawPoint_Widget(lineBasePt2,2,QColor(0,255,0));
@@ -353,7 +355,7 @@ void RobotDraw::AddCircle2Buffer(QVariantList circleList)
 }
 
 
-void RobotDraw::RobotDraw::safeCurrentSequence()
+void RobotDraw::safeCurrentSequence()
 {
     PointsBuffer_hist  = PointsBuffer; LinesBuffer_hist   = LinesBuffer;
     CircleBuffer_hist  = CircleBuffer; robotSequence_hist = robotSequence;
@@ -370,15 +372,15 @@ void RobotDraw::setPreviousSequence()
 
 void RobotDraw::robot_setPoint(QVector3D position)
 {
-//    _robotKinematik->setPoint(position.x(),
-//                              position.y(),
-//                              position.z(),
-//                              a,b,c,l1);
-    _robotKinematik->RobotPosition::setPoint(position.x(),
-                                             position.y(),
-                                             position.z(),
-                                             a,b,c,l1);
-    _robotKinematik->ToolMovement(Transformations::Z,-199);
+    _robotKinematik->setPoint(position.x(),
+                              position.y(),
+                              position.z(),
+                              a,b,c,l1);
+//    _robotKinematik->RobotPosition::setPoint(position.x(),
+//                                             position.y(),
+//                                             position.z(),
+//                                             a,b,c,l1);
+//    _robotKinematik->ToolMovement(Transformations::Z,-199);
 
     if(_robot->IsConnected())
     {

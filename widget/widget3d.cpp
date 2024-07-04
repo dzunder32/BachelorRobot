@@ -211,8 +211,11 @@ void Widget3D::addCylinderBetweenPoints(const QVector3D& startPoint, const QVect
     // Calculate the midpoint and rotation angles
     auto midPoint = (startPoint + endPoint) / 2;
     auto transPoint = endPoint - startPoint;
-    auto xAngle = atan(sqrt(pow(transPoint.z(), 2) + pow(transPoint.x(), 2)) / transPoint.y()) / M_PI * 180;
-    auto yAngle = (transPoint.x() == 0 && transPoint.z() == 0)? 0 : atan(transPoint.x() / transPoint.z()) / M_PI * 180;
+    // auto xAngle = atan(sqrt(pow(transPoint.z(), 2) + pow(transPoint.x(), 2)) / transPoint.y()) / M_PI * 180;
+    auto xAngle = atan2(sqrt(pow(transPoint.z(), 2) + pow(transPoint.x(), 2)) , transPoint.y()) / M_PI * 180;
+
+    // auto yAngle = (transPoint.x() == 0 && transPoint.z() == 0)? 0 : atan(transPoint.x() / transPoint.z()) / M_PI * 180;
+    auto yAngle = (transPoint.x() == 0 && transPoint.z() == 0)? 0 : atan2(transPoint.x(), transPoint.z()) / M_PI * 180;
 
     // Create and configure the transformation node
     auto transform = new Qt3DCore::QTransform(cylinderEntity);

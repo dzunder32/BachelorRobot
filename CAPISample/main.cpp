@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
 //    CoordinateSystem *CSystem=new CoordinateSystem();
 //    CSystem->setLength(100);
 //    CSystem->setNegativeAxis(false);
-////    CSystem->setTranslation(QVector3D(100,100,0));
+//    CSystem->setTranslation(QVector3D(100,100,0));
 //    STLMesh* toolMesh= new STLMesh(CSystem);
 //    toolMesh->setSource("Tool.STL");
 //    widget3d->addObject(CSystem);
@@ -57,7 +57,7 @@ int main(int argc, char *argv[])
 
     //Hinzufügen eines Tools in die Grafik
 //    KinectCamera* camera2 = new KinectCamera();
-    PenHolder* penHolder = new PenHolder();
+    Tool* penHolder = new PenHolder();
     penHolder->CoordSystem->thinOut(0.5);
     //Hinzufügen einer Linearachse
 
@@ -66,6 +66,10 @@ int main(int argc, char *argv[])
 //    robot2->addTool(camera2);
     robot2->addTool(penHolder);
     robot2->addLinearAxis(linAxis2);
+//    qDebug()<<"pen!"<<penHolder;
+
+    qDebug()<<"pen!"<<*static_cast<QMatrix4x4*>(penHolder);
+    robot2Kinematik->setTool(*static_cast<QMatrix4x4*>(penHolder));
 //    qDebug()<<linAxis2->rotation().toRotationMatrix();
     linAxis2->set_sled_position(linAxis2->rotation().toRotationMatrix());
     qDebug()<<linAxis2->sled_position;

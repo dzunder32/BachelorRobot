@@ -65,8 +65,8 @@ private:
     QMatrix4x4 rotation_plane;
     bool drawFirstLine=true,alreadyDrawn=false;
     float circlePoints_number;
-
     int circlePoints_counter;
+    QVector3D robotPosition;
 
 
     QVector3D Base2RobotPoint (QVector3D point3D){return QVector3D(robotMat.inverted() * point3D);}

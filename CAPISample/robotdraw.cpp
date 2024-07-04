@@ -372,15 +372,15 @@ void RobotDraw::setPreviousSequence()
 
 void RobotDraw::robot_setPoint(QVector3D position)
 {
-   // _robotKinematik->setPoint(position.x(),
-   //                           position.y(),
-   //                           position.z(),
-   //                           a,b,c,l1);
-    _robotKinematik->RobotPosition::setPoint(position.x(),
-                                             position.y(),
-                                             position.z(),
-                                             a,b,c,l1);
-    _robotKinematik->ToolMovement(Transformations::Z,-199);
+    _robotKinematik->setPoint(position.x(),
+                              position.y(),
+                              position.z(),
+                              a,b,c,l1);
+//    _robotKinematik->RobotPosition::setPoint(position.x(),
+//                                             position.y(),
+//                                             position.z(),
+//                                             a,b,c,l1);
+//    _robotKinematik->ToolMovement(Transformations::Z,-199);
 
     if(_robot->IsConnected())
     {

@@ -58,7 +58,7 @@ void SixJointRobot::setNoTool()
     _emptyTool->CoordSystem->setNegativeAxis(false);
 }
 
-void SixJointRobot::addLinearAxis(LinearAxis *axis)
+void SixJointRobot:: addLinearAxis(LinearAxis *axis)
 {
     axis->Qt3DCore::QEntity::setParent(static_cast<Qt3DCore::QEntity*>(this));
     _baseCoordSystem->Qt3DCore::QEntity::setParent(axis->Sled);

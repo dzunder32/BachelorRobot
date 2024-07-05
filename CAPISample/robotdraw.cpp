@@ -10,16 +10,19 @@ RobotDraw::RobotDraw(Kinematik *robotKinematik,Robot *robot, QVector3D sled_pos,
     _robot = robot;
     _plane = plane;
     _widget3d = widget3d;
+    _l1BasePos = sled_pos;
     _timer = new QTimer;
     connect(_timer, &QTimer::timeout,this, &RobotDraw::robDraw_onTimeout);
 
-    QVector3D ew = CalculateEw(_plane->matrix()*QMatrix4x4(QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),90).toRotationMatrix()));
-    a=ew.x();
-    b=ew.y();
-    c=ew.z();
-    l1=-250;
+    // QVector3D ew = CalculateEw(_plane->matrix()*QMatrix4x4(QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),90).toRotationMatrix()));
+    // a=ew.x();
+    // b=ew.y();
+    // c=ew.z();
+    // l1=-250;
 
-    robotMat.setColumn(3,QVector4D((sled_pos+QVector3D(0,l1,0)),1));
+    // robotPosition = sled_pos+QVector3D(0,l1,0);
+    // robotMat.setColumn(3,QVector4D(robotPosition,1));
+    setL1(0);
     robotMat.rotate(90,QVector3D(0,0,1));
 
     rotation_plane = _plane->matrix();
@@ -28,6 +31,37 @@ RobotDraw::RobotDraw(Kinematik *robotKinematik,Robot *robot, QVector3D sled_pos,
     initLetterSize(1);
 }
 
+void RobotDraw::PlanePositionChanged()
+{
+     QVector3D ew = CalculateEw(_plane->matrix()*QMatrix4x4(QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),90).toRotationMatrix()));
+    a=ew.x();
+    b=ew.y();
+    c=ew.z();
+
+}
+void RobotDraw::CalculateL1()
+{
+    QVector3D dist_vec = _plane->translation()-robotPosition;
+    double preffered_distance = 500;
+    double sqrt_arg = pow(preffered_distance,2) - pow(dist_vec.x(),2) -pow(dist_vec.z(),2);
+
+    if(abs(sqrt_arg)< 0.001)
+        sqrt_arg=1;
+
+    if(sqrt_arg<0){
+        qDebug()<<"negative sqrt argument! CalculateL1()";
+        return;
+    }
+    double new_l1 = sqrt(sqrt_arg)-dist_vec.y();
+}
+void RobotDraw::setL1(double val)
+{
+    l1=val;
+    robotPosition = _l1BasePos + QVector3D(0,l1,0);
+    robotMat.setColumn(3,QVector4D(robotPosition,1));
+
+
+}
 
 void RobotDraw::robDraw_onTimeout()
 {

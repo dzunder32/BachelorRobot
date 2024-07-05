@@ -90,6 +90,7 @@ private:
     void setL1(double val);
     void PlanePositionChanged();
     void CalculateL1();
+    float calculateAngleBetweenVectors(QVector3D vectorA, QVector3D vectorB);
 public slots:
 
 signals:

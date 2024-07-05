@@ -22,12 +22,13 @@ RobotDraw::RobotDraw(Kinematik *robotKinematik,Robot *robot, QVector3D sled_pos,
 
     // robotPosition = sled_pos+QVector3D(0,l1,0);
     // robotMat.setColumn(3,QVector4D(robotPosition,1));
-    setL1(0);
+    setL1(200);
     robotMat.rotate(90,QVector3D(0,0,1));
 
     rotation_plane = _plane->matrix();
     rotation_plane.setColumn(3,QVector4D(0,0,0,1));
 
+    CalculateL1();
     initLetterSize(1);
 }
 
@@ -42,9 +43,10 @@ void RobotDraw::PlanePositionChanged()
 void RobotDraw::CalculateL1()
 {
     QVector3D dist_vec = _plane->translation()-robotPosition;
+    qDebug()<<dist_vec;
     double preffered_distance = 500;
     double sqrt_arg = pow(preffered_distance,2) - pow(dist_vec.x(),2) -pow(dist_vec.z(),2);
-
+    qDebug()<<"sqrtarg"<<sqrt_arg;
     if(abs(sqrt_arg)< 0.001)
         sqrt_arg=1;
 
@@ -52,8 +54,25 @@ void RobotDraw::CalculateL1()
         qDebug()<<"negative sqrt argument! CalculateL1()";
         return;
     }
-    double new_l1 = sqrt(sqrt_arg)-dist_vec.y();
+    double sqrt_result = sqrt(sqrt_arg);
+    double new_l1n = -sqrt_result-_plane->translation().y();
+    double new_l1p = sqrt_result-_plane->translation().y();
+    qDebug()<<"l1n"<<new_l1n<<"l1p"<<new_l1p;
+    QVector3D robPos1 = _l1BasePos + QVector3D(0,new_l1n,0);
+    QVector3D robPos2 = _l1BasePos + QVector3D(0,new_l1p,0);
+    float ang1 = calculateAngleBetweenVectors(_plane->translation()- robPos1,rotation_plane.column(2).toVector3D());
+    float ang2 = calculateAngleBetweenVectors(_plane->translation()- robPos2,rotation_plane.column(2).toVector3D());
+    qDebug()<<"ang1:"<<ang1<<"ang2:"<<ang2;
 }
+float RobotDraw::calculateAngleBetweenVectors(QVector3D vectorA, QVector3D vectorB) {
+    float dotProduct = QVector3D::dotProduct(vectorA, vectorB);
+    float magnitudeA = vectorA.length();
+    float magnitudeB = vectorB.length();
+
+    float angleInRadians = acos(dotProduct / (magnitudeA * magnitudeB));
+    return angleInRadians * (180.0 / M_PI); // Convert radians to degrees
+}
+
 void RobotDraw::setL1(double val)
 {
     l1=val;

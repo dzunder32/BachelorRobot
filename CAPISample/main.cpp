@@ -111,7 +111,7 @@ int main(int argc, char *argv[])
 
     Plane *plane = new Plane(600.0,800.0);
 //    qDebug()<<linAxis2->sled_position;
-    plane->setTranslation(linAxis2->sled_position+QVector3D(0,-500,500));
+    plane->setTranslation(linAxis2->sled_position+QVector3D(0,-800,500));
     // plane->setRotation(QQuaternion::fromEulerAngles(QVector3D(-90,180,0)));
     // plane->setRotation(QQuaternion::fromEulerAngles(QVector3D(-90,180,0)) * QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180));
     plane->setRotation(QQuaternion::fromEulerAngles(QVector3D(-90,180,0)) /** QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),130)*/);

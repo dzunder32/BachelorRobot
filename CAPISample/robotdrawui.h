@@ -44,12 +44,21 @@ private slots:
 
     void on_spinBox_letterSize_valueChanged(int arg1);
 
+    void on_horizontalSlider_x_sliderMoved(int position);
+
+    void on_horizontalSlider_y_sliderMoved(int position);
+
+    void on_horizontalSlider_z_sliderMoved(int position);
+
+    void on_horizontalSlider_r_sliderMoved(int position);
+
 private:
     Ui::RobotDrawUi *ui;
     RobotDraw *_robDraw;
     Widget3D *_widget3d;
     QThread robotThread;
     Robot *_robot;
+    Plane *_plane;
     QVector2D P1,P2;
     QString P1X_Str,P1Y_Str,P2X_Str,P2Y_Str;
     QString historyText;

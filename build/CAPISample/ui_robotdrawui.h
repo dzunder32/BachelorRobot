@@ -32,7 +32,7 @@ class Ui_RobotDrawUi
 {
 public:
     QWidget *centralwidget;
-    QVBoxLayout *verticalLayout;
+    QVBoxLayout *verticalLayout_3;
     QGridLayout *gridLayout;
     QLineEdit *lineEdit_P1X;
     QLineEdit *lineEdit;
@@ -65,6 +65,11 @@ public:
     QSlider *timerSpeedSlider;
     QTextEdit *textEdit_Sequence;
     QTextEdit *textEdit_textInput;
+    QVBoxLayout *verticalLayout;
+    QSlider *horizontalSlider_x;
+    QSlider *horizontalSlider_y;
+    QSlider *horizontalSlider_z;
+    QSlider *horizontalSlider_r;
     QHBoxLayout *horizontalLayout_3;
     QPushButton *pushButton_History;
     QPushButton *pushButtonStart;
@@ -80,8 +85,8 @@ public:
         RobotDrawUi->resize(800, 600);
         centralwidget = new QWidget(RobotDrawUi);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
-        verticalLayout = new QVBoxLayout(centralwidget);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout_3 = new QVBoxLayout(centralwidget);
+        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
         gridLayout = new QGridLayout();
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         lineEdit_P1X = new QLineEdit(centralwidget);
@@ -155,7 +160,7 @@ public:
         gridLayout->addWidget(lineEdit_9, 1, 3, 1, 1);
 
 
-        verticalLayout->addLayout(gridLayout);
+        verticalLayout_3->addLayout(gridLayout);
 
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
@@ -210,7 +215,7 @@ public:
         horizontalLayout->addLayout(gridLayout_2);
 
 
-        verticalLayout->addLayout(horizontalLayout);
+        verticalLayout_3->addLayout(horizontalLayout);
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
@@ -245,7 +250,38 @@ public:
         horizontalLayout_2->addWidget(textEdit_textInput);
 
 
-        verticalLayout->addLayout(horizontalLayout_2);
+        verticalLayout_3->addLayout(horizontalLayout_2);
+
+        verticalLayout = new QVBoxLayout();
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        horizontalSlider_x = new QSlider(centralwidget);
+        horizontalSlider_x->setObjectName(QString::fromUtf8("horizontalSlider_x"));
+        horizontalSlider_x->setMinimum(-99);
+        horizontalSlider_x->setOrientation(Qt::Horizontal);
+
+        verticalLayout->addWidget(horizontalSlider_x);
+
+        horizontalSlider_y = new QSlider(centralwidget);
+        horizontalSlider_y->setObjectName(QString::fromUtf8("horizontalSlider_y"));
+        horizontalSlider_y->setMinimum(-99);
+        horizontalSlider_y->setOrientation(Qt::Horizontal);
+
+        verticalLayout->addWidget(horizontalSlider_y);
+
+        horizontalSlider_z = new QSlider(centralwidget);
+        horizontalSlider_z->setObjectName(QString::fromUtf8("horizontalSlider_z"));
+        horizontalSlider_z->setOrientation(Qt::Horizontal);
+
+        verticalLayout->addWidget(horizontalSlider_z);
+
+        horizontalSlider_r = new QSlider(centralwidget);
+        horizontalSlider_r->setObjectName(QString::fromUtf8("horizontalSlider_r"));
+        horizontalSlider_r->setOrientation(Qt::Horizontal);
+
+        verticalLayout->addWidget(horizontalSlider_r);
+
+
+        verticalLayout_3->addLayout(verticalLayout);
 
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
@@ -265,7 +301,7 @@ public:
         horizontalLayout_3->addWidget(pushButtonDelete);
 
 
-        verticalLayout->addLayout(horizontalLayout_3);
+        verticalLayout_3->addLayout(horizontalLayout_3);
 
         RobotDrawUi->setCentralWidget(centralwidget);
         menubar = new QMenuBar(RobotDrawUi);

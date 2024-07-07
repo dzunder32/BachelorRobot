@@ -10,24 +10,128 @@ RobotDraw::RobotDraw(Kinematik *robotKinematik,Robot *robot, QVector3D sled_pos,
     _robot = robot;
     _plane = plane;
     _widget3d = widget3d;
+    _l1BasePos = sled_pos;
     _timer = new QTimer;
     connect(_timer, &QTimer::timeout,this, &RobotDraw::robDraw_onTimeout);
 
-    QVector3D ew = CalculateEw(_plane->matrix()*QMatrix4x4(QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),90).toRotationMatrix()));
-    a=ew.x();
-    b=ew.y();
-    c=ew.z();
-    l1=-250;
+    // QVector3D ew = CalculateEw(_plane->matrix()*QMatrix4x4(QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),90).toRotationMatrix()));
+    // a=ew.x();
+    // b=ew.y();
+    // c=ew.z();
+    // l1=-250;
 
-    robotMat.setColumn(3,QVector4D((sled_pos+QVector3D(0,l1,0)),1));
+    // robotPosition = sled_pos+QVector3D(0,l1,0);
+    // robotMat.setColumn(3,QVector4D(robotPosition,1));
+    setL1(0);
     robotMat.rotate(90,QVector3D(0,0,1));
+    PlanePositionChanged();
 
-    rotation_plane = _plane->matrix();
-    rotation_plane.setColumn(3,QVector4D(0,0,0,1));
 
     initLetterSize(1);
 }
 
+void RobotDraw::PlanePositionChanged()
+{
+    rotation_plane = _plane->matrix();
+    rotation_plane.setColumn(3,QVector4D(0,0,0,1));
+    QVector3D ew = CalculateEw(_plane->matrix()*QMatrix4x4(QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),90).toRotationMatrix()));
+    a=ew.x();
+    b=ew.y();
+    c=ew.z();
+    calculateL1_new();
+
+}
+void RobotDraw::CalculateL1()
+{
+    QVector3D dist_vec = _plane->translation()-robotPosition;
+    qDebug()<<dist_vec;
+    double preffered_distance = 500;
+    double sqrt_arg = pow(preffered_distance,2) - pow(dist_vec.x(),2) -pow(dist_vec.z(),2);
+    qDebug()<<"sqrtarg"<<sqrt_arg;
+    if(abs(sqrt_arg)< 0.001)
+        sqrt_arg=1;
+
+    if(sqrt_arg<0){
+        qDebug()<<"negative sqrt argument! CalculateL1()";
+        return;
+    }
+    double sqrt_result = sqrt(sqrt_arg);
+    double new_l1n = -sqrt_result-_plane->translation().y();
+    double new_l1p = sqrt_result-_plane->translation().y();
+    qDebug()<<"l1n"<<new_l1n<<"l1p"<<new_l1p;
+    QVector3D robPos1 = _l1BasePos + QVector3D(0,new_l1n,0);
+    QVector3D robPos2 = _l1BasePos + QVector3D(0,new_l1p,0);
+    float ang1 = calculateAngleBetweenVectors(_plane->translation()- robPos1,rotation_plane.column(2).toVector3D());
+    float ang2 = calculateAngleBetweenVectors(_plane->translation()- robPos2,rotation_plane.column(2).toVector3D());
+    qDebug()<<"ang1:"<<ang1<<"ang2:"<<ang2;
+}
+
+float RobotDraw::calculateAngleBetweenVectors(QVector3D vectorA, QVector3D vectorB) {
+    float dotProduct = QVector3D::dotProduct(vectorA, vectorB);
+    float magnitudeA = vectorA.length();
+    float magnitudeB = vectorB.length();
+
+    float angleInRadians = acos(dotProduct / (magnitudeA * magnitudeB));
+    return angleInRadians * (180.0 / M_PI); // Convert radians to degrees
+}
+
+float RobotDraw::calculateL1_new()
+{
+    QVector3D line_position = _l1BasePos;
+    QVector3D plane_position = _plane->translation();
+    QVector3D vec_subtraction = line_position - plane_position;
+    QVector3D line_direction = robotMat.column(0).toVector3D();
+    qDebug()<<"direction:"<<line_direction;
+    float dotProduct = QVector3D::dotProduct(vec_subtraction, line_direction);
+    float line_directionSquared = line_direction.lengthSquared();
+
+    float k = -dotProduct/line_directionSquared;
+    // if(k >= 800)
+    //     k=800;
+    // if(k<=-800)
+    //     k=-800;
+
+    QVector3D R = line_position + k * line_direction;
+
+    QVector3D RP = plane_position-R;
+    qDebug()<<"RP len:"<<RP.length();
+    float preferred_dist = 700;
+
+    if(RP.length()<preferred_dist){
+        float alpha = acos(RP.length()/preferred_dist);
+        qDebug()<<"alpha"<<alpha * (180.0/M_PI);
+
+        QVector3D S1 = R + ((preferred_dist*sin(alpha)) * line_direction);
+        QVector3D S2 = R - ((preferred_dist*sin(alpha)) * line_direction);
+
+        qDebug()<<"R:"<<R<<"S:"<<S1;
+        qDebug()<<"R:"<<R<<"S:"<<S2;
+
+        PointsBuffer.append(R);
+        robotSequence.append(POINT);
+        PointsBuffer.append(S1);
+        robotSequence.append(POINT);
+        PointsBuffer.append(S2);
+        robotSequence.append(POINT);
+    }
+
+    // QVector3D robotPosition
+
+
+
+
+
+
+    // drawPoint_Widget(QVector3D(0,0,100),10,QColor(255,255,255));
+}
+void RobotDraw::setL1(double val)
+{
+    l1=val;
+    robotPosition = _l1BasePos + QVector3D(0,l1,0);
+    robotMat.setColumn(3,QVector4D(robotPosition,1));
+
+
+}
 
 void RobotDraw::robDraw_onTimeout()
 {
@@ -66,7 +170,7 @@ void RobotDraw::robotDrawPoint()
         QVector3D basePoint = PointsBuffer.takeFirst();
         robot_setPoint(Base2RobotPoint(basePoint));
         if(moveAboveCounter<2){drawPoint_Widget(basePoint,2,QColor(0,255,0));moveAboveCounter++;}
-       // else{drawPoint_Widget(basePoint,2,QColor(255,0,0));}
+       else{drawPoint_Widget(basePoint,10,QColor(255,0,0));}
         if(line_isTrue){drawLine(startLinePoint,basePoint);line_isTrue = false;}
     }
     else {stopTimer_goHome();}

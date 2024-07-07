@@ -8,6 +8,7 @@ RobotDrawUi::RobotDrawUi(Kinematik *robotKinematik,Robot *robot, QVector3D sled_
     ui->setupUi(this);
     _widget3d = widget3d;
     _robot = robot;
+    _plane = plane;
     _robDraw = new RobotDraw(robotKinematik,_robot,sled_pos,plane,widget3d);
     _robDraw->moveToThread(&robotThread);
 
@@ -43,6 +44,7 @@ void RobotDrawUi::increaseTimerSpeed(float factor)
 void RobotDrawUi::on_pushButtonStart_clicked()
 {
 //    _robDraw->connectTimer();
+
     if(preview_isDrawn){
         _widget3d->deleteAllLines();
         _widget3d->deleteAllPoints();
@@ -50,6 +52,7 @@ void RobotDrawUi::on_pushButtonStart_clicked()
     }
     startDrawTimer();
     setTimerSpeed(ui->timerSpeedSlider->value());
+    _robDraw->PlanePositionChanged();
 //    disconnect(_robDraw->_timer, &QTimer::timeout,this, &RobotDraw::robDraw_onTimeout);
 }
 
@@ -192,5 +195,46 @@ void RobotDrawUi::on_pushButton_draw_clicked()
 void RobotDrawUi::on_spinBox_letterSize_valueChanged(int arg1)
 {
     _robDraw->initLetterSize(float(arg1)/10);
+}
+
+
+void RobotDrawUi::on_horizontalSlider_x_sliderMoved(int position)
+{
+    if(position>ui->horizontalSlider_x->value()){
+        _plane->setTranslation(_plane->translation() + QVector3D(50,0,0));
+    }else{
+        _plane->setTranslation(_plane->translation() - QVector3D(50,0,0));
+    }
+
+}
+
+
+void RobotDrawUi::on_horizontalSlider_y_sliderMoved(int position)
+{
+    if(position>ui->horizontalSlider_y->value()){
+        _plane->setTranslation(_plane->translation() + QVector3D(0,50,0));
+    }else{
+        _plane->setTranslation(_plane->translation() - QVector3D(0,50,0));
+    }
+}
+
+
+void RobotDrawUi::on_horizontalSlider_z_sliderMoved(int position)
+{
+    if(position>ui->horizontalSlider_z->value()){
+        _plane->setTranslation(_plane->translation() + QVector3D(0,0,50));
+    }else{
+        _plane->setTranslation(_plane->translation() - QVector3D(0,0,50));
+    }
+}
+
+
+void RobotDrawUi::on_horizontalSlider_r_sliderMoved(int position)
+{
+    if(position>ui->horizontalSlider_r->value()){
+        _plane->setRotation(_plane->rotation() * QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),10));
+    }else{
+        _plane->setRotation(_plane->rotation() * QQuaternion::fromAxisAndAngle(QVector3D(1,0,0),-10));
+    }
 }
 

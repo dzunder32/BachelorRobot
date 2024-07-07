@@ -39,13 +39,15 @@ public:
     void initLetterSize(float sizeFactor);
     void drawGrid();
     void clearBuffers(){CircleBuffer.clear();PointsBuffer.clear();LinesBuffer.clear();robotSequence.clear();line_isTrue=false;}
+    void PlanePositionChanged();
+
 private:
     Letters *_letters;
     Widget3D *_widget3d;
     Kinematik *_robotKinematik;
     Robot *_robot;
     Plane* _plane;
-
+    QVector3D _l1BasePos;
     int moveAboveCounter = 2;
     bool line_isTrue = false;
     bool simulation_isTrue = true;
@@ -87,6 +89,10 @@ private:
     void moveTipAbove();
     void robot_moveInCircle(QVector<QVector2D> circlePoints);
     void initCirclePointsSpeedUp(float range);
+    void setL1(double val);
+    void CalculateL1();
+    float calculateAngleBetweenVectors(QVector3D vectorA, QVector3D vectorB);
+    float calculateL1_new();
 public slots:
 
 signals:

@@ -86,10 +86,10 @@ float RobotDraw::calculateL1_new()
     float line_directionSquared = line_direction.lengthSquared();
 
     float k = -dotProduct/line_directionSquared;
-    if(k >= 800)
-        k=800;
-    if(k<=-800)
-        k=-800;
+    // if(k >= 800)
+    //     k=800;
+    // if(k<=-800)
+    //     k=-800;
 
     QVector3D R = line_position + k * line_direction;
 

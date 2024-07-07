@@ -39,6 +39,7 @@ void RobotDraw::PlanePositionChanged()
     b=ew.y();
     c=ew.z();
     calculateL1_new();
+    //You Imbecile!
 
 }
 void RobotDraw::CalculateL1()

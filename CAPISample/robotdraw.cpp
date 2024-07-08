@@ -117,6 +117,23 @@ float RobotDraw::calculateL1_new()
 
     QVector <QVector3D> solutionVec_3d;
 
+    float alpha = acos(distPlane_3d.length()/preferred_dist);
+    qDebug()<<"alpha"<<alpha * (180.0/M_PI);
+
+    QVector3D S1 = minDist_3d - ((preferred_dist*sin(alpha)) * line_direction_3d);
+    QVector3D S2 = minDist_3d + ((preferred_dist*sin(alpha)) * line_direction_3d);
+
+    qDebug()<<"minDist_3d"<<minDist_3d<<"S1:"<<S1;
+    qDebug()<<"S2:"<<S2;
+
+    PointsBuffer.append(minDist_3d);
+    robotSequence.append(POINT);
+    PointsBuffer.append(S1);
+    robotSequence.append(POINT);
+    PointsBuffer.append(S2);
+    robotSequence.append(POINT);
+
+
     if(distPlane_3d.length()<preferred_dist){
 
         //check wether Plane Position is in Rect
@@ -151,21 +168,7 @@ float RobotDraw::calculateL1_new()
             qDebug()<<"plane not reachable, frontCheck not good";
         }
 
-        float alpha = acos(distPlane_3d.length()/preferred_dist);
-        qDebug()<<"alpha"<<alpha * (180.0/M_PI);
 
-        QVector3D S1 = minDist_3d - ((preferred_dist*sin(alpha)) * line_direction_3d);
-        QVector3D S2 = minDist_3d + ((preferred_dist*sin(alpha)) * line_direction_3d);
-
-        qDebug()<<"minDist_3d"<<minDist_3d<<"S1:"<<S1;
-        qDebug()<<"S2:"<<S2;
-
-        PointsBuffer.append(minDist_3d);
-        robotSequence.append(POINT);
-        PointsBuffer.append(S1);
-        robotSequence.append(POINT);
-        PointsBuffer.append(S2);
-        robotSequence.append(POINT);
 
 
         //check wether Plane Position is in Sphere 1 or 2
@@ -206,7 +209,7 @@ float RobotDraw::calculateL1_new()
 
     // QVector3D robotPosition
     // drawPoint_Widget(QVector3D(0,0,100),10,QColor(255,255,255));
-}
+    }}
 void RobotDraw::setL1(double val)
 {
     l1=val;
@@ -238,6 +241,7 @@ void RobotDraw::robDraw_onTimeout()
     }
     else
     {
+        qDebug()<<"main Home";
         stopTimer_goHome();
     }
 }

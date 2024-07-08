@@ -272,11 +272,7 @@ void RobotDraw::robDraw_onTimeout()
     }
     else
     {
-<<<<<<< HEAD
         qDebug()<<"main Home";
-=======
-        qDebug()<<"main Home!";
->>>>>>> 298ddadaad143f57b7a0713b5ea4bc58fd7269aa
         stopTimer_goHome();
     }
 }

@@ -44,7 +44,6 @@ void RobotDrawUi::increaseTimerSpeed(float factor)
 void RobotDrawUi::on_pushButtonStart_clicked()
 {
 //    _robDraw->connectTimer();
-
     if(preview_isDrawn){
         _widget3d->deleteAllLines();
         _widget3d->deleteAllPoints();
@@ -53,6 +52,7 @@ void RobotDrawUi::on_pushButtonStart_clicked()
     startDrawTimer();
     setTimerSpeed(ui->timerSpeedSlider->value());
     _robDraw->PlanePositionChanged();
+//    qDebug()<<"till here";
 //    disconnect(_robDraw->_timer, &QTimer::timeout,this, &RobotDraw::robDraw_onTimeout);
 }
 
@@ -133,6 +133,8 @@ void RobotDrawUi::insertRobotSequenceText(QString str)
 void RobotDrawUi::startDrawTimer()
 {
     _robDraw->_timer->start();
+    qDebug()<<"TimerStarted";
+    qDebug()<<_robDraw->_timer->isActive();
     _robDraw->safeCurrentSequence();
 }
 

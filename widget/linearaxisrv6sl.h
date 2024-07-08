@@ -4,7 +4,6 @@
 #include <QObject>
 #include "linearaxis.h"
 #include "stlmesh.h"
-#include "dialog.h"
 #include "coordinatesystem.h"
 class LinearAxisRV6SL: public LinearAxis
 {

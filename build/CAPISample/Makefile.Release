@@ -999,6 +999,7 @@ release/moc_draw.cpp: ../../CAPISample/draw.h \
 		../../melfaRobots/robot.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtNetwork/QTcpSocket \
 		../../CAPISample/letters.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/QVariantList \
 		release/moc_predefs.h \
 		C:/Qt/5.15.2/mingw81_64/bin/moc.exe
 	C:\Qt\5.15.2\mingw81_64\bin\moc.exe $(DEFINES) --include "C:/Users/Denis Zyulin/Desktop/Git/BachelorRobot/build/CAPISample/release/moc_predefs.h" -IC:/Qt/5.15.2/mingw81_64/mkspecs/win32-g++ -I"C:/Users/Denis Zyulin/Desktop/Git/BachelorRobot/CAPISample" -I"C:/Users/Denis Zyulin/Desktop/Git/BachelorRobot/CAPILibary" -I"C:/Users/Denis Zyulin/Desktop/Git/BachelorRobot/widget" -I"C:/Users/Denis Zyulin/Desktop/Git/BachelorRobot/melfaRobots" -IC:/Qt/5.15.2/mingw81_64/include -IC:/Qt/5.15.2/mingw81_64/include/QtWidgets -IC:/Qt/5.15.2/mingw81_64/include/Qt3DExtras -IC:/Qt/5.15.2/mingw81_64/include/Qt3DRender -IC:/Qt/5.15.2/mingw81_64/include/Qt3DInput -IC:/Qt/5.15.2/mingw81_64/include/Qt3DLogic -IC:/Qt/5.15.2/mingw81_64/include/Qt3DCore -IC:/Qt/5.15.2/mingw81_64/include/QtGamepad -IC:/Qt/5.15.2/mingw81_64/include/QtGui -IC:/Qt/5.15.2/mingw81_64/include/QtANGLE -IC:/Qt/5.15.2/mingw81_64/include/QtNetwork -IC:/Qt/5.15.2/mingw81_64/include/QtCore -I. -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed -IC:/Qt/Tools/mingw810_64/x86_64-w64-mingw32/include ..\..\CAPISample\draw.h -o release\moc_draw.cpp
@@ -1858,6 +1859,7 @@ release/moc_drawletters.cpp: ../../CAPISample/drawletters.h \
 		../../melfaRobots/robot.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtNetwork/QTcpSocket \
 		../../CAPISample/letters.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/QVariantList \
 		release/moc_predefs.h \
 		C:/Qt/5.15.2/mingw81_64/bin/moc.exe
 	C:\Qt\5.15.2\mingw81_64\bin\moc.exe $(DEFINES) --include "C:/Users/Denis Zyulin/Desktop/Git/BachelorRobot/build/CAPISample/release/moc_predefs.h" -IC:/Qt/5.15.2/mingw81_64/mkspecs/win32-g++ -I"C:/Users/Denis Zyulin/Desktop/Git/BachelorRobot/CAPISample" -I"C:/Users/Denis Zyulin/Desktop/Git/BachelorRobot/CAPILibary" -I"C:/Users/Denis Zyulin/Desktop/Git/BachelorRobot/widget" -I"C:/Users/Denis Zyulin/Desktop/Git/BachelorRobot/melfaRobots" -IC:/Qt/5.15.2/mingw81_64/include -IC:/Qt/5.15.2/mingw81_64/include/QtWidgets -IC:/Qt/5.15.2/mingw81_64/include/Qt3DExtras -IC:/Qt/5.15.2/mingw81_64/include/Qt3DRender -IC:/Qt/5.15.2/mingw81_64/include/Qt3DInput -IC:/Qt/5.15.2/mingw81_64/include/Qt3DLogic -IC:/Qt/5.15.2/mingw81_64/include/Qt3DCore -IC:/Qt/5.15.2/mingw81_64/include/QtGamepad -IC:/Qt/5.15.2/mingw81_64/include/QtGui -IC:/Qt/5.15.2/mingw81_64/include/QtANGLE -IC:/Qt/5.15.2/mingw81_64/include/QtNetwork -IC:/Qt/5.15.2/mingw81_64/include/QtCore -I. -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed -IC:/Qt/Tools/mingw810_64/x86_64-w64-mingw32/include ..\..\CAPISample\drawletters.h -o release\moc_drawletters.cpp
@@ -3669,6 +3671,8 @@ release/moc_robotdraw.cpp: ../../CAPISample/robotdraw.h \
 		../../melfaRobots/robot.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtNetwork/QTcpSocket \
 		../../CAPISample/letters.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/QVariantList \
+		C:/Qt/5.15.2/mingw81_64/include/QtGui/QVector4D \
 		release/moc_predefs.h \
 		C:/Qt/5.15.2/mingw81_64/bin/moc.exe
 	C:\Qt\5.15.2\mingw81_64\bin\moc.exe $(DEFINES) --include "C:/Users/Denis Zyulin/Desktop/Git/BachelorRobot/build/CAPISample/release/moc_predefs.h" -IC:/Qt/5.15.2/mingw81_64/mkspecs/win32-g++ -I"C:/Users/Denis Zyulin/Desktop/Git/BachelorRobot/CAPISample" -I"C:/Users/Denis Zyulin/Desktop/Git/BachelorRobot/CAPILibary" -I"C:/Users/Denis Zyulin/Desktop/Git/BachelorRobot/widget" -I"C:/Users/Denis Zyulin/Desktop/Git/BachelorRobot/melfaRobots" -IC:/Qt/5.15.2/mingw81_64/include -IC:/Qt/5.15.2/mingw81_64/include/QtWidgets -IC:/Qt/5.15.2/mingw81_64/include/Qt3DExtras -IC:/Qt/5.15.2/mingw81_64/include/Qt3DRender -IC:/Qt/5.15.2/mingw81_64/include/Qt3DInput -IC:/Qt/5.15.2/mingw81_64/include/Qt3DLogic -IC:/Qt/5.15.2/mingw81_64/include/Qt3DCore -IC:/Qt/5.15.2/mingw81_64/include/QtGamepad -IC:/Qt/5.15.2/mingw81_64/include/QtGui -IC:/Qt/5.15.2/mingw81_64/include/QtANGLE -IC:/Qt/5.15.2/mingw81_64/include/QtNetwork -IC:/Qt/5.15.2/mingw81_64/include/QtCore -I. -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed -IC:/Qt/Tools/mingw810_64/x86_64-w64-mingw32/include ..\..\CAPISample\robotdraw.h -o release\moc_robotdraw.cpp
@@ -4524,6 +4528,8 @@ release/moc_robotdrawui.cpp: ../../CAPISample/robotdrawui.h \
 		../../melfaRobots/robot.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtNetwork/QTcpSocket \
 		../../CAPISample/letters.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/QVariantList \
+		C:/Qt/5.15.2/mingw81_64/include/QtGui/QVector4D \
 		release/moc_predefs.h \
 		C:/Qt/5.15.2/mingw81_64/bin/moc.exe
 	C:\Qt\5.15.2\mingw81_64\bin\moc.exe $(DEFINES) --include "C:/Users/Denis Zyulin/Desktop/Git/BachelorRobot/build/CAPISample/release/moc_predefs.h" -IC:/Qt/5.15.2/mingw81_64/mkspecs/win32-g++ -I"C:/Users/Denis Zyulin/Desktop/Git/BachelorRobot/CAPISample" -I"C:/Users/Denis Zyulin/Desktop/Git/BachelorRobot/CAPILibary" -I"C:/Users/Denis Zyulin/Desktop/Git/BachelorRobot/widget" -I"C:/Users/Denis Zyulin/Desktop/Git/BachelorRobot/melfaRobots" -IC:/Qt/5.15.2/mingw81_64/include -IC:/Qt/5.15.2/mingw81_64/include/QtWidgets -IC:/Qt/5.15.2/mingw81_64/include/Qt3DExtras -IC:/Qt/5.15.2/mingw81_64/include/Qt3DRender -IC:/Qt/5.15.2/mingw81_64/include/Qt3DInput -IC:/Qt/5.15.2/mingw81_64/include/Qt3DLogic -IC:/Qt/5.15.2/mingw81_64/include/Qt3DCore -IC:/Qt/5.15.2/mingw81_64/include/QtGamepad -IC:/Qt/5.15.2/mingw81_64/include/QtGui -IC:/Qt/5.15.2/mingw81_64/include/QtANGLE -IC:/Qt/5.15.2/mingw81_64/include/QtNetwork -IC:/Qt/5.15.2/mingw81_64/include/QtCore -I. -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed -IC:/Qt/Tools/mingw810_64/x86_64-w64-mingw32/include ..\..\CAPISample\robotdrawui.h -o release\moc_robotdrawui.cpp
@@ -5412,7 +5418,8 @@ release/draw.o: ../../CAPISample/draw.cpp ../../CAPISample/draw.h \
 		../../widget/coordinatesystem.h \
 		../../melfaRobots/robot.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtNetwork/QTcpSocket \
-		../../CAPISample/letters.h
+		../../CAPISample/letters.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/QVariantList
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\draw.o ..\..\CAPISample\draw.cpp
 
 release/drawletters.o: ../../CAPISample/drawletters.cpp ../../CAPISample/drawletters.h \
@@ -6270,6 +6277,7 @@ release/drawletters.o: ../../CAPISample/drawletters.cpp ../../CAPISample/drawlet
 		../../melfaRobots/robot.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtNetwork/QTcpSocket \
 		../../CAPISample/letters.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/QVariantList \
 		ui_drawletters.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\drawletters.o ..\..\CAPISample\drawletters.cpp
 
@@ -6321,7 +6329,34 @@ release/letters.o: ../../CAPISample/letters.cpp ../../CAPISample/letters.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qvarlengtharray.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qcontainerfwd.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qobjectdefs.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qobjectdefs_impl.h
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qobjectdefs_impl.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/QVariantList \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qvariant.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qlist.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qbytearraylist.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qstringlist.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qregexp.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qstringmatcher.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qmap.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdebug.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qhash.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtextstream.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qiodevice.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qobject.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qcoreevent.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qscopedpointer.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qobject_impl.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qlocale.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qshareddata.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qset.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qcontiguouscache.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qsharedpointer.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qsharedpointer_impl.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/QDebug \
+		C:/Qt/5.15.2/mingw81_64/include/QtGui/QVector2D \
+		C:/Qt/5.15.2/mingw81_64/include/QtGui/qvector2d.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/QtMath \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qmath.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\letters.o ..\..\CAPISample\letters.cpp
 
 release/main.o: ../../CAPISample/main.cpp ../../CAPISample/mainwindow.h \
@@ -7178,36 +7213,13 @@ release/main.o: ../../CAPISample/main.cpp ../../CAPISample/mainwindow.h \
 		../../widget/linearaxisrv6sl.h \
 		../../widget/linearaxis.h \
 		../../widget/stlmesh.h \
-		../../widget/dialog.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QDialog \
 		../../widget/coordinatesystem.h \
-		../../widget/rv6sl.h \
-		../../widget/sixjointrobot.h \
-		../../widget/tool.h \
-		../../widget/rv4fl.h \
-		../../widget/kinectcamera.h \
 		../../melfaRobots/rv6slkinematik.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QtMath \
 		../../melfaRobots/kinematik.h \
 		../../melfaRobots/robotPosition.h \
 		../../melfaRobots/position.h \
-		../../melfaRobots/mathfunktions.h \
-		../../melfaRobots/controlpanel.h \
-		../../melfaRobots/subwindow.h \
-		../../CAPISample/drawletters.h \
-		../../CAPISample/draw.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/QFile \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/QTextStream \
-		C:/Qt/5.15.2/mingw81_64/include/Qt3DExtras/QSphereMesh \
-		C:/Qt/5.15.2/mingw81_64/include/Qt3DExtras/QPhongMaterial \
-		../../widget/plane.h \
-		../../melfaRobots/robot.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtNetwork/QTcpSocket \
-		../../CAPISample/letters.h \
-		../../CAPISample/robotdrawui.h \
-		../../CAPISample/robotdraw.h \
-		../../widget/penholder.h \
-		../../melfaRobots/robotcontrol.h
+		../../melfaRobots/mathfunktions.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\main.o ..\..\CAPISample\main.cpp
 
 release/mainwindow.o: ../../CAPISample/mainwindow.cpp ../../CAPISample/mainwindow.h \
@@ -9101,7 +9113,9 @@ release/robotdraw.o: ../../CAPISample/robotdraw.cpp ../../CAPISample/robotdraw.h
 		../../widget/coordinatesystem.h \
 		../../melfaRobots/robot.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtNetwork/QTcpSocket \
-		../../CAPISample/letters.h
+		../../CAPISample/letters.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/QVariantList \
+		C:/Qt/5.15.2/mingw81_64/include/QtGui/QVector4D
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\robotdraw.o ..\..\CAPISample\robotdraw.cpp
 
 release/robotdrawui.o: ../../CAPISample/robotdrawui.cpp ../../CAPISample/robotdrawui.h \
@@ -9955,6 +9969,8 @@ release/robotdrawui.o: ../../CAPISample/robotdrawui.cpp ../../CAPISample/robotdr
 		../../melfaRobots/robot.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtNetwork/QTcpSocket \
 		../../CAPISample/letters.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/QVariantList \
+		C:/Qt/5.15.2/mingw81_64/include/QtGui/QVector4D \
 		ui_robotdrawui.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\robotdrawui.o ..\..\CAPISample\robotdrawui.cpp
 

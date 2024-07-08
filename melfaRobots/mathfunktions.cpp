@@ -51,10 +51,10 @@ QMatrix4x4 CalculateT(double x, double y, double z, double EW1, double EW2, doub
         }
     }
     return tReturn;
-
 }
 
 QVector3D CalculateEw(QMatrix4x4 mat)
+
 {
     //*******************************************
     //*******************************************
@@ -71,11 +71,13 @@ QVector3D CalculateEw(QMatrix4x4 mat)
 }
 
 QVector3D CalculateXYZ(QMatrix4x4 m)
+
 {
 return QVector3D(m(0,3),m(1,3),m(2,3));
 }
 
 QMatrix4x4 CalculateTFromJoint(double q,double alpha,double a,double d)
+
 {
     alpha=alpha*M_PI/180;
     q=q*M_PI/180;
@@ -94,6 +96,7 @@ QMatrix4x4 CalculateTFromJoint(double q,double alpha,double a,double d)
 }
 
 void RotatateT(QMatrix4x4* trans,int axis,double alpha)
+
 {
     QMatrix4x4 rot;
 

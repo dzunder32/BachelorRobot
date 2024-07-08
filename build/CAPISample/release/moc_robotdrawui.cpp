@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_RobotDrawUi_t {
-    QByteArrayData data[20];
-    char stringdata0[382];
+    QByteArrayData data[30];
+    char stringdata0[605];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -42,16 +42,26 @@ QT_MOC_LITERAL(6, 93, 31), // "on_timerSpeedSlider_sliderMoved"
 QT_MOC_LITERAL(7, 125, 8), // "position"
 QT_MOC_LITERAL(8, 134, 27), // "on_pushButton_setP1_clicked"
 QT_MOC_LITERAL(9, 162, 27), // "on_pushButton_setP2_clicked"
-QT_MOC_LITERAL(10, 190, 21), // "on_pushButton_clicked"
-QT_MOC_LITERAL(11, 212, 29), // "on_pushButton_addLine_clicked"
-QT_MOC_LITERAL(12, 242, 27), // "on_pushButton_addP1_clicked"
-QT_MOC_LITERAL(13, 270, 27), // "on_pushButton_addP2_clicked"
-QT_MOC_LITERAL(14, 298, 29), // "on_pushButton_History_clicked"
-QT_MOC_LITERAL(15, 328, 14), // "startDrawTimer"
-QT_MOC_LITERAL(16, 343, 13), // "stopDrawTimer"
-QT_MOC_LITERAL(17, 357, 14), // "drawLineWidget"
-QT_MOC_LITERAL(18, 372, 5), // "start"
-QT_MOC_LITERAL(19, 378, 3) // "end"
+QT_MOC_LITERAL(10, 190, 29), // "on_pushButton_addLine_clicked"
+QT_MOC_LITERAL(11, 220, 27), // "on_pushButton_addP1_clicked"
+QT_MOC_LITERAL(12, 248, 29), // "on_pushButton_History_clicked"
+QT_MOC_LITERAL(13, 278, 15), // "widgetDrawPoint"
+QT_MOC_LITERAL(14, 294, 5), // "point"
+QT_MOC_LITERAL(15, 300, 9), // "thickness"
+QT_MOC_LITERAL(16, 310, 5), // "color"
+QT_MOC_LITERAL(17, 316, 31), // "on_pushButton_addCircle_clicked"
+QT_MOC_LITERAL(18, 348, 26), // "on_pushButton_draw_clicked"
+QT_MOC_LITERAL(19, 375, 34), // "on_spinBox_letterSize_valueCh..."
+QT_MOC_LITERAL(20, 410, 4), // "arg1"
+QT_MOC_LITERAL(21, 415, 33), // "on_horizontalSlider_x_sliderM..."
+QT_MOC_LITERAL(22, 449, 33), // "on_horizontalSlider_y_sliderM..."
+QT_MOC_LITERAL(23, 483, 33), // "on_horizontalSlider_z_sliderM..."
+QT_MOC_LITERAL(24, 517, 33), // "on_horizontalSlider_r_sliderM..."
+QT_MOC_LITERAL(25, 551, 14), // "startDrawTimer"
+QT_MOC_LITERAL(26, 566, 13), // "stopDrawTimer"
+QT_MOC_LITERAL(27, 580, 14), // "drawLineWidget"
+QT_MOC_LITERAL(28, 595, 5), // "start"
+QT_MOC_LITERAL(29, 601, 3) // "end"
 
     },
     "RobotDrawUi\0startDrawing\0\0stopDrawing\0"
@@ -60,11 +70,17 @@ QT_MOC_LITERAL(19, 378, 3) // "end"
     "on_timerSpeedSlider_sliderMoved\0"
     "position\0on_pushButton_setP1_clicked\0"
     "on_pushButton_setP2_clicked\0"
-    "on_pushButton_clicked\0"
     "on_pushButton_addLine_clicked\0"
     "on_pushButton_addP1_clicked\0"
-    "on_pushButton_addP2_clicked\0"
     "on_pushButton_History_clicked\0"
+    "widgetDrawPoint\0point\0thickness\0color\0"
+    "on_pushButton_addCircle_clicked\0"
+    "on_pushButton_draw_clicked\0"
+    "on_spinBox_letterSize_valueChanged\0"
+    "arg1\0on_horizontalSlider_x_sliderMoved\0"
+    "on_horizontalSlider_y_sliderMoved\0"
+    "on_horizontalSlider_z_sliderMoved\0"
+    "on_horizontalSlider_r_sliderMoved\0"
     "startDrawTimer\0stopDrawTimer\0"
     "drawLineWidget\0start\0end"
 };
@@ -76,7 +92,7 @@ static const uint qt_meta_data_RobotDrawUi[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      15,   14, // methods
+      21,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -84,23 +100,29 @@ static const uint qt_meta_data_RobotDrawUi[] = {
        2,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   89,    2, 0x06 /* Public */,
-       3,    0,   90,    2, 0x06 /* Public */,
+       1,    0,  119,    2, 0x06 /* Public */,
+       3,    0,  120,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       4,    0,   91,    2, 0x08 /* Private */,
-       5,    0,   92,    2, 0x08 /* Private */,
-       6,    1,   93,    2, 0x08 /* Private */,
-       8,    0,   96,    2, 0x08 /* Private */,
-       9,    0,   97,    2, 0x08 /* Private */,
-      10,    0,   98,    2, 0x08 /* Private */,
-      11,    0,   99,    2, 0x08 /* Private */,
-      12,    0,  100,    2, 0x08 /* Private */,
-      13,    0,  101,    2, 0x08 /* Private */,
-      14,    0,  102,    2, 0x08 /* Private */,
-      15,    0,  103,    2, 0x0a /* Public */,
-      16,    0,  104,    2, 0x0a /* Public */,
-      17,    2,  105,    2, 0x0a /* Public */,
+       4,    0,  121,    2, 0x08 /* Private */,
+       5,    0,  122,    2, 0x08 /* Private */,
+       6,    1,  123,    2, 0x08 /* Private */,
+       8,    0,  126,    2, 0x08 /* Private */,
+       9,    0,  127,    2, 0x08 /* Private */,
+      10,    0,  128,    2, 0x08 /* Private */,
+      11,    0,  129,    2, 0x08 /* Private */,
+      12,    0,  130,    2, 0x08 /* Private */,
+      13,    3,  131,    2, 0x08 /* Private */,
+      17,    0,  138,    2, 0x08 /* Private */,
+      18,    0,  139,    2, 0x08 /* Private */,
+      19,    1,  140,    2, 0x08 /* Private */,
+      21,    1,  143,    2, 0x08 /* Private */,
+      22,    1,  146,    2, 0x08 /* Private */,
+      23,    1,  149,    2, 0x08 /* Private */,
+      24,    1,  152,    2, 0x08 /* Private */,
+      25,    0,  155,    2, 0x0a /* Public */,
+      26,    0,  156,    2, 0x0a /* Public */,
+      27,    2,  157,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void,
@@ -115,11 +137,17 @@ static const uint qt_meta_data_RobotDrawUi[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void, QMetaType::QVector3D, QMetaType::Float, QMetaType::QColor,   14,   15,   16,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,   20,
+    QMetaType::Void, QMetaType::Int,    7,
+    QMetaType::Void, QMetaType::Int,    7,
+    QMetaType::Void, QMetaType::Int,    7,
+    QMetaType::Void, QMetaType::Int,    7,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QVector3D, QMetaType::QVector3D,   18,   19,
+    QMetaType::Void, QMetaType::QVector3D, QMetaType::QVector3D,   28,   29,
 
        0        // eod
 };
@@ -137,14 +165,20 @@ void RobotDrawUi::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 4: _t->on_timerSpeedSlider_sliderMoved((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 5: _t->on_pushButton_setP1_clicked(); break;
         case 6: _t->on_pushButton_setP2_clicked(); break;
-        case 7: _t->on_pushButton_clicked(); break;
-        case 8: _t->on_pushButton_addLine_clicked(); break;
-        case 9: _t->on_pushButton_addP1_clicked(); break;
-        case 10: _t->on_pushButton_addP2_clicked(); break;
-        case 11: _t->on_pushButton_History_clicked(); break;
-        case 12: _t->startDrawTimer(); break;
-        case 13: _t->stopDrawTimer(); break;
-        case 14: _t->drawLineWidget((*reinterpret_cast< QVector3D(*)>(_a[1])),(*reinterpret_cast< QVector3D(*)>(_a[2]))); break;
+        case 7: _t->on_pushButton_addLine_clicked(); break;
+        case 8: _t->on_pushButton_addP1_clicked(); break;
+        case 9: _t->on_pushButton_History_clicked(); break;
+        case 10: _t->widgetDrawPoint((*reinterpret_cast< QVector3D(*)>(_a[1])),(*reinterpret_cast< float(*)>(_a[2])),(*reinterpret_cast< QColor(*)>(_a[3]))); break;
+        case 11: _t->on_pushButton_addCircle_clicked(); break;
+        case 12: _t->on_pushButton_draw_clicked(); break;
+        case 13: _t->on_spinBox_letterSize_valueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 14: _t->on_horizontalSlider_x_sliderMoved((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 15: _t->on_horizontalSlider_y_sliderMoved((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 16: _t->on_horizontalSlider_z_sliderMoved((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 17: _t->on_horizontalSlider_r_sliderMoved((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 18: _t->startDrawTimer(); break;
+        case 19: _t->stopDrawTimer(); break;
+        case 20: _t->drawLineWidget((*reinterpret_cast< QVector3D(*)>(_a[1])),(*reinterpret_cast< QVector3D(*)>(_a[2]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -195,13 +229,13 @@ int RobotDrawUi::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 15)
+        if (_id < 21)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 15;
+        _id -= 21;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 15)
+        if (_id < 21)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 15;
+        _id -= 21;
     }
     return _id;
 }

@@ -244,7 +244,7 @@ void Robot::writeToRobot(QString command)
         QByteArray command_temp = (command+"\r\n").toLocal8Bit();
         _socket->write(command_temp);
         qDebug()<<command;
-        robotCommand(command);
+        emit robotCommand(command);
         readFromRobot(command);
     }
 }
@@ -285,7 +285,6 @@ void Robot::readFromRobot(QString command)
             _position->setJoints(j1,j2,j3,j4,j5,j6,j7);
             _position->updateView();
         }
-
     }
 }
 

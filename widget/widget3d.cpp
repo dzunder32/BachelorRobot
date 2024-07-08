@@ -42,6 +42,8 @@ Widget3D::Widget3D(QWidget *parent) : QWidget(parent)
     trans_tool     = new Qt3DCore::QTransform();
     trans_polaris  = new Qt3DCore::QTransform();
     trans_position = new Qt3DCore::QTransform();
+    trans_point    = new Qt3DCore::QTransform();
+
     if (trackData)
     {
         livePlot = new LivePlot();
@@ -189,16 +191,11 @@ void Widget3D::drawPoint(QVector3D position, float size, QColor color)
     // Create a transform and set its translation
     Qt3DCore::QTransform *transform = new Qt3DCore::QTransform();
     transform->setTranslation(position);
+    point_position=position;
     entity->addComponent(transform);
 
 }
 
-// void Widget3D::drawLine()
-// {
-//      Qt3DCore::QEntity *entity = new Qt3DCore::QEntity(_rootEntity);
-//     lineEntities.append(entity);
-
-// }
 
 
 void Widget3D::addCylinderBetweenPoints(const QVector3D& startPoint, const QVector3D& endPoint)
@@ -214,8 +211,11 @@ void Widget3D::addCylinderBetweenPoints(const QVector3D& startPoint, const QVect
     // Calculate the midpoint and rotation angles
     auto midPoint = (startPoint + endPoint) / 2;
     auto transPoint = endPoint - startPoint;
-    auto xAngle = atan(sqrt(pow(transPoint.z(), 2) + pow(transPoint.x(), 2)) / transPoint.y()) / M_PI * 180;
-    auto yAngle = (transPoint.x() == 0 && transPoint.z() == 0)? 0 : atan(transPoint.x() / transPoint.z()) / M_PI * 180;
+    // auto xAngle = atan(sqrt(pow(transPoint.z(), 2) + pow(transPoint.x(), 2)) / transPoint.y()) / M_PI * 180;
+    auto xAngle = atan2(sqrt(pow(transPoint.z(), 2) + pow(transPoint.x(), 2)) , transPoint.y()) / M_PI * 180;
+
+    // auto yAngle = (transPoint.x() == 0 && transPoint.z() == 0)? 0 : atan(transPoint.x() / transPoint.z()) / M_PI * 180;
+    auto yAngle = (transPoint.x() == 0 && transPoint.z() == 0)? 0 : atan2(transPoint.x(), transPoint.z()) / M_PI * 180;
 
     // Create and configure the transformation node
     auto transform = new Qt3DCore::QTransform(cylinderEntity);

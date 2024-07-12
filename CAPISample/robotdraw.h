@@ -24,7 +24,8 @@ public:
     RobotDraw(Kinematik *robotKinematik,Robot *robot, QVector3D sled_pos,Plane* plane, Widget3D *widget3d);
     QTimer *_timer;
     int prev_timerTime;
-//    void setTimerTime(int time_ms){_timer->setInterval(time_ms);}
+    int planeCounter = 0;
+    //    void setTimerTime(int time_ms){_timer->setInterval(time_ms);}
     void stopTimer_goHome();
     void UpdatePointsBuffer(QVector<QVector3D> pts);
     void AddPoint2Buffer(QVector2D pointPlane);
@@ -90,9 +91,10 @@ private:
     void robot_moveInCircle(QVector<QVector2D> circlePoints);
     void initCirclePointsSpeedUp(float range);
     void setL1(double val);
-    void CalculateL1();
+//    void CalculateL1();
     float calculateAngleBetweenVectors(QVector3D vectorA, QVector3D vectorB);
-    void calculateL1_new();
+    void  calculateL1_new();
+    void checkPlane();
 public slots:
 
 signals:

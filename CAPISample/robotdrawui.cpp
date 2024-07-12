@@ -38,7 +38,7 @@ void RobotDrawUi::setTimerSpeed(int time_ms){
 void RobotDrawUi::increaseTimerSpeed(float factor)
 {
     setTimerSpeed(qRound(ui->timerSpeedSlider->value()*factor));
-    qDebug()<<"currSpeed:"<<qRound(ui->timerSpeedSlider->value()*factor);
+//    qDebug()<<"currSpeed:"<<qRound(ui->timerSpeedSlider->value()*factor);
 }
 
 void RobotDrawUi::on_pushButtonStart_clicked()
@@ -112,15 +112,6 @@ void RobotDrawUi::on_pushButton_addP1_clicked()
     // _widget3d->drawPoint(P1,5,QColor(255,0,255));
     insertRobotSequenceText("P2:(" + P1X_Str + ", " + P1Y_Str + ")");
 }
-
-// void RobotDrawUi::on_pushButton_addP2_clicked()
-// {
-//     QVector2D planePoint = P2;
-//     _robDraw->AddPoint2Buffer(planePoint);
-//     _widget3d->drawPoint(planePoint,5,QColor(255,0,255));
-//     insertRobotSequenceText("P2:(" + P2X_Str + ", " + P2Y_Str + ")");
-
-// }
 
 
 void RobotDrawUi::insertRobotSequenceText(QString str)

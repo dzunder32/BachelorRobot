@@ -90,9 +90,9 @@ private:
     void robot_moveInCircle(QVector<QVector2D> circlePoints);
     void initCirclePointsSpeedUp(float range);
     void setL1(double val);
-    void CalculateL1();
+//    void CalculateL1();
     float calculateAngleBetweenVectors(QVector3D vectorA, QVector3D vectorB);
-    void calculateL1_new();
+    void  calculateL1_new();
 public slots:
 
 signals:

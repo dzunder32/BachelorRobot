@@ -26,8 +26,6 @@ RobotDraw::RobotDraw(Kinematik *robotKinematik, Robot *robot, QVector3D sled_pos
     setL1(0);
     robotMat.rotate(90,QVector3D(0,0,1));
     PlanePositionChanged();
-
-
     initLetterSize(1);
 }
 
@@ -35,38 +33,38 @@ void RobotDraw::PlanePositionChanged()
 {
     rotation_plane = _plane->matrix();
     rotation_plane.setColumn(3,QVector4D(0,0,0,1));
-    QVector3D ew = CalculateEw(_plane->matrix()*QMatrix4x4(QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),90).toRotationMatrix()));
+    QVector3D ew = CalculateEw(robotMat.inverted() * rotation_plane*QMatrix4x4(QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180).toRotationMatrix()));
     a=ew.x();
     b=ew.y();
     c=ew.z();
     calculateL1_new();
     //You Imbecile!
-
 }
-void RobotDraw::CalculateL1()
-{
-    QVector3D dist_vec = _plane->translation()-robotPosition;
-    qDebug()<<dist_vec;
-    double preffered_distance = 500;
-    double sqrt_arg = pow(preffered_distance,2) - pow(dist_vec.x(),2) -pow(dist_vec.z(),2);
-    qDebug()<<"sqrtarg"<<sqrt_arg;
-    if(abs(sqrt_arg)< 0.001)
-        sqrt_arg=1;
 
-    if(sqrt_arg<0){
-        qDebug()<<"negative sqrt argument! CalculateL1()";
-        return;
-    }
-    double sqrt_result = sqrt(sqrt_arg);
-    double new_l1n = -sqrt_result-_plane->translation().y();
-    double new_l1p = sqrt_result-_plane->translation().y();
-    qDebug()<<"l1n"<<new_l1n<<"l1p"<<new_l1p;
-    QVector3D robPos1 = _l1BasePos + QVector3D(0,new_l1n,0);
-    QVector3D robPos2 = _l1BasePos + QVector3D(0,new_l1p,0);
-    float ang1 = calculateAngleBetweenVectors(_plane->translation()- robPos1,rotation_plane.column(2).toVector3D());
-    float ang2 = calculateAngleBetweenVectors(_plane->translation()- robPos2,rotation_plane.column(2).toVector3D());
-    qDebug()<<"ang1:"<<ang1<<"ang2:"<<ang2;
-}
+//void RobotDraw::CalculateL1()
+//{
+//    QVector3D dist_vec = _plane->translation()-robotPosition;
+//    qDebug()<<dist_vec;
+//    double preffered_distance = 500;
+//    double sqrt_arg = pow(preffered_distance,2) - pow(dist_vec.x(),2) -pow(dist_vec.z(),2);
+//    qDebug()<<"sqrtarg"<<sqrt_arg;
+//    if(abs(sqrt_arg)< 0.001)
+//        sqrt_arg=1;
+
+//    if(sqrt_arg<0){
+//        qDebug()<<"negative sqrt argument! CalculateL1()";
+//        return;
+//    }
+//    double sqrt_result = sqrt(sqrt_arg);
+//    double new_l1n = -sqrt_result-_plane->translation().y();
+//    double new_l1p = sqrt_result-_plane->translation().y();
+//    qDebug()<<"l1n"<<new_l1n<<"l1p"<<new_l1p;
+//    QVector3D robPos1 = _l1BasePos + QVector3D(0,new_l1n,0);
+//    QVector3D robPos2 = _l1BasePos + QVector3D(0,new_l1p,0);
+//    float ang1 = calculateAngleBetweenVectors(_plane->translation()- robPos1,rotation_plane.column(2).toVector3D());
+//    float ang2 = calculateAngleBetweenVectors(_plane->translation()- robPos2,rotation_plane.column(2).toVector3D());
+//    qDebug()<<"ang1:"<<ang1<<"ang2:"<<ang2;
+//}
 
 float RobotDraw::calculateAngleBetweenVectors(QVector3D vectorA, QVector3D vectorB) {
     float dotProduct = QVector3D::dotProduct(vectorA, vectorB);
@@ -83,118 +81,53 @@ void RobotDraw::calculateL1_new()
     QVector3D plane_position_3d  = _plane->translation();
     QVector3D vec_subtraction_3d = line_position_3d - plane_position_3d;
     QVector3D line_direction_3d  = robotMat.column(0).toVector3D();
-    float     preferred_dist     = 700;
     QVector3D axisLift_3d        = QVector3D(0,0,277);
     QVector3D nextRobPos_3d;
-    float     rob_radius        = 700;
+    float     prefRob_range      = 1000;
+    float     maxRob_range       = 1400;
     QVector <QVector3D> solutionVec_3d;
 
     QVector3D center1_3d      = line_position_3d - (line_direction_3d*800) + axisLift_3d;
     QVector3D center2_3d      = line_position_3d + (line_direction_3d*800) + axisLift_3d;
 
-    qDebug()<<"direction:"<<line_direction_3d;
+//    qDebug() << "direction:" << line_direction_3d;
 
-    float dotProduct       = QVector3D::dotProduct(vec_subtraction_3d, line_direction_3d);
+    float     dotProduct   = QVector3D::dotProduct(vec_subtraction_3d, line_direction_3d);
     float     k            = -dotProduct/line_direction_3d.lengthSquared();
     QVector3D minDist_3d   = line_position_3d + k * line_direction_3d;
-    QVector3D distPlane_3d = plane_position_3d - minDist_3d;
-    qDebug()<<"distance Plane minDist:"<<distPlane_3d.length();
-
+    QVector3D distPlane_3d = plane_position_3d - minDist_3d + axisLift_3d;
     QVector3D distPlaneSphere1_3d    = center1_3d - plane_position_3d;
     QVector3D distPlaneSphere2_3d    = center2_3d - plane_position_3d;
+
     QVector2D xzProjectionCenter_2d  = QVector2D(line_position_3d.x(), center1_3d.z());
     QVector2D xzProjectionPlane_2d   = QVector2D(plane_position_3d.x(),plane_position_3d.z());
     QVector2D xzProjection_dist_2d   = xzProjectionCenter_2d - xzProjectionPlane_2d;
 
     float rectBorderY_min = line_position_3d.y() - 800;
     float rectBorderY_max = line_position_3d.y() + 800;
+    float rectBorderZ_min = line_position_3d.z() - prefRob_range;
+    float rectBorderZ_max = line_position_3d.z() + prefRob_range;
 
-    qDebug()<<"manamna"<<line_position_3d<<plane_position_3d<<rectBorderY_max<<rectBorderY_min;
+    bool rectCheckY = (plane_position_3d.y() >= rectBorderY_min)  && (plane_position_3d.y() <= rectBorderY_max);
+    bool rectCheckZ = (plane_position_3d.z() >= rectBorderZ_min)  && (plane_position_3d.z() <= rectBorderZ_max);
 
-//            PointsBuffer.append(S1);robotSequence.append(POINT);
-//            PointsBuffer.append(S1);robotSequence.append(POINT);
-
-
-    float rectBorderZ_min = line_position_3d.z()-rob_radius;
-    float rectBorderZ_max = line_position_3d.z()+rob_radius;
-
-    bool rectCheckY = (plane_position_3d.y() > rectBorderY_min)  && (plane_position_3d.y() < rectBorderY_max);
-    bool rectCheckZ = (plane_position_3d.z() > rectBorderZ_min)  && (plane_position_3d.z() < rectBorderZ_max);
+    qDebug() << "distance Plane minDist:" << distPlane_3d.length();
 
 //    PointsBuffer.append(minDist_3d);robotSequence.append(POINT);
 
-<<<<<<< HEAD
-    float alpha = acos(distPlane_3d.length()/preferred_dist);
-    qDebug()<<"alpha"<<alpha * (180.0/M_PI);
-
-    QVector3D S1 = minDist_3d - ((preferred_dist*sin(alpha)) * line_direction_3d);
-    QVector3D S2 = minDist_3d + ((preferred_dist*sin(alpha)) * line_direction_3d);
-
-    qDebug()<<"minDist_3d"<<minDist_3d<<"S1:"<<S1;
-    qDebug()<<"S2:"<<S2;
-
-    PointsBuffer.append(minDist_3d);
-    robotSequence.append(POINT);
-    PointsBuffer.append(S1);
-    robotSequence.append(POINT);
-    PointsBuffer.append(S2);
-    robotSequence.append(POINT);
-
-
-    if(distPlane_3d.length()<preferred_dist){
-
-        //check wether Plane Position is in Rect
-        //frontal check
-        if(xzProjection_dist_2d.length()<rob_radius)
-        {
-            //side check
-            if(rectCheckY && rectCheckZ)
-            {
-                qDebug()<<"plane in Rect!";
-            }
-            else
-            {
-                qDebug()<<"frontCheck good ";
-                qDebug()<<rectCheckY<<rectCheckZ;
-                qDebug()<<"plane not in Rect...check Spheres";
-
-                if(distPlaneSphere1_3d.length()<rob_radius)
-                {
-                    qDebug()<<"in Sphere1";
-                    nextRobPos_3d = S2;
-                }
-                else if(distPlaneSphere2_3d.length()<rob_radius)
-                {
-                    qDebug()<<"in Sphere2";
-                    nextRobPos_3d = S1;
-                }
-                else{qDebug()<<"plane not reachable!";}
-            }
-        }else
-        {
-            qDebug()<<"plane not reachable, frontCheck not good";
-        }
-=======
-    if(distPlane_3d.length()<preferred_dist)
+    if(distPlane_3d.length() < prefRob_range)
     {
->>>>>>> 298ddadaad143f57b7a0713b5ea4bc58fd7269aa
+        float alpha = acos(distPlane_3d.length()/prefRob_range);
+//        qDebug()<<"alpha"<<alpha * (180.0/M_PI);
 
+        QVector3D S1 = minDist_3d - ((prefRob_range*sin(alpha)) * line_direction_3d);
+        QVector3D S2 = minDist_3d + ((prefRob_range*sin(alpha)) * line_direction_3d);
 
-<<<<<<< HEAD
-=======
-        QVector3D S1 = minDist_3d - ((preferred_dist*sin(alpha)) * line_direction_3d);
-        QVector3D S2 = minDist_3d + ((preferred_dist*sin(alpha)) * line_direction_3d);
-
-        qDebug()<<"minDist_3d"<<minDist_3d<<"S1:"<<S1;
-        qDebug()<<"S2:"<<S2;
-
-//        PointsBuffer.append(S1);robotSequence.append(POINT);
-//        PointsBuffer.append(S2);robotSequence.append(POINT);
->>>>>>> 298ddadaad143f57b7a0713b5ea4bc58fd7269aa
-
+//        qDebug()<<"minDist_3d"<<minDist_3d<<"S1:"<<S1;
+//        qDebug()<<"S2:"<<S2;
         //check wether Plane Position is in Rect
         //frontal check
-        if(xzProjection_dist_2d.length()<rob_radius){
+        if(xzProjection_dist_2d.length()<prefRob_range){
             //side check
             if(rectCheckY && rectCheckZ){
                 qDebug()<<"plane in Rect!";
@@ -202,15 +135,15 @@ void RobotDraw::calculateL1_new()
                 solutionVec_3d.append(S2);
             }
             else{
-                qDebug()<<"side Check bad!";
+                qDebug()<<"side Chick bad!";
                 qDebug()<<rectCheckY<<rectCheckZ;
                 qDebug()<<"plane not in Rect...check Spheres";
 
-                if(distPlaneSphere1_3d.length()<rob_radius){
+                if(distPlaneSphere1_3d.length()<prefRob_range){
                     qDebug()<<"in Sphere1";
                    solutionVec_3d.append(S2);
                 }
-                else if(distPlaneSphere2_3d.length()<rob_radius){
+                else if(distPlaneSphere2_3d.length()<prefRob_range){
                     qDebug()<<"in Sphere2";
                     solutionVec_3d.append(S1);
                 }
@@ -222,25 +155,59 @@ void RobotDraw::calculateL1_new()
         }
     }
     else{
-      qDebug()<<"min Distance 2 Plane!";
-      solutionVec_3d.append(minDist_3d);
+        qDebug()<<"min Distance 2 Plane!";
+        solutionVec_3d.append(minDist_3d);
     }
 
     for(QVector3D vec:solutionVec_3d){
-        qDebug()<<"splution:"<<vec;
-        PointsBuffer.append(vec);robotSequence.append(POINT);
+        qDebug()<<"solution:"<<vec;
+        if(vec.y() > rectBorderY_max || vec.y() < rectBorderY_min){
+            solutionVec_3d.remove(solutionVec_3d.indexOf(vec));qDebug()<<"delete that ass";}
+        PointsBuffer.prepend(vec);robotSequence.prepend(POINT);
+    }
+    QVector3D solution_3d = solutionVec_3d.first();
 
+    QVector <QVector3D> plane_cornerPts_vec3d = _plane->getCornerPoints();
+    bool pt_inRange = true;
+    //check wether plane corner points are inside robot range
+    for (QVector3D pt_3d:plane_cornerPts_vec3d){
+
+        PointsBuffer.prepend(pt_3d);robotSequence.prepend(POINT);
+        LinesBuffer.prepend({pt_3d,solution_3d + axisLift_3d});robotSequence.prepend(LINE);
+
+        QVector3D distPointRob = pt_3d - solution_3d + axisLift_3d;
+        if(distPointRob.length() < maxRob_range){
+            qDebug()<<"length"<<distPointRob.length();
+            qDebug()<<"cornerPts *IN* range";
+        }
+        else{
+            qDebug()<<"length"<<distPointRob.length();
+            pt_inRange = false;
+            qDebug()<<"cornerPts /NOT\ in range";
+        }
+    }
+    float new_l1 = solution_3d.y() - line_position_3d.y();
+    setL1(new_l1);
+    qDebug()<<"new L1"<<new_l1;
+    if(pt_inRange){
+        qDebug()<<"ALL cornerPTs !in! range";
+    }else{
+        qDebug()<<"One or More cornerPT not in range";
     }
 
-<<<<<<< HEAD
+    PointsBuffer.prepend(plane_position_3d);robotSequence.prepend(POINT);
     // QVector3D robotPosition
     // drawPoint_Widget(QVector3D(0,0,100),10,QColor(255,255,255));
-    }}
-=======
+}
+
+void RobotDraw::checkPlane()
+{
+    QVector3D planePosition = PointsBuffer.takeFirst();
+    robotSequence.removeFirst();
+
 }
 
 
->>>>>>> 298ddadaad143f57b7a0713b5ea4bc58fd7269aa
 void RobotDraw::setL1(double val)
 {
     l1=val;
@@ -285,8 +252,10 @@ void RobotDraw::robotDrawPoint()
 //        qDebug()<<"Point";
         QVector3D basePoint = PointsBuffer.takeFirst();
         robot_setPoint(Base2RobotPoint(basePoint));
+
         if(moveAboveCounter<2){drawPoint_Widget(basePoint,2,QColor(0,255,0));moveAboveCounter++;}
        else{drawPoint_Widget(basePoint,10,QColor(255,0,0));}
+
         if(line_isTrue){drawLine(startLinePoint,basePoint);line_isTrue = false;}
     }
     else {stopTimer_goHome();}
@@ -317,7 +286,7 @@ void RobotDraw::robotDrawLine()
             line_isTrue  = true;
             alreadyDrawn = true;
             //speed up, when currently drawing a circle
-            if(circlePoints_counter>=circlePoints_number)
+            if(circlePoints_counter >= circlePoints_number)
             {changeTimerSpeed(1);qDebug()<<"no speed!!"<<_timer->interval();}
             else{circlePoints_counter++;}
         }
@@ -326,6 +295,7 @@ void RobotDraw::robotDrawLine()
 
 void RobotDraw::moveTipAbove()
 {
+
     QVector3D prev_linePt = endLinePoint;
     QVector3D next_linePt = startLinePoint;
 
@@ -341,6 +311,7 @@ void RobotDraw::moveTipAbove()
     PointsBuffer.prepend(lifted_prevPoint);
     robotSequence.prepend(POINT);
     moveAboveCounter = 0;
+
 }
 
 void RobotDraw::robotDrawCircle()
@@ -508,6 +479,7 @@ void RobotDraw::resetShiftVector()
     shiftVector.setY( _plane->yLimit/2 - yBoxSize + ySpace);
     qDebug()<<shiftVector;
 }
+
 bool RobotDraw::shiftVec_inPlane()
 {
     qDebug()<<"shift"<<shiftVector;
@@ -525,8 +497,6 @@ bool RobotDraw::shiftVec_inPlane()
 
     return (y_inPlane);
 }
-
-
 
 void RobotDraw::addLetter2Buffer()
 {
@@ -596,18 +566,9 @@ void RobotDraw::robot_setPoint(QVector3D position)
                               position.y(),
                               position.z(),
                               a,b,c,l1);
-//    _robotKinematik->RobotPosition::setPoint(position.x(),
-//                                             position.y(),
-//                                             position.z(),
-//                                             a,b,c,l1);
-//    _robotKinematik->ToolMovement(Transformations::Z,-199);
 
     if(_robot->IsConnected())
-    {
-        _robot->UpdatePosition();
-        _robotKinematik->WaitForPositionReached();
-    }
-
+    {_robot->UpdatePosition(); _robotKinematik->WaitForPositionReached();}
 }
 
 void RobotDraw::robot_moveInCircle(QVector <QVector2D> circlePoints)
@@ -622,9 +583,9 @@ void RobotDraw::robot_moveInCircle(QVector <QVector2D> circlePoints)
                                   pointRobot.y(),
                                   pointRobot.z(),
                                   a,b,c,l1);
-        QMatrix4x4 pointT = _robotKinematik->getTransformationMatrix()*MatrixTranslationZ(199);
+        QMatrix4x4 pointT   = _robotKinematik->getTransformationMatrix();
+        QVector3D  position = pointT.column(3).toVector3D();
 
-//        _robotKinematik->ToolMovement(Transformations::Z,-199);
         J_Vec.append({_robotKinematik->j1(),_robotKinematik->j2(),_robotKinematik->j3(),_robotKinematik->j4(),_robotKinematik->j5(),_robotKinematik->j6(),_robotKinematik->j7()});
     }
     qDebug()<<"the Joints :D"<<J_Vec;

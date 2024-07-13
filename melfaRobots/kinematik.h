@@ -56,6 +56,7 @@ public:
 
     QVector<Qt3DCore::QTransform*>* getTransformObjectJoints(){return _joints;}
     QVector<Qt3DCore::QTransform*>* _joints;
+    bool ePointReachable;
 
     double getJ1Max(){return j1Max;} double getJ1Min(){return j1Min;}
     double getJ2Max(){return j2Max;} double getJ2Min(){return j2Min;}

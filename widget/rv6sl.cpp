@@ -57,7 +57,7 @@ void RV6SL::RV6SLMesh()
     Joint5->setTranslation(QVector3D(47,215,0));
     Joint5->Qt3DCore::QEntity::setEnabled(true);
 
-    transTool= new Qt3DCore::QTransform() ;
+    transTool = new Qt3DCore::QTransform();
     QMatrix4x4 tool;
     tool.rotate(-90,1,0,0);
     tool.rotate(-90,0,0,1);

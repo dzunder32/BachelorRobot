@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include <QApplication>
 #include "linearaxisrv6sl.h"
-#include "rv6slkinematik.h".h"
+#include "rv6slkinematik.h"
 #include "rv4flkinematik.h"
 #include "rv4fl.h"
 #include "rv6sl.h"

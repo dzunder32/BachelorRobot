@@ -165,7 +165,7 @@ void Rv6slKinematik::invers()
     }
 
     // Auxiliary variables
-    bool ePointReachable;
+//    bool ePointReachable;
     double t,chi,sq4,cq4,sq5,cq5,sq6,cq6,l_e1;
     double alpha,beta,singamma,cosgamma,gamma;
     QVector3D x3,y3,z3,x4,y4,z4,y5,cross_z3_a;

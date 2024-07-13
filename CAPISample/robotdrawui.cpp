@@ -38,13 +38,12 @@ void RobotDrawUi::setTimerSpeed(int time_ms){
 void RobotDrawUi::increaseTimerSpeed(float factor)
 {
     setTimerSpeed(qRound(ui->timerSpeedSlider->value()*factor));
-    qDebug()<<"currSpeed:"<<qRound(ui->timerSpeedSlider->value()*factor);
+//    qDebug()<<"currSpeed:"<<qRound(ui->timerSpeedSlider->value()*factor);
 }
 
 void RobotDrawUi::on_pushButtonStart_clicked()
 {
 //    _robDraw->connectTimer();
-
     if(preview_isDrawn){
         _widget3d->deleteAllLines();
         _widget3d->deleteAllPoints();
@@ -53,6 +52,7 @@ void RobotDrawUi::on_pushButtonStart_clicked()
     startDrawTimer();
     setTimerSpeed(ui->timerSpeedSlider->value());
     _robDraw->PlanePositionChanged();
+//    qDebug()<<"till here";
 //    disconnect(_robDraw->_timer, &QTimer::timeout,this, &RobotDraw::robDraw_onTimeout);
 }
 
@@ -113,15 +113,6 @@ void RobotDrawUi::on_pushButton_addP1_clicked()
     insertRobotSequenceText("P2:(" + P1X_Str + ", " + P1Y_Str + ")");
 }
 
-// void RobotDrawUi::on_pushButton_addP2_clicked()
-// {
-//     QVector2D planePoint = P2;
-//     _robDraw->AddPoint2Buffer(planePoint);
-//     _widget3d->drawPoint(planePoint,5,QColor(255,0,255));
-//     insertRobotSequenceText("P2:(" + P2X_Str + ", " + P2Y_Str + ")");
-
-// }
-
 
 void RobotDrawUi::insertRobotSequenceText(QString str)
 {
@@ -133,6 +124,8 @@ void RobotDrawUi::insertRobotSequenceText(QString str)
 void RobotDrawUi::startDrawTimer()
 {
     _robDraw->_timer->start();
+    qDebug()<<"TimerStarted";
+    qDebug()<<_robDraw->_timer->isActive();
     _robDraw->safeCurrentSequence();
 }
 

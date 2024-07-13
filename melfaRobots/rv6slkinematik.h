@@ -17,6 +17,7 @@ public:
     void direct() override;
     void updateView() override;
 
+
 };
 
 #endif // RV6SLKINEMATIK_H

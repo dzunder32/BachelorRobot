@@ -7219,7 +7219,31 @@ debug/main.o: ../../CAPISample/main.cpp ../../CAPISample/mainwindow.h \
 		../../melfaRobots/kinematik.h \
 		../../melfaRobots/robotPosition.h \
 		../../melfaRobots/position.h \
-		../../melfaRobots/mathfunktions.h
+		../../melfaRobots/mathfunktions.h \
+		../../melfaRobots/rv4flkinematik.h \
+		../../widget/rv4fl.h \
+		../../widget/sixjointrobot.h \
+		../../widget/tool.h \
+		../../widget/rv6sl.h \
+		../../widget/kinectcamera.h \
+		../../melfaRobots/controlpanel.h \
+		../../melfaRobots/subwindow.h \
+		../../CAPISample/drawletters.h \
+		../../CAPISample/draw.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/QFile \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/QTextStream \
+		C:/Qt/5.15.2/mingw81_64/include/Qt3DExtras/QSphereMesh \
+		C:/Qt/5.15.2/mingw81_64/include/Qt3DExtras/QPhongMaterial \
+		../../widget/plane.h \
+		../../melfaRobots/robot.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtNetwork/QTcpSocket \
+		../../CAPISample/letters.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/QVariantList \
+		../../CAPISample/robotdrawui.h \
+		../../CAPISample/robotdraw.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtGui/QVector4D \
+		../../widget/penholder.h \
+		../../melfaRobots/robotcontrol.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\main.o ..\..\CAPISample\main.cpp
 
 debug/mainwindow.o: ../../CAPISample/mainwindow.cpp ../../CAPISample/mainwindow.h \

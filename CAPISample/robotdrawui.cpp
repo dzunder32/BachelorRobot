@@ -38,7 +38,7 @@ void RobotDrawUi::setTimerSpeed(int time_ms){
 void RobotDrawUi::increaseTimerSpeed(float factor)
 {
     setTimerSpeed(qRound(ui->timerSpeedSlider->value()*factor));
-    qDebug()<<"currSpeed:"<<qRound(ui->timerSpeedSlider->value()*factor);
+//    qDebug()<<"currSpeed:"<<qRound(ui->timerSpeedSlider->value()*factor);
 }
 
 void RobotDrawUi::on_pushButtonStart_clicked()

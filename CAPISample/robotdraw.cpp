@@ -15,14 +15,6 @@ RobotDraw::RobotDraw(Kinematik *robotKinematik, Robot *robot, QVector3D sled_pos
 
     connect(_timer, &QTimer::timeout,this, &RobotDraw::robDraw_onTimeout);
 
-    // QVector3D ew = CalculateEw(_plane->matrix()*QMatrix4x4(QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),90).toRotationMatrix()));
-    // a=ew.x();
-    // b=ew.y();
-    // c=ew.z();
-    // l1=-250;
-
-    // robotPosition = sled_pos+QVector3D(0,l1,0);
-    // robotMat.setColumn(3,QVector4D(robotPosition,1));
     setL1(0);
     robotMat.rotate(90,QVector3D(0,0,1));
     PlanePositionChanged();
@@ -37,34 +29,11 @@ void RobotDraw::PlanePositionChanged()
     a=ew.x();
     b=ew.y();
     c=ew.z();
+    planeCounter=0;
     calculateL1_new();
     //You Imbecile!
 }
 
-//void RobotDraw::CalculateL1()
-//{
-//    QVector3D dist_vec = _plane->translation()-robotPosition;
-//    qDebug()<<dist_vec;
-//    double preffered_distance = 500;
-//    double sqrt_arg = pow(preffered_distance,2) - pow(dist_vec.x(),2) -pow(dist_vec.z(),2);
-//    qDebug()<<"sqrtarg"<<sqrt_arg;
-//    if(abs(sqrt_arg)< 0.001)
-//        sqrt_arg=1;
-
-//    if(sqrt_arg<0){
-//        qDebug()<<"negative sqrt argument! CalculateL1()";
-//        return;
-//    }
-//    double sqrt_result = sqrt(sqrt_arg);
-//    double new_l1n = -sqrt_result-_plane->translation().y();
-//    double new_l1p = sqrt_result-_plane->translation().y();
-//    qDebug()<<"l1n"<<new_l1n<<"l1p"<<new_l1p;
-//    QVector3D robPos1 = _l1BasePos + QVector3D(0,new_l1n,0);
-//    QVector3D robPos2 = _l1BasePos + QVector3D(0,new_l1p,0);
-//    float ang1 = calculateAngleBetweenVectors(_plane->translation()- robPos1,rotation_plane.column(2).toVector3D());
-//    float ang2 = calculateAngleBetweenVectors(_plane->translation()- robPos2,rotation_plane.column(2).toVector3D());
-//    qDebug()<<"ang1:"<<ang1<<"ang2:"<<ang2;
-//}
 
 float RobotDraw::calculateAngleBetweenVectors(QVector3D vectorA, QVector3D vectorB) {
     float dotProduct = QVector3D::dotProduct(vectorA, vectorB);
@@ -111,6 +80,9 @@ void RobotDraw::calculateL1_new()
     bool rectCheckY = (plane_position_3d.y() >= rectBorderY_min)  && (plane_position_3d.y() <= rectBorderY_max);
     bool rectCheckZ = (plane_position_3d.z() >= rectBorderZ_min)  && (plane_position_3d.z() <= rectBorderZ_max);
 
+    float angle1, angle2;
+    bool multipleSolutions = false;
+
     qDebug() << "distance Plane minDist:" << distPlane_3d.length();
 
 //    PointsBuffer.append(minDist_3d);robotSequence.append(POINT);
@@ -133,6 +105,14 @@ void RobotDraw::calculateL1_new()
                 qDebug()<<"plane in Rect!";
                 solutionVec_3d.append(S1);
                 solutionVec_3d.append(S2);
+                QVector3D dist1 = S1 - plane_position_3d;
+                QVector3D dist2 = S2 - plane_position_3d;
+
+                angle1 = calculateAngleBetweenVectors(dist1,rotation_plane.column(2).toVector3D());
+                angle2 = calculateAngleBetweenVectors(dist2,rotation_plane.column(2).toVector3D());
+                multipleSolutions = true;
+                qDebug()<<"angle1"<<calculateAngleBetweenVectors(dist1,rotation_plane.column(2).toVector3D());
+                qDebug()<<"angle2"<<calculateAngleBetweenVectors(dist2,rotation_plane.column(2).toVector3D());
             }
             else{
                 qDebug()<<"side Chick bad!";
@@ -162,54 +142,54 @@ void RobotDraw::calculateL1_new()
     for(QVector3D vec:solutionVec_3d){
         qDebug()<<"solution:"<<vec;
         if(vec.y() > rectBorderY_max || vec.y() < rectBorderY_min){
-            solutionVec_3d.remove(solutionVec_3d.indexOf(vec));qDebug()<<"delete that ass";}
+            solutionVec_3d.remove(solutionVec_3d.indexOf(vec));
+            qDebug()<<"delete that ass";multipleSolutions = false;}
         PointsBuffer.prepend(vec);robotSequence.prepend(POINT);
-    }
-    QVector3D solution_3d = solutionVec_3d.first();
 
+    }
+
+    if(solutionVec_3d.isEmpty()){
+        qDebug()<<"no solutions";return;}
+    //when having 2 solutions for L1 -> check which one is behind the plane!
+    if(multipleSolutions && angle1 > angle2)
+        solutionVec_3d.removeFirst();
+
+    QVector3D solution_3d = solutionVec_3d.first();
     QVector <QVector3D> plane_cornerPts_vec3d = _plane->getCornerPoints();
     bool pt_inRange = true;
     //check wether plane corner points are inside robot range
     for (QVector3D pt_3d:plane_cornerPts_vec3d){
-
         PointsBuffer.prepend(pt_3d);robotSequence.prepend(POINT);
-        LinesBuffer.prepend({pt_3d,solution_3d + axisLift_3d});robotSequence.prepend(LINE);
-
-        QVector3D distPointRob = pt_3d - solution_3d + axisLift_3d;
-        if(distPointRob.length() < maxRob_range){
-            qDebug()<<"length"<<distPointRob.length();
-            qDebug()<<"cornerPts *IN* range";
-        }
-        else{
-            qDebug()<<"length"<<distPointRob.length();
-            pt_inRange = false;
-            qDebug()<<"cornerPts /NOT\ in range";
-        }
+//        LinesBuffer.prepend({pt_3d,solution_3d + axisLift_3d});robotSequence.prepend(LINE);
+//        QVector3D distPointRob = pt_3d - solution_3d + axisLift_3d;
+//        if(distPointRob.length() < maxRob_range){
+//            qDebug()<<"length"<<distPointRob.length();
+//            qDebug()<<"cornerPts *IN* range";
+//        }
+//        else{
+//            qDebug()<<"length"<<distPointRob.length();
+//            pt_inRange = false;
+//            qDebug()<<"cornerPts /NOT\ in range";
+//        }
     }
     float new_l1 = solution_3d.y() - line_position_3d.y();
     setL1(new_l1);
-    qDebug()<<"new L1"<<new_l1;
-    if(pt_inRange){
-        qDebug()<<"ALL cornerPTs !in! range";
-    }else{
-        qDebug()<<"One or More cornerPT not in range";
-    }
+//    qDebug()<<"new L1"<<new_l1;
+//    if(pt_inRange){
+//        qDebug()<<"ALL cornerPTs !in! range";
+//    }else{
+//        qDebug()<<"One or More cornerPT not in range";
+//    }
 
     PointsBuffer.prepend(plane_position_3d);robotSequence.prepend(POINT);
     // QVector3D robotPosition
     // drawPoint_Widget(QVector3D(0,0,100),10,QColor(255,255,255));
 }
 
-void RobotDraw::checkPlane()
-{
-    QVector3D planePosition = PointsBuffer.takeFirst();
-    robotSequence.removeFirst();
-
-}
-
 
 void RobotDraw::setL1(double val)
 {
+    qDebug()<<"newL1:"<<val;
     l1=val;
     robotPosition = _l1BasePos + QVector3D(0,l1,0);
     robotMat.setColumn(3,QVector4D(robotPosition,1));
@@ -249,18 +229,26 @@ void RobotDraw::robotDrawPoint()
 
     if(!PointsBuffer.isEmpty())
     {
-//        qDebug()<<"Point";
         QVector3D basePoint = PointsBuffer.takeFirst();
         robot_setPoint(Base2RobotPoint(basePoint));
+        checkPlane();
 
         if(moveAboveCounter<2){drawPoint_Widget(basePoint,2,QColor(0,255,0));moveAboveCounter++;}
-       else{drawPoint_Widget(basePoint,10,QColor(255,0,0));}
+        else{drawPoint_Widget(basePoint,10,QColor(255,0,0));}
 
         if(line_isTrue){drawLine(startLinePoint,basePoint);line_isTrue = false;}
     }
     else {stopTimer_goHome();}
 }
 
+void RobotDraw::checkPlane()
+{
+    if(planeCounter < 5 && !_robotKinematik->ePointReachable){
+        qDebug()<<planeCounter<<" -->Point not Reachable!!";
+        stopTimer_goHome();
+    }
+    planeCounter++;
+}
 void RobotDraw::robotDrawLine()
 {
     if(!LinesBuffer.isEmpty())
@@ -273,7 +261,7 @@ void RobotDraw::robotDrawLine()
         {
             LinesBuffer.prepend(line);robotSequence.prepend(LINE);
             //when distance is too big, move Tip above the plane
-            moveTipAbove();qDebug()<<"now!";
+            moveTipAbove();/*qDebug()<<"now!";*/
             alreadyDrawn = false;
         }
         else{
@@ -287,7 +275,7 @@ void RobotDraw::robotDrawLine()
             alreadyDrawn = true;
             //speed up, when currently drawing a circle
             if(circlePoints_counter >= circlePoints_number)
-            {changeTimerSpeed(1);qDebug()<<"no speed!!"<<_timer->interval();}
+            {changeTimerSpeed(1);/*qDebug()<<"no speed!!"<<_timer->interval();*/}
             else{circlePoints_counter++;}
         }
     }else{stopTimer_goHome();}

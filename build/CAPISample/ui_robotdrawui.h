@@ -65,11 +65,14 @@ public:
     QSlider *timerSpeedSlider;
     QTextEdit *textEdit_Sequence;
     QTextEdit *textEdit_textInput;
+    QHBoxLayout *horizontalLayout_4;
+    QSlider *horizontalSlider_xRot;
+    QSlider *horizontalSlider_yRot;
+    QSlider *horizontalSlider_zRot;
     QVBoxLayout *verticalLayout;
     QSlider *horizontalSlider_x;
     QSlider *horizontalSlider_y;
     QSlider *horizontalSlider_z;
-    QSlider *horizontalSlider_r;
     QHBoxLayout *horizontalLayout_3;
     QPushButton *pushButton_History;
     QPushButton *pushButtonStart;
@@ -252,6 +255,29 @@ public:
 
         verticalLayout_3->addLayout(horizontalLayout_2);
 
+        horizontalLayout_4 = new QHBoxLayout();
+        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
+        horizontalSlider_xRot = new QSlider(centralwidget);
+        horizontalSlider_xRot->setObjectName(QString::fromUtf8("horizontalSlider_xRot"));
+        horizontalSlider_xRot->setOrientation(Qt::Horizontal);
+
+        horizontalLayout_4->addWidget(horizontalSlider_xRot);
+
+        horizontalSlider_yRot = new QSlider(centralwidget);
+        horizontalSlider_yRot->setObjectName(QString::fromUtf8("horizontalSlider_yRot"));
+        horizontalSlider_yRot->setOrientation(Qt::Horizontal);
+
+        horizontalLayout_4->addWidget(horizontalSlider_yRot);
+
+        horizontalSlider_zRot = new QSlider(centralwidget);
+        horizontalSlider_zRot->setObjectName(QString::fromUtf8("horizontalSlider_zRot"));
+        horizontalSlider_zRot->setOrientation(Qt::Horizontal);
+
+        horizontalLayout_4->addWidget(horizontalSlider_zRot);
+
+
+        verticalLayout_3->addLayout(horizontalLayout_4);
+
         verticalLayout = new QVBoxLayout();
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         horizontalSlider_x = new QSlider(centralwidget);
@@ -270,15 +296,10 @@ public:
 
         horizontalSlider_z = new QSlider(centralwidget);
         horizontalSlider_z->setObjectName(QString::fromUtf8("horizontalSlider_z"));
+        horizontalSlider_z->setMinimum(-99);
         horizontalSlider_z->setOrientation(Qt::Horizontal);
 
         verticalLayout->addWidget(horizontalSlider_z);
-
-        horizontalSlider_r = new QSlider(centralwidget);
-        horizontalSlider_r->setObjectName(QString::fromUtf8("horizontalSlider_r"));
-        horizontalSlider_r->setOrientation(Qt::Horizontal);
-
-        verticalLayout->addWidget(horizontalSlider_r);
 
 
         verticalLayout_3->addLayout(verticalLayout);

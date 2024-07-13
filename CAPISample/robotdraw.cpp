@@ -23,17 +23,21 @@ RobotDraw::RobotDraw(Kinematik *robotKinematik, Robot *robot, QVector3D sled_pos
 
 void RobotDraw::PlanePositionChanged()
 {
+    planeCounter=0;
+    UpdatePlanePosition();
+    //You Imbecile!
+}
+
+void RobotDraw::UpdatePlanePosition()
+{
     rotation_plane = _plane->matrix();
     rotation_plane.setColumn(3,QVector4D(0,0,0,1));
     QVector3D ew = CalculateEw(robotMat.inverted() * rotation_plane*QMatrix4x4(QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180).toRotationMatrix()));
     a=ew.x();
     b=ew.y();
     c=ew.z();
-    planeCounter=0;
     calculateL1_new();
-    //You Imbecile!
 }
-
 
 float RobotDraw::calculateAngleBetweenVectors(QVector3D vectorA, QVector3D vectorB) {
     float dotProduct = QVector3D::dotProduct(vectorA, vectorB);
@@ -71,7 +75,7 @@ void RobotDraw::calculateL1_new()
     QVector2D xzProjectionCenter_2d  = QVector2D(line_position_3d.x(), center1_3d.z());
     QVector2D xzProjectionPlane_2d   = QVector2D(plane_position_3d.x(),plane_position_3d.z());
     QVector2D xzProjection_dist_2d   = xzProjectionCenter_2d - xzProjectionPlane_2d;
-
+    qDebug()<<"line_position:"<<line_position_3d;
     float rectBorderY_min = line_position_3d.y() - 800;
     float rectBorderY_max = line_position_3d.y() + 800;
     float rectBorderZ_min = line_position_3d.z() - prefRob_range;
@@ -99,7 +103,7 @@ void RobotDraw::calculateL1_new()
 //        qDebug()<<"S2:"<<S2;
         //check wether Plane Position is in Rect
         //frontal check
-        if(xzProjection_dist_2d.length()<prefRob_range){
+        if(xzProjection_dist_2d.length()<maxRob_range){
             //side check
             if(rectCheckY && rectCheckZ){
                 qDebug()<<"plane in Rect!";
@@ -119,11 +123,11 @@ void RobotDraw::calculateL1_new()
                 qDebug()<<rectCheckY<<rectCheckZ;
                 qDebug()<<"plane not in Rect...check Spheres";
 
-                if(distPlaneSphere1_3d.length()<prefRob_range){
+                if(distPlaneSphere1_3d.length()<maxRob_range){
                     qDebug()<<"in Sphere1";
                    solutionVec_3d.append(S2);
                 }
-                else if(distPlaneSphere2_3d.length()<prefRob_range){
+                else if(distPlaneSphere2_3d.length()<maxRob_range){
                     qDebug()<<"in Sphere2";
                     solutionVec_3d.append(S1);
                 }
@@ -139,12 +143,25 @@ void RobotDraw::calculateL1_new()
         solutionVec_3d.append(minDist_3d);
     }
 
-    for(QVector3D vec:solutionVec_3d){
-        qDebug()<<"solution:"<<vec;
-        if(vec.y() > rectBorderY_max || vec.y() < rectBorderY_min){
-            solutionVec_3d.remove(solutionVec_3d.indexOf(vec));qDebug()<<"delete that ass";}
-        PointsBuffer.prepend(vec);robotSequence.prepend(POINT);
+    for(QVector3D &vec:solutionVec_3d){
+                qDebug()<<"solution:"<<vec;
+
+        if(vec.y() > rectBorderY_max){
+            vec.setY(line_position_3d.y()+800);
+        }else if( vec.y() < rectBorderY_min){
+            vec.setY(line_position_3d.y()-800);}
+            // if(vec.y() > rectBorderY_max || vec.y() < rectBorderY_min){
+        //     solutionVec_3d.remove(solutionVec_3d.indexOf(vec));
+        //     qDebug()<<"delete that ass";multipleSolutions = false;}
+        if(planeCounter < 5){
+            PointsBuffer.prepend(vec);robotSequence.prepend(POINT);}
+
+
     }
+
+    if(solutionVec_3d.isEmpty()){
+        qDebug()<<"no solutions";return;}
+    //when having 2 solutions for L1 -> check which one is behind the plane!
     if(multipleSolutions && angle1 > angle2)
         solutionVec_3d.removeFirst();
 
@@ -152,11 +169,12 @@ void RobotDraw::calculateL1_new()
     QVector <QVector3D> plane_cornerPts_vec3d = _plane->getCornerPoints();
     bool pt_inRange = true;
     //check wether plane corner points are inside robot range
-    for (QVector3D pt_3d:plane_cornerPts_vec3d){
-
-        PointsBuffer.prepend(pt_3d);robotSequence.prepend(POINT);
+    if(planeCounter < 5){
+        for (QVector3D pt_3d:plane_cornerPts_vec3d){
+            PointsBuffer.prepend(pt_3d);robotSequence.prepend(POINT);
+        }
+    }
 //        LinesBuffer.prepend({pt_3d,solution_3d + axisLift_3d});robotSequence.prepend(LINE);
-
 //        QVector3D distPointRob = pt_3d - solution_3d + axisLift_3d;
 //        if(distPointRob.length() < maxRob_range){
 //            qDebug()<<"length"<<distPointRob.length();
@@ -167,7 +185,6 @@ void RobotDraw::calculateL1_new()
 //            pt_inRange = false;
 //            qDebug()<<"cornerPts /NOT\ in range";
 //        }
-    }
     float new_l1 = solution_3d.y() - line_position_3d.y();
     setL1(new_l1);
 //    qDebug()<<"new L1"<<new_l1;
@@ -176,8 +193,8 @@ void RobotDraw::calculateL1_new()
 //    }else{
 //        qDebug()<<"One or More cornerPT not in range";
 //    }
-
-    PointsBuffer.prepend(plane_position_3d);robotSequence.prepend(POINT);
+    if(planeCounter < 5){
+        PointsBuffer.prepend(plane_position_3d);robotSequence.prepend(POINT);}
     // QVector3D robotPosition
     // drawPoint_Widget(QVector3D(0,0,100),10,QColor(255,255,255));
 }
@@ -185,6 +202,7 @@ void RobotDraw::calculateL1_new()
 
 void RobotDraw::setL1(double val)
 {
+    qDebug()<<"newL1:"<<val;
     l1=val;
     robotPosition = _l1BasePos + QVector3D(0,l1,0);
     robotMat.setColumn(3,QVector4D(robotPosition,1));
@@ -229,7 +247,7 @@ void RobotDraw::robotDrawPoint()
         checkPlane();
 
         if(moveAboveCounter<2){drawPoint_Widget(basePoint,2,QColor(0,255,0));moveAboveCounter++;}
-        else{drawPoint_Widget(basePoint,10,QColor(255,0,0));}
+        // else{drawPoint_Widget(basePoint,10,QColor(255,0,0));}
 
         if(line_isTrue){drawLine(startLinePoint,basePoint);line_isTrue = false;}
     }

@@ -6278,7 +6278,18 @@ release/drawletters.o: ../../CAPISample/drawletters.cpp ../../CAPISample/drawlet
 		C:/Qt/5.15.2/mingw81_64/include/QtNetwork/QTcpSocket \
 		../../CAPISample/letters.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QVariantList \
-		ui_drawletters.h
+		ui_drawletters.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QApplication \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QCheckBox \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QFormLayout \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QHBoxLayout \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QMenuBar \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QPushButton \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QSlider \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QSpinBox \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QStatusBar \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QTextEdit \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QVBoxLayout
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\drawletters.o ..\..\CAPISample\drawletters.cpp
 
 release/letters.o: ../../CAPISample/letters.cpp ../../CAPISample/letters.h \
@@ -9995,7 +10006,19 @@ release/robotdrawui.o: ../../CAPISample/robotdrawui.cpp ../../CAPISample/robotdr
 		../../CAPISample/letters.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QVariantList \
 		C:/Qt/5.15.2/mingw81_64/include/QtGui/QVector4D \
-		ui_robotdrawui.h
+		ui_robotdrawui.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QApplication \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QGridLayout \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QHBoxLayout \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QMenuBar \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QPushButton \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QRadioButton \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QSlider \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QSpinBox \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QStatusBar \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QTextEdit \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QToolBar \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QVBoxLayout
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\robotdrawui.o ..\..\CAPISample\robotdrawui.cpp
 
 release/moc_draw.o: release/moc_draw.cpp 

@@ -155,10 +155,6 @@ void RobotDraw::calculateL1_new()
     for (QVector3D pt_3d:plane_cornerPts_vec3d){
 
         PointsBuffer.prepend(pt_3d);robotSequence.prepend(POINT);
-//        LinesBuffer.prepend({pt_3d,solution_3d + axisLift_3d});robotSequence.prepend(LINE);
-
-//        QVector3D distPointRob = pt_3d - solution_3d + axisLift_3d;
-//        if(distPointRob.length() < maxRob_range){
 //            qDebug()<<"length"<<distPointRob.length();
 //            qDebug()<<"cornerPts *IN* range";
 //        }

@@ -206,6 +206,7 @@ public:
 
         spinBox_letterSize = new QSpinBox(centralwidget);
         spinBox_letterSize->setObjectName(QString::fromUtf8("spinBox_letterSize"));
+        spinBox_letterSize->setMinimum(1);
 
         gridLayout_2->addWidget(spinBox_letterSize, 1, 1, 1, 1);
 

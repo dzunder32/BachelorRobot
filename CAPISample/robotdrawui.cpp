@@ -15,8 +15,9 @@ RobotDrawUi::RobotDrawUi(Kinematik *robotKinematik,Robot *robot, QVector3D sled_
     connect(&robotThread,  &QThread::finished, _robDraw,&QObject::deleteLater);
     connect(_robDraw, &RobotDraw::startTimer,this, &RobotDrawUi::startDrawTimer);
     connect(_robDraw, &RobotDraw::stopTimer,this, &RobotDrawUi::stopDrawTimer);
-    connect(_robDraw, &RobotDraw::drawLine,this, &RobotDrawUi::drawLineWidget);
-    connect(_robDraw, &RobotDraw::drawPoint_Widget,this, &RobotDrawUi::widgetDrawPoint);
+    connect(_robDraw, &RobotDraw::drawLine,_widget3d, &Widget3D::addCylinderBetweenPoints);
+//    connect(_robDraw, &RobotDraw::drawPoint_Widget,this, &RobotDrawUi::widgetDrawPoint);
+    connect(_robDraw, &RobotDraw::drawPoint_Widget,_widget3d, &Widget3D::drawPoint);
     connect(_robDraw, &RobotDraw::changeTimerSpeed,this, &RobotDrawUi::increaseTimerSpeed);
 
     robotThread.start();
@@ -100,7 +101,7 @@ void RobotDrawUi::on_pushButton_addLine_clicked()
     _robDraw->AddLine2Buffer(P1,P2);
     insertRobotSequenceText("Line: Start("+P1X_Str+ "," + P1Y_Str + ")"
                             + "End("+ P2X_Str+ "," + P2Y_Str + ")" );
-    // _widget3d->drawPoint(P1,5,QColor(0,255,255));
+     _widget3d->addCylinderBetweenPoints(P1.toVector3D(),P2.toVector3D());
     // _widget3d->drawPoint(P2,5,QColor(0,255,255));
 
 }
@@ -108,7 +109,7 @@ void RobotDrawUi::on_pushButton_addLine_clicked()
 void RobotDrawUi::on_pushButton_addP1_clicked()
 {
 
-    _robDraw->AddPoint2Buffer(P1);
+    _robDraw->AddPoint2Buffer(P1.toVector3D());
     // _widget3d->drawPoint(P1,5,QColor(255,0,255));
     insertRobotSequenceText("P2:(" + P1X_Str + ", " + P1Y_Str + ")");
 }
@@ -140,14 +141,12 @@ void RobotDrawUi::on_pushButton_History_clicked()
         _robDraw->setPreviousSequence();
 
     }
-
-
 }
 
 void RobotDrawUi::initBuffers()
 {
     for (int i=0;i<50;i+=10){
-        QVector2D planePoint = QVector2D(i,i);
+        QVector3D planePoint = QVector3D(i,i,0);
         _robDraw->AddPoint2Buffer(planePoint);
     }
 

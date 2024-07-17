@@ -198,6 +198,7 @@ void RobotDrawUi::on_horizontalSlider_x_sliderMoved(int position)
     }else{
         _plane->setTranslation(_plane->translation() - QVector3D(50,0,0));
     }
+    _robDraw->UpdatePlanePosition();
 
 }
 
@@ -209,6 +210,9 @@ void RobotDrawUi::on_horizontalSlider_y_sliderMoved(int position)
     }else{
         _plane->setTranslation(_plane->translation() - QVector3D(0,50,0));
     }
+
+    _robDraw->UpdatePlanePosition();
+
 }
 
 
@@ -219,15 +223,45 @@ void RobotDrawUi::on_horizontalSlider_z_sliderMoved(int position)
     }else{
         _plane->setTranslation(_plane->translation() - QVector3D(0,0,50));
     }
+
+    _robDraw->UpdatePlanePosition();
 }
 
 
-void RobotDrawUi::on_horizontalSlider_r_sliderMoved(int position)
+
+
+void RobotDrawUi::on_horizontalSlider_xRot_sliderMoved(int position)
 {
-    if(position>ui->horizontalSlider_r->value()){
-        _plane->setRotation(_plane->rotation() * QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),10));
+    if(position>ui->horizontalSlider_xRot->value()){
+        _plane->setRotation(_plane->rotation() * QQuaternion::fromAxisAndAngle(QVector3D(1,0,0),10));
     }else{
         _plane->setRotation(_plane->rotation() * QQuaternion::fromAxisAndAngle(QVector3D(1,0,0),-10));
     }
+    _robDraw->UpdatePlanePosition();
+
+}
+
+
+void RobotDrawUi::on_horizontalSlider_yRot_sliderMoved(int position)
+{
+    if(position>ui->horizontalSlider_yRot->value()){
+        _plane->setRotation(_plane->rotation() * QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),10));
+    }else{
+        _plane->setRotation(_plane->rotation() * QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),-10));
+    }
+    _robDraw->UpdatePlanePosition();
+
+}
+
+
+void RobotDrawUi::on_horizontalSlider_zRot_sliderMoved(int position)
+{
+    if(position>ui->horizontalSlider_zRot->value()){
+        _plane->setRotation(_plane->rotation() * QQuaternion::fromAxisAndAngle(QVector3D(0,0,1),10));
+    }else{
+        _plane->setRotation(_plane->rotation() * QQuaternion::fromAxisAndAngle(QVector3D(0,0,1),-10));
+    }
+    _robDraw->UpdatePlanePosition();
+
 }
 

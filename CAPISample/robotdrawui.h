@@ -50,7 +50,12 @@ private slots:
 
     void on_horizontalSlider_z_sliderMoved(int position);
 
-    void on_horizontalSlider_r_sliderMoved(int position);
+
+    void on_horizontalSlider_xRot_sliderMoved(int position);
+
+    void on_horizontalSlider_yRot_sliderMoved(int position);
+
+    void on_horizontalSlider_zRot_sliderMoved(int position);
 
 private:
     Ui::RobotDrawUi *ui;

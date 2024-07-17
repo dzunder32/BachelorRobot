@@ -208,6 +208,31 @@ li.checked::marker { content: &quot;\2612&quot;; }
      </layout>
     </item>
     <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_4">
+      <item>
+       <widget class="QSlider" name="horizontalSlider_xRot">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSlider" name="horizontalSlider_yRot">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSlider" name="horizontalSlider_zRot">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
        <widget class="QSlider" name="horizontalSlider_x">
@@ -231,13 +256,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
       </item>
       <item>
        <widget class="QSlider" name="horizontalSlider_z">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
+        <property name="minimum">
+         <number>-99</number>
         </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QSlider" name="horizontalSlider_r">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
         </property>

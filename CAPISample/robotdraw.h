@@ -42,6 +42,7 @@ public:
     void clearBuffers(){CircleBuffer.clear();PointsBuffer.clear();LinesBuffer.clear();robotSequence.clear();line_isTrue=false;}
     void PlanePositionChanged();
 
+    void UpdatePlanePosition();
 private:
     Letters *_letters;
     Widget3D *_widget3d;

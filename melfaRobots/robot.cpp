@@ -86,6 +86,8 @@ void Robot::MoveInCircle(QVector3D P1,QVector3D P2,QVector3D P3,double ew1, doub
                          +QString::number(l1)+")");
 
     Write("1;1;EXECMVC P1,P2,P3");
+    Write("USR:PositionChanged");
+
 }
 
 void Robot::MoveInCircleJ(QVector <double> joints1,QVector <double> joints2,QVector <double> joints3,double joint7)
@@ -106,7 +108,7 @@ void Robot::MoveInCircleJ(QVector <double> joints1,QVector <double> joints2,QVec
                          +QString::number(joints2.at(5))+","
                          +QString::number(joint7)+")");
 
-    Write("1;1;EXECJ1=(" +QString::number(joints3.at(0))+","
+    Write("1;1;EXECJ3=(" +QString::number(joints3.at(0))+","
                          +QString::number(joints3.at(1))+","
                          +QString::number(joints3.at(2))+","
                          +QString::number(joints3.at(3))+","
@@ -115,6 +117,8 @@ void Robot::MoveInCircleJ(QVector <double> joints1,QVector <double> joints2,QVec
                          +QString::number(joint7)+")");
 
     Write("1;1;EXECMVC J1,J2,J3");
+    Write("USR:PositionChanged");
+
 }
 
 

@@ -17,7 +17,9 @@ RobotDraw::RobotDraw(Kinematik *robotKinematik, Robot *robot, QVector3D sled_pos
 
     setL1(0);
     robotMat.rotate(90,QVector3D(0,0,1));
-//    PlanePositionChanged();
+
+    // PlanePositionChanged();
+    UpdatePlanePosition();
     initLetterSize(1);
 }
 
@@ -33,7 +35,7 @@ void RobotDraw::UpdatePlanePosition()
 //    rotation_plane = _plane->matrix();
 //    rotation_plane.setColumn(3,QVector4D(0,0,0,1));
     planeRobot_T = robotMat.inverted() * _plane->matrix();
-    QVector3D ew = CalculateEw(robotMat.inverted() * _plane->matrix() *QMatrix4x4(QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180).toRotationMatrix()));
+    QVector3D ew = CalculateEw(planeRobot_T *QMatrix4x4(QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180).toRotationMatrix()));
     a=ew.x();
     b=ew.y();
     c=ew.z();

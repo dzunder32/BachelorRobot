@@ -17,7 +17,7 @@ RobotDraw::RobotDraw(Kinematik *robotKinematik, Robot *robot, QVector3D sled_pos
 
     setL1(0);
     robotMat.rotate(90,QVector3D(0,0,1));
-    PlanePositionChanged();
+//    PlanePositionChanged();
     initLetterSize(1);
 }
 
@@ -170,6 +170,7 @@ void RobotDraw::calculateL1_new()
     if(planeCounter < 5){
         for (QVector3D pt_3d:plane_cornerPts_vec3d){
             PointsBuffer.prepend(Base2PlanePoint(pt_3d));robotSequence.prepend(POINT);
+
         }
     }
 //        LinesBuffer.prepend({pt_3d,solution_3d + axisLift_3d});robotSequence.prepend(LINE);
@@ -249,6 +250,7 @@ void RobotDraw::robotDrawPoint()
     if(!PointsBuffer.isEmpty())
     {
         QVector3D planePoint = PointsBuffer.takeFirst();
+        qDebug()<<"planePoint"<<planePoint;
         robot_setPoint(Plane2RobotPoint(planePoint));
         checkPlane();
 

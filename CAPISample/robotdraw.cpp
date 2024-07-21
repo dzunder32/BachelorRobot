@@ -615,6 +615,7 @@ void RobotDraw::robot_moveInCircle(QVector <QVector2D> circlePoints)
 {
 //You heheh
     //No man!
+    //AGain or what
     QVector <QVector <double>> J_Vec;
 
     for(QVector2D point: circlePoints)

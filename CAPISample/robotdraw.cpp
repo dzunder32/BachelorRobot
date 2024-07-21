@@ -613,7 +613,7 @@ void RobotDraw::robot_setPoint(QVector3D position)
 
 void RobotDraw::robot_moveInCircle(QVector <QVector2D> circlePoints)
 {
-
+//You heheh
     QVector <QVector <double>> J_Vec;
 
     for(QVector2D point: circlePoints)

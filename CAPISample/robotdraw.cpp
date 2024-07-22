@@ -330,11 +330,8 @@ void RobotDraw::robotDrawCircle()
             robotCirclePts_vec.append(end_circlePt);
 
 //            robot_moveInCircle(robotCirclePts_vec);
-<<<<<<< HEAD
-             _robot->MoveInCircle(Plane2RobotPoint(start_circlePt),Plane2RobotPoint(mid_circlePt),Plane2RobotPoint(end_circlePt),a,b,c,l1);
-=======
              _robot->MoveInCircle(Plane2RobotPoint(start_circlePt.toVector3D()),Plane2RobotPoint(mid_circlePt.toVector3D()),Plane2RobotPoint(end_circlePt.toVector3D()),a,b,c,l1);
->>>>>>> a19b4856cd591d707b85225dbb8bca7886ef996f
+
 
 //            while (!(robotCirclePts_vec.isEmpty()))
 //            {

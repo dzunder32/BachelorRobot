@@ -296,6 +296,96 @@ void RobotDraw::robotDrawLine()
     }else{stopTimer_goHome();}
 }
 
+
+void RobotDraw::robotDrawCircle()
+{
+
+    if(!CircleBuffer.isEmpty())
+    {
+        QVariantList currCircle = CircleBuffer.takeFirst();
+        QVector <QVector2D> robotCirclePts_vec;
+        float radius = currCircle[0].toFloat();
+        QVector2D center = currCircle[1].value<QVector2D>();
+        QVector2D angleLimits = currCircle[2].value<QVector2D>();
+
+        float start_angle  = angleLimits[0];
+        float end_angle   = angleLimits[1];
+        float angle_range = end_angle - start_angle;
+        float mid_angle   = angle_range/2 + start_angle;
+
+        QVector2D prev_circlePt;
+        prev_circlePt.setX(center.x() + (radius * qCos(qDegreesToRadians(end_angle))));
+        prev_circlePt.setY(center.y() + (radius * qSin(qDegreesToRadians(end_angle))));
+
+        if(!_robot->IsConnected())
+        {
+            QVector2D end_circlePt, mid_circlePt, start_circlePt;
+            start_circlePt.setX(center.x() + (radius * qCos(qDegreesToRadians(start_angle))));
+            start_circlePt.setY(center.y() + (radius * qSin(qDegreesToRadians(start_angle))));
+            robotCirclePts_vec.append(start_circlePt);
+
+            if(angle_range==360){end_angle = mid_angle; mid_angle = angle_range/4 + start_angle;}
+
+            mid_circlePt.setX(center.x() + (radius * qCos(qDegreesToRadians(mid_angle))));
+            mid_circlePt.setY(center.y() + (radius * qSin(qDegreesToRadians(mid_angle))));
+            robotCirclePts_vec.append(mid_circlePt);
+
+            end_circlePt.setX(center.x() + (radius * qCos(qDegreesToRadians(end_angle))));
+            end_circlePt.setY(center.y() + (radius * qSin(qDegreesToRadians(end_angle))));
+            robotCirclePts_vec.append(end_circlePt);
+
+            robot_moveInCircle(robotCirclePts_vec);
+            // _robot->MoveInCircle(Plane2RobotPoint(start_circlePt),Plane2RobotPoint(mid_circlePt),Plane2RobotPoint(end_circlePt),a,b,c,l1);
+
+            while (!(robotCirclePts_vec.isEmpty()))
+            {
+                //                qDebug()<<Plane2BasePoint(vec2d.toVector3D());
+                PointsBuffer.prepend(robotCirclePts_vec.takeLast());robotSequence.prepend(POINT);
+                //              drawPoint_Widget(Plane2BasePoint(Plane2BasePoint(vec2d.toVector3D())),2,QColor(255,0,0));
+            }
+        }
+        else
+        {
+            for (float angle = end_angle-angleStep; angle >start_angle;angle-=angleStep)
+            {
+                QVector2D circlePt;
+                circlePt.setX(center.x() + (radius * qCos(qDegreesToRadians(angle))));
+                circlePt.setY(center.y() + (radius * qSin(qDegreesToRadians(angle))));
+                LinesBuffer.prepend({circlePt.toVector3D(),prev_circlePt.toVector3D()});
+                robotSequence.prepend(LINE);
+                prev_circlePt = circlePt;
+            }
+            LinesBuffer.prepend({endLinePoint,prev_circlePt.toVector3D()});
+            robotSequence.prepend(LINE);
+            initCirclePointsSpeedUp(angle_range);
+        }
+    }else{stopTimer_goHome();}
+
+}
+
+void RobotDraw::robot_moveInCircle(QVector <QVector2D> circlePoints)
+{
+    //You heheh
+    //No man!
+    //AGain or what
+    QVector <QVector <double>> J_Vec;
+
+    for(QVector2D point: circlePoints)
+    {
+        QVector3D pointRobot = Plane2RobotPoint(point.toVector3D());
+        _robotKinematik->RobotPosition::setPoint(pointRobot.x(),
+                                                 pointRobot.y(),
+                                                 pointRobot.z(),
+                                                 a,b,c,l1);
+        QMatrix4x4 pointT   = _robotKinematik->getTransformationMatrix();
+        QVector3D  position = pointT.column(3).toVector3D();
+
+        J_Vec.append({_robotKinematik->j1(),_robotKinematik->j2(),_robotKinematik->j3(),_robotKinematik->j4(),_robotKinematik->j5(),_robotKinematik->j6(),_robotKinematik->j7()});
+    }
+    qDebug()<<"the Joints :D"<<J_Vec;
+    _robot->MoveInCircleJ(J_Vec[0],J_Vec[1],J_Vec[2],l1);
+}
+
 void RobotDraw::moveTipAbove()
 {
 
@@ -352,70 +442,6 @@ void RobotDraw::CirclePreview(QVariantList circleList)
 
 }
 
-void RobotDraw::robotDrawCircle()
-{
-
-    if(!CircleBuffer.isEmpty())
-    {
-        QVariantList currCircle = CircleBuffer.takeFirst();
-        QVector <QVector2D> robotCirclePts_vec;
-        float radius = currCircle[0].toFloat();
-        QVector2D center = currCircle[1].value<QVector2D>();
-        QVector2D angleLimits = currCircle[2].value<QVector2D>();
-
-        float start_angle  = angleLimits[0];
-        float end_angle   = angleLimits[1];
-        float angle_range = end_angle - start_angle;
-        float mid_angle   = angle_range/2 + start_angle;
-
-        QVector2D prev_circlePt;
-        prev_circlePt.setX(center.x() + (radius * qCos(qDegreesToRadians(end_angle))));
-        prev_circlePt.setY(center.y() + (radius * qSin(qDegreesToRadians(end_angle))));
-
-        if(_robot->IsConnected())
-        {
-            QVector2D end_circlePt, mid_circlePt, start_circlePt;
-            start_circlePt.setX(center.x() + (radius * qCos(qDegreesToRadians(start_angle))));
-            start_circlePt.setY(center.y() + (radius * qSin(qDegreesToRadians(start_angle))));
-            robotCirclePts_vec.append(start_circlePt);
-
-            if(angle_range==360){end_angle = mid_angle; mid_angle = angle_range/4 + start_angle;}
-
-            mid_circlePt.setX(center.x() + (radius * qCos(qDegreesToRadians(mid_angle))));
-            mid_circlePt.setY(center.y() + (radius * qSin(qDegreesToRadians(mid_angle))));
-            robotCirclePts_vec.append(mid_circlePt);
-
-            end_circlePt.setX(center.x() + (radius * qCos(qDegreesToRadians(end_angle))));
-            end_circlePt.setY(center.y() + (radius * qSin(qDegreesToRadians(end_angle))));
-            robotCirclePts_vec.append(end_circlePt);
-
-            robot_moveInCircle(robotCirclePts_vec);
-
-            for (QVector2D vec2d:robotCirclePts_vec)
-            {
-//                qDebug()<<Plane2BasePoint(vec2d.toVector3D());
-                PointsBuffer.prepend(vec2d.toVector3D());robotSequence.prepend(POINT);
-//              drawPoint_Widget(Plane2BasePoint(Plane2BasePoint(vec2d.toVector3D())),2,QColor(255,0,0));
-            }
-        }
-        else
-        {
-            for (float angle = end_angle-angleStep; angle >start_angle;angle-=angleStep)
-            {
-                QVector2D circlePt;
-                circlePt.setX(center.x() + (radius * qCos(qDegreesToRadians(angle))));
-                circlePt.setY(center.y() + (radius * qSin(qDegreesToRadians(angle))));
-                LinesBuffer.prepend({circlePt.toVector3D(),prev_circlePt.toVector3D()});
-                robotSequence.prepend(LINE);
-                prev_circlePt = circlePt;
-            }
-            LinesBuffer.prepend({endLinePoint,prev_circlePt.toVector3D()});
-            robotSequence.prepend(LINE);
-            initCirclePointsSpeedUp(angle_range);
-        }
-    }else{stopTimer_goHome();}
-
-}
 
 void RobotDraw::initCirclePointsSpeedUp(float angle_range){
     circlePoints_number = qRound(angle_range/angleStep);
@@ -611,27 +637,6 @@ void RobotDraw::robot_setPoint(QVector3D position)
     {_robot->UpdatePosition(); _robotKinematik->WaitForPositionReached();}
 }
 
-void RobotDraw::robot_moveInCircle(QVector <QVector2D> circlePoints)
-{
-//You heheh
-    //No man!
-    //AGain or what
-    QVector <QVector <double>> J_Vec;
-
-    for(QVector2D point: circlePoints)
-    {
-        QVector3D pointRobot = Plane2RobotPoint(point.toVector3D());
-        _robotKinematik->RobotPosition::setPoint(pointRobot.x(),
-                                  pointRobot.y(),
-                                  pointRobot.z(),
-                                  a,b,c,l1);
-        QMatrix4x4 pointT   = _robotKinematik->getTransformationMatrix();
-        QVector3D  position = pointT.column(3).toVector3D();
-
-        J_Vec.append({_robotKinematik->j1(),_robotKinematik->j2(),_robotKinematik->j3(),_robotKinematik->j4(),_robotKinematik->j5(),_robotKinematik->j6(),_robotKinematik->j7()});
-    }
-    qDebug()<<"the Joints :D"<<J_Vec;
-}
 
 
 void RobotDraw::UpdatePointsBuffer(QVector <QVector3D> pts)

@@ -85,7 +85,7 @@ void Robot::MoveInCircle(QVector3D P1,QVector3D P2,QVector3D P3,double ew1, doub
                          +QString::number(ew3)+","
                          +QString::number(l1)+")");
 
-    Write("1;1;EXECMVC P1,P2,P3");
+    Write("1;1;EXECMVR P1,P2,P3");
     Write("USR:PositionChanged");
 
 }
@@ -116,7 +116,8 @@ void Robot::MoveInCircleJ(QVector <double> joints1,QVector <double> joints2,QVec
                          +QString::number(joints3.at(5))+","
                          +QString::number(joint7)+")");
 
-    Write("1;1;EXECMVC J1,J2,J3");
+    //    Write("1;1;EXECMVC J1,J2,J3");
+    Write("1;1;EXECMVR J1,J2,J3");
     Write("USR:PositionChanged");
 
 }
@@ -175,7 +176,8 @@ void Robot::run()
 
     forever
     {
-
+        qDebug()<<"im in forever!";
+//        qDebug()<<std::this_thread::get_id();
         if(_connect)
         {
 

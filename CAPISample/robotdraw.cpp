@@ -26,6 +26,7 @@ RobotDraw::RobotDraw(Kinematik *robotKinematik, Robot *robot, QVector3D sled_pos
 
 void RobotDraw::PlanePositionChanged()
 {
+    //NFGASD
     planeCounter=0;
     UpdatePlanePosition();
     //You Imbecile!

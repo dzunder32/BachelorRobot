@@ -28,8 +28,8 @@ public:
     //    void setTimerTime(int time_ms){_timer->setInterval(time_ms);}
     void stopTimer_goHome();
     void UpdatePointsBuffer(QVector<QVector3D> pts);
-    void AddPoint2Buffer(QVector2D pointPlane);
-    void AddLine2Buffer(QVector2D linePlane1, QVector2D linePlane2);
+    void AddPoint2Buffer(QVector3D planePoint);
+    void AddLine2Buffer(QVector3D linePlane1, QVector3D linePlane2);
     void AddCircle2Buffer(QVariantList circleList);
     void robDraw_onTimeout();
     void safeCurrentSequence();
@@ -67,6 +67,7 @@ private:
     float angleStep=10;
     float xBoxSize,yBoxSize,xSpace,ySpace;
     QMatrix4x4 rotation_plane;
+    QMatrix4x4 planeRobot_T;
     bool drawFirstLine=true,alreadyDrawn=false;
     float circlePoints_number;
     int circlePoints_counter;
@@ -76,7 +77,7 @@ private:
     QVector3D Base2RobotPoint (QVector3D point3D){return QVector3D(robotMat.inverted() * point3D);}
     QVector3D Base2PlanePoint (QVector3D point3D){return QVector3D(_plane->matrix().inverted() * point3D);}
     QVector3D Plane2BasePoint (QVector3D point3D){return QVector3D(_plane->matrix() * point3D);}
-    QVector3D Plane2RobotPoint(QVector3D point3D){return Base2RobotPoint(Plane2BasePoint(point3D));}
+    QVector3D Plane2RobotPoint(QVector3D point3D){return QVector3D(planeRobot_T * point3D);}
 
     double cartDistance(QVector3D V1,QVector3D V2){QVector3D V_diff=V2-V1;return V_diff.length();}
     bool shiftVec_inPlane();
@@ -96,6 +97,7 @@ private:
     float calculateAngleBetweenVectors(QVector3D vectorA, QVector3D vectorB);
     void  calculateL1_new();
     void checkPlane();
+    void CirclePreview(QVariantList circleList);
 public slots:
 
 signals:

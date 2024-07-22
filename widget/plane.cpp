@@ -100,7 +100,7 @@ QVector <QVector3D> Plane::getCornerPoints()
     return cornerPoints;
 //    qDebug()<<"whathtehell";
 }
-void Plane::DrawPlaneLimits()
+void Plane::connectPlane2Polaris()
 {
 
 }

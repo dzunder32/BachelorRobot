@@ -176,7 +176,8 @@ void Robot::run()
 
     forever
     {
-
+        qDebug()<<"im in forever!";
+//        qDebug()<<std::this_thread::get_id();
         if(_connect)
         {
 

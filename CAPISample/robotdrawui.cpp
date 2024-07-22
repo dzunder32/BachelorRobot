@@ -52,7 +52,8 @@ void RobotDrawUi::on_pushButtonStart_clicked()
     }
     startDrawTimer();
     setTimerSpeed(ui->timerSpeedSlider->value());
-    _robDraw->PlanePositionChanged();
+    // _robDraw->PlanePositionChanged();
+    _robDraw->UpdatePlanePosition();
 //    qDebug()<<"till here";
 //    disconnect(_robDraw->_timer, &QTimer::timeout,this, &RobotDraw::robDraw_onTimeout);
 }
@@ -181,6 +182,7 @@ void RobotDrawUi::on_pushButton_draw_clicked()
         _robDraw->drawGrid();
     _robDraw->constructLetters(textInput);
     preview_isDrawn = true;
+    _robDraw->PlanePositionChanged();
 }
 
 

@@ -15,12 +15,12 @@ Draw::Draw(Kinematik *robotKinematik,Robot *robot, QVector3D sled_pos,Plane* pla
     robotMat.rotate(90,QVector3D(0,0,1));
     robotMat.setColumn(3,QVector4D(sled_pos,1));
 //    /*qDebug()*/<<robotMat;
-
-    QVector3D ew = CalculateEw(_plane->matrix()*QMatrix4x4(QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),90).toRotationMatrix()));
+    qDebug()<<"draw Constructer:"<<QThread::currentThreadId();
+    QVector3D ew = CalculateEw(robotMat.inverted() * _plane->matrix()*QMatrix4x4(QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180).toRotationMatrix()));
     a=ew.x();
     b=ew.y();
     c=ew.z();
-    l1=500;
+    l1=-170;
     unit_planeX = QVector3D(_plane->matrix().column(0));
     unit_planeY = QVector3D(_plane->matrix().column(1));
     unit_planeZ = QVector3D(_plane->matrix().column(2));
@@ -34,21 +34,22 @@ Draw::Draw(Kinematik *robotKinematik,Robot *robot, QVector3D sled_pos,Plane* pla
 void Draw::StartSimulation(int time_ms)
 {
     timer_draw->start(time_ms);
-    timerStopped=false;
+    timerStopped = false;
 }
 void Draw::draw_onTimeout()
 {
+    qDebug()<<"Draw Thread"<<QThread::currentThreadId();
 
     if(simLine_isTrue)
     {
         std::this_thread::sleep_for(std::chrono::seconds(1));
         qDebug()<<counter;
-        qDebug()<<pointsRobot[letter].length();
+//        qDebug()<<pointsRobot[letter].length();
         errorCounter++;
         qDebug()<<errorCounter;
         if(lineCounter >=0 && lineCounter<_letters->F.length() || !timerStopped)
         {
-            // robDrawLine();
+//             robDrawLine();
             errorCounter = 0;
         }
         else
@@ -88,7 +89,7 @@ void Draw::robMove2Point()
 {
     if (counter==0 && currentIndex == 0)
         emit deletePoints();
-
+//    qDebug()<<"point"<<pointsRobot[letter][counter]+letter_posRobot-QVector3D(l1,0,0);
     robot_setPoint(pointsRobot[letter][counter]+letter_posRobot-QVector3D(l1,0,0));
 
 
@@ -220,6 +221,7 @@ void Draw::shiftLetterPosPlaneX(float x)
 void Draw::shiftLetterPosPlaneY(float y)
 {
     letter_posPlane-=QVector3D(0,y,0);
+    letter_posPlane.setX(-_plane->xLimit/2);
     shiftVec2BaseAndRobot();
 }
 void Draw::getPreviousVectors()
@@ -320,7 +322,7 @@ void Draw::CreatePointsFromTxt(float size)
     Nx = _plane->xLimit/xLetterDist;
     Ny = _plane->yLimit/yLetterDist;
 
-    letter_posPlane = QVector3D(10, (Ny-1)*yLetterDist, 0);
+    letter_posPlane = QVector3D(-_plane->xLimit/2, _plane->yLimit/2 - yLetterDist, 0);
     shiftVec2BaseAndRobot();
 
     Txt2QVector2D();
@@ -337,6 +339,7 @@ void Draw::shiftVec2BaseAndRobot()
     letter_posBase = QVector3D(temp_planeMat * letter_posPlane);
     letter_posRobot = QVector3D(temp_robotMat.inverted() * letter_posBase);
 }
+
 void Draw::robot_setPoint(QVector3D position)
 {
     _robotKinematik->setPoint(position.x(),
@@ -345,7 +348,7 @@ void Draw::robot_setPoint(QVector3D position)
                      a,b,c,l1);
 
 
-    _robotKinematik->ToolMovement(Transformations::Z,-199);
+//    _robotKinematik->ToolMovement(Transformations::Z,-199);
 
     if(_robot->IsConnected())
     {

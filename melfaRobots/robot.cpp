@@ -8,6 +8,11 @@ Robot::Robot(QString ip, int port)
     _connect=false;
     _emergencyStop=false;
     DirectUpdating=false;
+
+    this->moveToThread(this);
+    connect(this,  &QThread::finished, this,&QObject::deleteLater);
+
+    qDebug()<<"roboThread"<< QThread::currentThreadId();
 }
 
 void Robot::ConnectKinematik(RobotPosition* pos)
@@ -24,6 +29,8 @@ void Robot::ConnectKinematik(RobotPosition* pos)
 
     connect(pos,&Kinematik::updateRobot,this,&Robot::UpdatePosition);
     connect(pos,&Kinematik::updateRobotFromUi,this,&Robot::UpdatePositionFromUi);
+    qDebug()<<"roboThread2"<< QThread::currentThreadId();
+
 }
 
 void Robot::_positionChanged()
@@ -177,7 +184,7 @@ void Robot::run()
     forever
     {
         qDebug()<<"im in forever!";
-//        qDebug()<<std::this_thread::get_id();
+        qDebug()<<GetCurrentThreadId();
         if(_connect)
         {
 

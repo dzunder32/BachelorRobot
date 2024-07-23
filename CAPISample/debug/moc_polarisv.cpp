@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_PolarisV_t {
-    QByteArrayData data[16];
-    char stringdata0[156];
+    QByteArrayData data[14];
+    char stringdata0[141];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -45,16 +45,13 @@ QT_MOC_LITERAL(9, 94, 8), // "fileName"
 QT_MOC_LITERAL(10, 103, 13), // "numberOfLines"
 QT_MOC_LITERAL(11, 117, 7), // "getData"
 QT_MOC_LITERAL(12, 125, 6), // "number"
-QT_MOC_LITERAL(13, 132, 8), // "getFrame"
-QT_MOC_LITERAL(14, 141, 10), // "setRomFile"
-QT_MOC_LITERAL(15, 152, 3) // "rom"
+QT_MOC_LITERAL(13, 132, 8) // "getFrame"
 
     },
     "PolarisV\0streamingStopped\0\0sendData\0"
     "sendToolData\0ToolData\0startStreaming\0"
     "writeCSV\0std::string\0fileName\0"
-    "numberOfLines\0getData\0number\0getFrame\0"
-    "setRomFile\0rom"
+    "numberOfLines\0getData\0number\0getFrame"
 };
 #undef QT_MOC_LITERAL
 
@@ -64,7 +61,7 @@ static const uint qt_meta_data_PolarisV[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       8,   14, // methods
+       7,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -72,16 +69,15 @@ static const uint qt_meta_data_PolarisV[] = {
        3,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   54,    2, 0x06 /* Public */,
-       3,    1,   55,    2, 0x06 /* Public */,
-       4,    1,   58,    2, 0x06 /* Public */,
+       1,    0,   49,    2, 0x06 /* Public */,
+       3,    1,   50,    2, 0x06 /* Public */,
+       4,    1,   53,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       6,    0,   61,    2, 0x0a /* Public */,
-       7,    2,   62,    2, 0x0a /* Public */,
-      11,    1,   67,    2, 0x0a /* Public */,
-      13,    0,   70,    2, 0x0a /* Public */,
-      14,    1,   71,    2, 0x0a /* Public */,
+       6,    0,   56,    2, 0x0a /* Public */,
+       7,    2,   57,    2, 0x0a /* Public */,
+      11,    1,   62,    2, 0x0a /* Public */,
+      13,    0,   65,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void,
@@ -93,7 +89,6 @@ static const uint qt_meta_data_PolarisV[] = {
     QMetaType::Void, 0x80000000 | 8, QMetaType::Int,    9,   10,
     QMetaType::Int, QMetaType::Int,   12,
     QMetaType::Int,
-    QMetaType::Void, QMetaType::QString,   15,
 
        0        // eod
 };
@@ -114,7 +109,6 @@ void PolarisV::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
         case 6: { int _r = _t->getFrame();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 7: _t->setRomFile((*reinterpret_cast< QString(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -172,13 +166,13 @@ int PolarisV::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 8)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 8;
+        _id -= 7;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 8)
+        if (_id < 7)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 8;
+        _id -= 7;
     }
     return _id;
 }

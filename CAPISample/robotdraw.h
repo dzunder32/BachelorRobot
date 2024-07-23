@@ -22,9 +22,10 @@ class RobotDraw : public QObject
       Q_OBJECT
 public:
     RobotDraw(Kinematik *robotKinematik,Robot *robot, QVector3D sled_pos,Plane* plane, Widget3D *widget3d);
-    QTimer *_timer;
+    QTimer *_timer = new QTimer(this);
     int prev_timerTime;
     int planeCounter = 0;
+    void startTimer();
     //    void setTimerTime(int time_ms){_timer->setInterval(time_ms);}
     void stopTimer_goHome();
     void UpdatePointsBuffer(QVector<QVector3D> pts);
@@ -99,11 +100,15 @@ private:
     void checkPlane();
     void CirclePreview(QVariantList circleList);
 public slots:
+    void startDrawTimer(){_timer->start();}
+    void stopDrawTimer(){_timer->stop();}
+    void setTimerTime(int ms){_timer->setInterval(ms);}
+    void changeTimerSpeed(float factor){setTimerTime(_timer->interval() * factor);}
+
 
 signals:
-    void stopTimer();
-    void startTimer();
-    void changeTimerSpeed(float factor);
+
+//    void changeTimerSpeed(float factor);
     void drawLine(QVector3D start,QVector3D end);
     void drawPoint_Widget(QVector3D point , float thickness, QColor color);
 

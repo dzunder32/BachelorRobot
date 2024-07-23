@@ -39,11 +39,11 @@ public slots:
 
 private:
     Letters *_letters;
-    bool CounterSet=false, simLine_isTrue=true;
+    bool CounterSet=false, simLine_isTrue=false;
     Widget3D *_widget3d;
     Kinematik *_robotKinematik;
     Robot *_robot;
-    QTimer *timer_draw;
+    QTimer *timer_draw /*= new QTimer(this)*/;
     Plane* _plane;
     int errorCounter=0;
     int Nx,Ny;

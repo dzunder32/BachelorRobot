@@ -10,7 +10,6 @@
 #define UI_LIVEPLOT_H
 
 #include <QtCore/QVariant>
-#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
@@ -26,7 +25,6 @@ QT_BEGIN_NAMESPACE
 class Ui_LivePlot
 {
 public:
-    QAction *actionPls;
     QWidget *centralwidget;
     QVBoxLayout *verticalLayout_2;
     QHBoxLayout *horizontalLayout;
@@ -36,6 +34,7 @@ public:
     QCustomPlot *plot_1;
     QCustomPlot *plot_2;
     QCustomPlot *plot;
+    QVBoxLayout *verticalLayout;
     QLineEdit *numDataEdit;
 
     void setupUi(QMainWindow *LivePlot)
@@ -44,8 +43,6 @@ public:
             LivePlot->setObjectName(QString::fromUtf8("LivePlot"));
         LivePlot->setWindowModality(Qt::NonModal);
         LivePlot->resize(589, 559);
-        actionPls = new QAction(LivePlot);
-        actionPls->setObjectName(QString::fromUtf8("actionPls"));
         centralwidget = new QWidget(LivePlot);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         verticalLayout_2 = new QVBoxLayout(centralwidget);
@@ -98,13 +95,18 @@ public:
 
         gridLayout->addWidget(plot, 0, 0, 1, 1);
 
+        verticalLayout = new QVBoxLayout();
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         numDataEdit = new QLineEdit(centralwidget);
         numDataEdit->setObjectName(QString::fromUtf8("numDataEdit"));
         QFont font;
         font.setPointSize(14);
         numDataEdit->setFont(font);
 
-        gridLayout->addWidget(numDataEdit, 1, 1, 1, 1);
+        verticalLayout->addWidget(numDataEdit);
+
+
+        gridLayout->addLayout(verticalLayout, 1, 1, 1, 1);
 
 
         verticalLayout_2->addLayout(gridLayout);
@@ -119,7 +121,6 @@ public:
     void retranslateUi(QMainWindow *LivePlot)
     {
         LivePlot->setWindowTitle(QCoreApplication::translate("LivePlot", "MainWindow", nullptr));
-        actionPls->setText(QCoreApplication::translate("LivePlot", "Pls", nullptr));
         ClearButton->setText(QCoreApplication::translate("LivePlot", "Clear", nullptr));
         DataButton->setText(QCoreApplication::translate("LivePlot", "Export data to txt-File", nullptr));
     } // retranslateUi

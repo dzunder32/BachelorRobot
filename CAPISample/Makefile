@@ -145,8 +145,6 @@ Makefile: CAPISample.pro C:/Qt/5.15.2/mingw81_64/mkspecs/win32-g++/qmake.conf C:
 		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_multimediawidgets_private.pri \
 		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_network.pri \
 		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_network_private.pri \
-		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_networkauth.pri \
-		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_networkauth_private.pri \
 		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_nfc.pri \
 		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_nfc_private.pri \
 		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_opengl.pri \
@@ -186,10 +184,6 @@ Makefile: CAPISample.pro C:/Qt/5.15.2/mingw81_64/mkspecs/win32-g++/qmake.conf C:
 		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_remoteobjects_private.pri \
 		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_repparser.pri \
 		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_repparser_private.pri \
-		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_script.pri \
-		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_script_private.pri \
-		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_scripttools.pri \
-		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_scripttools_private.pri \
 		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_scxml.pri \
 		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_scxml_private.pri \
 		C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_sensors.pri \
@@ -341,8 +335,6 @@ C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_multimediawidgets.pri:
 C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_multimediawidgets_private.pri:
 C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_network.pri:
 C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_network_private.pri:
-C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_networkauth.pri:
-C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_networkauth_private.pri:
 C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_nfc.pri:
 C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_nfc_private.pri:
 C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_opengl.pri:
@@ -382,10 +374,6 @@ C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_remoteobjects.pri:
 C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_remoteobjects_private.pri:
 C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_repparser.pri:
 C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_repparser_private.pri:
-C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_script.pri:
-C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_script_private.pri:
-C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_scripttools.pri:
-C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_scripttools_private.pri:
 C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_scxml.pri:
 C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_scxml_private.pri:
 C:/Qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_sensors.pri:

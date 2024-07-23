@@ -21,6 +21,8 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     MainWindow *w=new MainWindow;
 
+    qDebug()<<"main Thread"<< QThread::currentThreadId();
+
     w->show();
     //Erstellen des Widgets -----------------------------------------------------------------------------------------
     Widget3D *widget3d = new Widget3D();
@@ -114,6 +116,8 @@ int main(int argc, char *argv[])
 //     qDebug()<<"trans"<<plane->translation();
 // //    drawL->getPlane(static_cast<Qt3DCore::QTransform *>(plane));
      RobotDrawUi *drawL = new RobotDrawUi(robot2Kinematik,robot,linAxis2->sled_position,plane,widget3d);
+//     DrawLetters *drawL = new DrawLetters(robot2Kinematik,robot,linAxis2->sled_position,plane,widget3d);
+
      drawL->show();
     return a.exec();
 }

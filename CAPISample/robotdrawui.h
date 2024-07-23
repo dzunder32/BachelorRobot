@@ -70,14 +70,15 @@ private:
     bool preview_isDrawn = false;
     void insertRobotSequenceText(QString str);
     void initBuffers();
-    void setTimerSpeed(int time_ms);
-    void increaseTimerSpeed(float factor);
+    // void setTimerSpeed(int time_ms);
+    // void increaseTimerSpeed(float factor);
 signals:
     void startDrawing();
     void stopDrawing();
+    void changeTimerSpeed(int);
 public slots:
-    void startDrawTimer();
-    void stopDrawTimer();
+    // void startDrawTimer();
+    // void stopDrawTimer();
     void drawLineWidget(QVector3D start,QVector3D end){_widget3d->addCylinderBetweenPoints(start,end);}
 };
 

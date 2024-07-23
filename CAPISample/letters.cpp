@@ -268,7 +268,7 @@ QVector <QVariantList> Letters::getLetterVec(QChar char_letter)
     QVector <QVariantList> returnList;
 
     if(pos==-1)
-    {returnList.append(errorList);}
+    {returnList.append(errorList);qDebug()<<"Mothernature";}
     else
     {returnList = changed_Letters[pos];}
 

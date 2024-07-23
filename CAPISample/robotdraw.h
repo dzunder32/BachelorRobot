@@ -7,7 +7,7 @@
 #include <plane.h>
 #include "robot.h"
 #include "letters.h"
-#include <chrono>
+// #include <chrono>
 #include <QVariant>
 #include <QtMath>
 #include <QMatrix4x4>
@@ -22,9 +22,10 @@ class RobotDraw : public QObject
       Q_OBJECT
 public:
     RobotDraw(Kinematik *robotKinematik,Robot *robot, QVector3D sled_pos,Plane* plane, Widget3D *widget3d);
-    QTimer *_timer;
+    QTimer *_timer = new QTimer(this);
     int prev_timerTime;
     int planeCounter = 0;
+    void startTimer();
     //    void setTimerTime(int time_ms){_timer->setInterval(time_ms);}
     void stopTimer_goHome();
     void UpdatePointsBuffer(QVector<QVector3D> pts);
@@ -72,7 +73,7 @@ private:
     float circlePoints_number;
     int circlePoints_counter;
     QVector3D robotPosition;
-
+    int last_timerTime;
 
     QVector3D Base2RobotPoint (QVector3D point3D){return QVector3D(robotMat.inverted() * point3D);}
     QVector3D Base2PlanePoint (QVector3D point3D){return QVector3D(_plane->matrix().inverted() * point3D);}
@@ -99,11 +100,15 @@ private:
     void checkPlane();
     void CirclePreview(QVariantList circleList);
 public slots:
+    void startDrawTimer(){_timer->start();}
+    void stopDrawTimer(){_timer->stop();}
+    void setTimerTime(int ms){_timer->setInterval(ms);last_timerTime = ms;}
+    void changeTimerSpeed(float factor){_timer->setInterval(last_timerTime * factor);}
+
 
 signals:
-    void stopTimer();
-    void startTimer();
-    void changeTimerSpeed(float factor);
+
+//    void changeTimerSpeed(float factor);
     void drawLine(QVector3D start,QVector3D end);
     void drawPoint_Widget(QVector3D point , float thickness, QColor color);
 

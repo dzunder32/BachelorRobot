@@ -11,7 +11,7 @@ DrawLetters::DrawLetters(Kinematik *robotKinematik,Robot *robot, QVector3D sled_
     _robot = robot;
     _draw = new Draw(robotKinematik,_robot,sled_pos,plane,widget3d);
     _draw->moveToThread(&robotThread);
-
+    qDebug()<<"DrawLetters Thread"<<QThread::currentThreadId();
     connect(&robotThread,  &QThread::finished, _draw,&QObject::deleteLater);
     connect(_draw, &Draw::sendPoint,this, &DrawLetters::drawPointWidget);
     connect(_draw, &Draw::sendLine,this, &DrawLetters::drawLineWidget);

@@ -24,7 +24,8 @@ public:
     QVector3D lowerPosX;
     QVector3D rightPosY;
     QVector3D leftPosY;
-
+    void connectPlane2Polaris();
+    void updatePlanePolaris();
     QVector<QVector3D> getCornerPoints();
 private:
     Qt3DExtras::QCylinderMesh *_upperCylinderX;

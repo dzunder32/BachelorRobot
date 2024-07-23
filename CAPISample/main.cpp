@@ -21,6 +21,8 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     MainWindow *w=new MainWindow;
 
+    qDebug()<<"main Thread"<< QThread::currentThreadId();
+
     w->show();
     //Erstellen des Widgets -----------------------------------------------------------------------------------------
     Widget3D *widget3d = new Widget3D();
@@ -33,15 +35,15 @@ int main(int argc, char *argv[])
     coordSystem->setNegativeAxis(true);
     widget3d->addObject(coordSystem,QVector3D(0,0,0),QQuaternion(0,0,0,0));
 
-//    CoordinateSystem *CSystem=new CoordinateSystem();
-//    CSystem->setLength(100);
-//    CSystem->setNegativeAxis(false);
-//    CSystem->setTranslation(QVector3D(100,100,0));
-//    STLMesh* toolMesh= new STLMesh(CSystem);
-//    toolMesh->setSource("Tool.STL");
-//    widget3d->addObject(CSystem);
-//    widget3d->addTransTool(CSystem);
-//    static_cast<Qt3DCore::QTransform*>(CSystem->components()[1])->setTranslation(QVector3D(200,-200,0));
+    CoordinateSystem *CSystem=new CoordinateSystem();
+    CSystem->setLength(100);
+    CSystem->setNegativeAxis(false);
+    CSystem->setTranslation(QVector3D(100,100,0));
+    STLMesh* toolMesh= new STLMesh(CSystem);
+    toolMesh->setSource("Tool.STL");
+    widget3d->addObject(CSystem);
+    widget3d->addTransTool(CSystem);
+    static_cast<Qt3DCore::QTransform*>(CSystem->components()[1])->setTranslation(QVector3D(200,-200,0));
 
 
 //Adawakedawra
@@ -62,69 +64,35 @@ int main(int argc, char *argv[])
     //Hinzufügen einer Linearachse
 
     LinearAxisRV6SL* linAxis2 = new LinearAxisRV6SL();
-//    robot2->setTranslation(QVector3D(-1600,0,0));
-//    robot2->addTool(camera2);
     robot2->addTool(penHolder);
     robot2->addLinearAxis(linAxis2);
-//    qDebug()<<"pen!"<<penHolder;
 
     qDebug()<<"pen!"<<*static_cast<QMatrix4x4*>(penHolder);
     robot2Kinematik->setTool(*static_cast<QMatrix4x4*>(penHolder));
-//    qDebug()<<linAxis2->rotation().toRotationMatrix();
     linAxis2->set_sled_position(linAxis2->rotation().toRotationMatrix());
     qDebug()<<linAxis2->sled_position;
-//    drawL->setSledPos(linAxis2->sled_position);
     widget3d->setViewCenter(linAxis2->sled_position + QVector3D(0,0,500));
-
-//    QMatrix4x4 robotMat;
-//    robotMat.rotate(90,QVector3D(0,0,1));
-//    robotMat.setColumn(3,QVector4D(linAxis2->sled_position,1));
-//    qDebug()<<"main:"<<robotMat;
-//    qDebug()<<robotMat.inverted();
-
-//    QVector3D pointRobot,pointBase;
-//    pointBase = linAxis2->sled_position + QVector3D(100,0,0);
-//    pointRobot = QVector3D(robotMat.inverted() * pointBase);
-//    qDebug()<<pointRobot;
-
     widget3d->addObject(robot2);
 
-//    linAxis->setTranslation(QVector3D(-400,0,0));
-
     //Polaris als Koordinatensystem --------------------------------------------------------------
-//    CoordinateSystem *polaris=new CoordinateSystem;
-//    polaris->setLength(200);
-//    polaris->setNegativeAxis(false);
-//    widget3d->addObject(polaris);
-//    widget3d->addTransPolaris(polaris);
+    CoordinateSystem *polaris=new CoordinateSystem;
+    polaris->setLength(200);
+    polaris->setNegativeAxis(false);
+    widget3d->addObject(polaris);
+    widget3d->addTransPolaris(polaris);
 
     //Position des Polaris-Tools
-//    CoordinateSystem *position=new CoordinateSystem;
-//    position->setLength(100);
-////    position->AxisX->setEnabled(false);
-//    position->setNegativeAxis(false);
-//    widget3d->addObject(position,QVector3D(-790,0,800),QQuaternion(1,0,0,0)/*QQuaternion::fromAxisAndAngle(QVector3D(0,0,1),140)**//**//*QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180)*/);
-//    widget3d->setPosMatrix(static_cast<Qt3DCore::QTransform*>(position->components()[1]));
+    CoordinateSystem *position=new CoordinateSystem;
+    position->setLength(100);
+    position->setNegativeAxis(false);
+    widget3d->addObject(position,QVector3D(790,100,800),QQuaternion(1,0,0,0)/*QQuaternion::fromAxisAndAngle(QVector3D(0,0,1),140)**//**//*QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180)*/);
+    widget3d->setPosMatrix(static_cast<Qt3DCore::QTransform*>(position->components()[1]));
 
     //Ebene zu Zeichnen
-
-
     Plane *plane = new Plane(600.0,800.0);
-//    qDebug()<<linAxis2->sled_position;
     plane->setTranslation(linAxis2->sled_position+QVector3D(0,-800,500));
-    // plane->setRotation(QQuaternion::fromEulerAngles(QVector3D(-90,180,0)));
-    // plane->setRotation(QQuaternion::fromEulerAngles(QVector3D(-90,180,0)) * QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180));
     plane->setRotation(QQuaternion::fromEulerAngles(QVector3D(-90,180,0)) /** QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),130)*/);
-
     widget3d->addObject(plane);
-
-    // qDebug()<<plane->getCornerPoints();
-    // qDebug()<<plane->rotation().toRotationMatrix()(0,2);
-    // qDebug()<<plane->rotation().toRotationMatrix()(1,2);
-    // qDebug()<<plane->rotation().toRotationMatrix()(2,2);
-//    qDebug()<<plane->rotation().toRotationMatrix().operator (2)(0);
-//    qDebug()<<plane->rotation().toRotationMatrix().operator (2)(0);
-
 
     Robot *robot = new Robot("143.93.135.15",10001);
 
@@ -148,6 +116,8 @@ int main(int argc, char *argv[])
 //     qDebug()<<"trans"<<plane->translation();
 // //    drawL->getPlane(static_cast<Qt3DCore::QTransform *>(plane));
      RobotDrawUi *drawL = new RobotDrawUi(robot2Kinematik,robot,linAxis2->sled_position,plane,widget3d);
+//     DrawLetters *drawL = new DrawLetters(robot2Kinematik,robot,linAxis2->sled_position,plane,widget3d);
+
      drawL->show();
     return a.exec();
 }

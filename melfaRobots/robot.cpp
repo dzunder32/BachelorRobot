@@ -17,7 +17,7 @@ Robot::Robot(QString ip, int port)
 void Robot::ConnectKinematik(RobotPosition* pos)
 {
     _position=pos;
-    connect(pos,&RobotPosition::j1Changed,this,&Robot::_positionChanged,Qt::QueuedConnection);
+    connect(pos,&RobotPosition::j1Changed,this,&Robot::_positionChanged);
     connect(pos,&RobotPosition::j2Changed,this,&Robot::_positionChanged);
     connect(pos,&RobotPosition::j3Changed,this,&Robot::_positionChanged);
     connect(pos,&RobotPosition::j4Changed,this,&Robot::_positionChanged);

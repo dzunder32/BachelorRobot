@@ -20,7 +20,7 @@ Draw::Draw(Kinematik *robotKinematik,Robot *robot, QVector3D sled_pos,Plane* pla
     a=ew.x();
     b=ew.y();
     c=ew.z();
-    l1=-170;
+    l1=170;
     unit_planeX = QVector3D(_plane->matrix().column(0));
     unit_planeY = QVector3D(_plane->matrix().column(1));
     unit_planeZ = QVector3D(_plane->matrix().column(2));

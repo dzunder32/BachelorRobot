@@ -21,6 +21,10 @@ RobotDrawUi::RobotDrawUi(Kinematik *robotKinematik,Robot *robot, QVector3D sled_
     connect(_robDraw, &RobotDraw::drawPoint_Widget,_widget3d, &Widget3D::drawPoint);
 //    connect(_robDraw, &RobotDraw::changeTimerSpeed,this, &RobotDrawUi::increaseTimerSpeed);
     connect(this,&RobotDrawUi::startDrawing,_robDraw,&RobotDraw::startDrawTimer);
+    connect(this,&RobotDrawUi::stopDrawing,_robDraw,&RobotDraw::stopDrawTimer);
+    connect(this,&RobotDrawUi::changeTimerSpeed,_robDraw,&RobotDraw::setTimerTime);
+
+
     robotThread.start();
 }
 
@@ -31,17 +35,17 @@ RobotDrawUi::~RobotDrawUi()
     delete ui;
 }
 
-void RobotDrawUi::setTimerSpeed(int time_ms){
-//    _robDraw->prev_timerTime = _robDraw->_timer->interval();
-//    _robDraw->_timer->setInterval(time_ms);
-    _robDraw->_timer->setInterval(time_ms);
-}
+// void RobotDrawUi::setTimerSpeed(int time_ms){
+// //    _robDraw->prev_timerTime = _robDraw->_timer->interval();
+// //    _robDraw->_timer->setInterval(time_ms);
+//     _robDraw->_timer->setInterval(time_ms);
+// }
 
-void RobotDrawUi::increaseTimerSpeed(float factor)
-{
-    setTimerSpeed(qRound(ui->timerSpeedSlider->value()*factor));
-//    qDebug()<<"currSpeed:"<<qRound(ui->timerSpeedSlider->value()*factor);
-}
+// void RobotDrawUi::increaseTimerSpeed(float factor)
+// {
+//     setTimerSpeed(qRound(ui->timerSpeedSlider->value()*factor));
+// //    qDebug()<<"currSpeed:"<<qRound(ui->timerSpeedSlider->value()*factor);
+// }
 
 void RobotDrawUi::on_pushButtonStart_clicked()
 {
@@ -51,7 +55,7 @@ void RobotDrawUi::on_pushButtonStart_clicked()
         _widget3d->deleteAllPoints();
         preview_isDrawn = false;
     }
-    startDrawing();
+    emit startDrawing();
 //    startDrawTimer();
 //    _robDraw->startDrawTimer();
     _robDraw->setTimerTime(ui->timerSpeedSlider->value());
@@ -66,13 +70,21 @@ void RobotDrawUi::on_pushButtonStart_clicked()
 void RobotDrawUi::on_pushButtonDelete_clicked()
 {
 //    _robDraw->disconnectTimer();
-    stopDrawTimer();
+    // stopDrawTimer();
+    emit stopDrawing();
+    // _robDraw->stopDrawTimer();
+    historyText = ui->textEdit_Sequence->toPlainText();
+    qDebug()<<"TimerStopped";
+
+
 }
 
 
 void RobotDrawUi::on_timerSpeedSlider_sliderMoved(int position)
 {
-    _robDraw->setTimerTime(position);
+    // _robDraw->setTimerTime(position);
+    emit changeTimerSpeed(position);
+
     qDebug()<<position;
 }
 
@@ -93,13 +105,13 @@ void RobotDrawUi::on_pushButton_setP2_clicked()
     P2 = QVector2D(P2X_Str.toFloat(),P2Y_Str.toFloat());
 }
 
-void RobotDrawUi::stopDrawTimer(){
-    _robDraw->stopDrawTimer();
-//    _robDraw->_timer->stop();
-    historyText = ui->textEdit_Sequence->toPlainText();
-//    ui->textEdit_Sequence->setText("Robot Sequence:");
-    qDebug()<<"TimerStopped";
-}
+// void RobotDrawUi::stopDrawTimer(){
+//     _robDraw->stopDrawTimer();
+// //    _robDraw->_timer->stop();
+//     historyText = ui->textEdit_Sequence->toPlainText();
+// //    ui->textEdit_Sequence->setText("Robot Sequence:");
+//     qDebug()<<"TimerStopped";
+// }
 
 
 void RobotDrawUi::on_pushButton_addLine_clicked()
@@ -128,14 +140,14 @@ void RobotDrawUi::insertRobotSequenceText(QString str)
     ui->textEdit_Sequence->insertPlainText(str);
 }
 
-void RobotDrawUi::startDrawTimer()
-{
-//    _robDraw->_timer->start();
-    _robDraw->startDrawTimer();
-    qDebug()<<"TimerStarted";
-//    qDebug()<<_robDraw->_timer->isActive();
-    _robDraw->safeCurrentSequence();
-}
+// void RobotDrawUi::startDrawTimer()
+// {
+// //    _robDraw->_timer->start();
+//     _robDraw->startDrawTimer();
+//     qDebug()<<"TimerStarted";
+// //    qDebug()<<_robDraw->_timer->isActive();
+//     _robDraw->safeCurrentSequence();
+// }
 
 void RobotDrawUi::on_pushButton_History_clicked()
 {

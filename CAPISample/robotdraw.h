@@ -7,7 +7,7 @@
 #include <plane.h>
 #include "robot.h"
 #include "letters.h"
-#include <chrono>
+// #include <chrono>
 #include <QVariant>
 #include <QtMath>
 #include <QMatrix4x4>
@@ -73,7 +73,7 @@ private:
     float circlePoints_number;
     int circlePoints_counter;
     QVector3D robotPosition;
-
+    int last_timerTime;
 
     QVector3D Base2RobotPoint (QVector3D point3D){return QVector3D(robotMat.inverted() * point3D);}
     QVector3D Base2PlanePoint (QVector3D point3D){return QVector3D(_plane->matrix().inverted() * point3D);}
@@ -102,8 +102,8 @@ private:
 public slots:
     void startDrawTimer(){_timer->start();}
     void stopDrawTimer(){_timer->stop();}
-    void setTimerTime(int ms){_timer->setInterval(ms);}
-    void changeTimerSpeed(float factor){setTimerTime(_timer->interval() * factor);}
+    void setTimerTime(int ms){_timer->setInterval(ms);last_timerTime = ms;}
+    void changeTimerSpeed(float factor){_timer->setInterval(last_timerTime * factor);}
 
 
 signals:

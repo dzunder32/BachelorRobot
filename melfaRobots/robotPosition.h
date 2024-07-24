@@ -2,6 +2,7 @@
 #define ROBOTPOSITION_H
 #include "position.h"
 #include "mathfunktions.h"
+#include <QThread>
 
 class RobotPosition: public Position
 {

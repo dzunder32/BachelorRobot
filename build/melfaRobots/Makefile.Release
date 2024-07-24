@@ -234,6 +234,10 @@ release/moc_controlpanel.cpp: ../../melfaRobots/controlpanel.h \
 		../../melfaRobots/mathfunktions.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QtMath \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qmath.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/QThread \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthread.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdeadlinetimer.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qelapsedtimer.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/Qt3DCore \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/Qt3DCoreDepends \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QtCore \
@@ -274,8 +278,6 @@ release/moc_controlpanel.cpp: ../../melfaRobots/controlpanel.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qcoreapplication.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qconcatenatetablesproxymodel.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qcryptographichash.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdeadlinetimer.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qelapsedtimer.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdir.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qfileinfo.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qfile.h \
@@ -352,7 +354,6 @@ release/moc_controlpanel.cpp: ../../melfaRobots/controlpanel.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtemporaryfile.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtextboundaryfinder.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtextcodec.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthread.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthreadpool.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthreadstorage.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtimeline.h \
@@ -903,6 +904,10 @@ release/moc_robotPosition.cpp: ../../melfaRobots/robotPosition.h \
 		../../melfaRobots/mathfunktions.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QtMath \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qmath.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/QThread \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthread.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdeadlinetimer.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qelapsedtimer.h \
 		release/moc_predefs.h \
 		C:/Qt/5.15.2/mingw81_64/bin/moc.exe
 	C:\Qt\5.15.2\mingw81_64\bin\moc.exe $(DEFINES) --include C:/Users/wolfd/Desktop/Git/BachelorRobot/build/melfaRobots/release/moc_predefs.h -IC:/Qt/5.15.2/mingw81_64/mkspecs/win32-g++ -IC:/Users/wolfd/Desktop/Git/BachelorRobot/melfaRobots -IC:/Users/wolfd/Desktop/Git/BachelorRobot/widget -IC:/Qt/5.15.2/mingw81_64/include -IC:/Qt/5.15.2/mingw81_64/include/QtWidgets -IC:/Qt/5.15.2/mingw81_64/include/Qt3DExtras -IC:/Qt/5.15.2/mingw81_64/include/Qt3DRender -IC:/Qt/5.15.2/mingw81_64/include/Qt3DInput -IC:/Qt/5.15.2/mingw81_64/include/Qt3DLogic -IC:/Qt/5.15.2/mingw81_64/include/Qt3DCore -IC:/Qt/5.15.2/mingw81_64/include/QtGamepad -IC:/Qt/5.15.2/mingw81_64/include/QtGui -IC:/Qt/5.15.2/mingw81_64/include/QtANGLE -IC:/Qt/5.15.2/mingw81_64/include/QtNetwork -IC:/Qt/5.15.2/mingw81_64/include/QtCore -I. -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed -IC:/Qt/Tools/mingw810_64/x86_64-w64-mingw32/include ..\..\melfaRobots\robotPosition.h -o release\moc_robotPosition.cpp
@@ -991,6 +996,10 @@ release/moc_rv4flkinematik.cpp: ../../melfaRobots/rv4flkinematik.h \
 		../../melfaRobots/mathfunktions.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QtMath \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qmath.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/QThread \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthread.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdeadlinetimer.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qelapsedtimer.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/Qt3DCore \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/Qt3DCoreDepends \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QtCore \
@@ -1031,8 +1040,6 @@ release/moc_rv4flkinematik.cpp: ../../melfaRobots/rv4flkinematik.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qcoreapplication.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qconcatenatetablesproxymodel.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qcryptographichash.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdeadlinetimer.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qelapsedtimer.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdir.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qfileinfo.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qfile.h \
@@ -1109,7 +1116,6 @@ release/moc_rv4flkinematik.cpp: ../../melfaRobots/rv4flkinematik.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtemporaryfile.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtextboundaryfinder.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtextcodec.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthread.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthreadpool.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthreadstorage.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtimeline.h \
@@ -1793,6 +1799,7 @@ release/moc_rv6slkinematik.cpp: ../../melfaRobots/rv6slkinematik.h \
 		../../melfaRobots/robotPosition.h \
 		../../melfaRobots/position.h \
 		../../melfaRobots/mathfunktions.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/QThread \
 		release/moc_predefs.h \
 		C:/Qt/5.15.2/mingw81_64/bin/moc.exe
 	C:\Qt\5.15.2\mingw81_64\bin\moc.exe $(DEFINES) --include C:/Users/wolfd/Desktop/Git/BachelorRobot/build/melfaRobots/release/moc_predefs.h -IC:/Qt/5.15.2/mingw81_64/mkspecs/win32-g++ -IC:/Users/wolfd/Desktop/Git/BachelorRobot/melfaRobots -IC:/Users/wolfd/Desktop/Git/BachelorRobot/widget -IC:/Qt/5.15.2/mingw81_64/include -IC:/Qt/5.15.2/mingw81_64/include/QtWidgets -IC:/Qt/5.15.2/mingw81_64/include/Qt3DExtras -IC:/Qt/5.15.2/mingw81_64/include/Qt3DRender -IC:/Qt/5.15.2/mingw81_64/include/Qt3DInput -IC:/Qt/5.15.2/mingw81_64/include/Qt3DLogic -IC:/Qt/5.15.2/mingw81_64/include/Qt3DCore -IC:/Qt/5.15.2/mingw81_64/include/QtGamepad -IC:/Qt/5.15.2/mingw81_64/include/QtGui -IC:/Qt/5.15.2/mingw81_64/include/QtANGLE -IC:/Qt/5.15.2/mingw81_64/include/QtNetwork -IC:/Qt/5.15.2/mingw81_64/include/QtCore -I. -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed -IC:/Qt/Tools/mingw810_64/x86_64-w64-mingw32/include ..\..\melfaRobots\rv6slkinematik.h -o release\moc_rv6slkinematik.cpp
@@ -1881,6 +1888,10 @@ release/moc_robot.cpp: ../../melfaRobots/robot.h \
 		../../melfaRobots/mathfunktions.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QtMath \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qmath.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/QThread \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthread.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdeadlinetimer.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qelapsedtimer.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/Qt3DCore \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/Qt3DCoreDepends \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QtCore \
@@ -1921,8 +1932,6 @@ release/moc_robot.cpp: ../../melfaRobots/robot.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qcoreapplication.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qconcatenatetablesproxymodel.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qcryptographichash.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdeadlinetimer.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qelapsedtimer.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdir.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qfileinfo.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qfile.h \
@@ -1999,7 +2008,6 @@ release/moc_robot.cpp: ../../melfaRobots/robot.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtemporaryfile.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtextboundaryfinder.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtextcodec.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthread.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthreadpool.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthreadstorage.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtimeline.h \
@@ -2238,7 +2246,6 @@ release/moc_robot.cpp: ../../melfaRobots/robot.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/qskeletonloader.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/qtransform.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/qt3dcoreversion.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/QThread \
 		C:/Qt/5.15.2/mingw81_64/include/QtNetwork/QTcpSocket \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QElapsedTimer \
 		release/moc_predefs.h \
@@ -2330,6 +2337,10 @@ release/moc_robotcontrol.cpp: ../../melfaRobots/robotcontrol.h \
 		../../melfaRobots/mathfunktions.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QtMath \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qmath.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/QThread \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthread.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdeadlinetimer.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qelapsedtimer.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/Qt3DCore \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/Qt3DCoreDepends \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QtCore \
@@ -2370,8 +2381,6 @@ release/moc_robotcontrol.cpp: ../../melfaRobots/robotcontrol.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qcoreapplication.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qconcatenatetablesproxymodel.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qcryptographichash.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdeadlinetimer.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qelapsedtimer.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdir.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qfileinfo.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qfile.h \
@@ -2448,7 +2457,6 @@ release/moc_robotcontrol.cpp: ../../melfaRobots/robotcontrol.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtemporaryfile.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtextboundaryfinder.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtextcodec.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthread.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthreadpool.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthreadstorage.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtimeline.h \
@@ -2687,7 +2695,6 @@ release/moc_robotcontrol.cpp: ../../melfaRobots/robotcontrol.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/qskeletonloader.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/qtransform.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/qt3dcoreversion.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/QThread \
 		C:/Qt/5.15.2/mingw81_64/include/QtNetwork/QTcpSocket \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QElapsedTimer \
 		../../melfaRobots/subwindow.h \
@@ -2921,6 +2928,10 @@ release/controlpanel.o: ../../melfaRobots/controlpanel.cpp ../../melfaRobots/con
 		../../melfaRobots/mathfunktions.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QtMath \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qmath.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/QThread \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthread.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdeadlinetimer.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qelapsedtimer.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/Qt3DCore \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/Qt3DCoreDepends \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QtCore \
@@ -2961,8 +2972,6 @@ release/controlpanel.o: ../../melfaRobots/controlpanel.cpp ../../melfaRobots/con
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qcoreapplication.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qconcatenatetablesproxymodel.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qcryptographichash.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdeadlinetimer.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qelapsedtimer.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdir.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qfileinfo.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qfile.h \
@@ -3039,7 +3048,6 @@ release/controlpanel.o: ../../melfaRobots/controlpanel.cpp ../../melfaRobots/con
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtemporaryfile.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtextboundaryfinder.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtextcodec.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthread.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthreadpool.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthreadstorage.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtimeline.h \
@@ -3625,7 +3633,11 @@ release/robotPosition.o: ../../melfaRobots/robotPosition.cpp ../../melfaRobots/r
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qsize.h \
 		../../melfaRobots/mathfunktions.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QtMath \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qmath.h
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qmath.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/QThread \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthread.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdeadlinetimer.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qelapsedtimer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\robotPosition.o ..\..\melfaRobots\robotPosition.cpp
 
 release/rv4flkinematik.o: ../../melfaRobots/rv4flkinematik.cpp ../../melfaRobots/rv4flkinematik.h \
@@ -3712,6 +3724,10 @@ release/rv4flkinematik.o: ../../melfaRobots/rv4flkinematik.cpp ../../melfaRobots
 		../../melfaRobots/mathfunktions.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QtMath \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qmath.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/QThread \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthread.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdeadlinetimer.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qelapsedtimer.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/Qt3DCore \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/Qt3DCoreDepends \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QtCore \
@@ -3752,8 +3768,6 @@ release/rv4flkinematik.o: ../../melfaRobots/rv4flkinematik.cpp ../../melfaRobots
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qcoreapplication.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qconcatenatetablesproxymodel.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qcryptographichash.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdeadlinetimer.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qelapsedtimer.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdir.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qfileinfo.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qfile.h \
@@ -3830,7 +3844,6 @@ release/rv4flkinematik.o: ../../melfaRobots/rv4flkinematik.cpp ../../melfaRobots
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtemporaryfile.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtextboundaryfinder.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtextcodec.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthread.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthreadpool.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthreadstorage.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtimeline.h \
@@ -4511,7 +4524,8 @@ release/rv6slkinematik.o: ../../melfaRobots/rv6slkinematik.cpp ../../melfaRobots
 		../../melfaRobots/kinematik.h \
 		../../melfaRobots/robotPosition.h \
 		../../melfaRobots/position.h \
-		../../melfaRobots/mathfunktions.h
+		../../melfaRobots/mathfunktions.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/QThread
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\rv6slkinematik.o ..\..\melfaRobots\rv6slkinematik.cpp
 
 release/robot.o: ../../melfaRobots/robot.cpp ../../melfaRobots/robot.h \
@@ -4598,6 +4612,10 @@ release/robot.o: ../../melfaRobots/robot.cpp ../../melfaRobots/robot.h \
 		../../melfaRobots/mathfunktions.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QtMath \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qmath.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/QThread \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthread.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdeadlinetimer.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qelapsedtimer.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/Qt3DCore \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/Qt3DCoreDepends \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QtCore \
@@ -4638,8 +4656,6 @@ release/robot.o: ../../melfaRobots/robot.cpp ../../melfaRobots/robot.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qcoreapplication.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qconcatenatetablesproxymodel.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qcryptographichash.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdeadlinetimer.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qelapsedtimer.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdir.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qfileinfo.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qfile.h \
@@ -4716,7 +4732,6 @@ release/robot.o: ../../melfaRobots/robot.cpp ../../melfaRobots/robot.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtemporaryfile.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtextboundaryfinder.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtextcodec.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthread.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthreadpool.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthreadstorage.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtimeline.h \
@@ -4955,7 +4970,6 @@ release/robot.o: ../../melfaRobots/robot.cpp ../../melfaRobots/robot.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/qskeletonloader.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/qtransform.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/qt3dcoreversion.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/QThread \
 		C:/Qt/5.15.2/mingw81_64/include/QtNetwork/QTcpSocket \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QElapsedTimer
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\robot.o ..\..\melfaRobots\robot.cpp
@@ -5124,6 +5138,10 @@ release/kinematik.o: ../../melfaRobots/kinematik.cpp ../../melfaRobots/kinematik
 		../../melfaRobots/mathfunktions.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QtMath \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qmath.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/QThread \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthread.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdeadlinetimer.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qelapsedtimer.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/Qt3DCore \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/Qt3DCoreDepends \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QtCore \
@@ -5164,8 +5182,6 @@ release/kinematik.o: ../../melfaRobots/kinematik.cpp ../../melfaRobots/kinematik
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qcoreapplication.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qconcatenatetablesproxymodel.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qcryptographichash.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdeadlinetimer.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qelapsedtimer.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdir.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qfileinfo.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qfile.h \
@@ -5242,7 +5258,6 @@ release/kinematik.o: ../../melfaRobots/kinematik.cpp ../../melfaRobots/kinematik
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtemporaryfile.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtextboundaryfinder.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtextcodec.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthread.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthreadpool.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthreadstorage.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtimeline.h \
@@ -5568,6 +5583,10 @@ release/robotcontrol.o: ../../melfaRobots/robotcontrol.cpp ../../melfaRobots/rob
 		../../melfaRobots/mathfunktions.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QtMath \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qmath.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/QThread \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthread.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdeadlinetimer.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qelapsedtimer.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/Qt3DCore \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/Qt3DCoreDepends \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QtCore \
@@ -5608,8 +5627,6 @@ release/robotcontrol.o: ../../melfaRobots/robotcontrol.cpp ../../melfaRobots/rob
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qcoreapplication.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qconcatenatetablesproxymodel.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qcryptographichash.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdeadlinetimer.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qelapsedtimer.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdir.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qfileinfo.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qfile.h \
@@ -5686,7 +5703,6 @@ release/robotcontrol.o: ../../melfaRobots/robotcontrol.cpp ../../melfaRobots/rob
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtemporaryfile.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtextboundaryfinder.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtextcodec.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthread.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthreadpool.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthreadstorage.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtimeline.h \
@@ -5925,7 +5941,6 @@ release/robotcontrol.o: ../../melfaRobots/robotcontrol.cpp ../../melfaRobots/rob
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/qskeletonloader.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/qtransform.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/qt3dcoreversion.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/QThread \
 		C:/Qt/5.15.2/mingw81_64/include/QtNetwork/QTcpSocket \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QElapsedTimer \
 		../../melfaRobots/subwindow.h \

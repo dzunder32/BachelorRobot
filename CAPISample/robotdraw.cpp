@@ -1,7 +1,5 @@
 #include "robotdraw.h"
 
-
-
 RobotDraw::RobotDraw(Kinematik *robotKinematik, Robot *robot, QVector3D sled_pos, Plane* plane, Widget3D *widget3d)
 {
 //    _timer          = new QTimer;
@@ -513,10 +511,10 @@ void RobotDraw::getLetterData(QChar char_letter)
     {
 //        qDebug()<<"im in Letter Man!";
         currentLetter = _letters->getLetterVec(char_letter);
-
         _letters->shiftLetter(currentLetter,shiftVector);
+        qDebug()<<"CURRlETTER"<<currentLetter[0][0].value<QString>();
 
-        if(currentLetter[0][0]=="no Letter found")
+        if(currentLetter[0][0].value<QString>()=="no Letter found")
         {
             qDebug()<<"no Letter found";
         }

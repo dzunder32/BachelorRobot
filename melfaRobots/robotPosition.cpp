@@ -53,6 +53,7 @@ void RobotPosition::WaitForPositionReached()
 {
     while(_positionReached==false)
     {
-
+        qDebug()<<"waiting for position to get Reached";
+        qDebug()<<QThread::currentThreadId();
     }
 }

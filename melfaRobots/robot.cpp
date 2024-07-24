@@ -9,16 +9,15 @@ Robot::Robot(QString ip, int port)
     _emergencyStop=false;
     DirectUpdating=false;
 
-    this->moveToThread(this);
     connect(this,  &QThread::finished, this,&QObject::deleteLater);
 
-    qDebug()<<"roboThread"<< QThread::currentThreadId();
+//    qDebug()<<"roboThread"<< QThread::currentThreadId();
 }
 
 void Robot::ConnectKinematik(RobotPosition* pos)
 {
     _position=pos;
-    connect(pos,&RobotPosition::j1Changed,this,&Robot::_positionChanged);
+    connect(pos,&RobotPosition::j1Changed,this,&Robot::_positionChanged,Qt::QueuedConnection);
     connect(pos,&RobotPosition::j2Changed,this,&Robot::_positionChanged);
     connect(pos,&RobotPosition::j3Changed,this,&Robot::_positionChanged);
     connect(pos,&RobotPosition::j4Changed,this,&Robot::_positionChanged);
@@ -29,14 +28,16 @@ void Robot::ConnectKinematik(RobotPosition* pos)
 
     connect(pos,&Kinematik::updateRobot,this,&Robot::UpdatePosition);
     connect(pos,&Kinematik::updateRobotFromUi,this,&Robot::UpdatePositionFromUi);
-    qDebug()<<"roboThread2"<< QThread::currentThreadId();
 
 }
+
 
 void Robot::_positionChanged()
 {
     _connetedRobotChangePosition=true;
 //    qDebug()<<_position->getTransformationMatrix();
+//    qDebug()<<"roboThread3"<< QThread::currentThreadId();
+
 }
 
 void Robot::UpdatePosition()
@@ -160,7 +161,8 @@ void Robot::EmergencyStop()
 
 void Robot::run()
 {
-
+    qDebug()<<"lets Go!";
+    qDebug()<<QThread::currentThreadId();
     _socket = new QTcpSocket;
 
     _socket->connectToHost(_ip,_port,QIODevice::ReadWrite);
@@ -184,7 +186,7 @@ void Robot::run()
     forever
     {
         qDebug()<<"im in forever!";
-        qDebug()<<GetCurrentThreadId();
+        qDebug()<<QThread::currentThreadId();
         if(_connect)
         {
 

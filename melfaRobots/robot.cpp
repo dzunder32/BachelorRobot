@@ -46,6 +46,12 @@ void Robot::UpdatePosition()
     Write("USR:PositionChanged");
 }
 
+void Robot::UpdatePositionLinear()
+{
+    MoveToPositionLinear(_position);
+    Write("USR:PositionChanged");
+}
+
 void Robot::UpdatePositionFromUi()
 {
     if(DirectUpdating)
@@ -65,6 +71,18 @@ void Robot::MoveToPosition(Position* pos)
                          +QString::number(pos->j6())+","
                          +QString::number(pos->j7())+")");
     Write("1;1;EXECMOV J81");
+}
+
+void Robot::MoveToPositionLinear(Position* pos)
+{
+    Write("1;1;EXECJ81=("+QString::number(pos->j1())+","
+                         +QString::number(pos->j2())+","
+                         +QString::number(pos->j3())+","
+                         +QString::number(pos->j4())+","
+                         +QString::number(pos->j5())+","
+                         +QString::number(pos->j6())+","
+                         +QString::number(pos->j7())+")");
+    Write("1;1;EXECMVS J81");
 }
 
 void Robot::MoveInCircle(QVector3D P1,QVector3D P2,QVector3D P3,double ew1, double ew2, double ew3, double l1)
@@ -185,8 +203,8 @@ void Robot::run()
 
     forever
     {
-        qDebug()<<"im in forever!";
-        qDebug()<<QThread::currentThreadId();
+//        qDebug()<<"im in forever!";
+//        qDebug()<<QThread::currentThreadId();
         if(_connect)
         {
 
@@ -314,7 +332,8 @@ void Robot::stopRobot()
     }
     _emergencyStop = false;
 
-    emit robotCommand(command);
+    emit robotCommand(command)
+            ;
     emit robotAnswer(answer);
 }
 
@@ -335,8 +354,9 @@ void Robot::_alternativeCommand(QString command)
     if(command=="PositionChanged")
     {
         qDebug()<<_position;
-        if(_position!=nullptr)
-            _position->Reached();
+        if(_position!=nullptr){
+            qDebug()<<"reached the position!";
+            _position->Reached();}
         _connetedRobotChangePosition=false;
     }
 }

@@ -35,15 +35,17 @@ int main(int argc, char *argv[])
     coordSystem->setNegativeAxis(true);
     widget3d->addObject(coordSystem,QVector3D(0,0,0),QQuaternion(0,0,0,0));
 
-    CoordinateSystem *CSystem=new CoordinateSystem();
-    CSystem->setLength(100);
-    CSystem->setNegativeAxis(false);
-    CSystem->setTranslation(QVector3D(100,100,0));
-    STLMesh* toolMesh= new STLMesh(CSystem);
-    toolMesh->setSource("Tool.STL");
-    widget3d->addObject(CSystem);
-    widget3d->addTransTool(CSystem);
-    static_cast<Qt3DCore::QTransform*>(CSystem->components()[1])->setTranslation(QVector3D(200,-200,0));
+//In order to show the tool man!
+
+    // CoordinateSystem *CSystem=new CoordinateSystem();
+    // CSystem->setLength(100);
+    // CSystem->setNegativeAxis(false);
+    // CSystem->setTranslation(QVector3D(100,100,0));
+    // STLMesh* toolMesh= new STLMesh(CSystem);
+    // toolMesh->setSource("Tool.STL");
+    // widget3d->addObject(CSystem);
+    // widget3d->addTransTool(CSystem);
+    // static_cast<Qt3DCore::QTransform*>(CSystem->components()[1])->setTranslation(QVector3D(200,-200,0));
 
 
 //Adawakedawra
@@ -90,12 +92,12 @@ int main(int argc, char *argv[])
 
     //Ebene zu Zeichnen
     Plane *plane = new Plane(600.0,800.0);
+    widget3d->addObject(plane);
+    widget3d->addTransTool(plane);
     plane->setTranslation(linAxis2->sled_position+QVector3D(0,800,500));
     plane->setRotation(QQuaternion::fromEulerAngles(QVector3D(90,0,0)) /** QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),130)*/);
-    widget3d->addObject(plane);
 
     Robot *robot = new Robot("143.93.135.15",10001);
-
 
     RobotControl *robControl = new RobotControl(robot);
     robControl->show();

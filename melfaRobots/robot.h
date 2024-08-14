@@ -54,8 +54,9 @@ public:
     void MoveToPosition(Position* pos);
     void MoveToPositionLinear(Position* pos);
     void MoveInLine(double P1, double P2, double P3, double a, double b, double c, double l1);
-    void MoveInCircle(QVector3D P1, QVector3D P2, QVector3D P3, double ew1, double ew2, double ew3,double l1);
-    void MoveInCircleJ(QVector<double> joints1, QVector<double> joints2, QVector<double> joints3, double joint7);
+    // void MoveInCircle(QVector3D P1, QVector3D P2, QVector3D P3, double ew1, double ew2, double ew3,double l1);
+    // void MoveInArcJ(QVector<double> joints1, QVector<double> joints2, QVector<double> joints3, double joint7);
+    void MoveCircularJ(QVector<double> joints1, QVector<double> joints2, QVector<double> joints3, double joint7, bool drawCirc);
     void MoveInLine();
 signals:
     void robotAnswer(QString);

@@ -110,6 +110,7 @@ void Widget3D::getToolData(QVector <double> data)
 {
     ToolMatrix = DataMatrix(ToolVals,data);
     trans_tool->setMatrix(trans_polaris->matrix()*ToolMatrix);
+
 }
 
 void Widget3D::getPolarisData(QVector <double> data)

@@ -55,6 +55,7 @@ private:
     bool line_isTrue = false;
     bool simulation_isTrue = true;
     bool plane_isFull = false;
+    bool drawCircle = false;
     QVector3D startLinePoint, endLinePoint;
     double a,b,c,l1;
     QMatrix4x4 robotMat;
@@ -91,7 +92,8 @@ private:
 
     void gotoNextBox();
     void moveTipAbove();
-    void robot_moveInCircle(QVector<QVector2D> circlePoints);
+    // void robot_moveInArc(QVector<QVector2D> circlePoints);
+    void robot_moveCircular(QVector<QVector2D> circlePoints);
     void initCirclePointsSpeedUp(float range);
     void setL1(double val);
 //    void CalculateL1();

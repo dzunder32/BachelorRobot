@@ -89,16 +89,16 @@ private:
     void addLetter2Buffer();
     void getLetterData(QChar char_letter);
 
-    void gotoNextBox();
-    void moveTipAbove();
-    void robot_moveInCircle(QVector<QVector2D> circlePoints);
-    void initCirclePointsSpeedUp(float range);
-    void setL1(double val);
-//    void CalculateL1();
+    void  gotoNextBox();
+    void  moveTipAbove();
+    void  robot_moveInCircle(QVector<QVector2D> circlePoints);
+    void  initCirclePointsSpeedUp(float range);
+    void  setL1(double val);
     float calculateAngleBetweenVectors(QVector3D vectorA, QVector3D vectorB);
     void  calculateL1_new();
-    void checkPlane();
-    void CirclePreview(QVariantList circleList);
+    void  checkPlane();
+    void  CirclePreview(QVariantList circleList);
+    void moveAwayFromPlane();
 public slots:
     void startDrawTimer(){_timer->start();}
     void stopDrawTimer(){_timer->stop();}

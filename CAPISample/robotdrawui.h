@@ -19,7 +19,7 @@ public:
 private slots:
     void on_pushButtonStart_clicked();
 
-    void on_pushButtonDelete_clicked();
+    void on_pushButtonStop_clicked();
 
     void on_timerSpeedSlider_sliderMoved(int position);
 

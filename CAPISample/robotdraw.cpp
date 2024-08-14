@@ -23,12 +23,185 @@ RobotDraw::RobotDraw(Kinematik *robotKinematik, Robot *robot, QVector3D sled_pos
     initLetterSize(1);
 }
 
+
+void RobotDraw::robDraw_onTimeout()
+{
+//    qDebug()<<"roboSeq"<<robotSequence;
+    qDebug()<<"robDraw Timeout Thread"<< QThread::currentThreadId();
+
+    if(!robotSequence.isEmpty())
+    {
+        switch (robotSequence.takeFirst())
+        {
+        case POINT:
+            robotDrawPoint();break;
+        case LINE:
+            robotDrawLine();break;
+        case CIRCLE:
+            robotDrawCircle();break;
+        }
+    }
+    else
+    {
+        qDebug()<<"main Home";
+        stopTimer_goHome();
+    }
+}
+
+
+void RobotDraw::robotDrawPoint()
+{
+
+    if(!PointsBuffer.isEmpty())
+    {
+        QVector3D planePoint = PointsBuffer.takeFirst();
+        robot_setPoint(Plane2RobotPoint(planePoint));
+        checkPlane();
+
+        if(moveAboveCounter<2){drawPoint_Widget(Plane2BasePoint(planePoint),2,QColor(0,255,0));moveAboveCounter++;}
+        // else{drawPoint_Widget(basePoint,10,QColor(255,0,0));}
+
+        if(line_isTrue){drawLine(Plane2BasePoint(startLinePoint),Plane2BasePoint(planePoint));line_isTrue = false;}
+    }
+    else {stopTimer_goHome();}
+}
+
+void RobotDraw::robotDrawLine()
+{
+    if(!LinesBuffer.isEmpty())
+    {
+        QVector <QVector3D> line = LinesBuffer.takeFirst();
+        //save first Point
+        startLinePoint = line[0];
+        //check wether the distance between endPoint of current Line is bigger than 5
+        if(cartDistance(endLinePoint,startLinePoint)>5 && alreadyDrawn)
+        {
+            LinesBuffer.prepend(line);robotSequence.prepend(LINE);
+            //when distance is too big, move Tip above the plane
+            moveTipAbove();/*qDebug()<<"now!";*/
+            alreadyDrawn = false;
+        }
+        else{
+            //save second Point
+            endLinePoint   = line[1];
+            robot_setPoint(Plane2RobotPoint(startLinePoint));
+            //add second Line Point to Buffer as a Point
+            PointsBuffer.prepend(endLinePoint);
+            robotSequence.prepend(POINT);
+            line_isTrue  = true;
+            alreadyDrawn = true;
+            //speed up, when currently drawing a circle
+            if(circlePoints_counter >= circlePoints_number)
+            {changeTimerSpeed(1);/*qDebug()<<"no speed!!"<<_timer->interval();*/}
+            else{circlePoints_counter++;}
+        }
+    }else{stopTimer_goHome();}
+}
+
+
+void RobotDraw::robotDrawCircle()
+{
+
+    if(!CircleBuffer.isEmpty())
+    {
+        QVariantList currCircle = CircleBuffer.takeFirst();
+        QVector <QVector2D> robotCirclePts_vec;
+        float radius = currCircle[0].toFloat();
+        QVector2D center = currCircle[1].value<QVector2D>();
+        QVector2D angleLimits = currCircle[2].value<QVector2D>();
+
+        float start_angle  = angleLimits[0];
+        float end_angle   = angleLimits[1];
+        float angle_range = end_angle - start_angle;
+        float mid_angle   = angle_range/2 + start_angle;
+
+        QVector2D prev_circlePt;
+        prev_circlePt.setX(center.x() + (radius * qCos(qDegreesToRadians(end_angle))));
+        prev_circlePt.setY(center.y() + (radius * qSin(qDegreesToRadians(end_angle))));
+
+        if(_robot->IsConnected())
+        {
+            QVector2D end_circlePt, mid_circlePt, start_circlePt;
+            start_circlePt.setX(center.x() + (radius * qCos(qDegreesToRadians(start_angle))));
+            start_circlePt.setY(center.y() + (radius * qSin(qDegreesToRadians(start_angle))));
+            robotCirclePts_vec.append(start_circlePt);
+
+            if(angle_range==360){end_angle = mid_angle; mid_angle = angle_range/4 + start_angle;}
+
+            mid_circlePt.setX(center.x() + (radius * qCos(qDegreesToRadians(mid_angle))));
+            mid_circlePt.setY(center.y() + (radius * qSin(qDegreesToRadians(mid_angle))));
+            robotCirclePts_vec.append(mid_circlePt);
+
+            end_circlePt.setX(center.x() + (radius * qCos(qDegreesToRadians(end_angle))));
+            end_circlePt.setY(center.y() + (radius * qSin(qDegreesToRadians(end_angle))));
+            robotCirclePts_vec.append(end_circlePt);
+
+            robot_moveInCircle(robotCirclePts_vec);
+//            _robot->MoveInCircle(Plane2RobotPoint(start_circlePt.toVector3D()),Plane2RobotPoint(mid_circlePt.toVector3D()),Plane2RobotPoint(end_circlePt.toVector3D()),a,b,c,l1);
+
+//            while (!(robotCirclePts_vec.isEmpty()))
+//            {
+//                //qDebug()<<Plane2BasePoint(vec2d.toVector3D());
+//                QVector2D vec = robotCirclePts_vec.takeLast();
+//                PointsBuffer.prepend(vec);robotSequence.prepend(POINT);
+//                drawPoint_Widget(Plane2BasePoint(vec),2,QColor(255,0,0));
+//            }
+        }
+        else
+        {
+            for (float angle = end_angle-angleStep; angle >start_angle;angle-=angleStep)
+            {
+                QVector2D circlePt;
+                circlePt.setX(center.x() + (radius * qCos(qDegreesToRadians(angle))));
+                circlePt.setY(center.y() + (radius * qSin(qDegreesToRadians(angle))));
+                LinesBuffer.prepend({circlePt.toVector3D(),prev_circlePt.toVector3D()});
+                robotSequence.prepend(LINE);
+                prev_circlePt = circlePt;
+            }
+            LinesBuffer.prepend({endLinePoint,prev_circlePt.toVector3D()});
+            robotSequence.prepend(LINE);
+            initCirclePointsSpeedUp(angle_range);
+        }
+    }else{stopTimer_goHome();}
+
+}
+
+void RobotDraw::robot_setPoint(QVector3D position)
+{
+    _robotKinematik->setPoint(position.x(),
+                              position.y(),
+                              position.z(),
+                              a,b,c,l1);
+
+    if(_robot->IsConnected())
+    {_robot->UpdatePositionLinear(); _robotKinematik->WaitForPositionReached();}
+}
+
+
+void RobotDraw::robot_moveInCircle(QVector <QVector2D> circlePoints)
+{
+    //Circle points 2 Joints
+    QVector <QVector <double>> J_Vec;
+
+    for(QVector2D point: circlePoints)
+    {
+        QVector3D pointRobot = Plane2RobotPoint(point.toVector3D());
+        _robotKinematik->RobotPosition::setPoint(pointRobot.x(),
+                                                 pointRobot.y(),
+                                                 pointRobot.z(),
+                                                 a,b,c,l1     );
+        _robotKinematik->invers();
+        J_Vec.append({_robotKinematik->j1(),_robotKinematik->j2(),_robotKinematik->j3(),_robotKinematik->j4(),_robotKinematik->j5(),_robotKinematik->j6(),_robotKinematik->j7()});
+    }
+    qDebug()<<"the Joints :D"<<J_Vec;
+    _robot->MoveInCircleJ(J_Vec[0],J_Vec[1],J_Vec[2],l1);
+}
+
 void RobotDraw::PlanePositionChanged()
 {
     //NFGASD
     planeCounter=0;
     UpdatePlanePosition();
-    //You Imbecile!
 }
 
 void RobotDraw::UpdatePlanePosition()
@@ -92,7 +265,6 @@ void RobotDraw::calculateL1_new()
     bool multipleSolutions = false;
 
 //    qDebug() << "distance Plane minDist:" << distPlane_3d.length();
-
 //    PointsBuffer.append(minDist_3d);robotSequence.append(POINT);
 
     if(distPlane_3d.length() < prefRob_range)
@@ -203,36 +375,6 @@ void RobotDraw::setL1(double val)
     robotPosition = _l1BasePos + QVector3D(0,l1,0);
     robotMat.setColumn(3,QVector4D(robotPosition,1));
 }
-
-void RobotDraw::robDraw_onTimeout()
-{
-//    qDebug()<<"roboSeq"<<robotSequence;
-    qDebug()<<"robDraw Timeout Thread"<< QThread::currentThreadId();
-
-    if(!robotSequence.isEmpty())
-    {
-        switch (robotSequence.takeFirst())
-        {
-        case POINT:
-            robotDrawPoint();
-        break;
-
-        case LINE:
-            robotDrawLine();
-            break;
-
-        case CIRCLE:
-            // qDebug()<<CircleBuffer;
-            robotDrawCircle();
-            break;
-        }
-    }
-    else
-    {
-        qDebug()<<"main Home";
-        stopTimer_goHome();
-    }
-}
 void RobotDraw::checkPlane()
 {
     if(planeCounter < 5 && !_robotKinematik->ePointReachable){
@@ -240,149 +382,6 @@ void RobotDraw::checkPlane()
         stopTimer_goHome();
     }
     planeCounter++;
-}
-
-void RobotDraw::robotDrawPoint()
-{
-
-    if(!PointsBuffer.isEmpty())
-    {
-        QVector3D planePoint = PointsBuffer.takeFirst();
-        qDebug()<<"planePoint"<<planePoint;
-        robot_setPoint(Plane2RobotPoint(planePoint));
-        checkPlane();
-
-        if(moveAboveCounter<2){drawPoint_Widget(Plane2BasePoint(planePoint),2,QColor(0,255,0));moveAboveCounter++;}
-        // else{drawPoint_Widget(basePoint,10,QColor(255,0,0));}
-
-        if(line_isTrue){drawLine(Plane2BasePoint(startLinePoint),Plane2BasePoint(planePoint));line_isTrue = false;}
-    }
-    else {stopTimer_goHome();}
-}
-
-void RobotDraw::robotDrawLine()
-{
-    if(!LinesBuffer.isEmpty())
-    {
-        QVector <QVector3D> line = LinesBuffer.takeFirst();
-        //save first Point
-        startLinePoint = line[0];
-        //check wether the distance between endPoint of current Line is bigger than 5
-        if(cartDistance(endLinePoint,startLinePoint)>5 && alreadyDrawn)
-        {
-            LinesBuffer.prepend(line);robotSequence.prepend(LINE);
-            //when distance is too big, move Tip above the plane
-            moveTipAbove();/*qDebug()<<"now!";*/
-            alreadyDrawn = false;
-        }
-        else{
-            //save second Point
-            endLinePoint   = line[1];
-            robot_setPoint(Plane2RobotPoint(startLinePoint));
-            //add second Line Point to Buffer as a Point
-            PointsBuffer.prepend(endLinePoint);
-            robotSequence.prepend(POINT);
-            line_isTrue  = true;
-            alreadyDrawn = true;
-            //speed up, when currently drawing a circle
-            if(circlePoints_counter >= circlePoints_number)
-            {changeTimerSpeed(1);/*qDebug()<<"no speed!!"<<_timer->interval();*/}
-            else{circlePoints_counter++;}
-        }
-    }else{stopTimer_goHome();}
-}
-
-
-void RobotDraw::robotDrawCircle()
-{
-
-    if(!CircleBuffer.isEmpty())
-    {
-        QVariantList currCircle = CircleBuffer.takeFirst();
-        QVector <QVector2D> robotCirclePts_vec;
-        float radius = currCircle[0].toFloat();
-        QVector2D center = currCircle[1].value<QVector2D>();
-        QVector2D angleLimits = currCircle[2].value<QVector2D>();
-
-        float start_angle  = angleLimits[0];
-        float end_angle   = angleLimits[1];
-        float angle_range = end_angle - start_angle;
-        float mid_angle   = angle_range/2 + start_angle;
-
-        QVector2D prev_circlePt;
-        prev_circlePt.setX(center.x() + (radius * qCos(qDegreesToRadians(end_angle))));
-        prev_circlePt.setY(center.y() + (radius * qSin(qDegreesToRadians(end_angle))));
-
-        if(_robot->IsConnected())
-        {
-            QVector2D end_circlePt, mid_circlePt, start_circlePt;
-            start_circlePt.setX(center.x() + (radius * qCos(qDegreesToRadians(start_angle))));
-            start_circlePt.setY(center.y() + (radius * qSin(qDegreesToRadians(start_angle))));
-            robotCirclePts_vec.append(start_circlePt);
-
-            if(angle_range==360){end_angle = mid_angle; mid_angle = angle_range/4 + start_angle;}
-
-            mid_circlePt.setX(center.x() + (radius * qCos(qDegreesToRadians(mid_angle))));
-            mid_circlePt.setY(center.y() + (radius * qSin(qDegreesToRadians(mid_angle))));
-            robotCirclePts_vec.append(mid_circlePt);
-
-            end_circlePt.setX(center.x() + (radius * qCos(qDegreesToRadians(end_angle))));
-            end_circlePt.setY(center.y() + (radius * qSin(qDegreesToRadians(end_angle))));
-            robotCirclePts_vec.append(end_circlePt);
-
-//            robot_moveInCircle(robotCirclePts_vec);
-             _robot->MoveInCircle(Plane2RobotPoint(start_circlePt.toVector3D()),Plane2RobotPoint(mid_circlePt.toVector3D()),Plane2RobotPoint(end_circlePt.toVector3D()),a,b,c,l1);
-
-//            while (!(robotCirclePts_vec.isEmpty()))
-//            {
-//                //qDebug()<<Plane2BasePoint(vec2d.toVector3D());
-//                QVector2D vec = robotCirclePts_vec.takeLast();
-//                PointsBuffer.prepend(vec);robotSequence.prepend(POINT);
-//                drawPoint_Widget(Plane2BasePoint(vec),2,QColor(255,0,0));
-//            }
-        }
-        else
-        {
-            for (float angle = end_angle-angleStep; angle >start_angle;angle-=angleStep)
-            {
-                QVector2D circlePt;
-                circlePt.setX(center.x() + (radius * qCos(qDegreesToRadians(angle))));
-                circlePt.setY(center.y() + (radius * qSin(qDegreesToRadians(angle))));
-                LinesBuffer.prepend({circlePt.toVector3D(),prev_circlePt.toVector3D()});
-                robotSequence.prepend(LINE);
-                prev_circlePt = circlePt;
-            }
-            LinesBuffer.prepend({endLinePoint,prev_circlePt.toVector3D()});
-            robotSequence.prepend(LINE);
-            initCirclePointsSpeedUp(angle_range);
-        }
-    }else{stopTimer_goHome();}
-
-}
-
-void RobotDraw::robot_moveInCircle(QVector <QVector2D> circlePoints)
-{
-    //You heheh
-    //No man!
-    //Again or what
-    QVector <QVector <double>> J_Vec;
-
-    for(QVector2D point: circlePoints)
-    {
-        QVector3D pointRobot = Plane2RobotPoint(point.toVector3D());
-        _robotKinematik->RobotPosition::setPoint(pointRobot.x(),
-                                                 pointRobot.y(),
-                                                 pointRobot.z(),
-                                                 a,b,c,l1);
-        _robotKinematik->invers();
-
-//        QMatrix4x4 pointT   = _robotKinematik->getTransformationMatrix();
-//        QVector3D  position = pointT.column(3).toVector3D();
-
-        J_Vec.append({_robotKinematik->j1(),_robotKinematik->j2(),_robotKinematik->j3(),_robotKinematik->j4(),_robotKinematik->j5(),_robotKinematik->j6(),_robotKinematik->j7()});
-    }
-    qDebug()<<"the Joints :D"<<J_Vec;
-    _robot->MoveInCircleJ(J_Vec[0],J_Vec[1],J_Vec[2],l1);
 }
 
 void RobotDraw::moveTipAbove()
@@ -409,10 +408,6 @@ void RobotDraw::CirclePreview(QVariantList circleList)
     QVector2D center      = circleList[1].value<QVector2D>();
     QVector2D angleLimits = circleList[2].value<QVector2D>();
 
-//    qDebug()<<"leggo!";
-//    qDebug()<<"radius:"<<radius;
-//    qDebug()<<"center:"<<center;
-//    qDebug()<<"lims:"<<angleLimits;
 
     float    start_angle  = angleLimits[0];
     float    end_angle    = angleLimits[1];
@@ -491,6 +486,7 @@ void RobotDraw::constructLetters(QString letter_Str)
 //            qDebug()<<"getData!";
         }
     }
+
 }
 
 void RobotDraw::getLetterData(QChar char_letter)
@@ -511,15 +507,15 @@ void RobotDraw::getLetterData(QChar char_letter)
     {
 //        qDebug()<<"im in Letter Man!";
         currentLetter = _letters->getLetterVec(char_letter);
-        _letters->shiftLetter(currentLetter,shiftVector);
-        qDebug()<<"CURRlETTER"<<currentLetter[0][0].value<QString>();
+        qDebug()<<"CURRlETTER"<<currentLetter[0][0].value<int>();
 
-        if(currentLetter[0][0].value<QString>()=="no Letter found")
+        if(currentLetter[0][0].value<int>()==-1)
         {
             qDebug()<<"no Letter found";
         }
         else
         {
+            _letters->shiftLetter(currentLetter,shiftVector);
             addLetter2Buffer();
             gotoNextBox();
         }
@@ -579,6 +575,28 @@ void RobotDraw::addLetter2Buffer()
             qDebug()<<"Circle";
         }
     }
+    moveAwayFromPlane();
+}
+
+void RobotDraw::moveAwayFromPlane()
+{
+    switch (robotSequence.last())
+    {
+    case POINT:/*
+        QVector3D lastPoint = PointsBuffer.last();
+        AddLine2Buffer(lastPoint,lastPoint+=QVector3D(0,0,10));*/break;
+    case LINE:
+        /*QVector3D lastPoint = LinesBuffer.last();
+        AddLine2Buffer(lastPoint[1],lastPoint[1]+=QVector3D(0,0,10));*/break;
+    case CIRCLE:/*
+        QVariantList circleList = CircleBuffer.last();
+        float     radius      = circleList[0].toFloat();
+        QVector2D center      = circleList[1].value<QVector2D>();
+        QVector2D angleLimits = circleList[2].value<QVector2D>();
+        float deg2rad = qDegreesToRadians(angleLimits[1]);
+        QVector3D lastPoint = (radius * cos(deg2rad) + center[0],radius * sin(deg2rad) + center[1],0);
+        AddLine2Buffer(lastPoint,lastPoint+=QVector3D(0,0,10));*/break;
+    }
 }
 
 
@@ -606,6 +624,7 @@ void RobotDraw::AddLine2Buffer(QVector3D planeLine1, QVector3D planeLine2)
 void RobotDraw::AddCircle2Buffer(QVariantList circleList)
 {
     CirclePreview(circleList);
+    qDebug()<<"maybe this";
     CircleBuffer.append(circleList);
     robotSequence.append(CIRCLE);
 
@@ -624,20 +643,6 @@ void RobotDraw::setPreviousSequence()
     CircleBuffer  = CircleBuffer_hist;
     robotSequence = robotSequence_hist;
 }
-
-
-void RobotDraw::robot_setPoint(QVector3D position)
-{
-    _robotKinematik->setPoint(position.x(),
-                              position.y(),
-                              position.z(),
-                              a,b,c,l1);
-
-    if(_robot->IsConnected())
-    {_robot->UpdatePosition(); _robotKinematik->WaitForPositionReached();}
-}
-
-
 
 void RobotDraw::UpdatePointsBuffer(QVector <QVector3D> pts)
 {

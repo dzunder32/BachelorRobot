@@ -264,7 +264,7 @@ QVector <QVariantList> Letters::getLetterVec(QChar char_letter)
 {
     int pos = getLetterPosInVec(char_letter);
     QVariantList errorList;
-    errorList << "no Letter found";
+    errorList << -1;
     QVector <QVariantList> returnList;
 
     if(pos==-1)

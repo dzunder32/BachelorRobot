@@ -51,8 +51,15 @@ bool RobotPosition::isEqual(double a,double b,double epsilon)
 
 void RobotPosition::WaitForPositionReached()
 {
+    bool oneshot = true;
     while(_positionReached==false)
     {
+        if(oneshot){
+            qDebug()<<"waiting for position to get Reached";
+            qDebug()<<QThread::currentThreadId();
+            oneshot = false;
+        }
 
     }
+    qDebug()<<"position Reached!";
 }

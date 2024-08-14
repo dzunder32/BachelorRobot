@@ -19,7 +19,7 @@ CXXFLAGS      = -fno-keep-inline-dllexport -O2 -std=gnu++1y -Wall -Wextra -Wextr
 INCPATH       = -I..\..\melfaRobots -I. -I..\..\widget -IC:\Qt\5.15.2\mingw81_64\include -IC:\Qt\5.15.2\mingw81_64\include\QtWidgets -IC:\Qt\5.15.2\mingw81_64\include\Qt3DExtras -IC:\Qt\5.15.2\mingw81_64\include\Qt3DRender -IC:\Qt\5.15.2\mingw81_64\include\Qt3DInput -IC:\Qt\5.15.2\mingw81_64\include\Qt3DLogic -IC:\Qt\5.15.2\mingw81_64\include\Qt3DCore -IC:\Qt\5.15.2\mingw81_64\include\QtGamepad -IC:\Qt\5.15.2\mingw81_64\include\QtGui -IC:\Qt\5.15.2\mingw81_64\include\QtANGLE -IC:\Qt\5.15.2\mingw81_64\include\QtNetwork -IC:\Qt\5.15.2\mingw81_64\include\QtCore -Irelease -I. -I/include -IC:\Qt\5.15.2\mingw81_64\mkspecs\win32-g++ 
 LINKER      =        g++
 LFLAGS        =        -Wl,-s -shared -Wl,-subsystem,windows -mthreads -Wl,--out-implib,release\libmelfaRobots.a
-LIBS        =        -LC:\Users\wolfd\Desktop\Git\BachelorRobot\build\widget\release -lwidget C:\Qt\5.15.2\mingw81_64\lib\libQt5Widgets.a C:\Qt\5.15.2\mingw81_64\lib\libQt53DExtras.a C:\Qt\5.15.2\mingw81_64\lib\libQt53DRender.a C:\Qt\5.15.2\mingw81_64\lib\libQt53DInput.a C:\Qt\5.15.2\mingw81_64\lib\libQt53DLogic.a C:\Qt\5.15.2\mingw81_64\lib\libQt53DCore.a C:\Qt\5.15.2\mingw81_64\lib\libQt5Gamepad.a C:\Qt\5.15.2\mingw81_64\lib\libQt5Gui.a C:\Qt\5.15.2\mingw81_64\lib\libQt5Network.a C:\Qt\5.15.2\mingw81_64\lib\libQt5Core.a   
+LIBS        =        -L"C:\Users\Denis Zyulin\Desktop\Git\BachelorRobot\build\widget\release" -lwidget C:\Qt\5.15.2\mingw81_64\lib\libQt5Widgets.a C:\Qt\5.15.2\mingw81_64\lib\libQt53DExtras.a C:\Qt\5.15.2\mingw81_64\lib\libQt53DRender.a C:\Qt\5.15.2\mingw81_64\lib\libQt53DInput.a C:\Qt\5.15.2\mingw81_64\lib\libQt53DLogic.a C:\Qt\5.15.2\mingw81_64\lib\libQt53DCore.a C:\Qt\5.15.2\mingw81_64\lib\libQt5Gamepad.a C:\Qt\5.15.2\mingw81_64\lib\libQt5Gui.a C:\Qt\5.15.2\mingw81_64\lib\libQt5Network.a C:\Qt\5.15.2\mingw81_64\lib\libQt5Core.a   
 QMAKE         = C:\Qt\5.15.2\mingw81_64\bin\qmake.exe
 DEL_FILE      = del
 CHK_DIR_EXISTS= if not exist
@@ -119,7 +119,7 @@ qmake: FORCE
 qmake_all: FORCE
 
 dist:
-	$(ZIP) melfaRobots.zip $(SOURCES) $(DIST) ..\..\melfaRobots\melfaRobots.pro C:\Qt\5.15.2\mingw81_64\mkspecs\features\spec_pre.prf C:\Qt\5.15.2\mingw81_64\mkspecs\qdevice.pri C:\Qt\5.15.2\mingw81_64\mkspecs\features\device_config.prf C:\Qt\5.15.2\mingw81_64\mkspecs\common\sanitize.conf C:\Qt\5.15.2\mingw81_64\mkspecs\common\gcc-base.conf C:\Qt\5.15.2\mingw81_64\mkspecs\common\g++-base.conf C:\Qt\5.15.2\mingw81_64\mkspecs\common\angle.conf C:\Qt\5.15.2\mingw81_64\mkspecs\features\win32\windows_vulkan_sdk.prf C:\Qt\5.15.2\mingw81_64\mkspecs\common\windows-vulkan.conf C:\Qt\5.15.2\mingw81_64\mkspecs\common\g++-win32.conf C:\Qt\5.15.2\mingw81_64\mkspecs\common\windows-desktop.conf C:\Qt\5.15.2\mingw81_64\mkspecs\qconfig.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3danimation.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3danimation_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dcore.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dcore_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dextras.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dextras_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dinput.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dinput_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dlogic.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dlogic_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquick.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquick_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickanimation.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickanimation_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickextras.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickextras_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickinput.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickinput_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickrender.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickrender_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickscene2d.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickscene2d_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3drender.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3drender_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_accessibility_support_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_axbase.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_axbase_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_axcontainer.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_axcontainer_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_axserver.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_axserver_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_bluetooth.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_bluetooth_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_bodymovin_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_bootstrap_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_charts.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_charts_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_concurrent.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_concurrent_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_core.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_core_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_datavisualization.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_datavisualization_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_dbus.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_dbus_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_designer.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_designer_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_designercomponents_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_devicediscovery_support_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_edid_support_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_egl_support_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_eventdispatcher_support_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_fb_support_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_fontdatabase_support_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_gamepad.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_gamepad_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_gui.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_gui_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_help.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_help_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_insighttracker.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_insighttracker_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_insighttrackerqml.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_insighttrackerqml_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_location.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_location_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_multimedia.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_multimedia_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_multimediawidgets.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_multimediawidgets_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_network.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_network_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_networkauth.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_networkauth_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_nfc.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_nfc_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_opengl.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_opengl_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_openglextensions.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_openglextensions_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_packetprotocol_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_platformcompositor_support_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_positioning.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_positioning_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_positioningquick.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_positioningquick_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_printsupport.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_printsupport_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_purchasing.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_purchasing_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qml.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qml_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qmldebug_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qmldevtools_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qmlmodels.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qmlmodels_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qmltest.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qmltest_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qmlworkerscript.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qmlworkerscript_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quick.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quick3d.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quick3d_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quick3dassetimport.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quick3dassetimport_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quick3drender.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quick3drender_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quick3druntimerender.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quick3druntimerender_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quick3dutils.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quick3dutils_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quick_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quickcontrols2.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quickcontrols2_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quickparticles_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quickshapes_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quicktemplates2.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quicktemplates2_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quickwidgets.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quickwidgets_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_remoteobjects.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_remoteobjects_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_repparser.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_repparser_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_script.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_script_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_scripttools.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_scripttools_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_scxml.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_scxml_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_sensors.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_sensors_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_serialbus.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_serialbus_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_serialport.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_serialport_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_sql.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_sql_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_svg.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_svg_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_testlib.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_testlib_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_texttospeech.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_texttospeech_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_theme_support_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_uiplugin.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_uitools.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_uitools_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_virtualkeyboard.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_virtualkeyboard_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_vulkan_support_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_webchannel.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_webchannel_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_websockets.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_websockets_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_widgets.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_widgets_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_windowsuiautomation_support_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_winextras.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_winextras_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_xml.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_xml_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_xmlpatterns.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_xmlpatterns_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_zlib_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\features\qt_functions.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\qt_config.prf C:\Qt\5.15.2\mingw81_64\mkspecs\win32-g++\qmake.conf C:\Qt\5.15.2\mingw81_64\mkspecs\features\spec_post.prf ..\.qmake.stash C:\Qt\5.15.2\mingw81_64\mkspecs\features\exclusive_builds.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\toolchain.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\default_pre.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\win32\default_pre.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\resolve_config.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\exclusive_builds_post.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\default_post.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\build_pass.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\qml_debug.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\precompile_header.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\warn_on.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\qt.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\resources_functions.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\resources.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\moc.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\win32\opengl.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\uic.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\qmake_use.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\file_copies.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\win32\windows.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\testcase_targets.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\exceptions.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\yacc.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\lex.prf ..\..\melfaRobots\melfaRobots.pro C:\Qt\5.15.2\mingw81_64\lib\Qt5Widgets.prl C:\Qt\5.15.2\mingw81_64\lib\Qt53DExtras.prl C:\Qt\5.15.2\mingw81_64\lib\Qt53DRender.prl C:\Qt\5.15.2\mingw81_64\lib\Qt53DInput.prl C:\Qt\5.15.2\mingw81_64\lib\Qt53DLogic.prl C:\Qt\5.15.2\mingw81_64\lib\Qt53DCore.prl C:\Qt\5.15.2\mingw81_64\lib\Qt5Gamepad.prl C:\Qt\5.15.2\mingw81_64\lib\Qt5Gui.prl C:\Qt\5.15.2\mingw81_64\lib\Qt5Network.prl C:\Qt\5.15.2\mingw81_64\lib\Qt5Core.prl    C:\Qt\5.15.2\mingw81_64\mkspecs\features\data\dummy.cpp ..\..\melfaRobots\controlpanel.h ..\..\melfaRobots\robotPosition.h ..\..\melfaRobots\rv4flkinematik.h ..\..\melfaRobots\rv6slkinematik.h ..\..\melfaRobots\robot.h ..\..\melfaRobots\mathfunktions.h ..\..\melfaRobots\kinematik.h ..\..\melfaRobots\position.h ..\..\melfaRobots\robotcontrol.h ..\..\melfaRobots\subwindow.h  ..\..\melfaRobots\controlpanel.cpp ..\..\melfaRobots\robotPosition.cpp ..\..\melfaRobots\rv4flkinematik.cpp ..\..\melfaRobots\rv6slkinematik.cpp ..\..\melfaRobots\robot.cpp ..\..\melfaRobots\mathfunktions.cpp ..\..\melfaRobots\kinematik.cpp ..\..\melfaRobots\robotcontrol.cpp ..\..\melfaRobots\subwindow.cpp ..\..\melfaRobots\controlpanel.ui ..\..\melfaRobots\robotcontrol.ui    
+	$(ZIP) melfaRobots.zip $(SOURCES) $(DIST) ..\..\melfaRobots\melfaRobots.pro C:\Qt\5.15.2\mingw81_64\mkspecs\features\spec_pre.prf C:\Qt\5.15.2\mingw81_64\mkspecs\qdevice.pri C:\Qt\5.15.2\mingw81_64\mkspecs\features\device_config.prf C:\Qt\5.15.2\mingw81_64\mkspecs\common\sanitize.conf C:\Qt\5.15.2\mingw81_64\mkspecs\common\gcc-base.conf C:\Qt\5.15.2\mingw81_64\mkspecs\common\g++-base.conf C:\Qt\5.15.2\mingw81_64\mkspecs\common\angle.conf C:\Qt\5.15.2\mingw81_64\mkspecs\features\win32\windows_vulkan_sdk.prf C:\Qt\5.15.2\mingw81_64\mkspecs\common\windows-vulkan.conf C:\Qt\5.15.2\mingw81_64\mkspecs\common\g++-win32.conf C:\Qt\5.15.2\mingw81_64\mkspecs\common\windows-desktop.conf C:\Qt\5.15.2\mingw81_64\mkspecs\qconfig.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3danimation.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3danimation_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dcore.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dcore_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dextras.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dextras_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dinput.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dinput_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dlogic.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dlogic_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquick.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquick_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickanimation.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickanimation_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickextras.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickextras_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickinput.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickinput_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickrender.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickrender_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickscene2d.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickscene2d_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3drender.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3drender_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_accessibility_support_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_axbase.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_axbase_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_axcontainer.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_axcontainer_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_axserver.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_axserver_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_bluetooth.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_bluetooth_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_bootstrap_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_concurrent.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_concurrent_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_core.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_core_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_dbus.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_dbus_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_designer.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_designer_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_designercomponents_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_devicediscovery_support_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_edid_support_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_egl_support_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_eventdispatcher_support_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_fb_support_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_fontdatabase_support_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_gamepad.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_gamepad_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_gui.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_gui_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_help.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_help_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_location.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_location_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_multimedia.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_multimedia_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_multimediawidgets.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_multimediawidgets_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_network.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_network_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_nfc.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_nfc_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_opengl.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_opengl_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_openglextensions.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_openglextensions_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_packetprotocol_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_platformcompositor_support_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_positioning.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_positioning_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_positioningquick.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_positioningquick_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_printsupport.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_printsupport_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qml.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qml_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qmldebug_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qmldevtools_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qmlmodels.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qmlmodels_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qmltest.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qmltest_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qmlworkerscript.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qmlworkerscript_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quick.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quick_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quickcontrols2.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quickcontrols2_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quickparticles_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quickshapes_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quicktemplates2.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quicktemplates2_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quickwidgets.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quickwidgets_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_remoteobjects.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_remoteobjects_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_repparser.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_repparser_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_scxml.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_scxml_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_sensors.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_sensors_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_serialbus.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_serialbus_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_serialport.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_serialport_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_sql.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_sql_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_svg.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_svg_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_testlib.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_testlib_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_texttospeech.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_texttospeech_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_theme_support_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_uiplugin.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_uitools.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_uitools_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_vulkan_support_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_webchannel.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_webchannel_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_websockets.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_websockets_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_widgets.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_widgets_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_windowsuiautomation_support_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_winextras.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_winextras_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_xml.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_xml_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_xmlpatterns.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_xmlpatterns_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_zlib_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\features\qt_functions.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\qt_config.prf C:\Qt\5.15.2\mingw81_64\mkspecs\win32-g++\qmake.conf C:\Qt\5.15.2\mingw81_64\mkspecs\features\spec_post.prf ..\.qmake.stash C:\Qt\5.15.2\mingw81_64\mkspecs\features\exclusive_builds.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\toolchain.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\default_pre.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\win32\default_pre.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\resolve_config.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\exclusive_builds_post.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\default_post.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\build_pass.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\qml_debug.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\precompile_header.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\warn_on.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\qt.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\resources_functions.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\resources.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\moc.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\win32\opengl.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\uic.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\qmake_use.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\file_copies.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\win32\windows.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\testcase_targets.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\exceptions.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\yacc.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\lex.prf ..\..\melfaRobots\melfaRobots.pro C:\Qt\5.15.2\mingw81_64\lib\Qt5Widgets.prl C:\Qt\5.15.2\mingw81_64\lib\Qt53DExtras.prl C:\Qt\5.15.2\mingw81_64\lib\Qt53DRender.prl C:\Qt\5.15.2\mingw81_64\lib\Qt53DInput.prl C:\Qt\5.15.2\mingw81_64\lib\Qt53DLogic.prl C:\Qt\5.15.2\mingw81_64\lib\Qt53DCore.prl C:\Qt\5.15.2\mingw81_64\lib\Qt5Gamepad.prl C:\Qt\5.15.2\mingw81_64\lib\Qt5Gui.prl C:\Qt\5.15.2\mingw81_64\lib\Qt5Network.prl C:\Qt\5.15.2\mingw81_64\lib\Qt5Core.prl    C:\Qt\5.15.2\mingw81_64\mkspecs\features\data\dummy.cpp ..\..\melfaRobots\controlpanel.h ..\..\melfaRobots\robotPosition.h ..\..\melfaRobots\rv4flkinematik.h ..\..\melfaRobots\rv6slkinematik.h ..\..\melfaRobots\robot.h ..\..\melfaRobots\mathfunktions.h ..\..\melfaRobots\kinematik.h ..\..\melfaRobots\position.h ..\..\melfaRobots\robotcontrol.h ..\..\melfaRobots\subwindow.h  ..\..\melfaRobots\controlpanel.cpp ..\..\melfaRobots\robotPosition.cpp ..\..\melfaRobots\rv4flkinematik.cpp ..\..\melfaRobots\rv6slkinematik.cpp ..\..\melfaRobots\robot.cpp ..\..\melfaRobots\mathfunktions.cpp ..\..\melfaRobots\kinematik.cpp ..\..\melfaRobots\robotcontrol.cpp ..\..\melfaRobots\subwindow.cpp ..\..\melfaRobots\controlpanel.ui ..\..\melfaRobots\robotcontrol.ui    
 
 clean: compiler_clean 
 	-$(DEL_FILE) release\controlpanel.o release\robotPosition.o release\rv4flkinematik.o release\rv6slkinematik.o release\robot.o release\mathfunktions.o release\kinematik.o release\robotcontrol.o release\subwindow.o release\moc_controlpanel.o release\moc_robotPosition.o release\moc_rv4flkinematik.o release\moc_rv6slkinematik.o release\moc_robot.o release\moc_robotcontrol.o release\moc_subwindow.o
@@ -234,6 +234,10 @@ release/moc_controlpanel.cpp: ../../melfaRobots/controlpanel.h \
 		../../melfaRobots/mathfunktions.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QtMath \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qmath.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/QThread \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthread.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdeadlinetimer.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qelapsedtimer.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/Qt3DCore \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/Qt3DCoreDepends \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QtCore \
@@ -274,8 +278,6 @@ release/moc_controlpanel.cpp: ../../melfaRobots/controlpanel.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qcoreapplication.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qconcatenatetablesproxymodel.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qcryptographichash.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdeadlinetimer.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qelapsedtimer.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdir.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qfileinfo.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qfile.h \
@@ -352,7 +354,6 @@ release/moc_controlpanel.cpp: ../../melfaRobots/controlpanel.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtemporaryfile.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtextboundaryfinder.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtextcodec.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthread.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthreadpool.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthreadstorage.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtimeline.h \
@@ -819,7 +820,7 @@ release/moc_controlpanel.cpp: ../../melfaRobots/controlpanel.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DExtras/qt3dextrasversion.h \
 		release/moc_predefs.h \
 		C:/Qt/5.15.2/mingw81_64/bin/moc.exe
-	C:\Qt\5.15.2\mingw81_64\bin\moc.exe $(DEFINES) --include C:/Users/wolfd/Desktop/Git/BachelorRobot/build/melfaRobots/release/moc_predefs.h -IC:/Qt/5.15.2/mingw81_64/mkspecs/win32-g++ -IC:/Users/wolfd/Desktop/Git/BachelorRobot/melfaRobots -IC:/Users/wolfd/Desktop/Git/BachelorRobot/widget -IC:/Qt/5.15.2/mingw81_64/include -IC:/Qt/5.15.2/mingw81_64/include/QtWidgets -IC:/Qt/5.15.2/mingw81_64/include/Qt3DExtras -IC:/Qt/5.15.2/mingw81_64/include/Qt3DRender -IC:/Qt/5.15.2/mingw81_64/include/Qt3DInput -IC:/Qt/5.15.2/mingw81_64/include/Qt3DLogic -IC:/Qt/5.15.2/mingw81_64/include/Qt3DCore -IC:/Qt/5.15.2/mingw81_64/include/QtGamepad -IC:/Qt/5.15.2/mingw81_64/include/QtGui -IC:/Qt/5.15.2/mingw81_64/include/QtANGLE -IC:/Qt/5.15.2/mingw81_64/include/QtNetwork -IC:/Qt/5.15.2/mingw81_64/include/QtCore -I. -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed -IC:/Qt/Tools/mingw810_64/x86_64-w64-mingw32/include ..\..\melfaRobots\controlpanel.h -o release\moc_controlpanel.cpp
+	C:\Qt\5.15.2\mingw81_64\bin\moc.exe $(DEFINES) --include "C:/Users/Denis Zyulin/Desktop/Git/BachelorRobot/build/melfaRobots/release/moc_predefs.h" -IC:/Qt/5.15.2/mingw81_64/mkspecs/win32-g++ -I"C:/Users/Denis Zyulin/Desktop/Git/BachelorRobot/melfaRobots" -I"C:/Users/Denis Zyulin/Desktop/Git/BachelorRobot/widget" -IC:/Qt/5.15.2/mingw81_64/include -IC:/Qt/5.15.2/mingw81_64/include/QtWidgets -IC:/Qt/5.15.2/mingw81_64/include/Qt3DExtras -IC:/Qt/5.15.2/mingw81_64/include/Qt3DRender -IC:/Qt/5.15.2/mingw81_64/include/Qt3DInput -IC:/Qt/5.15.2/mingw81_64/include/Qt3DLogic -IC:/Qt/5.15.2/mingw81_64/include/Qt3DCore -IC:/Qt/5.15.2/mingw81_64/include/QtGamepad -IC:/Qt/5.15.2/mingw81_64/include/QtGui -IC:/Qt/5.15.2/mingw81_64/include/QtANGLE -IC:/Qt/5.15.2/mingw81_64/include/QtNetwork -IC:/Qt/5.15.2/mingw81_64/include/QtCore -I. -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed -IC:/Qt/Tools/mingw810_64/x86_64-w64-mingw32/include ..\..\melfaRobots\controlpanel.h -o release\moc_controlpanel.cpp
 
 release/moc_robotPosition.cpp: ../../melfaRobots/robotPosition.h \
 		../../melfaRobots/position.h \
@@ -903,9 +904,13 @@ release/moc_robotPosition.cpp: ../../melfaRobots/robotPosition.h \
 		../../melfaRobots/mathfunktions.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QtMath \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qmath.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/QThread \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthread.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdeadlinetimer.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qelapsedtimer.h \
 		release/moc_predefs.h \
 		C:/Qt/5.15.2/mingw81_64/bin/moc.exe
-	C:\Qt\5.15.2\mingw81_64\bin\moc.exe $(DEFINES) --include C:/Users/wolfd/Desktop/Git/BachelorRobot/build/melfaRobots/release/moc_predefs.h -IC:/Qt/5.15.2/mingw81_64/mkspecs/win32-g++ -IC:/Users/wolfd/Desktop/Git/BachelorRobot/melfaRobots -IC:/Users/wolfd/Desktop/Git/BachelorRobot/widget -IC:/Qt/5.15.2/mingw81_64/include -IC:/Qt/5.15.2/mingw81_64/include/QtWidgets -IC:/Qt/5.15.2/mingw81_64/include/Qt3DExtras -IC:/Qt/5.15.2/mingw81_64/include/Qt3DRender -IC:/Qt/5.15.2/mingw81_64/include/Qt3DInput -IC:/Qt/5.15.2/mingw81_64/include/Qt3DLogic -IC:/Qt/5.15.2/mingw81_64/include/Qt3DCore -IC:/Qt/5.15.2/mingw81_64/include/QtGamepad -IC:/Qt/5.15.2/mingw81_64/include/QtGui -IC:/Qt/5.15.2/mingw81_64/include/QtANGLE -IC:/Qt/5.15.2/mingw81_64/include/QtNetwork -IC:/Qt/5.15.2/mingw81_64/include/QtCore -I. -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed -IC:/Qt/Tools/mingw810_64/x86_64-w64-mingw32/include ..\..\melfaRobots\robotPosition.h -o release\moc_robotPosition.cpp
+	C:\Qt\5.15.2\mingw81_64\bin\moc.exe $(DEFINES) --include "C:/Users/Denis Zyulin/Desktop/Git/BachelorRobot/build/melfaRobots/release/moc_predefs.h" -IC:/Qt/5.15.2/mingw81_64/mkspecs/win32-g++ -I"C:/Users/Denis Zyulin/Desktop/Git/BachelorRobot/melfaRobots" -I"C:/Users/Denis Zyulin/Desktop/Git/BachelorRobot/widget" -IC:/Qt/5.15.2/mingw81_64/include -IC:/Qt/5.15.2/mingw81_64/include/QtWidgets -IC:/Qt/5.15.2/mingw81_64/include/Qt3DExtras -IC:/Qt/5.15.2/mingw81_64/include/Qt3DRender -IC:/Qt/5.15.2/mingw81_64/include/Qt3DInput -IC:/Qt/5.15.2/mingw81_64/include/Qt3DLogic -IC:/Qt/5.15.2/mingw81_64/include/Qt3DCore -IC:/Qt/5.15.2/mingw81_64/include/QtGamepad -IC:/Qt/5.15.2/mingw81_64/include/QtGui -IC:/Qt/5.15.2/mingw81_64/include/QtANGLE -IC:/Qt/5.15.2/mingw81_64/include/QtNetwork -IC:/Qt/5.15.2/mingw81_64/include/QtCore -I. -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed -IC:/Qt/Tools/mingw810_64/x86_64-w64-mingw32/include ..\..\melfaRobots\robotPosition.h -o release\moc_robotPosition.cpp
 
 release/moc_rv4flkinematik.cpp: ../../melfaRobots/rv4flkinematik.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QObject \
@@ -991,6 +996,10 @@ release/moc_rv4flkinematik.cpp: ../../melfaRobots/rv4flkinematik.h \
 		../../melfaRobots/mathfunktions.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QtMath \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qmath.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/QThread \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthread.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdeadlinetimer.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qelapsedtimer.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/Qt3DCore \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/Qt3DCoreDepends \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QtCore \
@@ -1031,8 +1040,6 @@ release/moc_rv4flkinematik.cpp: ../../melfaRobots/rv4flkinematik.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qcoreapplication.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qconcatenatetablesproxymodel.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qcryptographichash.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdeadlinetimer.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qelapsedtimer.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdir.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qfileinfo.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qfile.h \
@@ -1109,7 +1116,6 @@ release/moc_rv4flkinematik.cpp: ../../melfaRobots/rv4flkinematik.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtemporaryfile.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtextboundaryfinder.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtextcodec.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthread.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthreadpool.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthreadstorage.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtimeline.h \
@@ -1350,7 +1356,7 @@ release/moc_rv4flkinematik.cpp: ../../melfaRobots/rv4flkinematik.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/qt3dcoreversion.h \
 		release/moc_predefs.h \
 		C:/Qt/5.15.2/mingw81_64/bin/moc.exe
-	C:\Qt\5.15.2\mingw81_64\bin\moc.exe $(DEFINES) --include C:/Users/wolfd/Desktop/Git/BachelorRobot/build/melfaRobots/release/moc_predefs.h -IC:/Qt/5.15.2/mingw81_64/mkspecs/win32-g++ -IC:/Users/wolfd/Desktop/Git/BachelorRobot/melfaRobots -IC:/Users/wolfd/Desktop/Git/BachelorRobot/widget -IC:/Qt/5.15.2/mingw81_64/include -IC:/Qt/5.15.2/mingw81_64/include/QtWidgets -IC:/Qt/5.15.2/mingw81_64/include/Qt3DExtras -IC:/Qt/5.15.2/mingw81_64/include/Qt3DRender -IC:/Qt/5.15.2/mingw81_64/include/Qt3DInput -IC:/Qt/5.15.2/mingw81_64/include/Qt3DLogic -IC:/Qt/5.15.2/mingw81_64/include/Qt3DCore -IC:/Qt/5.15.2/mingw81_64/include/QtGamepad -IC:/Qt/5.15.2/mingw81_64/include/QtGui -IC:/Qt/5.15.2/mingw81_64/include/QtANGLE -IC:/Qt/5.15.2/mingw81_64/include/QtNetwork -IC:/Qt/5.15.2/mingw81_64/include/QtCore -I. -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed -IC:/Qt/Tools/mingw810_64/x86_64-w64-mingw32/include ..\..\melfaRobots\rv4flkinematik.h -o release\moc_rv4flkinematik.cpp
+	C:\Qt\5.15.2\mingw81_64\bin\moc.exe $(DEFINES) --include "C:/Users/Denis Zyulin/Desktop/Git/BachelorRobot/build/melfaRobots/release/moc_predefs.h" -IC:/Qt/5.15.2/mingw81_64/mkspecs/win32-g++ -I"C:/Users/Denis Zyulin/Desktop/Git/BachelorRobot/melfaRobots" -I"C:/Users/Denis Zyulin/Desktop/Git/BachelorRobot/widget" -IC:/Qt/5.15.2/mingw81_64/include -IC:/Qt/5.15.2/mingw81_64/include/QtWidgets -IC:/Qt/5.15.2/mingw81_64/include/Qt3DExtras -IC:/Qt/5.15.2/mingw81_64/include/Qt3DRender -IC:/Qt/5.15.2/mingw81_64/include/Qt3DInput -IC:/Qt/5.15.2/mingw81_64/include/Qt3DLogic -IC:/Qt/5.15.2/mingw81_64/include/Qt3DCore -IC:/Qt/5.15.2/mingw81_64/include/QtGamepad -IC:/Qt/5.15.2/mingw81_64/include/QtGui -IC:/Qt/5.15.2/mingw81_64/include/QtANGLE -IC:/Qt/5.15.2/mingw81_64/include/QtNetwork -IC:/Qt/5.15.2/mingw81_64/include/QtCore -I. -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed -IC:/Qt/Tools/mingw810_64/x86_64-w64-mingw32/include ..\..\melfaRobots\rv4flkinematik.h -o release\moc_rv4flkinematik.cpp
 
 release/moc_rv6slkinematik.cpp: ../../melfaRobots/rv6slkinematik.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QObject \
@@ -1793,9 +1799,10 @@ release/moc_rv6slkinematik.cpp: ../../melfaRobots/rv6slkinematik.h \
 		../../melfaRobots/robotPosition.h \
 		../../melfaRobots/position.h \
 		../../melfaRobots/mathfunktions.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/QThread \
 		release/moc_predefs.h \
 		C:/Qt/5.15.2/mingw81_64/bin/moc.exe
-	C:\Qt\5.15.2\mingw81_64\bin\moc.exe $(DEFINES) --include C:/Users/wolfd/Desktop/Git/BachelorRobot/build/melfaRobots/release/moc_predefs.h -IC:/Qt/5.15.2/mingw81_64/mkspecs/win32-g++ -IC:/Users/wolfd/Desktop/Git/BachelorRobot/melfaRobots -IC:/Users/wolfd/Desktop/Git/BachelorRobot/widget -IC:/Qt/5.15.2/mingw81_64/include -IC:/Qt/5.15.2/mingw81_64/include/QtWidgets -IC:/Qt/5.15.2/mingw81_64/include/Qt3DExtras -IC:/Qt/5.15.2/mingw81_64/include/Qt3DRender -IC:/Qt/5.15.2/mingw81_64/include/Qt3DInput -IC:/Qt/5.15.2/mingw81_64/include/Qt3DLogic -IC:/Qt/5.15.2/mingw81_64/include/Qt3DCore -IC:/Qt/5.15.2/mingw81_64/include/QtGamepad -IC:/Qt/5.15.2/mingw81_64/include/QtGui -IC:/Qt/5.15.2/mingw81_64/include/QtANGLE -IC:/Qt/5.15.2/mingw81_64/include/QtNetwork -IC:/Qt/5.15.2/mingw81_64/include/QtCore -I. -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed -IC:/Qt/Tools/mingw810_64/x86_64-w64-mingw32/include ..\..\melfaRobots\rv6slkinematik.h -o release\moc_rv6slkinematik.cpp
+	C:\Qt\5.15.2\mingw81_64\bin\moc.exe $(DEFINES) --include "C:/Users/Denis Zyulin/Desktop/Git/BachelorRobot/build/melfaRobots/release/moc_predefs.h" -IC:/Qt/5.15.2/mingw81_64/mkspecs/win32-g++ -I"C:/Users/Denis Zyulin/Desktop/Git/BachelorRobot/melfaRobots" -I"C:/Users/Denis Zyulin/Desktop/Git/BachelorRobot/widget" -IC:/Qt/5.15.2/mingw81_64/include -IC:/Qt/5.15.2/mingw81_64/include/QtWidgets -IC:/Qt/5.15.2/mingw81_64/include/Qt3DExtras -IC:/Qt/5.15.2/mingw81_64/include/Qt3DRender -IC:/Qt/5.15.2/mingw81_64/include/Qt3DInput -IC:/Qt/5.15.2/mingw81_64/include/Qt3DLogic -IC:/Qt/5.15.2/mingw81_64/include/Qt3DCore -IC:/Qt/5.15.2/mingw81_64/include/QtGamepad -IC:/Qt/5.15.2/mingw81_64/include/QtGui -IC:/Qt/5.15.2/mingw81_64/include/QtANGLE -IC:/Qt/5.15.2/mingw81_64/include/QtNetwork -IC:/Qt/5.15.2/mingw81_64/include/QtCore -I. -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed -IC:/Qt/Tools/mingw810_64/x86_64-w64-mingw32/include ..\..\melfaRobots\rv6slkinematik.h -o release\moc_rv6slkinematik.cpp
 
 release/moc_robot.cpp: ../../melfaRobots/robot.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QObject \
@@ -1881,6 +1888,10 @@ release/moc_robot.cpp: ../../melfaRobots/robot.h \
 		../../melfaRobots/mathfunktions.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QtMath \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qmath.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/QThread \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthread.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdeadlinetimer.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qelapsedtimer.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/Qt3DCore \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/Qt3DCoreDepends \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QtCore \
@@ -1921,8 +1932,6 @@ release/moc_robot.cpp: ../../melfaRobots/robot.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qcoreapplication.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qconcatenatetablesproxymodel.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qcryptographichash.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdeadlinetimer.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qelapsedtimer.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdir.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qfileinfo.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qfile.h \
@@ -1999,7 +2008,6 @@ release/moc_robot.cpp: ../../melfaRobots/robot.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtemporaryfile.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtextboundaryfinder.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtextcodec.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthread.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthreadpool.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthreadstorage.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtimeline.h \
@@ -2238,12 +2246,11 @@ release/moc_robot.cpp: ../../melfaRobots/robot.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/qskeletonloader.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/qtransform.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/qt3dcoreversion.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/QThread \
 		C:/Qt/5.15.2/mingw81_64/include/QtNetwork/QTcpSocket \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QElapsedTimer \
 		release/moc_predefs.h \
 		C:/Qt/5.15.2/mingw81_64/bin/moc.exe
-	C:\Qt\5.15.2\mingw81_64\bin\moc.exe $(DEFINES) --include C:/Users/wolfd/Desktop/Git/BachelorRobot/build/melfaRobots/release/moc_predefs.h -IC:/Qt/5.15.2/mingw81_64/mkspecs/win32-g++ -IC:/Users/wolfd/Desktop/Git/BachelorRobot/melfaRobots -IC:/Users/wolfd/Desktop/Git/BachelorRobot/widget -IC:/Qt/5.15.2/mingw81_64/include -IC:/Qt/5.15.2/mingw81_64/include/QtWidgets -IC:/Qt/5.15.2/mingw81_64/include/Qt3DExtras -IC:/Qt/5.15.2/mingw81_64/include/Qt3DRender -IC:/Qt/5.15.2/mingw81_64/include/Qt3DInput -IC:/Qt/5.15.2/mingw81_64/include/Qt3DLogic -IC:/Qt/5.15.2/mingw81_64/include/Qt3DCore -IC:/Qt/5.15.2/mingw81_64/include/QtGamepad -IC:/Qt/5.15.2/mingw81_64/include/QtGui -IC:/Qt/5.15.2/mingw81_64/include/QtANGLE -IC:/Qt/5.15.2/mingw81_64/include/QtNetwork -IC:/Qt/5.15.2/mingw81_64/include/QtCore -I. -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed -IC:/Qt/Tools/mingw810_64/x86_64-w64-mingw32/include ..\..\melfaRobots\robot.h -o release\moc_robot.cpp
+	C:\Qt\5.15.2\mingw81_64\bin\moc.exe $(DEFINES) --include "C:/Users/Denis Zyulin/Desktop/Git/BachelorRobot/build/melfaRobots/release/moc_predefs.h" -IC:/Qt/5.15.2/mingw81_64/mkspecs/win32-g++ -I"C:/Users/Denis Zyulin/Desktop/Git/BachelorRobot/melfaRobots" -I"C:/Users/Denis Zyulin/Desktop/Git/BachelorRobot/widget" -IC:/Qt/5.15.2/mingw81_64/include -IC:/Qt/5.15.2/mingw81_64/include/QtWidgets -IC:/Qt/5.15.2/mingw81_64/include/Qt3DExtras -IC:/Qt/5.15.2/mingw81_64/include/Qt3DRender -IC:/Qt/5.15.2/mingw81_64/include/Qt3DInput -IC:/Qt/5.15.2/mingw81_64/include/Qt3DLogic -IC:/Qt/5.15.2/mingw81_64/include/Qt3DCore -IC:/Qt/5.15.2/mingw81_64/include/QtGamepad -IC:/Qt/5.15.2/mingw81_64/include/QtGui -IC:/Qt/5.15.2/mingw81_64/include/QtANGLE -IC:/Qt/5.15.2/mingw81_64/include/QtNetwork -IC:/Qt/5.15.2/mingw81_64/include/QtCore -I. -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed -IC:/Qt/Tools/mingw810_64/x86_64-w64-mingw32/include ..\..\melfaRobots\robot.h -o release\moc_robot.cpp
 
 release/moc_robotcontrol.cpp: ../../melfaRobots/robotcontrol.h \
 		../../melfaRobots/robot.h \
@@ -2330,6 +2337,10 @@ release/moc_robotcontrol.cpp: ../../melfaRobots/robotcontrol.h \
 		../../melfaRobots/mathfunktions.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QtMath \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qmath.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/QThread \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthread.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdeadlinetimer.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qelapsedtimer.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/Qt3DCore \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/Qt3DCoreDepends \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QtCore \
@@ -2370,8 +2381,6 @@ release/moc_robotcontrol.cpp: ../../melfaRobots/robotcontrol.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qcoreapplication.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qconcatenatetablesproxymodel.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qcryptographichash.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdeadlinetimer.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qelapsedtimer.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdir.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qfileinfo.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qfile.h \
@@ -2448,7 +2457,6 @@ release/moc_robotcontrol.cpp: ../../melfaRobots/robotcontrol.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtemporaryfile.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtextboundaryfinder.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtextcodec.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthread.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthreadpool.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthreadstorage.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtimeline.h \
@@ -2687,7 +2695,6 @@ release/moc_robotcontrol.cpp: ../../melfaRobots/robotcontrol.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/qskeletonloader.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/qtransform.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/qt3dcoreversion.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/QThread \
 		C:/Qt/5.15.2/mingw81_64/include/QtNetwork/QTcpSocket \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QElapsedTimer \
 		../../melfaRobots/subwindow.h \
@@ -2699,7 +2706,7 @@ release/moc_robotcontrol.cpp: ../../melfaRobots/robotcontrol.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/qsizepolicy.h \
 		release/moc_predefs.h \
 		C:/Qt/5.15.2/mingw81_64/bin/moc.exe
-	C:\Qt\5.15.2\mingw81_64\bin\moc.exe $(DEFINES) --include C:/Users/wolfd/Desktop/Git/BachelorRobot/build/melfaRobots/release/moc_predefs.h -IC:/Qt/5.15.2/mingw81_64/mkspecs/win32-g++ -IC:/Users/wolfd/Desktop/Git/BachelorRobot/melfaRobots -IC:/Users/wolfd/Desktop/Git/BachelorRobot/widget -IC:/Qt/5.15.2/mingw81_64/include -IC:/Qt/5.15.2/mingw81_64/include/QtWidgets -IC:/Qt/5.15.2/mingw81_64/include/Qt3DExtras -IC:/Qt/5.15.2/mingw81_64/include/Qt3DRender -IC:/Qt/5.15.2/mingw81_64/include/Qt3DInput -IC:/Qt/5.15.2/mingw81_64/include/Qt3DLogic -IC:/Qt/5.15.2/mingw81_64/include/Qt3DCore -IC:/Qt/5.15.2/mingw81_64/include/QtGamepad -IC:/Qt/5.15.2/mingw81_64/include/QtGui -IC:/Qt/5.15.2/mingw81_64/include/QtANGLE -IC:/Qt/5.15.2/mingw81_64/include/QtNetwork -IC:/Qt/5.15.2/mingw81_64/include/QtCore -I. -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed -IC:/Qt/Tools/mingw810_64/x86_64-w64-mingw32/include ..\..\melfaRobots\robotcontrol.h -o release\moc_robotcontrol.cpp
+	C:\Qt\5.15.2\mingw81_64\bin\moc.exe $(DEFINES) --include "C:/Users/Denis Zyulin/Desktop/Git/BachelorRobot/build/melfaRobots/release/moc_predefs.h" -IC:/Qt/5.15.2/mingw81_64/mkspecs/win32-g++ -I"C:/Users/Denis Zyulin/Desktop/Git/BachelorRobot/melfaRobots" -I"C:/Users/Denis Zyulin/Desktop/Git/BachelorRobot/widget" -IC:/Qt/5.15.2/mingw81_64/include -IC:/Qt/5.15.2/mingw81_64/include/QtWidgets -IC:/Qt/5.15.2/mingw81_64/include/Qt3DExtras -IC:/Qt/5.15.2/mingw81_64/include/Qt3DRender -IC:/Qt/5.15.2/mingw81_64/include/Qt3DInput -IC:/Qt/5.15.2/mingw81_64/include/Qt3DLogic -IC:/Qt/5.15.2/mingw81_64/include/Qt3DCore -IC:/Qt/5.15.2/mingw81_64/include/QtGamepad -IC:/Qt/5.15.2/mingw81_64/include/QtGui -IC:/Qt/5.15.2/mingw81_64/include/QtANGLE -IC:/Qt/5.15.2/mingw81_64/include/QtNetwork -IC:/Qt/5.15.2/mingw81_64/include/QtCore -I. -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed -IC:/Qt/Tools/mingw810_64/x86_64-w64-mingw32/include ..\..\melfaRobots\robotcontrol.h -o release\moc_robotcontrol.cpp
 
 release/moc_subwindow.cpp: ../../melfaRobots/subwindow.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QMdiSubWindow \
@@ -2808,7 +2815,7 @@ release/moc_subwindow.cpp: ../../melfaRobots/subwindow.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtGui/qtouchdevice.h \
 		release/moc_predefs.h \
 		C:/Qt/5.15.2/mingw81_64/bin/moc.exe
-	C:\Qt\5.15.2\mingw81_64\bin\moc.exe $(DEFINES) --include C:/Users/wolfd/Desktop/Git/BachelorRobot/build/melfaRobots/release/moc_predefs.h -IC:/Qt/5.15.2/mingw81_64/mkspecs/win32-g++ -IC:/Users/wolfd/Desktop/Git/BachelorRobot/melfaRobots -IC:/Users/wolfd/Desktop/Git/BachelorRobot/widget -IC:/Qt/5.15.2/mingw81_64/include -IC:/Qt/5.15.2/mingw81_64/include/QtWidgets -IC:/Qt/5.15.2/mingw81_64/include/Qt3DExtras -IC:/Qt/5.15.2/mingw81_64/include/Qt3DRender -IC:/Qt/5.15.2/mingw81_64/include/Qt3DInput -IC:/Qt/5.15.2/mingw81_64/include/Qt3DLogic -IC:/Qt/5.15.2/mingw81_64/include/Qt3DCore -IC:/Qt/5.15.2/mingw81_64/include/QtGamepad -IC:/Qt/5.15.2/mingw81_64/include/QtGui -IC:/Qt/5.15.2/mingw81_64/include/QtANGLE -IC:/Qt/5.15.2/mingw81_64/include/QtNetwork -IC:/Qt/5.15.2/mingw81_64/include/QtCore -I. -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed -IC:/Qt/Tools/mingw810_64/x86_64-w64-mingw32/include ..\..\melfaRobots\subwindow.h -o release\moc_subwindow.cpp
+	C:\Qt\5.15.2\mingw81_64\bin\moc.exe $(DEFINES) --include "C:/Users/Denis Zyulin/Desktop/Git/BachelorRobot/build/melfaRobots/release/moc_predefs.h" -IC:/Qt/5.15.2/mingw81_64/mkspecs/win32-g++ -I"C:/Users/Denis Zyulin/Desktop/Git/BachelorRobot/melfaRobots" -I"C:/Users/Denis Zyulin/Desktop/Git/BachelorRobot/widget" -IC:/Qt/5.15.2/mingw81_64/include -IC:/Qt/5.15.2/mingw81_64/include/QtWidgets -IC:/Qt/5.15.2/mingw81_64/include/Qt3DExtras -IC:/Qt/5.15.2/mingw81_64/include/Qt3DRender -IC:/Qt/5.15.2/mingw81_64/include/Qt3DInput -IC:/Qt/5.15.2/mingw81_64/include/Qt3DLogic -IC:/Qt/5.15.2/mingw81_64/include/Qt3DCore -IC:/Qt/5.15.2/mingw81_64/include/QtGamepad -IC:/Qt/5.15.2/mingw81_64/include/QtGui -IC:/Qt/5.15.2/mingw81_64/include/QtANGLE -IC:/Qt/5.15.2/mingw81_64/include/QtNetwork -IC:/Qt/5.15.2/mingw81_64/include/QtCore -I. -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed -IC:/Qt/Tools/mingw810_64/x86_64-w64-mingw32/include ..\..\melfaRobots\subwindow.h -o release\moc_subwindow.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -2921,6 +2928,10 @@ release/controlpanel.o: ../../melfaRobots/controlpanel.cpp ../../melfaRobots/con
 		../../melfaRobots/mathfunktions.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QtMath \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qmath.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/QThread \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthread.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdeadlinetimer.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qelapsedtimer.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/Qt3DCore \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/Qt3DCoreDepends \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QtCore \
@@ -2961,8 +2972,6 @@ release/controlpanel.o: ../../melfaRobots/controlpanel.cpp ../../melfaRobots/con
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qcoreapplication.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qconcatenatetablesproxymodel.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qcryptographichash.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdeadlinetimer.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qelapsedtimer.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdir.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qfileinfo.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qfile.h \
@@ -3039,7 +3048,6 @@ release/controlpanel.o: ../../melfaRobots/controlpanel.cpp ../../melfaRobots/con
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtemporaryfile.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtextboundaryfinder.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtextcodec.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthread.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthreadpool.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthreadstorage.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtimeline.h \
@@ -3625,7 +3633,11 @@ release/robotPosition.o: ../../melfaRobots/robotPosition.cpp ../../melfaRobots/r
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qsize.h \
 		../../melfaRobots/mathfunktions.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QtMath \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qmath.h
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qmath.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/QThread \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthread.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdeadlinetimer.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qelapsedtimer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\robotPosition.o ..\..\melfaRobots\robotPosition.cpp
 
 release/rv4flkinematik.o: ../../melfaRobots/rv4flkinematik.cpp ../../melfaRobots/rv4flkinematik.h \
@@ -3712,6 +3724,10 @@ release/rv4flkinematik.o: ../../melfaRobots/rv4flkinematik.cpp ../../melfaRobots
 		../../melfaRobots/mathfunktions.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QtMath \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qmath.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/QThread \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthread.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdeadlinetimer.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qelapsedtimer.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/Qt3DCore \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/Qt3DCoreDepends \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QtCore \
@@ -3752,8 +3768,6 @@ release/rv4flkinematik.o: ../../melfaRobots/rv4flkinematik.cpp ../../melfaRobots
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qcoreapplication.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qconcatenatetablesproxymodel.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qcryptographichash.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdeadlinetimer.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qelapsedtimer.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdir.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qfileinfo.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qfile.h \
@@ -3830,7 +3844,6 @@ release/rv4flkinematik.o: ../../melfaRobots/rv4flkinematik.cpp ../../melfaRobots
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtemporaryfile.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtextboundaryfinder.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtextcodec.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthread.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthreadpool.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthreadstorage.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtimeline.h \
@@ -4511,7 +4524,8 @@ release/rv6slkinematik.o: ../../melfaRobots/rv6slkinematik.cpp ../../melfaRobots
 		../../melfaRobots/kinematik.h \
 		../../melfaRobots/robotPosition.h \
 		../../melfaRobots/position.h \
-		../../melfaRobots/mathfunktions.h
+		../../melfaRobots/mathfunktions.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/QThread
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\rv6slkinematik.o ..\..\melfaRobots\rv6slkinematik.cpp
 
 release/robot.o: ../../melfaRobots/robot.cpp ../../melfaRobots/robot.h \
@@ -4598,6 +4612,10 @@ release/robot.o: ../../melfaRobots/robot.cpp ../../melfaRobots/robot.h \
 		../../melfaRobots/mathfunktions.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QtMath \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qmath.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/QThread \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthread.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdeadlinetimer.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qelapsedtimer.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/Qt3DCore \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/Qt3DCoreDepends \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QtCore \
@@ -4638,8 +4656,6 @@ release/robot.o: ../../melfaRobots/robot.cpp ../../melfaRobots/robot.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qcoreapplication.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qconcatenatetablesproxymodel.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qcryptographichash.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdeadlinetimer.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qelapsedtimer.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdir.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qfileinfo.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qfile.h \
@@ -4716,7 +4732,6 @@ release/robot.o: ../../melfaRobots/robot.cpp ../../melfaRobots/robot.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtemporaryfile.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtextboundaryfinder.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtextcodec.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthread.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthreadpool.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthreadstorage.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtimeline.h \
@@ -4955,7 +4970,6 @@ release/robot.o: ../../melfaRobots/robot.cpp ../../melfaRobots/robot.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/qskeletonloader.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/qtransform.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/qt3dcoreversion.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/QThread \
 		C:/Qt/5.15.2/mingw81_64/include/QtNetwork/QTcpSocket \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QElapsedTimer
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\robot.o ..\..\melfaRobots\robot.cpp
@@ -5124,6 +5138,10 @@ release/kinematik.o: ../../melfaRobots/kinematik.cpp ../../melfaRobots/kinematik
 		../../melfaRobots/mathfunktions.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QtMath \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qmath.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/QThread \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthread.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdeadlinetimer.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qelapsedtimer.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/Qt3DCore \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/Qt3DCoreDepends \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QtCore \
@@ -5164,8 +5182,6 @@ release/kinematik.o: ../../melfaRobots/kinematik.cpp ../../melfaRobots/kinematik
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qcoreapplication.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qconcatenatetablesproxymodel.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qcryptographichash.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdeadlinetimer.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qelapsedtimer.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdir.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qfileinfo.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qfile.h \
@@ -5242,7 +5258,6 @@ release/kinematik.o: ../../melfaRobots/kinematik.cpp ../../melfaRobots/kinematik
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtemporaryfile.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtextboundaryfinder.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtextcodec.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthread.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthreadpool.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthreadstorage.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtimeline.h \
@@ -5568,6 +5583,10 @@ release/robotcontrol.o: ../../melfaRobots/robotcontrol.cpp ../../melfaRobots/rob
 		../../melfaRobots/mathfunktions.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QtMath \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qmath.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/QThread \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthread.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdeadlinetimer.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qelapsedtimer.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/Qt3DCore \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/Qt3DCoreDepends \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QtCore \
@@ -5608,8 +5627,6 @@ release/robotcontrol.o: ../../melfaRobots/robotcontrol.cpp ../../melfaRobots/rob
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qcoreapplication.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qconcatenatetablesproxymodel.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qcryptographichash.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdeadlinetimer.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qelapsedtimer.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdir.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qfileinfo.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qfile.h \
@@ -5686,7 +5703,6 @@ release/robotcontrol.o: ../../melfaRobots/robotcontrol.cpp ../../melfaRobots/rob
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtemporaryfile.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtextboundaryfinder.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtextcodec.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthread.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthreadpool.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qthreadstorage.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtimeline.h \
@@ -5925,7 +5941,6 @@ release/robotcontrol.o: ../../melfaRobots/robotcontrol.cpp ../../melfaRobots/rob
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/qskeletonloader.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/qtransform.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DCore/qt3dcoreversion.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/QThread \
 		C:/Qt/5.15.2/mingw81_64/include/QtNetwork/QTcpSocket \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QElapsedTimer \
 		../../melfaRobots/subwindow.h \

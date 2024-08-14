@@ -32,12 +32,12 @@ private:
     void getJoints();
     bool isRunning();
     void _alternativeCommand(QString);
-
 private slots:
     void _positionChanged();
 
 public slots:
     void UpdatePosition();
+    void UpdatePositionLinear();
     void Write(QString);
     void Connect();
     bool IsConnected(){return _connect;}
@@ -52,9 +52,11 @@ public:
     Robot(QString ip,int port);
     void ConnectKinematik(RobotPosition *pos);
     void MoveToPosition(Position* pos);
+    void MoveToPositionLinear(Position* pos);
     void MoveInLine(double P1, double P2, double P3, double a, double b, double c, double l1);
     void MoveInCircle(QVector3D P1, QVector3D P2, QVector3D P3, double ew1, double ew2, double ew3,double l1);
     void MoveInCircleJ(QVector<double> joints1, QVector<double> joints2, QVector<double> joints3, double joint7);
+    void MoveInLine();
 signals:
     void robotAnswer(QString);
     void robotCommand(QString);

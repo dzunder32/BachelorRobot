@@ -90,8 +90,8 @@ int main(int argc, char *argv[])
 
     //Ebene zu Zeichnen
     Plane *plane = new Plane(600.0,800.0);
-    plane->setTranslation(linAxis2->sled_position+QVector3D(0,-800,500));
-    plane->setRotation(QQuaternion::fromEulerAngles(QVector3D(-90,180,0)) /** QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),130)*/);
+    plane->setTranslation(linAxis2->sled_position+QVector3D(0,800,500));
+    plane->setRotation(QQuaternion::fromEulerAngles(QVector3D(90,0,0)) /** QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),130)*/);
     widget3d->addObject(plane);
 
     Robot *robot = new Robot("143.93.135.15",10001);
@@ -102,6 +102,7 @@ int main(int argc, char *argv[])
     ControlPanel *control = new ControlPanel(robot2Kinematik);
     control->show();
     robot->ConnectKinematik(robot2Kinematik);
+
 //    robot->Connect();
 //    robot->ServoOn(true);
 //    robot->Write("1;1;EXECMVS P_Curr,-100");

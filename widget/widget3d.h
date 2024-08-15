@@ -12,9 +12,11 @@
 #include <QPointLight>
 #include <Qt3DExtras>
 #include <QMdiSubWindow>
+#include <plane.h>
 #include <QVector>
 #include <liveplot2.h>
 #include <QThread>
+
 
 class Widget3D : public QWidget
 {
@@ -41,6 +43,7 @@ public:
     void setFileName(QString name);
     void setViewCenter(QVector3D point);
 
+    void addPlane(Plane *plane);
 public slots:
     void getToolData(QVector <double>);
     void getPolarisData(QVector <double>);
@@ -57,6 +60,9 @@ private:
     Qt3DRender::QCamera *_cameraEntity;
     Qt3DExtras::QAbstractCameraController* _camController;
     QWidget *_widget3D;
+    Plane *_plane;
+    CoordinateSystem *cSys;
+    Qt3DCore::QTransform *planeToolTransform = new Qt3DCore::QTransform();
     Qt3DCore::QTransform *trans_tool;
     Qt3DCore::QTransform *trans_polaris;
     Qt3DCore::QTransform *trans_position;
@@ -68,7 +74,6 @@ private:
     LivePlot* livePlot;
     LivePlot2* livePlot2;
     QVector<Qt3DCore::QEntity*> pointEntities,lineEntities;
-    QVector3D point_position;
 
     double roundDecimalPlaces(double val);
     void setDecimalPlaces(int val);

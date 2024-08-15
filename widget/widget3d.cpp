@@ -61,6 +61,20 @@ Widget3D::Widget3D(QWidget *parent) : QWidget(parent)
     ToolVals=QVector <QVector <double>>(meanVal,QVector <double>(7,0));
     PolarisVals=ToolVals;
 
+    // Create a new entity
+    Qt3DCore::QEntity *planeToolEntity = new Qt3DCore::QEntity(_rootEntity);
+    // Create a sphere mesh and set its radius
+    Qt3DExtras::QSphereMesh *sphere = new Qt3DExtras::QSphereMesh();
+    sphere->setRadius(10);
+    planeToolEntity->addComponent(sphere);
+
+    // Create a material and set its diffuse color
+    Qt3DExtras::QPhongMaterial *material = new Qt3DExtras::QPhongMaterial();
+    material->setDiffuse(QColor(255,0,0));
+    planeToolEntity->addComponent(material);
+    // Create a transform and set its translation
+    planeToolEntity->addComponent(planeToolTransform);
+
 }
 Widget3D::~Widget3D(){}
 
@@ -94,6 +108,12 @@ void Widget3D::addTransTool(Qt3DCore::QEntity *entity)
     entity->addComponent(trans_tool);
 
 }
+
+void Widget3D::addPlane(Plane *plane)
+{
+   _plane = plane;
+}
+
 void Widget3D::addTransPolaris(Qt3DCore::QEntity *entity)
 {
     entity->addComponent(trans_polaris);
@@ -109,7 +129,11 @@ void Widget3D::setPosMatrix(Qt3DCore::QTransform *pos)
 void Widget3D::getToolData(QVector <double> data)
 {
     ToolMatrix = DataMatrix(ToolVals,data);
-    trans_tool->setMatrix(trans_polaris->matrix()*ToolMatrix);
+    _plane->setMatrix(trans_polaris->matrix()*ToolMatrix);
+//    drawPoint(_plane->translation(),10,QColor(255,0,0));
+    planeToolTransform->setTranslation(_plane->translation());
+    _plane->setTranslation(_plane->translation() + _plane->matrix().column(0).toVector3D() * _plane->xLimit/2);
+//    trans_tool->setMatrix(trans_polaris->matrix()*ToolMatrix);
 
 }
 
@@ -192,7 +216,6 @@ void Widget3D::drawPoint(QVector3D position, float size, QColor color)
     // Create a transform and set its translation
     Qt3DCore::QTransform *transform = new Qt3DCore::QTransform();
     transform->setTranslation(position);
-    point_position=position;
     entity->addComponent(transform);
 
 }

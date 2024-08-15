@@ -78,7 +78,7 @@ PolarisV::PolarisV()
 //        fileName = "5_1280_3.5mm";
         configurePassiveTools("5_1280_3.5mm.rom");
 //        configurePassiveTools("kurze_Spitze_Test.rom");
-        configurePassiveTools("NDI_Tracker2.rom");
+        configurePassiveTools("NDI_Tracker4.rom");
 
         //configureActiveWirelessTools();
         //if (scu_hostname.length() > 0)

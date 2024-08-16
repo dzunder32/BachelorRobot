@@ -39,6 +39,8 @@ void RobotDraw::robDraw_onTimeout()
             robotDrawLine();break;
         case CIRCLE:
             robotDrawCircle();break;
+        case MOVE:
+            robotDrawCircle();break;
         }
     }
     else
@@ -55,11 +57,9 @@ void RobotDraw::robotDrawPoint()
     if(!PointsBuffer.isEmpty())
     {
         QVector3D planePoint = PointsBuffer.takeFirst();
-        robot_setPoint(Plane2RobotPoint(planePoint));
-        checkPlane();
-
+//        checkPlane();
+          robot_setPoint(Plane2RobotPoint(planePoint));
         if(moveAboveCounter<2){drawPoint_Widget(Plane2BasePoint(planePoint),2,QColor(0,255,0));moveAboveCounter++;}
-        // else{drawPoint_Widget(basePoint,10,QColor(255,0,0));}
 
         if(line_isTrue){drawLine(Plane2BasePoint(startLinePoint),Plane2BasePoint(planePoint));line_isTrue = false;}
     }
@@ -158,15 +158,26 @@ void RobotDraw::robotDrawCircle()
 
 }
 
+
+
 void RobotDraw::robot_setPoint(QVector3D position)
 {
-    _robotKinematik->setPoint(position.x(),
+
+
+    _robotKinematik->RobotPosition::setPoint(position.x(),
                               position.y(),
                               position.z(),
                               a,b,c,l1);
 
+   _robotKinematik->ToolMovement(Transformations::Z,6);
+
     if(_robot->IsConnected())
-    {_robot->UpdatePositionLinear(); _robotKinematik->WaitForPositionReached();}
+    {
+        if(moveAboveCounter<2){_robot->UpdatePosition();}
+        else                  {_robot->UpdatePositionLinear();}
+
+        _robotKinematik->WaitForPositionReached();
+    }
 }
 
 void RobotDraw::robot_moveCircular(QVector <QVector2D> circlePoints)
@@ -190,24 +201,6 @@ void RobotDraw::robot_moveCircular(QVector <QVector2D> circlePoints)
     drawCircle = false;
 }
 
-// void RobotDraw::robot_moveInArc(QVector <QVector2D> circlePoints)
-// {
-//     //Circle points 2 Joints
-//     QVector <QVector <double>> J_Vec;
-
-//     for(QVector2D point: circlePoints)
-//     {
-//         QVector3D pointRobot = Plane2RobotPoint(point.toVector3D());
-//         _robotKinematik->RobotPosition::setPoint(pointRobot.x(),
-//                                                  pointRobot.y(),
-//                                                  pointRobot.z(),
-//                                                  a,b,c,l1     );
-//         _robotKinematik->invers();
-//         J_Vec.append({_robotKinematik->j1(),_robotKinematik->j2(),_robotKinematik->j3(),_robotKinematik->j4(),_robotKinematik->j5(),_robotKinematik->j6(),_robotKinematik->j7()});
-//     }
-//     qDebug()<<"the Joints :D"<<J_Vec;
-//     _robot->MoveInArcJ(J_Vec[0],J_Vec[1],J_Vec[2],l1);
-// }
 
 void RobotDraw::PlanePositionChanged()
 {

@@ -78,8 +78,8 @@ void RobotDraw::robotDrawLine()
             //when distance is too big, move Tip above the plane
             moveTipAbove();/*qDebug()<<"now!";*/
             alreadyDrawn = false;
-        }
-        else{
+        }else
+        {
             //save second Point
             endLinePoint   = line[1];
             robot_setPoint(Plane2RobotPoint(startLinePoint));
@@ -90,10 +90,11 @@ void RobotDraw::robotDrawLine()
             alreadyDrawn = true;
             //speed up, when currently drawing a circle
             if(circlePoints_counter >= circlePoints_number)
-            {changeTimerSpeed(1);/*qDebug()<<"no speed!!"<<_timer->interval();*/}
+            {changeTimerSpeed(1);}/*qDebug()<<"no speed!!"<<_timer->interval();*/
             else{circlePoints_counter++;}
         }
-    }else{stopTimer_goHome();}
+    }
+    else{stopTimer_goHome();}
 }
 
 

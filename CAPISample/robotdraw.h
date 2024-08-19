@@ -25,7 +25,7 @@ public:
     QTimer *_timer = new QTimer(this);
     int prev_timerTime;
     int planeCounter = 0;
-    void startTimer();
+
     //    void setTimerTime(int time_ms){_timer->setInterval(time_ms);}
     void stopTimer_goHome();
     void UpdatePointsBuffer(QVector<QVector3D> pts);
@@ -55,6 +55,8 @@ private:
     bool line_isTrue = false;
     bool plane_isFull = false;
     bool drawCircle = false;
+    bool alreadyDrawn=false;
+
     QVector3D startLinePoint, endLinePoint;
     double a,b,c,l1;
     QMatrix4x4 robotMat;
@@ -69,7 +71,6 @@ private:
     float xBoxSize,yBoxSize,xSpace,ySpace;
     QMatrix4x4 rotation_plane;
     QMatrix4x4 planeRobot_T;
-    bool alreadyDrawn=false;
     float circlePoints_number;
     int circlePoints_counter;
     QVector3D robotPosition;
@@ -103,7 +104,7 @@ private:
     void  CirclePreview(QVariantList circleList);
     void moveAwayFromPlane();
 public slots:
-    void startDrawTimer(){_timer->start();}
+    void startDrawTimer(){_timer->start();alreadyDrawn=false;}
     void stopDrawTimer(){_timer->stop();}
     void setTimerTime(int ms){_timer->setInterval(ms);last_timerTime = ms;}
     void changeTimerSpeed(float factor){_timer->setInterval(last_timerTime * factor);}

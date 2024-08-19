@@ -55,6 +55,7 @@ private:
     bool line_isTrue = false;
     bool simulation_isTrue = true;
     bool plane_isFull = false;
+    bool drawCircle = false;
     QVector3D startLinePoint, endLinePoint;
     double a,b,c,l1;
     QMatrix4x4 robotMat;
@@ -89,11 +90,14 @@ private:
     void addLetter2Buffer();
     void getLetterData(QChar char_letter);
 
-    void  gotoNextBox();
-    void  moveTipAbove();
-    void  robot_moveInCircle(QVector<QVector2D> circlePoints);
-    void  initCirclePointsSpeedUp(float range);
-    void  setL1(double val);
+
+    void gotoNextBox();
+    void moveTipAbove();
+    // void robot_moveInArc(QVector<QVector2D> circlePoints);
+    void robot_moveCircular(QVector<QVector2D> circlePoints);
+    void initCirclePointsSpeedUp(float range);
+    void setL1(double val);
+//    void CalculateL1();
     float calculateAngleBetweenVectors(QVector3D vectorA, QVector3D vectorB);
     void  calculateL1_new();
     void  checkPlane();
@@ -105,9 +109,7 @@ public slots:
     void setTimerTime(int ms){_timer->setInterval(ms);last_timerTime = ms;}
     void changeTimerSpeed(float factor){_timer->setInterval(last_timerTime * factor);}
 
-
 signals:
-
 //    void changeTimerSpeed(float factor);
     void drawLine(QVector3D start,QVector3D end);
     void drawPoint_Widget(QVector3D point , float thickness, QColor color);

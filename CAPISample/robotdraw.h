@@ -13,8 +13,8 @@
 #include <QMatrix4x4>
 #include <QVector4D>
 
-#define POINT 1
-#define LINE 2
+#define POINT  1
+#define LINE   2
 #define CIRCLE 3
 
 class RobotDraw : public QObject
@@ -53,7 +53,6 @@ private:
     QVector3D _l1BasePos;
     int moveAboveCounter = 2;
     bool line_isTrue = false;
-    bool simulation_isTrue = true;
     bool plane_isFull = false;
     bool drawCircle = false;
     QVector3D startLinePoint, endLinePoint;
@@ -70,7 +69,7 @@ private:
     float xBoxSize,yBoxSize,xSpace,ySpace;
     QMatrix4x4 rotation_plane;
     QMatrix4x4 planeRobot_T;
-    bool drawFirstLine=true,alreadyDrawn=false;
+    bool alreadyDrawn=false;
     float circlePoints_number;
     int circlePoints_counter;
     QVector3D robotPosition;

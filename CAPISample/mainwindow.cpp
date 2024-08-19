@@ -86,7 +86,7 @@ void MainWindow::getData(QString data)
     {
         ui->textEdit->append(data);
         dataList=data.split(',');
-        qDebug()<<"dataList:"<<dataList;
+//        qDebug()<<"dataList:"<<dataList;
 //        qDebug()<<"ToolHandle"<<dataList[1];
         for (int i=4;i<12;i++){
             RotTransData.append(dataList[i].toDouble());
@@ -94,14 +94,14 @@ void MainWindow::getData(QString data)
         if (dataList[1]=="Port:1")
         {
              emit sendPolarisData(RotTransData);
-            qDebug()<<"worked";
+//            qDebug()<<"worked";
         }
         else
         {
             emit sendToolData(RotTransData);
-        qDebug()<<"also worked!";
+//        qDebug()<<"also worked!";
         }
-        qDebug()<<"the Data:"<<RotTransData;
+//        qDebug()<<"the Data:"<<RotTransData;
     }
     RotTransData.clear();
 }

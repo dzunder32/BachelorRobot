@@ -110,28 +110,11 @@ void RobotDrawUi::insertRobotSequenceText(QString str)
 void RobotDrawUi::on_pushButton_History_clicked()
 {
     qDebug()<<ui->textEdit_Sequence->toPlainText();
-    if(ui->textEdit_Sequence->toPlainText()=="Robot Sequence:"){
-        initBuffers();
-        qDebug()<<"initialized";
-    }else{
         ui->textEdit_Sequence->setText(historyText);
         _robDraw->setPreviousSequence();
 
-    }
 }
 
-void RobotDrawUi::initBuffers()
-{
-    for (int i=0;i<50;i+=10){
-        QVector3D planePoint = QVector3D(i,i,0);
-        _robDraw->AddPoint2Buffer(planePoint);
-    }
-
-    for (int k=0;k<50;k+=10){
-        _robDraw->AddLine2Buffer(QVector2D(50,k),QVector2D(-50,k));
-    }
-
-}
 
 void RobotDrawUi::on_pushButton_addCircle_clicked()
 {

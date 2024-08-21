@@ -7,15 +7,15 @@
 #include <plane.h>
 #include "robot.h"
 #include "letters.h"
-// #include <chrono>
 #include <QVariant>
 #include <QtMath>
 #include <QMatrix4x4>
 #include <QVector4D>
 
-#define POINT  1
-#define LINE   2
-#define CIRCLE 3
+#define POINT    1
+#define LINE     2
+#define CIRCLE   3
+#define L1CHANGE 4
 
 class RobotDraw : public QObject
 {
@@ -28,15 +28,16 @@ public:
 
     //    void setTimerTime(int time_ms){_timer->setInterval(time_ms);}
     void stopTimer_goHome();
-    void UpdatePointsBuffer(QVector<QVector3D> pts);
-    void AddPoint2Buffer(QVector3D planePoint);
-    void AddLine2Buffer(QVector3D linePlane1, QVector3D linePlane2);
-    void AddCircle2Buffer(QVariantList circleList);
-    void robDraw_onTimeout();
+
+    void AddPoint2Buffer   (QVector3D planePoint);
+    void AddLine2Buffer    (QVector3D linePlane1, QVector3D linePlane2);
+    void AddCircle2Buffer  (QVariantList circleList);
+    void AddL1Adjust2Buffer(){robotSequence.append(L1CHANGE);}
+
+    void robDraw_onTimeout ();
     void safeCurrentSequence();
     void setPreviousSequence();
-    void constructLetters(QString letter_Str);
-    void changeAngleStep(float step){angleStep = step;}
+    void constructLetters  (QString letter_Str);
     void resetShiftVector();
     void initLetterSize(float sizeFactor);
     void drawGrid();
@@ -45,29 +46,32 @@ public:
 
     void UpdatePlanePosition();
 private:
-    Letters *_letters;
-    Widget3D *_widget3d;
+    Letters   *_letters;
+    Widget3D  *_widget3d;
     Kinematik *_robotKinematik;
-    Robot *_robot;
-    Plane* _plane;
+    Robot     *_robot;
+    Plane     *_plane;
     QVector3D _l1BasePos;
-    int moveAboveCounter = 2;
-    bool line_isTrue = false;
-    bool plane_isFull = false;
-    bool drawCircle = false;
-    bool alreadyDrawn=false;
+    int   moveAboveCounter = 2;
+    bool  line_isTrue      = false;
+    bool  plane_isFull     = false;
+    bool  drawCircle       = false;
+    bool  alreadyDrawn     = false;
+    bool  lastPoint_drawn  = false;
+    float angleStep        = 10;
 
+    QVector3D lastPoint;
+
+    QVector <QVector <QVector3D>> LinesBuffer, LinesBuffer_hist;
     QVector3D startLinePoint, endLinePoint;
     double a,b,c,l1;
     QMatrix4x4 robotMat;
     QVector<QVector3D> cornerPoints;
-    QVector<QVector3D> PointsBuffer, PointsBuffer_hist;
-    QVector <QVector <QVector3D>> LinesBuffer, LinesBuffer_hist;
+    QVector<QVector3D> PointsBuffer, PointsBuffer_hist, L1Buffer;
     QList <int> robotSequence, robotSequence_hist;
     QVector <QVariantList> CircleBuffer,CircleBuffer_hist;
     QVector <QVariantList> currentLetter;
     QVector2D shiftVector;
-    float angleStep=10;
     float xBoxSize,yBoxSize,xSpace,ySpace;
     QMatrix4x4 rotation_plane;
     QMatrix4x4 planeRobot_T;
@@ -79,7 +83,8 @@ private:
     QVector3D Base2RobotPoint (QVector3D point3D){return QVector3D(robotMat.inverted() * point3D);}
     QVector3D Base2PlanePoint (QVector3D point3D){return QVector3D(_plane->matrix().inverted() * point3D);}
     QVector3D Plane2BasePoint (QVector3D point3D){return QVector3D(_plane->matrix() * point3D);}
-    QVector3D Plane2RobotPoint(QVector3D point3D){return QVector3D(/*planeRobot_T*/(robotMat.inverted() * _plane->matrix()) * point3D);}
+    QVector3D Plane2RobotPoint(QVector3D point3D){return QVector3D((robotMat.inverted() * _plane->matrix()) * point3D);}
+    QVector3D Robot2BasePoint (QVector3D point3D){return QVector3D(robotMat * point3D);}
 
     double cartDistance(QVector3D V1,QVector3D V2){QVector3D V_diff=V2-V1;return V_diff.length();}
     bool shiftVec_inPlane();
@@ -87,6 +92,8 @@ private:
     void robotDrawCircle();
     void robotDrawPoint();
     void robotDrawLine();
+    void robotAdjustL1();
+
     void addLetter2Buffer();
     void getLetterData(QChar char_letter);
 
@@ -102,9 +109,8 @@ private:
     void  calculateL1_new();
     void  checkPlane();
     void  CirclePreview(QVariantList circleList);
-    void moveAwayFromPlane();
 public slots:
-    void startDrawTimer(){_timer->start();alreadyDrawn=false;}
+    void startDrawTimer(){_timer->start();alreadyDrawn=false;moveAboveCounter=1;}
     void stopDrawTimer(){_timer->stop();}
     void setTimerTime(int ms){_timer->setInterval(ms);last_timerTime = ms;}
     void changeTimerSpeed(float factor){_timer->setInterval(last_timerTime * factor);}

@@ -162,8 +162,6 @@ void RobotDraw::robotDrawCircle()
 
 void RobotDraw::robot_setPoint(QVector3D position)
 {
-
-
     _robotKinematik->RobotPosition::setPoint(position.x(),
                               position.y(),
                               position.z(),

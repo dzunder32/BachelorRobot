@@ -24,7 +24,6 @@ RobotDrawUi::RobotDrawUi(Kinematik *robotKinematik,Robot *robot, QVector3D sled_
     connect(this,&RobotDrawUi::stopDrawing,_robDraw,&RobotDraw::stopDrawTimer);
     connect(this,&RobotDrawUi::changeTimerSpeed,_robDraw,&RobotDraw::setTimerTime);
 
-
     robotThread.start();
 }
 
@@ -35,48 +34,24 @@ RobotDrawUi::~RobotDrawUi()
     delete ui;
 }
 
-// void RobotDrawUi::setTimerSpeed(int time_ms){
-// //    _robDraw->prev_timerTime = _robDraw->_timer->interval();
-// //    _robDraw->_timer->setInterval(time_ms);
-//     _robDraw->_timer->setInterval(time_ms);
-// }
-
-// void RobotDrawUi::increaseTimerSpeed(float factor)
-// {
-//     setTimerSpeed(qRound(ui->timerSpeedSlider->value()*factor));
-// //    qDebug()<<"currSpeed:"<<qRound(ui->timerSpeedSlider->value()*factor);
-// }
-
 void RobotDrawUi::on_pushButtonStart_clicked()
 {
-//    _robDraw->connectTimer();
     if(preview_isDrawn){
         _widget3d->deleteAllLines();
         _widget3d->deleteAllPoints();
         preview_isDrawn = false;
     }
     emit startDrawing();
-//    startDrawTimer();
-//    _robDraw->startDrawTimer();
     _robDraw->setTimerTime(ui->timerSpeedSlider->value());
-//    setTimerSpeed(ui->timerSpeedSlider->value());
-    // _robDraw->PlanePositionChanged();
     _robDraw->UpdatePlanePosition();
-//    qDebug()<<"till here";
-//    disconnect(_robDraw->_timer, &QTimer::timeout,this, &RobotDraw::robDraw_onTimeout);
 }
 
 
-void RobotDrawUi::on_pushButtonDelete_clicked()
+void RobotDrawUi::on_pushButtonStop_clicked()
 {
-//    _robDraw->disconnectTimer();
-    // stopDrawTimer();
     emit stopDrawing();
-    // _robDraw->stopDrawTimer();
     historyText = ui->textEdit_Sequence->toPlainText();
     qDebug()<<"TimerStopped";
-
-
 }
 
 
@@ -105,14 +80,6 @@ void RobotDrawUi::on_pushButton_setP2_clicked()
     P2 = QVector2D(P2X_Str.toFloat(),P2Y_Str.toFloat());
 }
 
-// void RobotDrawUi::stopDrawTimer(){
-//     _robDraw->stopDrawTimer();
-// //    _robDraw->_timer->stop();
-//     historyText = ui->textEdit_Sequence->toPlainText();
-// //    ui->textEdit_Sequence->setText("Robot Sequence:");
-//     qDebug()<<"TimerStopped";
-// }
-
 
 void RobotDrawUi::on_pushButton_addLine_clicked()
 {
@@ -127,9 +94,10 @@ void RobotDrawUi::on_pushButton_addLine_clicked()
 void RobotDrawUi::on_pushButton_addP1_clicked()
 {
 
+    _robDraw->AddL1Adjust2Buffer(P1.toVector3D());
     _robDraw->AddPoint2Buffer(P1.toVector3D());
     // _widget3d->drawPoint(P1,5,QColor(255,0,255));
-    insertRobotSequenceText("P2:(" + P1X_Str + ", " + P1Y_Str + ")");
+    insertRobotSequenceText("P1:(" + P1X_Str + ", " + P1Y_Str + ")");
 }
 
 
@@ -140,40 +108,14 @@ void RobotDrawUi::insertRobotSequenceText(QString str)
     ui->textEdit_Sequence->insertPlainText(str);
 }
 
-// void RobotDrawUi::startDrawTimer()
-// {
-// //    _robDraw->_timer->start();
-//     _robDraw->startDrawTimer();
-//     qDebug()<<"TimerStarted";
-// //    qDebug()<<_robDraw->_timer->isActive();
-//     _robDraw->safeCurrentSequence();
-// }
-
 void RobotDrawUi::on_pushButton_History_clicked()
 {
     qDebug()<<ui->textEdit_Sequence->toPlainText();
-    if(ui->textEdit_Sequence->toPlainText()=="Robot Sequence:"){
-        initBuffers();
-        qDebug()<<"initialized";
-    }else{
         ui->textEdit_Sequence->setText(historyText);
         _robDraw->setPreviousSequence();
 
-    }
 }
 
-void RobotDrawUi::initBuffers()
-{
-    for (int i=0;i<50;i+=10){
-        QVector3D planePoint = QVector3D(i,i,0);
-        _robDraw->AddPoint2Buffer(planePoint);
-    }
-
-    for (int k=0;k<50;k+=10){
-        _robDraw->AddLine2Buffer(QVector2D(50,k),QVector2D(-50,k));
-    }
-
-}
 
 void RobotDrawUi::on_pushButton_addCircle_clicked()
 {
@@ -185,8 +127,8 @@ void RobotDrawUi::on_pushButton_addCircle_clicked()
     insertRobotSequenceText("Circle: r=" + QString::number(radius) + " center: (" + P1X_Str + ", " + P1Y_Str + ")");
     _robDraw->AddLine2Buffer(QVector3D(P1.x()+radius,P1.y(),0),QVector3D(P1.x()+radius,P1.y(),0));
     _robDraw->AddCircle2Buffer(circleList);
+    preview_isDrawn = true;
 }
-
 
 
 void RobotDrawUi::on_pushButton_draw_clicked()

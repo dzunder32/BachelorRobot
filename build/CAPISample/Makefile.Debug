@@ -823,6 +823,8 @@ debug/moc_draw.cpp: ../../CAPISample/draw.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DRender/QPointLight \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QMdiSubWindow \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/qmdisubwindow.h \
+		../../widget/plane.h \
+		../../widget/coordinatesystem.h \
 		../../widget/liveplot2.h \
 		../../widget/liveplot.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QMainWindow \
@@ -994,8 +996,6 @@ debug/moc_draw.cpp: ../../CAPISample/draw.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QElapsedTimer \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QTimeZone \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QRandomGenerator \
-		../../widget/plane.h \
-		../../widget/coordinatesystem.h \
 		../../melfaRobots/robot.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtNetwork/QTcpSocket \
 		../../CAPISample/letters.h \
@@ -1686,6 +1686,8 @@ debug/moc_drawletters.cpp: ../../CAPISample/drawletters.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DRender/QPointLight \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QMdiSubWindow \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/qmdisubwindow.h \
+		../../widget/plane.h \
+		../../widget/coordinatesystem.h \
 		../../widget/liveplot2.h \
 		../../widget/liveplot.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QLineEdit \
@@ -1854,8 +1856,6 @@ debug/moc_drawletters.cpp: ../../CAPISample/drawletters.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QElapsedTimer \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QTimeZone \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QRandomGenerator \
-		../../widget/plane.h \
-		../../widget/coordinatesystem.h \
 		../../melfaRobots/robot.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtNetwork/QTcpSocket \
 		../../CAPISample/letters.h \
@@ -2546,6 +2546,8 @@ debug/moc_mainwindow.cpp: ../../CAPISample/mainwindow.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DRender/QPointLight \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QMdiSubWindow \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/qmdisubwindow.h \
+		../../widget/plane.h \
+		../../widget/coordinatesystem.h \
 		../../widget/liveplot2.h \
 		../../widget/liveplot.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QLineEdit \
@@ -2713,8 +2715,6 @@ debug/moc_mainwindow.cpp: ../../CAPISample/mainwindow.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QElapsedTimer \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QTimeZone \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QRandomGenerator \
-		../../widget/plane.h \
-		../../widget/coordinatesystem.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QFileDialog \
 		debug/moc_predefs.h \
 		C:/Qt/5.15.2/mingw81_64/bin/moc.exe
@@ -3497,6 +3497,8 @@ debug/moc_robotdraw.cpp: ../../CAPISample/robotdraw.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DRender/QPointLight \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QMdiSubWindow \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/qmdisubwindow.h \
+		../../widget/plane.h \
+		../../widget/coordinatesystem.h \
 		../../widget/liveplot2.h \
 		../../widget/liveplot.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QMainWindow \
@@ -3668,8 +3670,6 @@ debug/moc_robotdraw.cpp: ../../CAPISample/robotdraw.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QElapsedTimer \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QTimeZone \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QRandomGenerator \
-		../../widget/plane.h \
-		../../widget/coordinatesystem.h \
 		../../melfaRobots/robot.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtNetwork/QTcpSocket \
 		../../CAPISample/letters.h \
@@ -4357,6 +4357,8 @@ debug/moc_robotdrawui.cpp: ../../CAPISample/robotdrawui.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DRender/QPointLight \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QMdiSubWindow \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/qmdisubwindow.h \
+		../../widget/plane.h \
+		../../widget/coordinatesystem.h \
 		../../widget/liveplot2.h \
 		../../widget/liveplot.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QLineEdit \
@@ -4525,8 +4527,6 @@ debug/moc_robotdrawui.cpp: ../../CAPISample/robotdrawui.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QElapsedTimer \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QTimeZone \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QRandomGenerator \
-		../../widget/plane.h \
-		../../widget/coordinatesystem.h \
 		../../melfaRobots/robot.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtNetwork/QTcpSocket \
 		../../CAPISample/letters.h \
@@ -5245,6 +5245,8 @@ debug/draw.o: ../../CAPISample/draw.cpp ../../CAPISample/draw.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DRender/QPointLight \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QMdiSubWindow \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/qmdisubwindow.h \
+		../../widget/plane.h \
+		../../widget/coordinatesystem.h \
 		../../widget/liveplot2.h \
 		../../widget/liveplot.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QMainWindow \
@@ -5416,8 +5418,6 @@ debug/draw.o: ../../CAPISample/draw.cpp ../../CAPISample/draw.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QElapsedTimer \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QTimeZone \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QRandomGenerator \
-		../../widget/plane.h \
-		../../widget/coordinatesystem.h \
 		../../melfaRobots/robot.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtNetwork/QTcpSocket \
 		../../CAPISample/letters.h \
@@ -6106,6 +6106,8 @@ debug/drawletters.o: ../../CAPISample/drawletters.cpp ../../CAPISample/drawlette
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DRender/QPointLight \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QMdiSubWindow \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/qmdisubwindow.h \
+		../../widget/plane.h \
+		../../widget/coordinatesystem.h \
 		../../widget/liveplot2.h \
 		../../widget/liveplot.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QLineEdit \
@@ -6274,8 +6276,6 @@ debug/drawletters.o: ../../CAPISample/drawletters.cpp ../../CAPISample/drawlette
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QElapsedTimer \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QTimeZone \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QRandomGenerator \
-		../../widget/plane.h \
-		../../widget/coordinatesystem.h \
 		../../melfaRobots/robot.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtNetwork/QTcpSocket \
 		../../CAPISample/letters.h \
@@ -7054,6 +7054,8 @@ debug/main.o: ../../CAPISample/main.cpp ../../CAPISample/mainwindow.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DRender/QPointLight \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QMdiSubWindow \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/qmdisubwindow.h \
+		../../widget/plane.h \
+		../../widget/coordinatesystem.h \
 		../../widget/liveplot2.h \
 		../../widget/liveplot.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QLineEdit \
@@ -7221,8 +7223,6 @@ debug/main.o: ../../CAPISample/main.cpp ../../CAPISample/mainwindow.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QElapsedTimer \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QTimeZone \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QRandomGenerator \
-		../../widget/plane.h \
-		../../widget/coordinatesystem.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QFileDialog \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QApplication \
 		../../widget/linearaxisrv6sl.h \
@@ -7941,6 +7941,8 @@ debug/mainwindow.o: ../../CAPISample/mainwindow.cpp ../../CAPISample/mainwindow.
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DRender/QPointLight \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QMdiSubWindow \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/qmdisubwindow.h \
+		../../widget/plane.h \
+		../../widget/coordinatesystem.h \
 		../../widget/liveplot2.h \
 		../../widget/liveplot.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QLineEdit \
@@ -8108,8 +8110,6 @@ debug/mainwindow.o: ../../CAPISample/mainwindow.cpp ../../CAPISample/mainwindow.
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QElapsedTimer \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QTimeZone \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QRandomGenerator \
-		../../widget/plane.h \
-		../../widget/coordinatesystem.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QFileDialog \
 		../../CAPISample/ui_mainwindow.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QApplication \
@@ -8980,6 +8980,8 @@ debug/robotdraw.o: ../../CAPISample/robotdraw.cpp ../../CAPISample/robotdraw.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DRender/QPointLight \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QMdiSubWindow \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/qmdisubwindow.h \
+		../../widget/plane.h \
+		../../widget/coordinatesystem.h \
 		../../widget/liveplot2.h \
 		../../widget/liveplot.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QMainWindow \
@@ -9151,8 +9153,6 @@ debug/robotdraw.o: ../../CAPISample/robotdraw.cpp ../../CAPISample/robotdraw.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QElapsedTimer \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QTimeZone \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QRandomGenerator \
-		../../widget/plane.h \
-		../../widget/coordinatesystem.h \
 		../../melfaRobots/robot.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtNetwork/QTcpSocket \
 		../../CAPISample/letters.h \
@@ -9838,6 +9838,8 @@ debug/robotdrawui.o: ../../CAPISample/robotdrawui.cpp ../../CAPISample/robotdraw
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DRender/QPointLight \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QMdiSubWindow \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/qmdisubwindow.h \
+		../../widget/plane.h \
+		../../widget/coordinatesystem.h \
 		../../widget/liveplot2.h \
 		../../widget/liveplot.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QLineEdit \
@@ -10006,8 +10008,6 @@ debug/robotdrawui.o: ../../CAPISample/robotdrawui.cpp ../../CAPISample/robotdraw
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QElapsedTimer \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QTimeZone \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QRandomGenerator \
-		../../widget/plane.h \
-		../../widget/coordinatesystem.h \
 		../../melfaRobots/robot.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtNetwork/QTcpSocket \
 		../../CAPISample/letters.h \

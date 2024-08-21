@@ -23,7 +23,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_RobotDrawUi_t {
     QByteArrayData data[31];
-    char stringdata0[670];
+    char stringdata0[668];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -38,36 +38,36 @@ QT_MOC_LITERAL(2, 25, 0), // ""
 QT_MOC_LITERAL(3, 26, 11), // "stopDrawing"
 QT_MOC_LITERAL(4, 38, 16), // "changeTimerSpeed"
 QT_MOC_LITERAL(5, 55, 26), // "on_pushButtonStart_clicked"
-QT_MOC_LITERAL(6, 82, 27), // "on_pushButtonDelete_clicked"
-QT_MOC_LITERAL(7, 110, 31), // "on_timerSpeedSlider_sliderMoved"
-QT_MOC_LITERAL(8, 142, 8), // "position"
-QT_MOC_LITERAL(9, 151, 27), // "on_pushButton_setP1_clicked"
-QT_MOC_LITERAL(10, 179, 27), // "on_pushButton_setP2_clicked"
-QT_MOC_LITERAL(11, 207, 29), // "on_pushButton_addLine_clicked"
-QT_MOC_LITERAL(12, 237, 27), // "on_pushButton_addP1_clicked"
-QT_MOC_LITERAL(13, 265, 29), // "on_pushButton_History_clicked"
-QT_MOC_LITERAL(14, 295, 15), // "widgetDrawPoint"
-QT_MOC_LITERAL(15, 311, 5), // "point"
-QT_MOC_LITERAL(16, 317, 9), // "thickness"
-QT_MOC_LITERAL(17, 327, 5), // "color"
-QT_MOC_LITERAL(18, 333, 31), // "on_pushButton_addCircle_clicked"
-QT_MOC_LITERAL(19, 365, 26), // "on_pushButton_draw_clicked"
-QT_MOC_LITERAL(20, 392, 34), // "on_spinBox_letterSize_valueCh..."
-QT_MOC_LITERAL(21, 427, 4), // "arg1"
-QT_MOC_LITERAL(22, 432, 33), // "on_horizontalSlider_x_sliderM..."
-QT_MOC_LITERAL(23, 466, 33), // "on_horizontalSlider_y_sliderM..."
-QT_MOC_LITERAL(24, 500, 33), // "on_horizontalSlider_z_sliderM..."
-QT_MOC_LITERAL(25, 534, 36), // "on_horizontalSlider_xRot_slid..."
-QT_MOC_LITERAL(26, 571, 36), // "on_horizontalSlider_yRot_slid..."
-QT_MOC_LITERAL(27, 608, 36), // "on_horizontalSlider_zRot_slid..."
-QT_MOC_LITERAL(28, 645, 14), // "drawLineWidget"
-QT_MOC_LITERAL(29, 660, 5), // "start"
-QT_MOC_LITERAL(30, 666, 3) // "end"
+QT_MOC_LITERAL(6, 82, 25), // "on_pushButtonStop_clicked"
+QT_MOC_LITERAL(7, 108, 31), // "on_timerSpeedSlider_sliderMoved"
+QT_MOC_LITERAL(8, 140, 8), // "position"
+QT_MOC_LITERAL(9, 149, 27), // "on_pushButton_setP1_clicked"
+QT_MOC_LITERAL(10, 177, 27), // "on_pushButton_setP2_clicked"
+QT_MOC_LITERAL(11, 205, 29), // "on_pushButton_addLine_clicked"
+QT_MOC_LITERAL(12, 235, 27), // "on_pushButton_addP1_clicked"
+QT_MOC_LITERAL(13, 263, 29), // "on_pushButton_History_clicked"
+QT_MOC_LITERAL(14, 293, 15), // "widgetDrawPoint"
+QT_MOC_LITERAL(15, 309, 5), // "point"
+QT_MOC_LITERAL(16, 315, 9), // "thickness"
+QT_MOC_LITERAL(17, 325, 5), // "color"
+QT_MOC_LITERAL(18, 331, 31), // "on_pushButton_addCircle_clicked"
+QT_MOC_LITERAL(19, 363, 26), // "on_pushButton_draw_clicked"
+QT_MOC_LITERAL(20, 390, 34), // "on_spinBox_letterSize_valueCh..."
+QT_MOC_LITERAL(21, 425, 4), // "arg1"
+QT_MOC_LITERAL(22, 430, 33), // "on_horizontalSlider_x_sliderM..."
+QT_MOC_LITERAL(23, 464, 33), // "on_horizontalSlider_y_sliderM..."
+QT_MOC_LITERAL(24, 498, 33), // "on_horizontalSlider_z_sliderM..."
+QT_MOC_LITERAL(25, 532, 36), // "on_horizontalSlider_xRot_slid..."
+QT_MOC_LITERAL(26, 569, 36), // "on_horizontalSlider_yRot_slid..."
+QT_MOC_LITERAL(27, 606, 36), // "on_horizontalSlider_zRot_slid..."
+QT_MOC_LITERAL(28, 643, 14), // "drawLineWidget"
+QT_MOC_LITERAL(29, 658, 5), // "start"
+QT_MOC_LITERAL(30, 664, 3) // "end"
 
     },
     "RobotDrawUi\0startDrawing\0\0stopDrawing\0"
     "changeTimerSpeed\0on_pushButtonStart_clicked\0"
-    "on_pushButtonDelete_clicked\0"
+    "on_pushButtonStop_clicked\0"
     "on_timerSpeedSlider_sliderMoved\0"
     "position\0on_pushButton_setP1_clicked\0"
     "on_pushButton_setP2_clicked\0"
@@ -166,7 +166,7 @@ void RobotDrawUi::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 1: _t->stopDrawing(); break;
         case 2: _t->changeTimerSpeed((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 3: _t->on_pushButtonStart_clicked(); break;
-        case 4: _t->on_pushButtonDelete_clicked(); break;
+        case 4: _t->on_pushButtonStop_clicked(); break;
         case 5: _t->on_timerSpeedSlider_sliderMoved((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 6: _t->on_pushButton_setP1_clicked(); break;
         case 7: _t->on_pushButton_setP2_clicked(); break;

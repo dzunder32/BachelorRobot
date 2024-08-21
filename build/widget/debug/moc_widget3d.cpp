@@ -23,8 +23,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Widget3D_t {
-    QByteArrayData data[17];
-    char stringdata0[187];
+    QByteArrayData data[18];
+    char stringdata0[199];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -39,21 +39,22 @@ QT_MOC_LITERAL(2, 19, 0), // ""
 QT_MOC_LITERAL(3, 20, 15), // "QVector<double>"
 QT_MOC_LITERAL(4, 36, 6), // "values"
 QT_MOC_LITERAL(5, 43, 10), // "updatePlt2"
-QT_MOC_LITERAL(6, 54, 11), // "getToolData"
-QT_MOC_LITERAL(7, 66, 14), // "getPolarisData"
-QT_MOC_LITERAL(8, 81, 9), // "drawPoint"
-QT_MOC_LITERAL(9, 91, 8), // "position"
-QT_MOC_LITERAL(10, 100, 4), // "size"
-QT_MOC_LITERAL(11, 105, 5), // "color"
-QT_MOC_LITERAL(12, 111, 15), // "deleteAllPoints"
-QT_MOC_LITERAL(13, 127, 14), // "deleteAllLines"
-QT_MOC_LITERAL(14, 142, 24), // "addCylinderBetweenPoints"
-QT_MOC_LITERAL(15, 167, 10), // "startPoint"
-QT_MOC_LITERAL(16, 178, 8) // "endPoint"
+QT_MOC_LITERAL(6, 54, 11), // "updatePlane"
+QT_MOC_LITERAL(7, 66, 11), // "getToolData"
+QT_MOC_LITERAL(8, 78, 14), // "getPolarisData"
+QT_MOC_LITERAL(9, 93, 9), // "drawPoint"
+QT_MOC_LITERAL(10, 103, 8), // "position"
+QT_MOC_LITERAL(11, 112, 4), // "size"
+QT_MOC_LITERAL(12, 117, 5), // "color"
+QT_MOC_LITERAL(13, 123, 15), // "deleteAllPoints"
+QT_MOC_LITERAL(14, 139, 14), // "deleteAllLines"
+QT_MOC_LITERAL(15, 154, 24), // "addCylinderBetweenPoints"
+QT_MOC_LITERAL(16, 179, 10), // "startPoint"
+QT_MOC_LITERAL(17, 190, 8) // "endPoint"
 
     },
     "Widget3D\0updatePlt\0\0QVector<double>\0"
-    "values\0updatePlt2\0getToolData\0"
+    "values\0updatePlt2\0updatePlane\0getToolData\0"
     "getPolarisData\0drawPoint\0position\0"
     "size\0color\0deleteAllPoints\0deleteAllLines\0"
     "addCylinderBetweenPoints\0startPoint\0"
@@ -67,36 +68,38 @@ static const uint qt_meta_data_Widget3D[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       8,   14, // methods
+       9,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       2,       // signalCount
+       3,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   54,    2, 0x06 /* Public */,
-       5,    1,   57,    2, 0x06 /* Public */,
+       1,    1,   59,    2, 0x06 /* Public */,
+       5,    1,   62,    2, 0x06 /* Public */,
+       6,    0,   65,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       6,    1,   60,    2, 0x0a /* Public */,
-       7,    1,   63,    2, 0x0a /* Public */,
-       8,    3,   66,    2, 0x0a /* Public */,
-      12,    0,   73,    2, 0x0a /* Public */,
-      13,    0,   74,    2, 0x0a /* Public */,
-      14,    2,   75,    2, 0x0a /* Public */,
+       7,    1,   66,    2, 0x0a /* Public */,
+       8,    1,   69,    2, 0x0a /* Public */,
+       9,    3,   72,    2, 0x0a /* Public */,
+      13,    0,   79,    2, 0x0a /* Public */,
+      14,    0,   80,    2, 0x0a /* Public */,
+      15,    2,   81,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3,    4,
     QMetaType::Void, 0x80000000 | 3,    4,
+    QMetaType::Void,
 
  // slots: parameters
     QMetaType::Void, 0x80000000 | 3,    2,
     QMetaType::Void, 0x80000000 | 3,    2,
-    QMetaType::Void, QMetaType::QVector3D, QMetaType::Float, QMetaType::QColor,    9,   10,   11,
+    QMetaType::Void, QMetaType::QVector3D, QMetaType::Float, QMetaType::QColor,   10,   11,   12,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QVector3D, QMetaType::QVector3D,   15,   16,
+    QMetaType::Void, QMetaType::QVector3D, QMetaType::QVector3D,   16,   17,
 
        0        // eod
 };
@@ -109,12 +112,13 @@ void Widget3D::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         switch (_id) {
         case 0: _t->updatePlt((*reinterpret_cast< QVector<double>(*)>(_a[1]))); break;
         case 1: _t->updatePlt2((*reinterpret_cast< QVector<double>(*)>(_a[1]))); break;
-        case 2: _t->getToolData((*reinterpret_cast< QVector<double>(*)>(_a[1]))); break;
-        case 3: _t->getPolarisData((*reinterpret_cast< QVector<double>(*)>(_a[1]))); break;
-        case 4: _t->drawPoint((*reinterpret_cast< QVector3D(*)>(_a[1])),(*reinterpret_cast< float(*)>(_a[2])),(*reinterpret_cast< QColor(*)>(_a[3]))); break;
-        case 5: _t->deleteAllPoints(); break;
-        case 6: _t->deleteAllLines(); break;
-        case 7: _t->addCylinderBetweenPoints((*reinterpret_cast< const QVector3D(*)>(_a[1])),(*reinterpret_cast< const QVector3D(*)>(_a[2]))); break;
+        case 2: _t->updatePlane(); break;
+        case 3: _t->getToolData((*reinterpret_cast< QVector<double>(*)>(_a[1]))); break;
+        case 4: _t->getPolarisData((*reinterpret_cast< QVector<double>(*)>(_a[1]))); break;
+        case 5: _t->drawPoint((*reinterpret_cast< QVector3D(*)>(_a[1])),(*reinterpret_cast< float(*)>(_a[2])),(*reinterpret_cast< QColor(*)>(_a[3]))); break;
+        case 6: _t->deleteAllPoints(); break;
+        case 7: _t->deleteAllLines(); break;
+        case 8: _t->addCylinderBetweenPoints((*reinterpret_cast< const QVector3D(*)>(_a[1])),(*reinterpret_cast< const QVector3D(*)>(_a[2]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -134,14 +138,14 @@ void Widget3D::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
                 *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QVector<double> >(); break;
             }
             break;
-        case 2:
+        case 3:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 0:
                 *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QVector<double> >(); break;
             }
             break;
-        case 3:
+        case 4:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 0:
@@ -162,6 +166,13 @@ void Widget3D::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
             using _t = void (Widget3D::*)(QVector<double> );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&Widget3D::updatePlt2)) {
                 *result = 1;
+                return;
+            }
+        }
+        {
+            using _t = void (Widget3D::*)();
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&Widget3D::updatePlane)) {
+                *result = 2;
                 return;
             }
         }
@@ -197,13 +208,13 @@ int Widget3D::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 8)
+        if (_id < 9)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 8;
+        _id -= 9;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 8)
+        if (_id < 9)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 8;
+        _id -= 9;
     }
     return _id;
 }
@@ -220,6 +231,12 @@ void Widget3D::updatePlt2(QVector<double> _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
     QMetaObject::activate(this, &staticMetaObject, 1, _a);
+}
+
+// SIGNAL 2
+void Widget3D::updatePlane()
+{
+    QMetaObject::activate(this, &staticMetaObject, 2, nullptr);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

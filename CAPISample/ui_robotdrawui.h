@@ -76,7 +76,7 @@ public:
     QHBoxLayout *horizontalLayout_3;
     QPushButton *pushButton_History;
     QPushButton *pushButtonStart;
-    QPushButton *pushButtonDelete;
+    QPushButton *pushButtonStop;
     QMenuBar *menubar;
     QStatusBar *statusbar;
     QToolBar *toolBar;
@@ -317,10 +317,10 @@ public:
 
         horizontalLayout_3->addWidget(pushButtonStart);
 
-        pushButtonDelete = new QPushButton(centralwidget);
-        pushButtonDelete->setObjectName(QString::fromUtf8("pushButtonDelete"));
+        pushButtonStop = new QPushButton(centralwidget);
+        pushButtonStop->setObjectName(QString::fromUtf8("pushButtonStop"));
 
-        horizontalLayout_3->addWidget(pushButtonDelete);
+        horizontalLayout_3->addWidget(pushButtonStop);
 
 
         verticalLayout_3->addLayout(horizontalLayout_3);
@@ -371,7 +371,7 @@ public:
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Robot Sequence:</p></body></html>", nullptr));
         pushButton_History->setText(QCoreApplication::translate("RobotDrawUi", "previous Sequence", nullptr));
         pushButtonStart->setText(QCoreApplication::translate("RobotDrawUi", "Start", nullptr));
-        pushButtonDelete->setText(QCoreApplication::translate("RobotDrawUi", "Stop", nullptr));
+        pushButtonStop->setText(QCoreApplication::translate("RobotDrawUi", "Stop", nullptr));
         toolBar->setWindowTitle(QCoreApplication::translate("RobotDrawUi", "toolBar", nullptr));
     } // retranslateUi
 

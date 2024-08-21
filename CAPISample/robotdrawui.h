@@ -19,7 +19,7 @@ public:
 private slots:
     void on_pushButtonStart_clicked();
 
-    void on_pushButtonDelete_clicked();
+    void on_pushButtonStop_clicked();
 
     void on_timerSpeedSlider_sliderMoved(int position);
 
@@ -69,16 +69,13 @@ private:
     QString historyText;
     bool preview_isDrawn = false;
     void insertRobotSequenceText(QString str);
-    void initBuffers();
-    // void setTimerSpeed(int time_ms);
-    // void increaseTimerSpeed(float factor);
+
 signals:
     void startDrawing();
     void stopDrawing();
     void changeTimerSpeed(int);
+
 public slots:
-    // void startDrawTimer();
-    // void stopDrawTimer();
     void drawLineWidget(QVector3D start,QVector3D end){_widget3d->addCylinderBetweenPoints(start,end);}
 };
 

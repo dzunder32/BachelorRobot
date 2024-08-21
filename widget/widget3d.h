@@ -74,12 +74,14 @@ private:
     LivePlot* livePlot;
     LivePlot2* livePlot2;
     QVector<Qt3DCore::QEntity*> pointEntities,lineEntities;
+    int updateCounter=0;
 
     double roundDecimalPlaces(double val);
     void setDecimalPlaces(int val);
 signals:
     void updatePlt(QVector <double> values);
     void updatePlt2(QVector <double> values);
+    void updatePlane();
 
 };
 

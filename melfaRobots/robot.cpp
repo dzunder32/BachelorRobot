@@ -385,7 +385,7 @@ void Robot::_alternativeCommand(QString command)
     command.remove(0,4);
     if(command=="PositionChanged")
     {
-        qDebug()<<_position;
+        qDebug()<<"position"<<_position;
         if(_position!=nullptr){
             qDebug()<<"reached the position!";
             _position->Reached();}

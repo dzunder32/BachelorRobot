@@ -56,10 +56,9 @@ void RobotPosition::WaitForPositionReached()
     {
         if(oneshot){
             qDebug()<<"waiting for position to get Reached";
-            qDebug()<<"This thread is waiting:"<<QThread::currentThreadId();
+            qDebug()<<"waiting Thread:"<<QThread::currentThreadId();
             oneshot = false;
         }
-
     }
     qDebug()<<"position Reached!";
 }

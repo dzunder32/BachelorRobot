@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_RobotDraw_t {
-    QByteArrayData data[15];
-    char stringdata0[138];
+    QByteArrayData data[16];
+    char stringdata0[158];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -46,13 +46,15 @@ QT_MOC_LITERAL(10, 84, 13), // "stopDrawTimer"
 QT_MOC_LITERAL(11, 98, 12), // "setTimerTime"
 QT_MOC_LITERAL(12, 111, 2), // "ms"
 QT_MOC_LITERAL(13, 114, 16), // "changeTimerSpeed"
-QT_MOC_LITERAL(14, 131, 6) // "factor"
+QT_MOC_LITERAL(14, 131, 6), // "factor"
+QT_MOC_LITERAL(15, 138, 19) // "UpdatePlanePosition"
 
     },
     "RobotDraw\0drawLine\0\0start\0end\0"
     "drawPoint_Widget\0point\0thickness\0color\0"
     "startDrawTimer\0stopDrawTimer\0setTimerTime\0"
-    "ms\0changeTimerSpeed\0factor"
+    "ms\0changeTimerSpeed\0factor\0"
+    "UpdatePlanePosition"
 };
 #undef QT_MOC_LITERAL
 
@@ -62,7 +64,7 @@ static const uint qt_meta_data_RobotDraw[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       6,   14, // methods
+       7,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -70,14 +72,15 @@ static const uint qt_meta_data_RobotDraw[] = {
        2,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    2,   44,    2, 0x06 /* Public */,
-       5,    3,   49,    2, 0x06 /* Public */,
+       1,    2,   49,    2, 0x06 /* Public */,
+       5,    3,   54,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       9,    0,   56,    2, 0x0a /* Public */,
-      10,    0,   57,    2, 0x0a /* Public */,
-      11,    1,   58,    2, 0x0a /* Public */,
-      13,    1,   61,    2, 0x0a /* Public */,
+       9,    0,   61,    2, 0x0a /* Public */,
+      10,    0,   62,    2, 0x0a /* Public */,
+      11,    1,   63,    2, 0x0a /* Public */,
+      13,    1,   66,    2, 0x0a /* Public */,
+      15,    0,   69,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::QVector3D, QMetaType::QVector3D,    3,    4,
@@ -88,6 +91,7 @@ static const uint qt_meta_data_RobotDraw[] = {
     QMetaType::Void,
     QMetaType::Void, QMetaType::Int,   12,
     QMetaType::Void, QMetaType::Float,   14,
+    QMetaType::Void,
 
        0        // eod
 };
@@ -104,6 +108,7 @@ void RobotDraw::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         case 3: _t->stopDrawTimer(); break;
         case 4: _t->setTimerTime((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 5: _t->changeTimerSpeed((*reinterpret_cast< float(*)>(_a[1]))); break;
+        case 6: _t->UpdatePlanePosition(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -154,13 +159,13 @@ int RobotDraw::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 6)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 6;
+        _id -= 7;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 6)
+        if (_id < 7)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 6;
+        _id -= 7;
     }
     return _id;
 }

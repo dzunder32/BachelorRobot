@@ -87,13 +87,13 @@ int main(int argc, char *argv[])
     CoordinateSystem *position=new CoordinateSystem;
     position->setLength(100);
     position->setNegativeAxis(false);
-    widget3d->addObject(position,QVector3D(790,100,800),QQuaternion(1,0,0,0)/*QQuaternion::fromAxisAndAngle(QVector3D(0,0,1),140)**//**//*QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180)*/);
+    widget3d->addObject(position,QVector3D(800,300,730),/*QQuaternion(1,0,0,0) * */QQuaternion::fromAxisAndAngle(QVector3D(0,0,1),45)/**//*QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180)*/);
     widget3d->setPosMatrix(static_cast<Qt3DCore::QTransform*>(position->components()[1]));
 
     //Ebene zu Zeichnen
-    Plane *plane = new Plane(600.0,800.0);
+    Plane *plane = new Plane(650.0,850.0);
     widget3d->addObject(plane);
-    widget3d->addTransTool(plane);
+    widget3d->addPlane(plane);
     plane->setTranslation(linAxis2->sled_position+QVector3D(0,800,500));
     plane->setRotation(QQuaternion::fromEulerAngles(QVector3D(90,0,0)) /** QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),130)*/);
 

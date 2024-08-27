@@ -183,6 +183,7 @@ void RobotDrawUi::on_pushButton_addCircle_clicked()
     circleList.append(P1);
     circleList.append(QVector2D(0,360));
     insertRobotSequenceText("Circle: r=" + QString::number(radius) + " center: (" + P1X_Str + ", " + P1Y_Str + ")");
+    _robDraw->AddLine2Buffer(QVector3D(P1.x()+radius,P1.y(),0),QVector3D(P1.x()+radius,P1.y(),0));
     _robDraw->AddCircle2Buffer(circleList);
 }
 
@@ -194,6 +195,7 @@ void RobotDrawUi::on_pushButton_draw_clicked()
     _widget3d->deleteAllPoints();
     _robDraw->resetShiftVector();
     _robDraw->clearBuffers();
+    ui->textEdit_Sequence->setText("RobotSequence:");
     QString textInput = ui->textEdit_textInput->toPlainText();
     qDebug()<<textInput;
     if(ui->radioButton_grid->isChecked())

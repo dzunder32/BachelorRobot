@@ -4,7 +4,7 @@
 #include <QObject>
 #include<Qt3DCore>
 #include <Qt3DExtras>
-#include <widget3d.h>
+//#include <widget3d.h>
 #include "coordinatesystem.h"
 
 

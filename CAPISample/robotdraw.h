@@ -13,9 +13,10 @@
 #include <QMatrix4x4>
 #include <QVector4D>
 
-#define POINT 1
-#define LINE 2
+#define POINT  1
+#define LINE   2
 #define CIRCLE 3
+#define MOVE   4
 
 class RobotDraw : public QObject
 {

@@ -210,7 +210,7 @@ void RobotDraw::robot_moveCircular(QVector <QVector2D> circlePoints)
 
     for(QVector2D point: circlePoints)
     {
-        QVector3D pointRobot = Plane2RobotPoint(point.toVector3D());
+        QVector3D pointRobot = Plane2RobotPoint(point.toVector3D() );
         _robotKinematik->RobotPosition::setPoint(pointRobot.x(),
                                                  pointRobot.y(),
                                                  pointRobot.z(),
@@ -234,6 +234,7 @@ void RobotDraw::PlanePositionChanged()
 
 void RobotDraw::UpdatePlanePosition()
 {
+    emit test_deleteLater();
 //    rotation_plane = _plane->matrix();
 //    rotation_plane.setColumn(3,QVector4D(0,0,0,1));
     planeRobot_T = robotMat.inverted() * _plane->matrix();

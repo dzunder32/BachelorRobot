@@ -23,6 +23,8 @@ RobotDrawUi::RobotDrawUi(Kinematik *robotKinematik,Robot *robot, QVector3D sled_
     connect(this,&RobotDrawUi::startDrawing,_robDraw,&RobotDraw::startDrawTimer);
     connect(this,&RobotDrawUi::stopDrawing,_robDraw,&RobotDraw::stopDrawTimer);
     connect(this,&RobotDrawUi::changeTimerSpeed,_robDraw,&RobotDraw::setTimerTime);
+    connect(_robDraw, &RobotDraw::test_deleteLater,this,&RobotDrawUi::test);
+    test();
 
     robotThread.start();
 }
@@ -32,6 +34,12 @@ RobotDrawUi::~RobotDrawUi()
     robotThread.quit();
     robotThread.wait();
     delete ui;
+}
+
+void RobotDrawUi::test()
+{
+    counter_deleteLater++;
+    ui->textEdit_textInput->setText("worked!!: "+ QString::number(counter_deleteLater) +"/" +QString::number(_widget3d->sum_T)+"/" +QString::number(_widget3d->updateCounter));
 }
 
 void RobotDrawUi::on_pushButtonStart_clicked()

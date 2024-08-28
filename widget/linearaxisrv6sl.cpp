@@ -6,7 +6,9 @@ LinearAxisRV6SL::LinearAxisRV6SL(Qt3DCore::QEntity* parent)
     this->addComponent(static_cast<Qt3DCore::QTransform*>(this));
     _substructure=new STLMesh(this);
     _substructure->setRotationX(-90);
-    _substructure->setTranslation(QVector3D(-188,0,50));
+        // _substructure->setTranslation(QVector3D(-188,0,50));
+                                            // X, Z, Y
+    _substructure->setTranslation(QVector3D(-28,-10.92,48.8));
     _substructure->setSource("UnterbauRV-6SL.STL");
     _substructure->Qt3DCore::QEntity::setEnabled(true);
     //Linearachse

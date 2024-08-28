@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
 
     //Welt-Koordinatensystem im Raum --------------------------------------------------------------------------------
     CoordinateSystem *coordSystem=new CoordinateSystem();
-    coordSystem->setLength(6000);
+    coordSystem->setLength(3000);
     coordSystem->setNegativeAxis(true);
     widget3d->addObject(coordSystem,QVector3D(0,0,0),QQuaternion(0,0,0,0));
 
@@ -69,6 +69,7 @@ int main(int argc, char *argv[])
     robot2->addTool(penHolder);
     robot2->addLinearAxis(linAxis2);
 
+
     qDebug()<<"pen!"<<*static_cast<QMatrix4x4*>(penHolder);
     robot2Kinematik->setTool(*static_cast<QMatrix4x4*>(penHolder));
     linAxis2->set_sled_position(linAxis2->rotation().toRotationMatrix());
@@ -83,11 +84,44 @@ int main(int argc, char *argv[])
     widget3d->addObject(polaris);
     widget3d->addTransPolaris(polaris);
 
+
+
+//     CoordinateSystem *CSystem=new CoordinateSystem();
+//     CSystem->setLength(100);
+//     CSystem->setNegativeAxis(false);
+//     CSystem->setTranslation(QVector3D(0,100,1000));
+
+//     STLMesh* toolMesh= new STLMesh(CSystem);
+//     toolMesh->setSource("RefTool_C.STL");
+//     toolMesh->setRotationZ(90);
+////     toolMesh->setTranslation(QVector3D(-8.77,62.5,-7));
+//     toolMesh->setTranslation(QVector3D(-8.77,-72.5,-7));
+
+////     CSystem->setRotationZ(90);
+////     toolMesh->setRotationX(180);
+//     widget3d->addObject(CSystem);
+
+//    Tool *refTool = new Tool;
+//    STLMesh *refToolMesh = new STLMesh(refTool);
+//    refToolMesh->setSource("RefTool.STL");
+//    refToolMesh->Qt3DCore::QEntity::setEnabled(true);
+//    refToolMesh->setRotationX()
+//    refTool->setTranslation(QVector3D(0,0,1000));
+//    widget3d->addObject(refTool);
+
     //Position des Polaris-Tools
     CoordinateSystem *position=new CoordinateSystem;
     position->setLength(100);
     position->setNegativeAxis(false);
-    widget3d->addObject(position,QVector3D(800,300,730),/*QQuaternion(1,0,0,0) * */QQuaternion::fromAxisAndAngle(QVector3D(0,0,1),45)/**//*QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180)*/);
+    //Mesh des Referenz Tools
+    STLMesh* toolMesh= new STLMesh(position);
+    toolMesh->setSource("RefTool_C.STL");
+    toolMesh->setRotationZ(90);
+    toolMesh->setTranslation(QVector3D(-8.77,-72.5,-7));
+    //Pos 1
+    widget3d->addObject(position,QVector3D(980,380,712),/*QQuaternion(1,0,0,0) * */QQuaternion::fromAxisAndAngle(QVector3D(0,0,1),45)/**//*QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180)*/);
+    //Pos 2
+    // widget3d->addObject(position,QVector3D(1360,360,712),/*QQuaternion(1,0,0,0) * */QQuaternion::fromAxisAndAngle(QVector3D(0,0,1),45)/**//*QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180)*/);
     widget3d->setPosMatrix(static_cast<Qt3DCore::QTransform*>(position->components()[1]));
 
     //Ebene zu Zeichnen

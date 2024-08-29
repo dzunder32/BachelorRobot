@@ -24,7 +24,7 @@ public:
     RobotDraw(Kinematik *robotKinematik,Robot *robot, QVector3D sled_pos,Plane* plane, Widget3D *widget3d);
     QTimer *_timer = new QTimer(this);
     int prev_timerTime;
-    int planeCounter = 0;
+    // int planeCounter = 0;
 
     //    void setTimerTime(int time_ms){_timer->setInterval(time_ms);}
     void stopTimer_goHome();
@@ -42,7 +42,8 @@ public:
     void initLetterSize(float sizeFactor);
     void drawGrid();
     void clearBuffers(){CircleBuffer.clear();PointsBuffer.clear();LinesBuffer.clear();robotSequence.clear();line_isTrue=false;}
-    void PlanePositionChanged();
+    // void PlanePositionChanged();
+    void UpdatePlanePosition();
 
 private:
     Letters   *_letters;
@@ -113,12 +114,12 @@ public slots:
     void stopDrawTimer(){_timer->stop();}
     void setTimerTime(int ms){_timer->setInterval(ms);last_timerTime = ms;}
     void changeTimerSpeed(float factor){_timer->setInterval(last_timerTime * factor);}
-    void UpdatePlanePosition();
 
 signals:
 //    void changeTimerSpeed(float factor);
     void drawLine(QVector3D start,QVector3D end);
     void drawPoint_Widget(QVector3D point , float thickness, QColor color);
+    void test_deleteLater();
 
 };
 

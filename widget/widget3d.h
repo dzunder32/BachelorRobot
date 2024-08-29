@@ -40,6 +40,9 @@ public:
     QWidget *getQWidget() const;
     QVector <double> meanVector(QVector <QVector <double>> &vec,QVector <double> data);
 
+    float sum_T;
+    int updateCounter=0;
+
     void setFileName(QString name);
     void setViewCenter(QVector3D point);
 
@@ -70,11 +73,11 @@ private:
     int meanVal=20,decimalPlaces;
     QVector <QVector <double>> PolarisVals,ToolVals;
     QVector <double> meanDataT=QVector <double>(meanVal,0),meanDataP=QVector <double>(meanVal,0);
-    QMatrix4x4 ToolMatrix,PolarisMatrix;
+    QMatrix4x4 ToolMatrix,PolarisMatrix,T_plane;
     LivePlot* livePlot;
     LivePlot2* livePlot2;
     QVector<Qt3DCore::QEntity*> pointEntities,lineEntities;
-    int updateCounter=0;
+
 
     double roundDecimalPlaces(double val);
     void setDecimalPlaces(int val);

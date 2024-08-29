@@ -58,6 +58,9 @@ Widget3D::Widget3D(QWidget *parent) : QWidget(parent)
         connect(livePlot,&LivePlot::sendDataExtract50,livePlot2,&LivePlot2::getDataExtract50);
     }
 
+
+
+
     ToolVals=QVector <QVector <double>>(meanVal,QVector <double>(7,0));
     PolarisVals=ToolVals;
 
@@ -129,13 +132,36 @@ void Widget3D::setPosMatrix(Qt3DCore::QTransform *pos)
 void Widget3D::getToolData(QVector <double> data)
 {
     ToolMatrix = DataMatrix(ToolVals,data);
-    _plane->setMatrix(trans_polaris->matrix()*ToolMatrix);
-//    drawPoint(_plane->translation(),10,QColor(255,0,0));
-    planeToolTransform->setTranslation(_plane->translation());
+    // QMatrix4x4 temp_T_plane =  trans_polaris->matrix()*ToolMatrix;
+    T_plane =  trans_polaris->matrix()*ToolMatrix;
+    _plane->setMatrix(T_plane);
+     planeToolTransform->setTranslation(_plane->translation());
     _plane->setTranslation(_plane->translation() + _plane->matrix().column(0).toVector3D() * _plane->xLimit/2);
-//    trans_tool->setMatrix(trans_polaris->matrix()*ToolMatrix);
-    if(updateCounter % 30){emit updatePlane();updateCounter=0;}
-    updateCounter++;
+
+     // emit updatePlane();
+    //check weather the matrix has changed
+//    float sum_T;
+    // QMatrix4x4 subtaction_T = temp_T_plane - T_plane;
+
+    // for (int i=0;i<4;i++){
+    //     for (int k=0;k<4;k++){
+    //         sum_T += abs(subtaction_T(i,k));
+    //     }
+    // }
+
+    // if(sum_T>1)
+    // {
+
+    //     T_plane = temp_T_plane;
+    //     _plane->setMatrix(T_plane);
+    //     planeToolTransform->setTranslation(_plane->translation());
+    //     _plane->setTranslation(_plane->translation() + _plane->matrix().column(0).toVector3D() * _plane->xLimit/2);
+    //     emit updatePlane();
+    // }
+    // sum_T=0;
+    // //
+    // if(updateCounter == 30){updateCounter=0;emit updatePlane();}
+    // updateCounter++;
 
 }
 

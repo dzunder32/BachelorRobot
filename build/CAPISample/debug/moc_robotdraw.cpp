@@ -23,7 +23,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_RobotDraw_t {
     QByteArrayData data[16];
-    char stringdata0[158];
+    char stringdata0[155];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -41,20 +41,20 @@ QT_MOC_LITERAL(5, 30, 16), // "drawPoint_Widget"
 QT_MOC_LITERAL(6, 47, 5), // "point"
 QT_MOC_LITERAL(7, 53, 9), // "thickness"
 QT_MOC_LITERAL(8, 63, 5), // "color"
-QT_MOC_LITERAL(9, 69, 14), // "startDrawTimer"
-QT_MOC_LITERAL(10, 84, 13), // "stopDrawTimer"
-QT_MOC_LITERAL(11, 98, 12), // "setTimerTime"
-QT_MOC_LITERAL(12, 111, 2), // "ms"
-QT_MOC_LITERAL(13, 114, 16), // "changeTimerSpeed"
-QT_MOC_LITERAL(14, 131, 6), // "factor"
-QT_MOC_LITERAL(15, 138, 19) // "UpdatePlanePosition"
+QT_MOC_LITERAL(9, 69, 16), // "test_deleteLater"
+QT_MOC_LITERAL(10, 86, 14), // "startDrawTimer"
+QT_MOC_LITERAL(11, 101, 13), // "stopDrawTimer"
+QT_MOC_LITERAL(12, 115, 12), // "setTimerTime"
+QT_MOC_LITERAL(13, 128, 2), // "ms"
+QT_MOC_LITERAL(14, 131, 16), // "changeTimerSpeed"
+QT_MOC_LITERAL(15, 148, 6) // "factor"
 
     },
     "RobotDraw\0drawLine\0\0start\0end\0"
     "drawPoint_Widget\0point\0thickness\0color\0"
-    "startDrawTimer\0stopDrawTimer\0setTimerTime\0"
-    "ms\0changeTimerSpeed\0factor\0"
-    "UpdatePlanePosition"
+    "test_deleteLater\0startDrawTimer\0"
+    "stopDrawTimer\0setTimerTime\0ms\0"
+    "changeTimerSpeed\0factor"
 };
 #undef QT_MOC_LITERAL
 
@@ -69,29 +69,29 @@ static const uint qt_meta_data_RobotDraw[] = {
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       2,       // signalCount
+       3,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
        1,    2,   49,    2, 0x06 /* Public */,
        5,    3,   54,    2, 0x06 /* Public */,
+       9,    0,   61,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       9,    0,   61,    2, 0x0a /* Public */,
       10,    0,   62,    2, 0x0a /* Public */,
-      11,    1,   63,    2, 0x0a /* Public */,
-      13,    1,   66,    2, 0x0a /* Public */,
-      15,    0,   69,    2, 0x0a /* Public */,
+      11,    0,   63,    2, 0x0a /* Public */,
+      12,    1,   64,    2, 0x0a /* Public */,
+      14,    1,   67,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::QVector3D, QMetaType::QVector3D,    3,    4,
     QMetaType::Void, QMetaType::QVector3D, QMetaType::Float, QMetaType::QColor,    6,    7,    8,
+    QMetaType::Void,
 
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,   12,
-    QMetaType::Void, QMetaType::Float,   14,
-    QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,   13,
+    QMetaType::Void, QMetaType::Float,   15,
 
        0        // eod
 };
@@ -104,11 +104,11 @@ void RobotDraw::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         switch (_id) {
         case 0: _t->drawLine((*reinterpret_cast< QVector3D(*)>(_a[1])),(*reinterpret_cast< QVector3D(*)>(_a[2]))); break;
         case 1: _t->drawPoint_Widget((*reinterpret_cast< QVector3D(*)>(_a[1])),(*reinterpret_cast< float(*)>(_a[2])),(*reinterpret_cast< QColor(*)>(_a[3]))); break;
-        case 2: _t->startDrawTimer(); break;
-        case 3: _t->stopDrawTimer(); break;
-        case 4: _t->setTimerTime((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 5: _t->changeTimerSpeed((*reinterpret_cast< float(*)>(_a[1]))); break;
-        case 6: _t->UpdatePlanePosition(); break;
+        case 2: _t->test_deleteLater(); break;
+        case 3: _t->startDrawTimer(); break;
+        case 4: _t->stopDrawTimer(); break;
+        case 5: _t->setTimerTime((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 6: _t->changeTimerSpeed((*reinterpret_cast< float(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -124,6 +124,13 @@ void RobotDraw::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
             using _t = void (RobotDraw::*)(QVector3D , float , QColor );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&RobotDraw::drawPoint_Widget)) {
                 *result = 1;
+                return;
+            }
+        }
+        {
+            using _t = void (RobotDraw::*)();
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&RobotDraw::test_deleteLater)) {
+                *result = 2;
                 return;
             }
         }
@@ -182,6 +189,12 @@ void RobotDraw::drawPoint_Widget(QVector3D _t1, float _t2, QColor _t3)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t2))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t3))) };
     QMetaObject::activate(this, &staticMetaObject, 1, _a);
+}
+
+// SIGNAL 2
+void RobotDraw::test_deleteLater()
+{
+    QMetaObject::activate(this, &staticMetaObject, 2, nullptr);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

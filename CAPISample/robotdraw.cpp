@@ -11,7 +11,6 @@ RobotDraw::RobotDraw(Kinematik *robotKinematik, Robot *robot, QVector3D sled_pos
     _robotKinematik->setJoints(0,0,90,0,90,0,0);
 
     connect(_timer, &QTimer::timeout,this, &RobotDraw::robDraw_onTimeout);
-    connect(_widget3d,&Widget3D::updatePlane,this,&RobotDraw::UpdatePlanePosition);
     qDebug()<<"robotdraw cpp"<< QThread::currentThreadId();
 
     setL1(0);

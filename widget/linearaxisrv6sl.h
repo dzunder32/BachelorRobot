@@ -22,6 +22,7 @@ private:
     STLMesh *_axis;
     STLMesh *_sled;
     STLMesh *_substructure;
+    STLMesh *_tableTop;
     QVector3D currentTrans;
 
 

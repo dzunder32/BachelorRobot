@@ -119,7 +119,6 @@ signals:
 //    void changeTimerSpeed(float factor);
     void drawLine(QVector3D start,QVector3D end);
     void drawPoint_Widget(QVector3D point , float thickness, QColor color);
-    void test_deleteLater();
 
 };
 

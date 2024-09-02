@@ -133,35 +133,9 @@ void Widget3D::getToolData(QVector <double> data)
 {
     ToolMatrix = DataMatrix(ToolVals,data);
     // QMatrix4x4 temp_T_plane =  trans_polaris->matrix()*ToolMatrix;
-    T_plane =  trans_polaris->matrix()*ToolMatrix;
-    _plane->setMatrix(T_plane);
+    _plane->setMatrix(trans_polaris->matrix()*ToolMatrix);
      planeToolTransform->setTranslation(_plane->translation());
     _plane->setTranslation(_plane->translation() + _plane->matrix().column(0).toVector3D() * _plane->xLimit/2);
-
-     // emit updatePlane();
-    //check weather the matrix has changed
-//    float sum_T;
-    // QMatrix4x4 subtaction_T = temp_T_plane - T_plane;
-
-    // for (int i=0;i<4;i++){
-    //     for (int k=0;k<4;k++){
-    //         sum_T += abs(subtaction_T(i,k));
-    //     }
-    // }
-
-    // if(sum_T>1)
-    // {
-
-    //     T_plane = temp_T_plane;
-    //     _plane->setMatrix(T_plane);
-    //     planeToolTransform->setTranslation(_plane->translation());
-    //     _plane->setTranslation(_plane->translation() + _plane->matrix().column(0).toVector3D() * _plane->xLimit/2);
-    //     emit updatePlane();
-    // }
-    // sum_T=0;
-    // //
-    // if(updateCounter == 30){updateCounter=0;emit updatePlane();}
-    // updateCounter++;
 
 }
 

@@ -69,7 +69,6 @@ private:
     QString historyText;
     bool preview_isDrawn = false;
     void insertRobotSequenceText(QString str);
-    int counter_deleteLater =0;
 
 signals:
     void startDrawing();
@@ -78,7 +77,6 @@ signals:
 
 public slots:
     void drawLineWidget(QVector3D start,QVector3D end){_widget3d->addCylinderBetweenPoints(start,end);}
-    void test();
 };
 
 #endif // ROBOTDRAWUI_H

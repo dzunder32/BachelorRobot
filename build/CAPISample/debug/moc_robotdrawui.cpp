@@ -23,7 +23,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_RobotDrawUi_t {
     QByteArrayData data[32];
-    char stringdata0[673];
+    char stringdata0[692];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -60,10 +60,10 @@ QT_MOC_LITERAL(24, 498, 33), // "on_horizontalSlider_z_sliderM..."
 QT_MOC_LITERAL(25, 532, 36), // "on_horizontalSlider_xRot_slid..."
 QT_MOC_LITERAL(26, 569, 36), // "on_horizontalSlider_yRot_slid..."
 QT_MOC_LITERAL(27, 606, 36), // "on_horizontalSlider_zRot_slid..."
-QT_MOC_LITERAL(28, 643, 14), // "drawLineWidget"
-QT_MOC_LITERAL(29, 658, 5), // "start"
-QT_MOC_LITERAL(30, 664, 3), // "end"
-QT_MOC_LITERAL(31, 668, 4) // "test"
+QT_MOC_LITERAL(28, 643, 23), // "on_spinBox_valueChanged"
+QT_MOC_LITERAL(29, 667, 14), // "drawLineWidget"
+QT_MOC_LITERAL(30, 682, 5), // "start"
+QT_MOC_LITERAL(31, 688, 3) // "end"
 
     },
     "RobotDrawUi\0startDrawing\0\0stopDrawing\0"
@@ -85,7 +85,8 @@ QT_MOC_LITERAL(31, 668, 4) // "test"
     "on_horizontalSlider_xRot_sliderMoved\0"
     "on_horizontalSlider_yRot_sliderMoved\0"
     "on_horizontalSlider_zRot_sliderMoved\0"
-    "drawLineWidget\0start\0end\0test"
+    "on_spinBox_valueChanged\0drawLineWidget\0"
+    "start\0end"
 };
 #undef QT_MOC_LITERAL
 
@@ -126,8 +127,8 @@ static const uint qt_meta_data_RobotDrawUi[] = {
       25,    1,  165,    2, 0x08 /* Private */,
       26,    1,  168,    2, 0x08 /* Private */,
       27,    1,  171,    2, 0x08 /* Private */,
-      28,    2,  174,    2, 0x0a /* Public */,
-      31,    0,  179,    2, 0x0a /* Public */,
+      28,    1,  174,    2, 0x08 /* Private */,
+      29,    2,  177,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void,
@@ -153,8 +154,8 @@ static const uint qt_meta_data_RobotDrawUi[] = {
     QMetaType::Void, QMetaType::Int,    8,
     QMetaType::Void, QMetaType::Int,    8,
     QMetaType::Void, QMetaType::Int,    8,
-    QMetaType::Void, QMetaType::QVector3D, QMetaType::QVector3D,   29,   30,
-    QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,   21,
+    QMetaType::Void, QMetaType::QVector3D, QMetaType::QVector3D,   30,   31,
 
        0        // eod
 };
@@ -186,8 +187,8 @@ void RobotDrawUi::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 18: _t->on_horizontalSlider_xRot_sliderMoved((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 19: _t->on_horizontalSlider_yRot_sliderMoved((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 20: _t->on_horizontalSlider_zRot_sliderMoved((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 21: _t->drawLineWidget((*reinterpret_cast< QVector3D(*)>(_a[1])),(*reinterpret_cast< QVector3D(*)>(_a[2]))); break;
-        case 22: _t->test(); break;
+        case 21: _t->on_spinBox_valueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 22: _t->drawLineWidget((*reinterpret_cast< QVector3D(*)>(_a[1])),(*reinterpret_cast< QVector3D(*)>(_a[2]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {

@@ -11,7 +11,6 @@ RobotDraw::RobotDraw(Kinematik *robotKinematik, Robot *robot, QVector3D sled_pos
     _robotKinematik->setJoints(0,0,90,0,90,0,0);
 
     connect(_timer, &QTimer::timeout,this, &RobotDraw::robDraw_onTimeout);
-    connect(_widget3d,&Widget3D::updatePlane,this,&RobotDraw::UpdatePlanePosition);
     qDebug()<<"robotdraw cpp"<< QThread::currentThreadId();
 
     setL1(0);
@@ -26,8 +25,10 @@ RobotDraw::RobotDraw(Kinematik *robotKinematik, Robot *robot, QVector3D sled_pos
 void RobotDraw::robDraw_onTimeout()
 {
     runAgain:
-    qDebug()<<"roboSeq"<<robotSequence;
+    // qDebug()<<"roboSeq"<<robotSequence;
+
 //    qDebug()<<"robDraw Timeout Thread"<< QThread::currentThreadId();
+    UpdatePlanePosition();
     if(!robotSequence.isEmpty())
     {
         switch (robotSequence.takeFirst())
@@ -38,8 +39,8 @@ void RobotDraw::robDraw_onTimeout()
             robotDrawLine();  break;
         case CIRCLE:
             robotDrawCircle();break;
-        case L1CHANGE:
-            robotAdjustL1();break;
+        // case L1CHANGE:
+        //     robotAdjustL1();break;
         }
     }
     else
@@ -188,10 +189,10 @@ void RobotDraw::robot_setPoint(QVector3D position)
                               position.z(),
                               a,b,c,l1);
 
-   _robotKinematik->ToolMovement(Transformations::Z,6);
+   _robotKinematik->ToolMovement(Transformations::Z,toolTipDistance);
 
-    if(moveAboveCounter<2){qDebug()<<"im Above!";drawPoint_Widget(Robot2BasePoint(position),2,QColor(0,255,0));moveAboveCounter++;}
-    else                  {qDebug()<<"im Below!";}
+    if(moveAboveCounter<2){/*qDebug()<<"im Above!"*/;drawPoint_Widget(Robot2BasePoint(position),2,QColor(0,255,0));moveAboveCounter++;}
+    else                  {/*qDebug()<<"im Below!";*/}
 
     if(_robot->IsConnected())
     {
@@ -225,25 +226,49 @@ void RobotDraw::robot_moveCircular(QVector <QVector2D> circlePoints)
 }
 
 
-void RobotDraw::PlanePositionChanged()
-{
-    //NFGASD
-    planeCounter=0;
-    UpdatePlanePosition();
-}
+// void RobotDraw::PlanePositionChanged()
+// {
+//     //NFGASD
+//     planeCounter=0;
+//     UpdatePlanePosition();
+// }
 
 void RobotDraw::UpdatePlanePosition()
 {
-    emit test_deleteLater();
+    // emit test_deleteLater();
 //    rotation_plane = _plane->matrix();
 //    rotation_plane.setColumn(3,QVector4D(0,0,0,1));
-    planeRobot_T = robotMat.inverted() * _plane->matrix();
-    QVector3D ew = CalculateEw(planeRobot_T * QMatrix4x4(QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180).toRotationMatrix()));
-    a=ew.x();
-    b=ew.y();
-    c=ew.z();
-    calculateL1_new();
+
+    // planeRobot_T = robotMat.inverted() * _plane->matrix();
+
+    QMatrix4x4 curr_planeRobot_T =  robotMat.inverted() * _plane->matrix();
+    QMatrix4x4 subtract_T = planeRobot_T - curr_planeRobot_T;
+    float sum_T = 0;
+
+    for (int i=0;i<4;i++){
+        for (int k=0;k<4;k++){
+            sum_T += abs(subtract_T(i,k));
+        }
+    }
+
+    if(sum_T>1)
+    {
+        planeRobot_T = curr_planeRobot_T;
+        QVector3D ew = CalculateEw(planeRobot_T * QMatrix4x4(QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180).toRotationMatrix()));
+        a=ew.x();
+        b=ew.y();
+        c=ew.z();
+        calculateL1_new();
+        qDebug()<<"Plane Changed";
+    }else{
+        qDebug()<<"Plane Not Changed";
+    }
+    sum_T=0;
+    // if()
+
 }
+
+
 
 float RobotDraw::calculateAngleBetweenVectors(QVector3D vectorA, QVector3D vectorB) {
     float dotProduct = QVector3D::dotProduct(vectorA, vectorB);
@@ -362,7 +387,7 @@ void RobotDraw::calculateL1_new()
     QVector3D line_direction_3d  = robotMat.column(0).toVector3D();
     QVector3D axisLift_3d        = QVector3D(0,0,277);
     float     prefRob_range      = 1000;
-    float     maxRob_range       = 1400;
+    float     maxRob_range       = 1600;
     QVector <QVector3D> solutionVec_3d;
 
     QVector3D center1_3d      = line_position_3d - (line_direction_3d*800) + axisLift_3d;
@@ -501,14 +526,14 @@ void RobotDraw::setL1(double val)
     robotPosition = _l1BasePos + QVector3D(0,l1,0);
     robotMat.setColumn(3,QVector4D(robotPosition,1));
 }
-void RobotDraw::checkPlane()
-{
-    if(planeCounter < 5 && !_robotKinematik->ePointReachable){
-        qDebug()<<planeCounter<<" -->Point not Reachable!!";
-        stopTimer_goHome();
-    }
-    planeCounter++;
-}
+// void RobotDraw::checkPlane()
+// {
+//     if(planeCounter < 5 && !_robotKinematik->ePointReachable){
+//         qDebug()<<planeCounter<<" -->Point not Reachable!!";
+//         stopTimer_goHome();
+//     }
+//     planeCounter++;
+// }
 
 void RobotDraw::moveTipAbove()
 {

@@ -124,6 +124,26 @@ int main(int argc, char *argv[])
     // widget3d->addObject(position,QVector3D(1360,360,712),/*QQuaternion(1,0,0,0) * */QQuaternion::fromAxisAndAngle(QVector3D(0,0,1),45)/**//*QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180)*/);
     widget3d->setPosMatrix(static_cast<Qt3DCore::QTransform*>(position->components()[1]));
 
+    // Qt3DExtras::QCylinderMesh *xMeasureCylinder =new Qt3DExtras::QCylinderMesh;
+    // xMeasureCylinder->setLength(100);
+    // xMeasureCylinder->setRadius(1);
+    // Qt3DExtras::QCylinderMesh *yMeasureCylinder =new Qt3DExtras::QCylinderMesh;
+    // Qt3DCore::QTransform *cylinderTransformX = new Qt3DCore::QTransform();
+    // Qt3DCore::QTransform *cylinderTransformY = new Qt3DCore::QTransform();
+    // Qt3DExtras::QPhongMaterial *MeasureMaterial =new Qt3DExtras::QPhongMaterial();
+
+    // MeasureMaterial->setAmbient(QColor(255,0,0));
+    // cylinderTransformX->setRotationZ(-90);
+
+    // Qt3DCore::QEntity *xMeasureEntity = new Qt3DCore::QEntity();
+    // xMeasureEntity->addComponent(xMeasureCylinder);
+    // xMeasureEntity->addComponent(cylinderTransformX);
+    // xMeasureEntity->addComponent(MeasureMaterial);
+
+    widget3d->addCylinderBetweenPoints(QVector3D(980,380,712),QVector3D(980,740,712));
+    widget3d->addCylinderBetweenPoints(QVector3D(980,740,712),QVector3D(940,740,712));
+
+
     //Ebene zu Zeichnen
     Plane *plane = new Plane(650.0,850.0);
     widget3d->addObject(plane);

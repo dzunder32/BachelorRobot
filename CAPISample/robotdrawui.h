@@ -57,6 +57,8 @@ private slots:
 
     void on_horizontalSlider_zRot_sliderMoved(int position);
 
+    void on_spinBox_valueChanged(int arg1);
+
 private:
     Ui::RobotDrawUi *ui;
     RobotDraw *_robDraw;
@@ -69,7 +71,6 @@ private:
     QString historyText;
     bool preview_isDrawn = false;
     void insertRobotSequenceText(QString str);
-    int counter_deleteLater =0;
 
 signals:
     void startDrawing();
@@ -78,7 +79,6 @@ signals:
 
 public slots:
     void drawLineWidget(QVector3D start,QVector3D end){_widget3d->addCylinderBetweenPoints(start,end);}
-    void test();
 };
 
 #endif // ROBOTDRAWUI_H

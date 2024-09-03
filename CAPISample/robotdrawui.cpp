@@ -23,8 +23,6 @@ RobotDrawUi::RobotDrawUi(Kinematik *robotKinematik,Robot *robot, QVector3D sled_
     connect(this,&RobotDrawUi::startDrawing,_robDraw,&RobotDraw::startDrawTimer);
     connect(this,&RobotDrawUi::stopDrawing,_robDraw,&RobotDraw::stopDrawTimer);
     connect(this,&RobotDrawUi::changeTimerSpeed,_robDraw,&RobotDraw::setTimerTime);
-    connect(_robDraw, &RobotDraw::test_deleteLater,this,&RobotDrawUi::test);
-    test();
 
     robotThread.start();
 }
@@ -36,11 +34,6 @@ RobotDrawUi::~RobotDrawUi()
     delete ui;
 }
 
-void RobotDrawUi::test()
-{
-    counter_deleteLater++;
-    ui->textEdit_textInput->setText("worked!!: "+ QString::number(counter_deleteLater) +"/" +QString::number(_widget3d->sum_T)+"/" +QString::number(_widget3d->updateCounter));
-}
 
 void RobotDrawUi::on_pushButtonStart_clicked()
 {
@@ -102,7 +95,7 @@ void RobotDrawUi::on_pushButton_addLine_clicked()
 void RobotDrawUi::on_pushButton_addP1_clicked()
 {
 
-    _robDraw->AddL1Adjust2Buffer(P1.toVector3D());
+    // _robDraw->AddL1Adjust2Buffer(P1.toVector3D());
     _robDraw->AddPoint2Buffer(P1.toVector3D());
     // _widget3d->drawPoint(P1,5,QColor(255,0,255));
     insertRobotSequenceText("P1:(" + P1X_Str + ", " + P1Y_Str + ")");
@@ -152,7 +145,7 @@ void RobotDrawUi::on_pushButton_draw_clicked()
         _robDraw->drawGrid();
     _robDraw->constructLetters(textInput);
     preview_isDrawn = true;
-    _robDraw->PlanePositionChanged();
+    _robDraw->UpdatePlanePosition();
 }
 
 
@@ -236,3 +229,8 @@ void RobotDrawUi::on_horizontalSlider_zRot_sliderMoved(int position)
 
 }
 
+
+void RobotDrawUi::on_spinBox_valueChanged(int arg1)
+{
+    _robDraw->toolTipDistance = arg1;
+}

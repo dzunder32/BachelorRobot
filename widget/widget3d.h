@@ -31,6 +31,7 @@ public:
     void addTransTool(Qt3DCore::QEntity *entity);
     void addTransPolaris(Qt3DCore::QEntity *entity);
     void setPosMatrix(Qt3DCore::QTransform *pos);
+    int toolPlaneDistance = 8;
     QMatrix4x4 DataMatrix(QVector <QVector <double>> &vals,QVector <double> data);
 
     QMdiSubWindow* ShowAsSubWindow(){QMdiSubWindow* window=new QMdiSubWindow();window->setWidget(_widget3D);window->show();return window;}
@@ -42,8 +43,8 @@ public:
 
     void setFileName(QString name);
     void setViewCenter(QVector3D point);
-
     void addPlane(Plane *plane);
+
 public slots:
     void getToolData(QVector <double>);
     void getPolarisData(QVector <double>);
@@ -61,8 +62,7 @@ private:
     Qt3DExtras::QAbstractCameraController* _camController;
     QWidget *_widget3D;
     Plane *_plane;
-    CoordinateSystem *cSys;
-    Qt3DCore::QTransform *planeToolTransform = new Qt3DCore::QTransform();
+    // Qt3DCore::QTransform *planeToolTransform = new Qt3DCore::QTransform();
     Qt3DCore::QTransform *trans_tool;
     Qt3DCore::QTransform *trans_polaris;
     Qt3DCore::QTransform *trans_position;

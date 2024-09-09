@@ -66,9 +66,11 @@ public:
     QTextEdit *textEdit_Sequence;
     QTextEdit *textEdit_textInput;
     QHBoxLayout *horizontalLayout_4;
+    QSpinBox *spinBox_dist;
     QSlider *horizontalSlider_xRot;
     QSlider *horizontalSlider_yRot;
     QSlider *horizontalSlider_zRot;
+    QLineEdit *lineEdit_Range;
     QVBoxLayout *verticalLayout;
     QSlider *horizontalSlider_x;
     QSlider *horizontalSlider_y;
@@ -258,6 +260,13 @@ public:
 
         horizontalLayout_4 = new QHBoxLayout();
         horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
+
+        spinBox_dist = new QSpinBox(centralwidget);
+        spinBox_dist->setObjectName(QString::fromUtf8("spinBox_dist"));
+        spinBox_dist->setMinimum(1);
+
+        horizontalLayout_4->addWidget(spinBox_dist);
+
         horizontalSlider_xRot = new QSlider(centralwidget);
         horizontalSlider_xRot->setObjectName(QString::fromUtf8("horizontalSlider_xRot"));
         horizontalSlider_xRot->setOrientation(Qt::Horizontal);
@@ -270,11 +279,18 @@ public:
 
         horizontalLayout_4->addWidget(horizontalSlider_yRot);
 
+
+
         horizontalSlider_zRot = new QSlider(centralwidget);
         horizontalSlider_zRot->setObjectName(QString::fromUtf8("horizontalSlider_zRot"));
         horizontalSlider_zRot->setOrientation(Qt::Horizontal);
 
         horizontalLayout_4->addWidget(horizontalSlider_zRot);
+
+        lineEdit_Range = new QLineEdit(centralwidget);
+        lineEdit_Range->setObjectName(QString::fromUtf8("lineEdit_Range"));
+
+        horizontalLayout_4->addWidget(lineEdit_Range);
 
 
         verticalLayout_3->addLayout(horizontalLayout_4);

@@ -70,6 +70,29 @@ Plane::Plane(double XSize,double YSize,Qt3DCore::QEntity* parent)
     leftBorderY->addComponent(_leftTransformY);
     leftBorderY->addComponent(_materialY);
     leftBorderY->setEnabled(true);
+
+
+    // // Tool as point
+    // Qt3DCore::QEntity *planeToolEntity = new Qt3DCore::QEntity(static_cast<Qt3DCore::QEntity*>(this));
+    // Qt3DExtras::QSphereMesh *sphere = new Qt3DExtras::QSphereMesh();
+    // sphere->setRadius(10);
+    // planeToolEntity->addComponent(sphere);
+    // Qt3DExtras::QPhongMaterial *material = new Qt3DExtras::QPhongMaterial();
+    // material->setDiffuse(QColor(255,0,0));
+    // planeToolEntity->addComponent(material);
+    // planeToolTransform=new Qt3DCore::QTransform();
+    // planeToolEntity->addComponent(planeToolTransform);
+
+    toolPos = QVector3D(-xLimit/2,0,10);
+    // planeToolTransform->setTranslation(toolPos);
+
+    //Tool as CSystem
+    planeToolTransform = new CoordinateSystem(static_cast<Qt3DCore::QEntity*>(this));
+    planeToolTransform->setLength(50);
+    planeToolTransform->setNegativeAxis(false);
+    planeToolTransform->setTranslation(toolPos);
+
+
 }
 
 QVector <QVector3D> Plane::getCornerPoints()
@@ -100,7 +123,55 @@ QVector <QVector3D> Plane::getCornerPoints()
     return cornerPoints;
 //    qDebug()<<"whathtehell";
 }
-void Plane::connectPlane2Polaris()
+void Plane::tool_setTranslation(QVector3D pos)
 {
+    this->setTranslation(pos-toolPos);
+    // planeToolTransform->setTranslation(pos)
+}
+
+QVector3D Plane::getToolTranslation()
+{
+    return this->translation() + toolPos;
+}
+
+QVector3D Plane::adjustToolOffset(float offset)
+{
+    toolPos.setZ(offset);
+    QMatrix4x4 toolBase_T = this->matrix() * planeToolTransform->matrix();
+
+    planeToolTransform->setTranslation(toolPos);
+    this->setMatrix(toolBase_T*planeToolTransform->matrix().inverted());
+
+    // this->setTranslation(this->translation()-this->matrix().column(2).toVector3D()*offset);
+    // this->setTranslation(this->matrix()*toolPos);
+}
+
+void Plane::setToolMatrix(QMatrix4x4 toolBase_T)
+{
+    this->setMatrix(toolBase_T*planeToolTransform->matrix().inverted());
+}
+
+void Plane::setToolOffset()
+{
+    QVector2D P_off1=QVector2D(-100,10);
+    QVector2D P_off2=QVector2D(100,-40);
+    QVector2D r=P_off2-P_off1;
+    float k_0=-(P_off1.x()/r.x());
+
+    float offset = P_off1.y() + k_0*r.y();
+    qDebug()<<"offset"<<offset;
+    // QVector2D P_diff = P_off2-P_off1;
+
+    // float angle = atan2(P_diff.y(),P_diff.x());
+
+    float angle =  atan2(r.y(),r.x());
+
+    qDebug()<<"angle"<<qRadiansToDegrees(angle);
+
+    // adjustToolOffset(toolPos.z()-offset);
+    planeToolTransform->setRotationY(qRadiansToDegrees(angle));
+
+    // this->setRotation(this->rotation()*QQuaternion::fromAxisAndAngle(this->matrix().column(2).toVector3D(),-qRadiansToDegrees(angle)));
+    // this->setRotation(this->rotation()*QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),-qRadiansToDegrees(angle)));
 
 }

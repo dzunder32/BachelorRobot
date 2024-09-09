@@ -214,6 +214,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_4">
       <item>
+       <widget class="QSpinBox" name="spinBox_dist"/>
+      </item>
+      <item>
        <widget class="QSlider" name="horizontalSlider_xRot">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
@@ -231,6 +234,13 @@ li.checked::marker { content: &quot;\2612&quot;; }
        <widget class="QSlider" name="horizontalSlider_zRot">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="lineEdit_Range">
+        <property name="text">
+         <string>1000</string>
         </property>
        </widget>
       </item>
@@ -275,7 +285,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <item>
        <widget class="QPushButton" name="pushButton_History">
         <property name="text">
-         <string>previous Sequence</string>
+         <string>PushButton</string>
         </property>
        </widget>
       </item>

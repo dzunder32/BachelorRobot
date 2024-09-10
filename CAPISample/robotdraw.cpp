@@ -19,6 +19,7 @@ RobotDraw::RobotDraw(Kinematik *robotKinematik, Robot *robot, QVector3D sled_pos
     UpdatePlanePosition();
 
     initLetterSize(1);
+
 }
 
 
@@ -46,7 +47,7 @@ void RobotDraw::robDraw_onTimeout()
         if(!lastPoint_drawn)
         {
             qDebug()<<"yysas";
-            moveAboveCounter = 1;
+            // moveAboveCounter = 1;
             PointsBuffer.prepend(lastPoint+QVector3D(0,0,150));
             robotSequence.prepend(POINT);
             lastPoint_drawn = true;
@@ -240,9 +241,6 @@ void RobotDraw::robot_setPoint(QVector3D position)
 
     _robotKinematik->ToolMovement(Transformations::C,-_robotKinematik->j6());
 
-    if(moveAboveCounter<2){qDebug()<<"im Above!";drawPoint_Widget(Robot2BasePoint(position),2,QColor(0,255,0));moveAboveCounter++;}
-    else                  {qDebug()<<"im Below!";}
-
     if(_robot->IsConnected())
     {
         if(moveAboveCounter<2){_robot->UpdatePosition();}
@@ -250,6 +248,9 @@ void RobotDraw::robot_setPoint(QVector3D position)
 
         _robotKinematik->WaitForPositionReached();
     }
+
+    if(moveAboveCounter<2){qDebug()<<"Doin MOV!";drawPoint_Widget(Robot2BasePoint(position),2,QColor(0,255,0));moveAboveCounter++;}
+    else                  {qDebug()<<"Doin MVS!";}
 }
 
 

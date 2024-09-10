@@ -16,6 +16,7 @@ SOURCES += \
         robotdrawui.cpp
 
 HEADERS += \
+    MousePositionFilter.h \
     draw.h \
     drawletters.h \
     letters.h \

@@ -27,6 +27,10 @@ RobotDrawUi::RobotDrawUi(Kinematik *robotKinematik,Robot *robot, QVector3D sled_
 
 
 
+    MousePositionFilter *filter = new MousePositionFilter(ui->textEdit_textInput);
+    ui->textEdit_textInput->viewport()->installEventFilter(filter);
+
+
 
     // ui->lineEdit_Range->setText("1000");
     robotThread.start();

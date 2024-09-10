@@ -241,12 +241,10 @@ void RobotDrawUi::on_horizontalSlider_zRot_sliderMoved(int position)
 
 
 
-
 void RobotDrawUi::on_spinBox_dist_valueChanged(int arg1)
 {
     qDebug()<<arg1;
     _plane->adjustToolOffset(float(arg1));
-
 }
 
 void RobotDrawUi::on_pushButton_History_clicked()

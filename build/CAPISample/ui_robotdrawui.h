@@ -66,14 +66,15 @@ public:
     QTextEdit *textEdit_Sequence;
     QTextEdit *textEdit_textInput;
     QHBoxLayout *horizontalLayout_4;
+    QSpinBox *spinBox_dist;
     QSlider *horizontalSlider_xRot;
     QSlider *horizontalSlider_yRot;
     QSlider *horizontalSlider_zRot;
+    QLineEdit *lineEdit_Range;
     QVBoxLayout *verticalLayout;
     QSlider *horizontalSlider_x;
     QSlider *horizontalSlider_y;
     QSlider *horizontalSlider_z;
-    QSpinBox *spinBox;
     QHBoxLayout *horizontalLayout_3;
     QPushButton *pushButton_History;
     QPushButton *pushButtonStart;
@@ -86,7 +87,7 @@ public:
     {
         if (RobotDrawUi->objectName().isEmpty())
             RobotDrawUi->setObjectName(QString::fromUtf8("RobotDrawUi"));
-        RobotDrawUi->resize(800, 600);
+        RobotDrawUi->resize(810, 599);
         centralwidget = new QWidget(RobotDrawUi);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         verticalLayout_3 = new QVBoxLayout(centralwidget);
@@ -259,6 +260,11 @@ public:
 
         horizontalLayout_4 = new QHBoxLayout();
         horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
+        spinBox_dist = new QSpinBox(centralwidget);
+        spinBox_dist->setObjectName(QString::fromUtf8("spinBox_dist"));
+
+        horizontalLayout_4->addWidget(spinBox_dist);
+
         horizontalSlider_xRot = new QSlider(centralwidget);
         horizontalSlider_xRot->setObjectName(QString::fromUtf8("horizontalSlider_xRot"));
         horizontalSlider_xRot->setOrientation(Qt::Horizontal);
@@ -276,6 +282,11 @@ public:
         horizontalSlider_zRot->setOrientation(Qt::Horizontal);
 
         horizontalLayout_4->addWidget(horizontalSlider_zRot);
+
+        lineEdit_Range = new QLineEdit(centralwidget);
+        lineEdit_Range->setObjectName(QString::fromUtf8("lineEdit_Range"));
+
+        horizontalLayout_4->addWidget(lineEdit_Range);
 
 
         verticalLayout_3->addLayout(horizontalLayout_4);
@@ -306,11 +317,6 @@ public:
 
         verticalLayout_3->addLayout(verticalLayout);
 
-        spinBox = new QSpinBox(centralwidget);
-        spinBox->setObjectName(QString::fromUtf8("spinBox"));
-
-        verticalLayout_3->addWidget(spinBox);
-
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
         pushButton_History = new QPushButton(centralwidget);
@@ -334,7 +340,7 @@ public:
         RobotDrawUi->setCentralWidget(centralwidget);
         menubar = new QMenuBar(RobotDrawUi);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 800, 20));
+        menubar->setGeometry(QRect(0, 0, 810, 20));
         RobotDrawUi->setMenuBar(menubar);
         statusbar = new QStatusBar(RobotDrawUi);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
@@ -372,7 +378,8 @@ public:
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Segoe UI'; font-size:9pt;\">Robot Sequence:</span></p></body></html>", nullptr));
-        pushButton_History->setText(QCoreApplication::translate("RobotDrawUi", "previous Sequence", nullptr));
+        lineEdit_Range->setText(QCoreApplication::translate("RobotDrawUi", "1000", nullptr));
+        pushButton_History->setText(QCoreApplication::translate("RobotDrawUi", "PushButton", nullptr));
         pushButtonStart->setText(QCoreApplication::translate("RobotDrawUi", "Start", nullptr));
         pushButtonStop->setText(QCoreApplication::translate("RobotDrawUi", "Stop", nullptr));
         toolBar->setWindowTitle(QCoreApplication::translate("RobotDrawUi", "toolBar", nullptr));

@@ -149,8 +149,9 @@ int main(int argc, char *argv[])
     widget3d->addObject(plane);
     widget3d->addPlane(plane);
     plane->setTranslation(linAxis2->sled_position+QVector3D(0,800,500));
-    plane->setRotation(QQuaternion::fromEulerAngles(QVector3D(90,0,0)) /** QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),130)*/);
+    plane->setRotation(QQuaternion::fromEulerAngles(QVector3D(90,0,0))/** QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),130)*/);
 
+    // plane->setToolMatrix(QMatrix4x4());
     Robot *robot = new Robot("143.93.135.15",10001);
 
     RobotControl *robControl = new RobotControl(robot);

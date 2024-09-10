@@ -23,7 +23,12 @@ RobotDrawUi::RobotDrawUi(Kinematik *robotKinematik,Robot *robot, QVector3D sled_
     connect(this,&RobotDrawUi::startDrawing,_robDraw,&RobotDraw::startDrawTimer);
     connect(this,&RobotDrawUi::stopDrawing,_robDraw,&RobotDraw::stopDrawTimer);
     connect(this,&RobotDrawUi::changeTimerSpeed,_robDraw,&RobotDraw::setTimerTime);
+    connect(_robDraw, &RobotDraw::robotRangeChanged,this, &RobotDrawUi::adjustRobotRange);
 
+
+
+
+    // ui->lineEdit_Range->setText("1000");
     robotThread.start();
 }
 
@@ -34,9 +39,13 @@ RobotDrawUi::~RobotDrawUi()
     delete ui;
 }
 
-
+void RobotDrawUi::adjustRobotRange(float range)
+{
+    ui->lineEdit_Range->setText(QString::number(range));
+}
 void RobotDrawUi::on_pushButtonStart_clicked()
 {
+    // _robDraw->robotRange = ui->lineEdit_Range->text().toDouble();
     if(preview_isDrawn){
         _widget3d->deleteAllLines();
         _widget3d->deleteAllPoints();
@@ -51,16 +60,13 @@ void RobotDrawUi::on_pushButtonStart_clicked()
 void RobotDrawUi::on_pushButtonStop_clicked()
 {
     emit stopDrawing();
-    historyText = ui->textEdit_Sequence->toPlainText();
     qDebug()<<"TimerStopped";
 }
 
 
 void RobotDrawUi::on_timerSpeedSlider_sliderMoved(int position)
 {
-    // _robDraw->setTimerTime(position);
     emit changeTimerSpeed(position);
-
     qDebug()<<position;
 }
 
@@ -88,6 +94,10 @@ void RobotDrawUi::on_pushButton_addLine_clicked()
     insertRobotSequenceText("Line: Start("+P1X_Str+ "," + P1Y_Str + ")"
                             + "End("+ P2X_Str+ "," + P2Y_Str + ")" );
      _widget3d->addCylinderBetweenPoints(P1.toVector3D(),P2.toVector3D());
+    _robDraw->dontDrawPoint = false;
+     preview_isDrawn = true;
+
+
     // _widget3d->drawPoint(P2,5,QColor(0,255,255));
 
 }
@@ -109,13 +119,6 @@ void RobotDrawUi::insertRobotSequenceText(QString str)
     ui->textEdit_Sequence->insertPlainText(str);
 }
 
-void RobotDrawUi::on_pushButton_History_clicked()
-{
-    qDebug()<<ui->textEdit_Sequence->toPlainText();
-        ui->textEdit_Sequence->setText(historyText);
-        _robDraw->setPreviousSequence();
-
-}
 
 
 void RobotDrawUi::on_pushButton_addCircle_clicked()
@@ -128,6 +131,7 @@ void RobotDrawUi::on_pushButton_addCircle_clicked()
     insertRobotSequenceText("Circle: r=" + QString::number(radius) + " center: (" + P1X_Str + ", " + P1Y_Str + ")");
     _robDraw->AddLine2Buffer(QVector3D(P1.x()+radius,P1.y(),0),QVector3D(P1.x()+radius,P1.y(),0));
     _robDraw->AddCircle2Buffer(circleList);
+    _robDraw->dontDrawPoint = false;
     preview_isDrawn = true;
 }
 
@@ -145,6 +149,7 @@ void RobotDrawUi::on_pushButton_draw_clicked()
         _robDraw->drawGrid();
     _robDraw->constructLetters(textInput);
     preview_isDrawn = true;
+    _robDraw->dontDrawPoint = false;
     _robDraw->UpdatePlanePosition();
 }
 
@@ -157,10 +162,16 @@ void RobotDrawUi::on_spinBox_letterSize_valueChanged(int arg1)
 
 void RobotDrawUi::on_horizontalSlider_x_sliderMoved(int position)
 {
+    // if(position>ui->horizontalSlider_x->value()){
+    //     _plane->setTranslation(_plane->translation() + QVector3D(50,0,0));
+    // }else{
+    //     _plane->setTranslation(_plane->translation() - QVector3D(50,0,0));
+    // }
+    // _robDraw->UpdatePlanePosition();
     if(position>ui->horizontalSlider_x->value()){
-        _plane->setTranslation(_plane->translation() + QVector3D(50,0,0));
+        _plane->tool_setTranslation(_plane->getToolTranslation() + QVector3D(50,0,0));
     }else{
-        _plane->setTranslation(_plane->translation() - QVector3D(50,0,0));
+        _plane->tool_setTranslation(_plane->getToolTranslation() - QVector3D(50,0,0));
     }
     _robDraw->UpdatePlanePosition();
 
@@ -230,7 +241,37 @@ void RobotDrawUi::on_horizontalSlider_zRot_sliderMoved(int position)
 }
 
 
-void RobotDrawUi::on_spinBox_valueChanged(int arg1)
+void RobotDrawUi::on_spinBox_dist_valueChanged(int arg1)
 {
-    _robDraw->toolTipDistance = arg1;
+    qDebug()<<arg1;
+    _plane->adjustToolOffset(float(arg1));
+
+}
+
+void RobotDrawUi::on_pushButton_History_clicked()
+{
+    QString text = ui->lineEdit_Range->text();
+    QStringList list = text.split(",");
+
+    if(!list.isEmpty()){
+        _plane->offsetX_plane=list[0].toFloat();
+        if(list.length()>1)
+        {
+            qDebug()<<list,list[0],list[1];
+            _plane->offsetY_plane=list[1].toFloat();
+        }
+    }else{
+        _plane->offsetX_plane=text.toFloat();
+        qDebug()<<text.toFloat();
+    }
+
+    _plane->setToolOffset();
+
+}
+
+
+void RobotDrawUi::on_pushButton_clicked()
+{
+//    ui->pushButton
+    qDebug()<<"HHello1";
 }

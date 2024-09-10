@@ -18,46 +18,28 @@ public:
 
 private slots:
     void on_pushButtonStart_clicked();
-
     void on_pushButtonStop_clicked();
-
     void on_timerSpeedSlider_sliderMoved(int position);
-
     void on_pushButton_setP1_clicked();
-
     void on_pushButton_setP2_clicked();
-
     void on_pushButton_addLine_clicked();
-
     void on_pushButton_addP1_clicked();
+    void widgetDrawPoint(QVector3D point , float thickness, QColor color){_widget3d->drawPoint(point,thickness,color);}
+    void on_pushButton_addCircle_clicked();
+    void on_pushButton_draw_clicked();
+    void on_spinBox_letterSize_valueChanged(int arg1);
+    void on_horizontalSlider_x_sliderMoved(int position);
+    void on_horizontalSlider_y_sliderMoved(int position);
+    void on_horizontalSlider_z_sliderMoved(int position);
+    void on_horizontalSlider_xRot_sliderMoved(int position);
+    void on_horizontalSlider_yRot_sliderMoved(int position);
+    void on_horizontalSlider_zRot_sliderMoved(int position);
 
-    // void on_pushButton_addP2_clicked();
+    void on_spinBox_dist_valueChanged(int arg1);
 
     void on_pushButton_History_clicked();
 
-    void widgetDrawPoint(QVector3D point , float thickness, QColor color){_widget3d->drawPoint(point,thickness,color);}
-
-    void on_pushButton_addCircle_clicked();
-
-
-    void on_pushButton_draw_clicked();
-
-    void on_spinBox_letterSize_valueChanged(int arg1);
-
-    void on_horizontalSlider_x_sliderMoved(int position);
-
-    void on_horizontalSlider_y_sliderMoved(int position);
-
-    void on_horizontalSlider_z_sliderMoved(int position);
-
-
-    void on_horizontalSlider_xRot_sliderMoved(int position);
-
-    void on_horizontalSlider_yRot_sliderMoved(int position);
-
-    void on_horizontalSlider_zRot_sliderMoved(int position);
-
-    void on_spinBox_valueChanged(int arg1);
+    void on_pushButton_clicked();
 
 private:
     Ui::RobotDrawUi *ui;
@@ -68,7 +50,6 @@ private:
     Plane *_plane;
     QVector2D P1,P2;
     QString P1X_Str,P1Y_Str,P2X_Str,P2Y_Str;
-    QString historyText;
     bool preview_isDrawn = false;
     void insertRobotSequenceText(QString str);
 
@@ -79,6 +60,7 @@ signals:
 
 public slots:
     void drawLineWidget(QVector3D start,QVector3D end){_widget3d->addCylinderBetweenPoints(start,end);}
+    void adjustRobotRange(float range);
 };
 
 #endif // ROBOTDRAWUI_H

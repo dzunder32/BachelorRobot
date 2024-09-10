@@ -27,6 +27,7 @@ RobotDrawUi::RobotDrawUi(Kinematik *robotKinematik,Robot *robot, QVector3D sled_
 
 
 
+
     // ui->lineEdit_Range->setText("1000");
     robotThread.start();
 }
@@ -240,7 +241,6 @@ void RobotDrawUi::on_horizontalSlider_zRot_sliderMoved(int position)
 }
 
 
-
 void RobotDrawUi::on_spinBox_dist_valueChanged(int arg1)
 {
     qDebug()<<arg1;
@@ -249,6 +249,28 @@ void RobotDrawUi::on_spinBox_dist_valueChanged(int arg1)
 
 void RobotDrawUi::on_pushButton_History_clicked()
 {
+    QString text = ui->lineEdit_Range->text();
+    QStringList list = text.split(",");
+
+    if(!list.isEmpty()){
+        _plane->offsetX_plane=list[0].toFloat();
+        if(list.length()>1)
+        {
+            qDebug()<<list,list[0],list[1];
+            _plane->offsetY_plane=list[1].toFloat();
+        }
+    }else{
+        _plane->offsetX_plane=text.toFloat();
+        qDebug()<<text.toFloat();
+    }
+
     _plane->setToolOffset();
+
 }
 
+
+void RobotDrawUi::on_pushButton_clicked()
+{
+//    ui->pushButton
+    qDebug()<<"HHello1";
+}

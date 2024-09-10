@@ -39,6 +39,8 @@ private slots:
 
     void on_pushButton_History_clicked();
 
+    void on_pushButton_clicked();
+
 private:
     Ui::RobotDrawUi *ui;
     RobotDraw *_robDraw;

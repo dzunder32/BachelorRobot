@@ -153,23 +153,32 @@ void Plane::setToolMatrix(QMatrix4x4 toolBase_T)
 
 void Plane::setToolOffset()
 {
-    QVector2D P_off1=QVector2D(-100,10);
-    QVector2D P_off2=QVector2D(100,-40);
-    QVector2D r=P_off2-P_off1;
-    float k_0=-(P_off1.x()/r.x());
+    QVector2D P_offY1=QVector2D(-100,0);
+    QVector2D P_offY2=QVector2D(100,offsetY_plane);
 
-    float offset = P_off1.y() + k_0*r.y();
-    qDebug()<<"offset"<<offset;
+    QVector2D ry=P_offY2-P_offY1;
+//    float k_0=-(P_offY1.x()/ry.x());
+
+//    float offsetY = P_offY1.y() + k_0*ry.y();
+//    qDebug()<<"offset"<<offsetY;
     // QVector2D P_diff = P_off2-P_off1;
 
     // float angle = atan2(P_diff.y(),P_diff.x());
 
-    float angle =  atan2(r.y(),r.x());
+    float angleY =  atan2(ry.y(),ry.x());
 
-    qDebug()<<"angle"<<qRadiansToDegrees(angle);
+    qDebug()<<"angle"<<qRadiansToDegrees(angleY);
 
     // adjustToolOffset(toolPos.z()-offset);
-    planeToolTransform->setRotationY(qRadiansToDegrees(angle));
+    planeToolTransform->setRotationY(qRadiansToDegrees(angleY));
+
+    QVector2D P_offX1=QVector2D(-100,0);
+    QVector2D P_offX2=QVector2D(100,offsetX_plane);
+    QVector2D rx=P_offX2-P_offX1;
+    float angleX =  atan2(rx.y(),rx.x());
+
+    qDebug()<<"angle"<<qRadiansToDegrees(angleX);
+    planeToolTransform->setRotationX(qRadiansToDegrees(angleX));
 
     // this->setRotation(this->rotation()*QQuaternion::fromAxisAndAngle(this->matrix().column(2).toVector3D(),-qRadiansToDegrees(angle)));
     // this->setRotation(this->rotation()*QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),-qRadiansToDegrees(angle)));

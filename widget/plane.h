@@ -28,6 +28,9 @@ public:
     QVector3D lowerPosX;
     QVector3D rightPosY;
     QVector3D leftPosY;
+    float offsetX_plane=0;
+    float offsetY_plane=0;
+
     void connectPlane2Polaris();
     void updatePlanePolaris();
     QVector<QVector3D> getCornerPoints();
@@ -36,6 +39,7 @@ public:
     QVector3D adjustToolOffset(float offset);
     void setToolMatrix(QMatrix4x4 toolBase_T);
     void setToolOffset();
+
 
 private:
     Qt3DExtras::QCylinderMesh *_upperCylinderX;

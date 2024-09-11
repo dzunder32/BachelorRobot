@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include "robotdraw.h"
+#include <MousePositionFilter.h>>
+
 
 namespace Ui {
 class RobotDrawUi;

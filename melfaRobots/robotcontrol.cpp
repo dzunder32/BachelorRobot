@@ -40,7 +40,6 @@ void RobotControl::_connectClicked()
         _robot->Disconnect();
         ui->pb_connect->setText("connect");
         _disable(true);
-
     }
 }
 

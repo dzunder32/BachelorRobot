@@ -27,6 +27,10 @@ RobotDrawUi::RobotDrawUi(Kinematik *robotKinematik,Robot *robot, QVector3D sled_
 
 
 
+    MousePositionFilter *filter = new MousePositionFilter(ui->textEdit_textInput);
+    ui->textEdit_textInput->viewport()->installEventFilter(filter);
+
+
 
     // ui->lineEdit_Range->setText("1000");
     robotThread.start();
@@ -104,9 +108,9 @@ void RobotDrawUi::on_pushButton_addLine_clicked()
 
 void RobotDrawUi::on_pushButton_addP1_clicked()
 {
-
     // _robDraw->AddL1Adjust2Buffer(P1.toVector3D());
     _robDraw->AddPoint2Buffer(P1.toVector3D());
+    _robDraw->AddPoint2Buffer(P1.toVector3D()+QVector3D(0,0,50));
     // _widget3d->drawPoint(P1,5,QColor(255,0,255));
     insertRobotSequenceText("P1:(" + P1X_Str + ", " + P1Y_Str + ")");
 }
@@ -245,7 +249,6 @@ void RobotDrawUi::on_spinBox_dist_valueChanged(int arg1)
 {
     qDebug()<<arg1;
     _plane->adjustToolOffset(float(arg1));
-
 }
 
 void RobotDrawUi::on_pushButton_History_clicked()

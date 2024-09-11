@@ -19,6 +19,7 @@ RobotDraw::RobotDraw(Kinematik *robotKinematik, Robot *robot, QVector3D sled_pos
     UpdatePlanePosition();
 
     initLetterSize(1);
+
 }
 
 
@@ -46,7 +47,7 @@ void RobotDraw::robDraw_onTimeout()
         if(!lastPoint_drawn)
         {
             qDebug()<<"yysas";
-            moveAboveCounter = 1;
+            // moveAboveCounter = 1;
             PointsBuffer.prepend(lastPoint+QVector3D(0,0,150));
             robotSequence.prepend(POINT);
             lastPoint_drawn = true;
@@ -91,8 +92,7 @@ void RobotDraw::DrawFirstPoint()
         }
     }
     else
-    {/*
-        alreadyDrawn = true;*/
+    {
         lastPoint_drawn = true;
     }
 
@@ -197,14 +197,18 @@ void RobotDraw::robotDrawCircle()
 
             calculateL1_new(Plane2BasePoint(center.toVector3D()));
 
+            endLinePoint = lastPoint;
+            // PointsBuffer.prepend(end_circlePt);  robotSequence.prepend(POINT);
+            // PointsBuffer.prepend(mid_circlePt);  robotSequence.prepend(POINT);
+            // PointsBuffer.prepend(start_circlePt);robotSequence.prepend(POINT);
+
             robot_moveCircular(robotCirclePts_vec);
             _robotKinematik->WaitForPositionReached();
-            endLinePoint=lastPoint;
 //            PointsBuffer.prepend(lastPoint);robotSequence.prepend(POINT);
         }
         else
         {
-            for (float angle = end_angle-angleStep; angle >start_angle;angle-=angleStep)
+            for (float angle = end_angle-angleStep; angle > start_angle;angle -= angleStep)
             {
                 QVector2D circlePt;
                 circlePt.setX(center.x() + (radius * qCos(qDegreesToRadians(angle))));
@@ -237,9 +241,6 @@ void RobotDraw::robot_setPoint(QVector3D position)
 
     _robotKinematik->ToolMovement(Transformations::C,-_robotKinematik->j6());
 
-    if(moveAboveCounter<2){qDebug()<<"im Above!";drawPoint_Widget(Robot2BasePoint(position),2,QColor(0,255,0));moveAboveCounter++;}
-    else                  {qDebug()<<"im Below!";}
-
     if(_robot->IsConnected())
     {
         if(moveAboveCounter<2){_robot->UpdatePosition();}
@@ -247,6 +248,9 @@ void RobotDraw::robot_setPoint(QVector3D position)
 
         _robotKinematik->WaitForPositionReached();
     }
+
+    if(moveAboveCounter<2){qDebug()<<"Doin MOV!";drawPoint_Widget(Robot2BasePoint(position),2,QColor(0,255,0));moveAboveCounter++;}
+    else                  {qDebug()<<"Doin MVS!";}
 }
 
 
@@ -312,12 +316,12 @@ float RobotDraw::calculateAngleBetweenVectors(QVector3D vectorA, QVector3D vecto
 
 void RobotDraw::adjustRobotRangeHeigth(float height)
 {
-    float max_range  = 1350;
-    float min_range  = 900;
-    float max_height = 1000;
-    float min_height = 0;
+    float max_range   = 1350;
+    float min_range   = 900;
+    float max_height  = 1000;
+    float min_height  = 0;
     float diff_height = max_height-min_height;
-    float diff_range = max_range-min_range;
+    float diff_range  = max_range-min_range;
 
     float curr_height = height - min_height;
 
@@ -327,7 +331,7 @@ void RobotDraw::adjustRobotRangeHeigth(float height)
         float curr_range = (diff_range/height_percent)+min_range;
         robotRange = curr_range;
     }else{
-        qDebug()<<"pointt to high";
+        qDebug()<<"point to high";
         robotRange = max_range;
 
     }

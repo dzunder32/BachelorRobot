@@ -10,17 +10,18 @@ SOURCES += \
         letters.cpp \
         main.cpp \
         mainwindow.cpp \
+        mousepositionfilter.cpp \
         polaristool.cpp \
         polarisv.cpp \
         robotdraw.cpp \
         robotdrawui.cpp
 
 HEADERS += \
-    MousePositionFilter.h \
     draw.h \
     drawletters.h \
     letters.h \
     mainwindow.h \
+    mousepositionfilter.h \
     polaristool.h \
     polarisv.h \
     robotdraw.h \

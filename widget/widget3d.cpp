@@ -120,7 +120,7 @@ void Widget3D::addPlane(Plane *plane)
 void Widget3D::addTransPolaris(Qt3DCore::QEntity *entity)
 {
     entity->addComponent(trans_polaris);
-    trans_polaris->setTranslation(QVector3D(200,-200,200));
+    trans_polaris->setTranslation(QVector3D(-5*0.7,-5*0.7,800));
 }
 
 void Widget3D::setPosMatrix(Qt3DCore::QTransform *pos)
@@ -143,7 +143,7 @@ void Widget3D::getToolData(QVector <double> data)
 void Widget3D::getPolarisData(QVector <double> data)
 {
     //    float pitch,yaw,roll;
-    //    QQuaternion(data[0],data[1],data[2],data[3]).getEulerAngles(&pitch,&yaw,&roll);
+       // QQuaternion(data[0],data[1],data[2],data[3]).getEulerAngles(&pitch,&yaw,&roll);
     //    emit updatePlt({roundDecimalPlaces(pitch),roundDecimalPlaces(yaw),roundDecimalPlaces(roll)});
     //    emit updatePlt2({data[4],data[5],data[6]});
     PolarisMatrix = DataMatrix(PolarisVals,data);

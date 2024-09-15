@@ -51,6 +51,7 @@ int main(int argc, char *argv[])
 //Adawakedawra
 
 
+
     //2. Roboter Mesh -----------------------------------------------------------------------------------------------
     RV6SL *robot2 =new RV6SL();
     Rv6slKinematik *robot2Kinematik=new Rv6slKinematik(robot2);
@@ -149,7 +150,12 @@ int main(int argc, char *argv[])
     widget3d->addObject(plane);
     widget3d->addPlane(plane);
     plane->setTranslation(linAxis2->sled_position+QVector3D(0,800,500));
-    plane->setRotation(QQuaternion::fromEulerAngles(QVector3D(90,0,0))/** QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),130)*/);
+    plane->setRotation(QQuaternion::fromEulerAngles(QVector3D(90.01,0,0)));
+
+    float pitch=0,yaw=0,roll=0;
+    qDebug()<<plane->rotation().toEulerAngles();
+
+    // qDebug()<<"pitch:"<<pitch;qDebug()<<"yaw:"<<yaw;qDebug()<<"roll:"<<roll;
 
     // plane->setToolMatrix(QMatrix4x4());
     Robot *robot = new Robot("143.93.135.15",10001);

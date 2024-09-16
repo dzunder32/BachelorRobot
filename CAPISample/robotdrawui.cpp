@@ -94,9 +94,10 @@ void RobotDrawUi::on_pushButton_addLine_clicked()
 void RobotDrawUi::on_pushButton_addP1_clicked()
 {
 
+    _robDraw->AddL1Adjust2Buffer(P1.toVector3D());
     _robDraw->AddPoint2Buffer(P1.toVector3D());
     // _widget3d->drawPoint(P1,5,QColor(255,0,255));
-    insertRobotSequenceText("P2:(" + P1X_Str + ", " + P1Y_Str + ")");
+    insertRobotSequenceText("P1:(" + P1X_Str + ", " + P1Y_Str + ")");
 }
 
 

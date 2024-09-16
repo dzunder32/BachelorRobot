@@ -134,6 +134,8 @@ void Widget3D::getToolData(QVector <double> data)
     planeToolTransform->setTranslation(_plane->translation());
     _plane->setTranslation(_plane->translation() + _plane->matrix().column(0).toVector3D() * _plane->xLimit/2);
 //    trans_tool->setMatrix(trans_polaris->matrix()*ToolMatrix);
+    if(updateCounter % 30){emit updatePlane();updateCounter=0;}
+    updateCounter++;
 
 }
 

@@ -32,7 +32,7 @@ public:
     void AddPoint2Buffer   (QVector3D planePoint);
     void AddLine2Buffer    (QVector3D linePlane1, QVector3D linePlane2);
     void AddCircle2Buffer  (QVariantList circleList);
-    void AddL1Adjust2Buffer(){robotSequence.append(L1CHANGE);}
+    void AddL1Adjust2Buffer(QVector3D vec){robotSequence.append(L1CHANGE);L1Buffer.append(vec);}
 
     void robDraw_onTimeout ();
     void safeCurrentSequence();
@@ -44,7 +44,6 @@ public:
     void clearBuffers(){CircleBuffer.clear();PointsBuffer.clear();LinesBuffer.clear();robotSequence.clear();line_isTrue=false;}
     void PlanePositionChanged();
 
-    void UpdatePlanePosition();
 private:
     Letters   *_letters;
     Widget3D  *_widget3d;
@@ -114,6 +113,7 @@ public slots:
     void stopDrawTimer(){_timer->stop();}
     void setTimerTime(int ms){_timer->setInterval(ms);last_timerTime = ms;}
     void changeTimerSpeed(float factor){_timer->setInterval(last_timerTime * factor);}
+    void UpdatePlanePosition();
 
 signals:
 //    void changeTimerSpeed(float factor);

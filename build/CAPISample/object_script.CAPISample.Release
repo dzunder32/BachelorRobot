@@ -3,6 +3,7 @@ release/drawletters.o
 release/letters.o
 release/main.o
 release/mainwindow.o
+release/mousepositionfilter.o
 release/polaristool.o
 release/polarisv.o
 release/robotdraw.o
@@ -10,6 +11,7 @@ release/robotdrawui.o
 release/moc_draw.o
 release/moc_drawletters.o
 release/moc_mainwindow.o
+release/moc_mousepositionfilter.o
 release/moc_polarisv.o
 release/moc_robotdraw.o
 release/moc_robotdrawui.o

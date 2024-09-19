@@ -3,6 +3,7 @@ debug/drawletters.o
 debug/letters.o
 debug/main.o
 debug/mainwindow.o
+debug/mousepositionfilter.o
 debug/polaristool.o
 debug/polarisv.o
 debug/robotdraw.o
@@ -10,6 +11,7 @@ debug/robotdrawui.o
 debug/moc_draw.o
 debug/moc_drawletters.o
 debug/moc_mainwindow.o
+debug/moc_mousepositionfilter.o
 debug/moc_polarisv.o
 debug/moc_robotdraw.o
 debug/moc_robotdrawui.o

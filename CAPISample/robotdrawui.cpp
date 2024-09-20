@@ -486,11 +486,11 @@ void RobotDrawUi::adjustGWSliders()
     int max_horizont = ui->graphicsView->horizontalScrollBar()->maximum();
     int min_horizont = ui->graphicsView->horizontalScrollBar()->minimum();
     int range = max_horizont-min_horizont;
-    ui->graphicsView->horizontalScrollBar()->setValue(min_horizont + int(range/2)-7);
+    ui->graphicsView->horizontalScrollBar()->setValue(min_horizont + int(range/2)-12);
     int max_vertical = ui->graphicsView->verticalScrollBar()->maximum();
     int min_vertical = ui->graphicsView->verticalScrollBar()->minimum();
     int range_vertical = max_vertical-min_vertical;
-    ui->graphicsView->verticalScrollBar()->setValue(min_vertical  + int(range_vertical/2)-7);
+    ui->graphicsView->verticalScrollBar()->setValue(min_vertical  + int(range_vertical/2)-12);
 
 }
 

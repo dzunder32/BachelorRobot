@@ -54,7 +54,6 @@ public slots:
     void addCylinderBetweenPoints(const QVector3D &startPoint, const QVector3D &endPoint);
 
 private:
-    bool trackData=false;
     Qt3DCore::QEntity* _rootEntity;
     Qt3DCore::QTransform* _transRoot;
     Qt3DExtras::Qt3DWindow *_view;

@@ -44,7 +44,8 @@ Widget3D::Widget3D(QWidget *parent) : QWidget(parent)
     trans_position = new Qt3DCore::QTransform();
     trans_point    = new Qt3DCore::QTransform();
 
-    if (trackData)
+    //LivePlot tracking------------------------------------------------------------------------------
+    if (false)
     {
         livePlot = new LivePlot();
         connect(this,&Widget3D::updatePlt,livePlot,&LivePlot::addPts);
@@ -57,8 +58,7 @@ Widget3D::Widget3D(QWidget *parent) : QWidget(parent)
         connect(livePlot,&LivePlot::sendConfigName,livePlot2,&LivePlot2::getConfigName);
         connect(livePlot,&LivePlot::sendDataExtract50,livePlot2,&LivePlot2::getDataExtract50);
     }
-
-
+    //-------------------------------------------------------------------------------------------------
 
 
     ToolVals=QVector <QVector <double>>(meanVal,QVector <double>(7,0));

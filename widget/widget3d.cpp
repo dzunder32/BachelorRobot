@@ -44,7 +44,8 @@ Widget3D::Widget3D(QWidget *parent) : QWidget(parent)
     trans_position = new Qt3DCore::QTransform();
     trans_point    = new Qt3DCore::QTransform();
 
-    if (trackData)
+    //LivePlot tracking------------------------------------------------------------------------------
+    if (true)
     {
         livePlot = new LivePlot();
         connect(this,&Widget3D::updatePlt,livePlot,&LivePlot::addPts);
@@ -57,8 +58,7 @@ Widget3D::Widget3D(QWidget *parent) : QWidget(parent)
         connect(livePlot,&LivePlot::sendConfigName,livePlot2,&LivePlot2::getConfigName);
         connect(livePlot,&LivePlot::sendDataExtract50,livePlot2,&LivePlot2::getDataExtract50);
     }
-
-
+    //-------------------------------------------------------------------------------------------------
 
 
     ToolVals=QVector <QVector <double>>(meanVal,QVector <double>(7,0));
@@ -120,7 +120,7 @@ void Widget3D::addPlane(Plane *plane)
 void Widget3D::addTransPolaris(Qt3DCore::QEntity *entity)
 {
     entity->addComponent(trans_polaris);
-    trans_polaris->setTranslation(QVector3D(200,-200,200));
+    trans_polaris->setTranslation(QVector3D(-5*0.7,-5*0.7,800));
 }
 
 void Widget3D::setPosMatrix(Qt3DCore::QTransform *pos)
@@ -133,6 +133,35 @@ void Widget3D::getToolData(QVector <double> data)
 {
     ToolMatrix = DataMatrix(ToolVals,data);
     _plane->setToolMatrix(trans_polaris->matrix()*ToolMatrix);
+//    QVector3D planeTrans=;
+//    emit updatePlt({roundDecimalPlaces(_plane->translation().x()),roundDecimalPlaces(_plane->translation().y()),roundDecimalPlaces(_plane->translation().z())});
+//        emit updatePlt(planeTrans);
+
+    //first Block works
+//    QMatrix4x4 mat = trans_polaris->matrix();
+//    double m11 =mat(0,0);
+//    double m12 =mat(0,1);
+//    double m13 =mat(0,2);
+//    double x1  =mat(0,3);
+
+//    double m21 =mat(1,0);
+//    double m22 =mat(1,1);
+//    double m23 =mat(1,2);
+//    double y1  =mat(1,3);
+
+//    double m31 =mat(2,0);
+//    double m32 =mat(2,1);
+//    double m33 =mat(2,2);
+//    double z1  =mat(2,3);
+
+//    QVector<double> dVec;
+//    dVec.append(data[4]*m11+data[5]*m12+data[6]*m13+x1);
+//    dVec.append(data[4]*m21+data[5]*m22+data[6]*m23+y1);
+//    dVec.append(data[4]*m31+data[5]*m32+data[6]*m33+z1);
+
+//    emit updatePlt2(dVec);
+
+//    emit updatePlt({data[4],data[5],data[6]});
     // QMatrix4x4 temp_T_plane =  trans_polaris->matrix()*ToolMatrix;
     // _plane->setMatrix(trans_polaris->matrix()*ToolMatrix);
      // planeToolTransform->setTranslation(_plane->translation());
@@ -142,10 +171,11 @@ void Widget3D::getToolData(QVector <double> data)
 
 void Widget3D::getPolarisData(QVector <double> data)
 {
-    //    float pitch,yaw,roll;
-    //    QQuaternion(data[0],data[1],data[2],data[3]).getEulerAngles(&pitch,&yaw,&roll);
-    //    emit updatePlt({roundDecimalPlaces(pitch),roundDecimalPlaces(yaw),roundDecimalPlaces(roll)});
-    //    emit updatePlt2({data[4],data[5],data[6]});
+        float pitch,yaw,roll;
+        QQuaternion(data[0],data[1],data[2],data[3]).getEulerAngles(&pitch,&yaw,&roll);
+        emit updatePlt({roundDecimalPlaces(pitch),roundDecimalPlaces(yaw),roundDecimalPlaces(roll)});
+        emit updatePlt2({data[4],data[5],data[6]});
+
     PolarisMatrix = DataMatrix(PolarisVals,data);
     trans_polaris->setMatrix(trans_position->matrix()*PolarisMatrix.inverted());
 }

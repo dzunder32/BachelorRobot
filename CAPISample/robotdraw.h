@@ -41,6 +41,7 @@ public:
     void drawGrid();
     void clearBuffers(){CircleBuffer.clear();PointsBuffer.clear();LinesBuffer.clear();robotSequence.clear();line_isTrue=false;}
     void UpdatePlanePosition();
+    void removeLastPoint(){qDebug()<<"here man";robotSequence.removeLast();PointsBuffer.removeLast();}
 
 private:
     Letters   *_letters;
@@ -111,7 +112,7 @@ private:
 
 public slots:
     void startDrawTimer(){DrawFirstPoint();_timer->start();}
-    void stopDrawTimer(){_timer->stop();dontDrawPoint = true;}
+    void stopDrawTimer(){_timer->stop();dontDrawPoint = true;emit clearGW();}
     void setTimerTime(int ms){_timer->setInterval(ms);last_timerTime = ms;}
     void changeTimerSpeed(float factor){_timer->setInterval(last_timerTime * factor);}
 
@@ -120,7 +121,7 @@ signals:
     void drawLine(QVector3D start,QVector3D end);
     void drawPoint_Widget(QVector3D point , float thickness, QColor color);
     void robotRangeChanged(float);
-
+    void clearGW();
 };
 
 #endif // ROBOTDRAW_H

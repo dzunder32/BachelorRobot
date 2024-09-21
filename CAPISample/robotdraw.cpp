@@ -11,15 +11,10 @@ RobotDraw::RobotDraw(Kinematik *robotKinematik, Robot *robot, QVector3D sled_pos
     _robotKinematik->setJoints(0,0,90,0,90,0,0);
 
     connect(_timer, &QTimer::timeout,this, &RobotDraw::robDraw_onTimeout);
-    qDebug()<<"robotdraw cpp"<< QThread::currentThreadId();
-
     setL1(0);
     robotMat.rotate(90,QVector3D(0,0,1));
-
     UpdatePlanePosition();
-
     initLetterSize(1);
-
 }
 
 
@@ -27,8 +22,6 @@ void RobotDraw::robDraw_onTimeout()
 {
     runAgain:
     // qDebug()<<"roboSeq"<<robotSequence;
-
-//    qDebug()<<"robDraw Timeout Thread"<< QThread::currentThreadId();
     UpdatePlanePosition();
     if(!robotSequence.isEmpty())
     {
@@ -60,8 +53,7 @@ void RobotDraw::robDraw_onTimeout()
 }
 void RobotDraw::DrawFirstPoint()
 {
-    if (!robotSequence.isEmpty() && !dontDrawPoint)
-    {
+    if (!robotSequence.isEmpty() && !dontDrawPoint){
         alreadyDrawn = false;
         moveAboveCounter=1;
         // qDebug()<<"firstRobSequence:"<<robotSequence;
@@ -78,7 +70,6 @@ void RobotDraw::DrawFirstPoint()
                 QVector3D point = LinesBuffer.first().first();
                 point.setZ(50);
                 PointsBuffer.prepend(point);robotSequence.prepend(POINT);}
-            // qDebug()<<"worked";
             break;
         case CIRCLE:
             if(!CircleBuffer.isEmpty()){
@@ -90,26 +81,17 @@ void RobotDraw::DrawFirstPoint()
                 PointsBuffer.prepend(point);robotSequence.prepend(POINT);}
             break;
         }
-    }
-    else
-    {
-        lastPoint_drawn = true;
-    }
-
+    }else{lastPoint_drawn = true;}
 }
 
 
 void RobotDraw::robotDrawPoint()
 {
-
     if(!PointsBuffer.isEmpty())
     {
         QVector3D planePoint = PointsBuffer.takeFirst();
-//        if(moveAboveCounter<2){drawPoint_Widget(Plane2BasePoint(planePoint),2,QColor(0,255,0));moveAboveCounter++;}
         if(line_isTrue){drawLine(Plane2BasePoint(startLinePoint),Plane2BasePoint(planePoint));line_isTrue = false;}
-        else{}
         robot_setPoint(Plane2RobotPoint(planePoint));
-
         lastPoint = planePoint;
     }
     else {stopTimer_goHome();}
@@ -648,9 +630,9 @@ void RobotDraw::AddCircle2Buffer(QVariantList circleList)
 
 void RobotDraw::stopTimer_goHome()
 {
+    stopDrawTimer();
     dontDrawPoint = false;
     lastPoint_drawn = false;
-    stopDrawTimer();
     while(_timer->isActive()){}/* {qDebug()<<"inWhile!";}*/
     _robotKinematik->setJoints(0,0,90,0,90,0,0);
     qDebug()<<"imHome";

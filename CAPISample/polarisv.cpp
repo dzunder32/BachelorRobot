@@ -73,10 +73,12 @@ PolarisV::PolarisV()
 //        }else{
 //            configurePassiveTools(passiveTool);
 //        }
-//        configurePassiveTools("4_DTracker5.rom");
-//        configurePassiveTools("4_DTracker18.rom");
+        configurePassiveTools("3_332.rom");
 //        fileName = "5_1280_3.5mm";
-        configurePassiveTools("5_1280_3.5mm.rom");
+//        configurePassiveTools("5_1280_3.5mm.rom");
+
+//        configurePassiveTools("3_161.rom");
+//        configurePassiveTools("SLen_350_18.rom");
 //        configurePassiveTools("kurze_Spitze_Test.rom");
         configurePassiveTools("NDI_Tracker4.rom");
 

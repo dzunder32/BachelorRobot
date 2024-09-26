@@ -412,6 +412,7 @@ void RobotDrawUi::addCircle(qreal x, qreal y)
             circleVariant<<radius_plane<<pre_point2D<<QVector2D(0,360);
             _robDraw->AddLine2Buffer(QVector3D(pre_point2D.x()+radius_plane,pre_point2D.y(),0),QVector3D(pre_point2D.x()+radius_plane,pre_point2D.y(),0));
             _robDraw->AddCircle2Buffer(circleVariant);
+            insertRobotSequenceText("Circle: r=" + QString::number(radius_plane) + " center: (" + QString::number(pre_point2D.x()) + ", " + QString::number(pre_point2D.y())+ ")");
         }
     }
 }
@@ -485,11 +486,11 @@ void RobotDrawUi::adjustGWSliders()
     int max_horizont = ui->graphicsView->horizontalScrollBar()->maximum();
     int min_horizont = ui->graphicsView->horizontalScrollBar()->minimum();
     int range = max_horizont-min_horizont;
-    ui->graphicsView->horizontalScrollBar()->setValue(min_horizont + int(range/2)-7);
+    ui->graphicsView->horizontalScrollBar()->setValue(min_horizont + int(range/2)-12);
     int max_vertical = ui->graphicsView->verticalScrollBar()->maximum();
     int min_vertical = ui->graphicsView->verticalScrollBar()->minimum();
     int range_vertical = max_vertical-min_vertical;
-    ui->graphicsView->verticalScrollBar()->setValue(min_vertical  + int(range_vertical/2)-7);
+    ui->graphicsView->verticalScrollBar()->setValue(min_vertical  + int(range_vertical/2)-12);
 
 }
 

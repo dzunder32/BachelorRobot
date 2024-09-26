@@ -22,7 +22,7 @@ public:
     void setConfigName(QString name);
 public slots:
     void on_ClearButton_clicked();
-    void addPts(QVector<double> values);
+    void addPts(QVector <double> values);
     void on_DataButton_clicked();
     void changeName();
     void setDecimalPlaces(int val);

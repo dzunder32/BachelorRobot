@@ -54,7 +54,6 @@ public slots:
     void addCylinderBetweenPoints(const QVector3D &startPoint, const QVector3D &endPoint);
 
 private:
-    bool trackData=false;
     Qt3DCore::QEntity* _rootEntity;
     Qt3DCore::QTransform* _transRoot;
     Qt3DExtras::Qt3DWindow *_view;
@@ -67,7 +66,7 @@ private:
     Qt3DCore::QTransform *trans_polaris;
     Qt3DCore::QTransform *trans_position;
     Qt3DCore::QTransform *trans_point;
-    int meanVal=20,decimalPlaces;
+    int meanVal=1,decimalPlaces;
     QVector <QVector <double>> PolarisVals,ToolVals;
     QVector <double> meanDataT=QVector <double>(meanVal,0),meanDataP=QVector <double>(meanVal,0);
     QMatrix4x4 ToolMatrix,PolarisMatrix;

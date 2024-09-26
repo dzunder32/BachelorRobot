@@ -217,8 +217,13 @@ void RobotDraw::robotDrawCircle()
                 prev_circlePt = circlePt;
             }
             lastPoint = prev_circlePt;
+<<<<<<< HEAD
             // LinesBuffer.prepend({endLinePoint,prev_circlePt.toVector3D()});
             // robotSequence.prepend(LINE);
+=======
+//            LinesBuffer.prepend({endLinePoint,prev_circlePt.toVector3D()});
+//            robotSequence.prepend(LINE);
+>>>>>>> ba83f0bf4a22add3a0a1f60fd9d0cacb40218f98
             initCirclePointsSpeedUp(angle_range);
         }
     }else{stopTimer_goHome();}
@@ -463,7 +468,7 @@ void RobotDraw::setL1(double val)
 
 void RobotDraw::moveTipAbove()
 {
-    QVector3D prev_linePt = endLinePoint;
+    QVector3D prev_linePt = ;
     QVector3D next_linePt = startLinePoint;
     qDebug()<<"moving tip above";
     prev_linePt.setZ(50);next_linePt.setZ(50);
@@ -495,9 +500,15 @@ void RobotDraw::CirclePreview(QVariantList circleList)
         prev_circlePt = circlePt;
     }
 
+<<<<<<< HEAD
     // if(!LinesBuffer.isEmpty()){
     // QVector3D lastPoint_temp = LinesBuffer.last().last();
     //     drawLine(Plane2BasePoint(prev_circlePt),Plane2BasePoint(lastPoint_temp));}
+=======
+//    if(!LinesBuffer.isEmpty()){
+//    QVector3D lastPoint_temp = LinesBuffer.last().last();
+//        drawLine(Plane2BasePoint(prev_circlePt),Plane2BasePoint(lastPoint_temp));}
+>>>>>>> ba83f0bf4a22add3a0a1f60fd9d0cacb40218f98
 
 }
 

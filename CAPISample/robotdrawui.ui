@@ -231,14 +231,14 @@ li.checked::marker { content: &quot;\2612&quot;; }
            </widget>
           </item>
           <item>
+           <widget class="QLineEdit" name="lineEdit_Radius"/>
+          </item>
+          <item>
            <widget class="QPushButton" name="pushButton_addCircle">
             <property name="text">
              <string>Add Circle</string>
             </property>
            </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="lineEdit_Radius"/>
           </item>
          </layout>
         </item>

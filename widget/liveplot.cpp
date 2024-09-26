@@ -48,11 +48,13 @@ void LivePlot::initVariables(){
     sigmaValues=max_v;
     meanValues=max_v;
 }
+
 void LivePlot::addPts(QVector <double> values){
     int cnt=0;
     for (auto& GaussValues:GaussVec)
     {
-        double val=values[cnt];
+//        double val=values[cnt];
+        const auto& val = values[cnt];
         Values[cnt].append(val);
 
         if (GaussValues[0].isEmpty()){
@@ -122,12 +124,11 @@ void LivePlot::clearData()
 //Home------------------------------------------------------------------------------------------------------------------------------------------
 //addPts({0,0,0});
 //----------------------------------------------------------------------------------------------------------------------------------------------
-
-GaussVec.clear();
-Values.clear();
-max_v.clear();
-min_v.clear();
-initVariables();
+    GaussVec.clear();
+    Values.clear();
+    max_v.clear();
+    min_v.clear();
+    initVariables();
 }
 
 void LivePlot::on_ClearButton_clicked()
@@ -156,7 +157,7 @@ void LivePlot::DataExtraction(){
 void LivePlot::on_DataButton_clicked()
 {
 //Labor---------------------------------------------------------------------------------------------------------------------------------------------------------------
-DataExtraction();
+    DataExtraction();
 //**********************************************************************************************************************************************************************
 
 //Home-------------------------------------------------------------------------------------------------------------------------------------------------------------------

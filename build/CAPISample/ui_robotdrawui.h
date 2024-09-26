@@ -72,8 +72,8 @@ public:
     QPushButton *pushButton_addLine;
     QHBoxLayout *horizontalLayout_5;
     QLineEdit *lineEdit_6;
-    QPushButton *pushButton_addCircle;
     QLineEdit *lineEdit_Radius;
+    QPushButton *pushButton_addCircle;
     QHBoxLayout *horizontalLayout_3;
     QPushButton *pushButton_History;
     QPushButton *pushButtonStart;
@@ -293,15 +293,15 @@ public:
 
         horizontalLayout_5->addWidget(lineEdit_6);
 
-        pushButton_addCircle = new QPushButton(centralwidget);
-        pushButton_addCircle->setObjectName(QString::fromUtf8("pushButton_addCircle"));
-
-        horizontalLayout_5->addWidget(pushButton_addCircle);
-
         lineEdit_Radius = new QLineEdit(centralwidget);
         lineEdit_Radius->setObjectName(QString::fromUtf8("lineEdit_Radius"));
 
         horizontalLayout_5->addWidget(lineEdit_Radius);
+
+        pushButton_addCircle = new QPushButton(centralwidget);
+        pushButton_addCircle->setObjectName(QString::fromUtf8("pushButton_addCircle"));
+
+        horizontalLayout_5->addWidget(pushButton_addCircle);
 
 
         verticalLayout_8->addLayout(horizontalLayout_5);

@@ -217,13 +217,10 @@ void RobotDraw::robotDrawCircle()
                 prev_circlePt = circlePt;
             }
             lastPoint = prev_circlePt;
-<<<<<<< HEAD
             // LinesBuffer.prepend({endLinePoint,prev_circlePt.toVector3D()});
             // robotSequence.prepend(LINE);
-=======
 //            LinesBuffer.prepend({endLinePoint,prev_circlePt.toVector3D()});
 //            robotSequence.prepend(LINE);
->>>>>>> ba83f0bf4a22add3a0a1f60fd9d0cacb40218f98
             initCirclePointsSpeedUp(angle_range);
         }
     }else{stopTimer_goHome();}

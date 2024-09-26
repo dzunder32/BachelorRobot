@@ -190,7 +190,7 @@ void RobotDraw::robotDrawCircle()
         }
         else
         {
-            for (float angle = end_angle-angleStep; angle > start_angle;angle -= angleStep)
+            for (float angle = end_angle-angleStep; angle >= start_angle;angle -= angleStep)
             {
                 QVector2D circlePt;
                 circlePt.setX(center.x() + (radius * qCos(qDegreesToRadians(angle))));
@@ -200,8 +200,8 @@ void RobotDraw::robotDrawCircle()
                 prev_circlePt = circlePt;
             }
             lastPoint = prev_circlePt;
-            LinesBuffer.prepend({endLinePoint,prev_circlePt.toVector3D()});
-            robotSequence.prepend(LINE);
+//            LinesBuffer.prepend({endLinePoint,prev_circlePt.toVector3D()});
+//            robotSequence.prepend(LINE);
             initCirclePointsSpeedUp(angle_range);
         }
     }else{stopTimer_goHome();}
@@ -446,7 +446,7 @@ void RobotDraw::setL1(double val)
 
 void RobotDraw::moveTipAbove()
 {
-    QVector3D prev_linePt = endLinePoint;
+    QVector3D prev_linePt = ;
     QVector3D next_linePt = startLinePoint;
 
     prev_linePt.setZ(50);next_linePt.setZ(50);
@@ -469,7 +469,7 @@ void RobotDraw::CirclePreview(QVariantList circleList)
     prev_circlePt.setY(center.y() + (radius * qSin(qDegreesToRadians(end_angle))));
 
 
-    for (float angle = end_angle - angleStep; angle > start_angle;angle -= angleStep)
+    for (float angle = end_angle - angleStep; angle >= start_angle;angle -= angleStep)
     {
         QVector2D circlePt;
         circlePt.setX(center.x() + (radius * qCos(qDegreesToRadians(angle))));
@@ -478,9 +478,9 @@ void RobotDraw::CirclePreview(QVariantList circleList)
         prev_circlePt = circlePt;
     }
 
-    if(!LinesBuffer.isEmpty()){
-    QVector3D lastPoint_temp = LinesBuffer.last().last();
-        drawLine(Plane2BasePoint(prev_circlePt),Plane2BasePoint(lastPoint_temp));}
+//    if(!LinesBuffer.isEmpty()){
+//    QVector3D lastPoint_temp = LinesBuffer.last().last();
+//        drawLine(Plane2BasePoint(prev_circlePt),Plane2BasePoint(lastPoint_temp));}
 
 }
 

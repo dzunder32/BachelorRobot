@@ -150,8 +150,25 @@ void RobotDraw::robotDrawCircle()
         prev_circlePt.setX(center.x() + (radius * qCos(qDegreesToRadians(end_angle))));
         prev_circlePt.setY(center.y() + (radius * qSin(qDegreesToRadians(end_angle))));
 
+        QVector2D start_circlePt;
+        prev_circlePt.setX(center.x() + (radius * qCos(qDegreesToRadians(start_angle))));
+        prev_circlePt.setY(center.y() + (radius * qSin(qDegreesToRadians(start_angle))));
+        startLinePoint = start_circlePt;
 
-        if(_robot->IsConnected())
+        // checkCircleDistance(start_circlePt);
+        if(cartDistance(endLinePoint,start_circlePt)>5 && alreadyDrawn)
+        {
+            moveTipAbove();
+            alreadyDrawn = false;
+            return;
+        }else
+        {
+            endLinePoint = prev_circlePt;
+            alreadyDrawn = true;
+        }
+
+
+        if(!_robot->IsConnected())
         {
             QVector2D end_circlePt, mid_circlePt, start_circlePt;
             start_circlePt.setX(center.x() + (radius * qCos(qDegreesToRadians(start_angle))));
@@ -180,12 +197,12 @@ void RobotDraw::robotDrawCircle()
             calculateL1_new(Plane2BasePoint(center.toVector3D()));
 
             endLinePoint = lastPoint;
-            // PointsBuffer.prepend(end_circlePt);  robotSequence.prepend(POINT);
-            // PointsBuffer.prepend(mid_circlePt);  robotSequence.prepend(POINT);
-            // PointsBuffer.prepend(start_circlePt);robotSequence.prepend(POINT);
+            PointsBuffer.prepend(end_circlePt);  robotSequence.prepend(POINT);
+            PointsBuffer.prepend(mid_circlePt);  robotSequence.prepend(POINT);
+            PointsBuffer.prepend(start_circlePt);robotSequence.prepend(POINT);
 
             robot_moveCircular(robotCirclePts_vec);
-            _robotKinematik->WaitForPositionReached();
+            // _robotKinematik->WaitForPositionReached();
 //            PointsBuffer.prepend(lastPoint);robotSequence.prepend(POINT);
         }
         else
@@ -448,7 +465,7 @@ void RobotDraw::moveTipAbove()
 {
     QVector3D prev_linePt = endLinePoint;
     QVector3D next_linePt = startLinePoint;
-
+    qDebug()<<"moving tip above";
     prev_linePt.setZ(50);next_linePt.setZ(50);
     PointsBuffer.prepend(next_linePt);robotSequence.prepend(POINT);
     PointsBuffer.prepend(prev_linePt);robotSequence.prepend(POINT);

@@ -135,7 +135,7 @@ void Widget3D::getToolData(QVector <double> data)
     _plane->setToolMatrix(trans_polaris->matrix()*ToolMatrix);
     // QMatrix4x4 temp_T_plane =  trans_polaris->matrix()*ToolMatrix;
     // _plane->setMatrix(trans_polaris->matrix()*ToolMatrix);
-     // planeToolTransform->setTranslation(_plane->translation());
+    // planeToolTransform->setTranslation(_plane->translation());
     // _plane->setTranslation(_plane->translation() + _plane->matrix().column(0).toVector3D() * _plane->xLimit/2 - _plane->matrix().column(2).toVector3D()*toolPlaneDistance);
 
 }
@@ -143,7 +143,7 @@ void Widget3D::getToolData(QVector <double> data)
 void Widget3D::getPolarisData(QVector <double> data)
 {
     //    float pitch,yaw,roll;
-       // QQuaternion(data[0],data[1],data[2],data[3]).getEulerAngles(&pitch,&yaw,&roll);
+    // QQuaternion(data[0],data[1],data[2],data[3]).getEulerAngles(&pitch,&yaw,&roll);
     //    emit updatePlt({roundDecimalPlaces(pitch),roundDecimalPlaces(yaw),roundDecimalPlaces(roll)});
     //    emit updatePlt2({data[4],data[5],data[6]});
     PolarisMatrix = DataMatrix(PolarisVals,data);

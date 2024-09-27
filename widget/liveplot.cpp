@@ -82,8 +82,6 @@ void LivePlot::addPts(QVector <double> values){
         }
          cnt++;
     }
-
-
 //Home--------------------------------------------------------------------------------------------------------------------------------------
 //    for (int i=0;i<3;i++){
 //         GaussVec[i][0].push_back(QRandomGenerator::global()->bounded(100.0));
@@ -91,15 +89,16 @@ void LivePlot::addPts(QVector <double> values){
 //    }
 //    plot();
 //-------------------------------------------------------------------------------------------------------------------------------------------
-if(Values[0].size()%plotRate==0){
-    plot();
-    PlotText();
-}
-if (/*(Values[0].size()==25000)||*/(Values[0].size()==50000&& dataExtract50)||(Values[0].size()==100000&& dataExtract100)||(Values[0].size()==200000&& dataExtract200)){
-    DataExtraction();
+    if(Values[0].size()%plotRate==0){
+        plot();
+        PlotText();
+    }
+    if (/*(Values[0].size()==25000)||*/(Values[0].size()==50000&& dataExtract50)||(Values[0].size()==100000&& dataExtract100)||(Values[0].size()==200000&& dataExtract200)){
+        DataExtraction();
+    }
 }
 
-}
+
 void LivePlot::ExtractDataAt50(){
     dataExtract50=true;
 }

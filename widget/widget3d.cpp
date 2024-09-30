@@ -171,18 +171,12 @@ void Widget3D::getToolData(QVector <double> data)
 
 void Widget3D::getPolarisData(QVector <double> data)
 {
-<<<<<<< HEAD
+
     //    float pitch,yaw,roll;
     // QQuaternion(data[0],data[1],data[2],data[3]).getEulerAngles(&pitch,&yaw,&roll);
     //    emit updatePlt({roundDecimalPlaces(pitch),roundDecimalPlaces(yaw),roundDecimalPlaces(roll)});
     //    emit updatePlt2({data[4],data[5],data[6]});
-=======
-        float pitch,yaw,roll;
-        QQuaternion(data[0],data[1],data[2],data[3]).getEulerAngles(&pitch,&yaw,&roll);
-        emit updatePlt({roundDecimalPlaces(pitch),roundDecimalPlaces(yaw),roundDecimalPlaces(roll)});
-        emit updatePlt2({data[4],data[5],data[6]});
 
->>>>>>> 6f3c1b5137dc4861ee09fdde5a27c21722c5eb50
     PolarisMatrix = DataMatrix(PolarisVals,data);
     trans_polaris->setMatrix(trans_position->matrix()*PolarisMatrix.inverted());
 }

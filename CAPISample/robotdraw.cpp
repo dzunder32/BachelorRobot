@@ -21,7 +21,7 @@ RobotDraw::RobotDraw(Kinematik *robotKinematik, Robot *robot, QVector3D sled_pos
 void RobotDraw::robDraw_onTimeout()
 {
     runAgain:
-    // qDebug()<<"roboSeq"<<robotSequence;
+    qDebug()<<"roboSeq"<<robotSequence;
     UpdatePlanePosition();
     if(!robotSequence.isEmpty())
     {
@@ -150,8 +150,25 @@ void RobotDraw::robotDrawCircle()
         prev_circlePt.setX(center.x() + (radius * qCos(qDegreesToRadians(end_angle))));
         prev_circlePt.setY(center.y() + (radius * qSin(qDegreesToRadians(end_angle))));
 
+        QVector2D start_circlePt;
+        prev_circlePt.setX(center.x() + (radius * qCos(qDegreesToRadians(start_angle))));
+        prev_circlePt.setY(center.y() + (radius * qSin(qDegreesToRadians(start_angle))));
+        startLinePoint = start_circlePt;
 
-        if(_robot->IsConnected())
+        // checkCircleDistance(start_circlePt);
+        if(cartDistance(endLinePoint,start_circlePt)>5 && alreadyDrawn)
+        {
+            moveTipAbove();
+            alreadyDrawn = false;
+            return;
+        }else
+        {
+            endLinePoint = prev_circlePt;
+            alreadyDrawn = true;
+        }
+
+
+        if(!_robot->IsConnected())
         {
             QVector2D end_circlePt, mid_circlePt, start_circlePt;
             start_circlePt.setX(center.x() + (radius * qCos(qDegreesToRadians(start_angle))));
@@ -180,17 +197,17 @@ void RobotDraw::robotDrawCircle()
             calculateL1_new(Plane2BasePoint(center.toVector3D()));
 
             endLinePoint = lastPoint;
-            // PointsBuffer.prepend(end_circlePt);  robotSequence.prepend(POINT);
-            // PointsBuffer.prepend(mid_circlePt);  robotSequence.prepend(POINT);
-            // PointsBuffer.prepend(start_circlePt);robotSequence.prepend(POINT);
+            PointsBuffer.prepend(end_circlePt);  robotSequence.prepend(POINT);
+            PointsBuffer.prepend(mid_circlePt);  robotSequence.prepend(POINT);
+            PointsBuffer.prepend(start_circlePt);robotSequence.prepend(POINT);
 
             robot_moveCircular(robotCirclePts_vec);
-            _robotKinematik->WaitForPositionReached();
+            // _robotKinematik->WaitForPositionReached();
 //            PointsBuffer.prepend(lastPoint);robotSequence.prepend(POINT);
         }
         else
         {
-            for (float angle = end_angle-angleStep; angle > start_angle;angle -= angleStep)
+            for (float angle = end_angle-angleStep; angle >= start_angle;angle -= angleStep)
             {
                 QVector2D circlePt;
                 circlePt.setX(center.x() + (radius * qCos(qDegreesToRadians(angle))));
@@ -200,8 +217,10 @@ void RobotDraw::robotDrawCircle()
                 prev_circlePt = circlePt;
             }
             lastPoint = prev_circlePt;
-            LinesBuffer.prepend({endLinePoint,prev_circlePt.toVector3D()});
-            robotSequence.prepend(LINE);
+            // LinesBuffer.prepend({endLinePoint,prev_circlePt.toVector3D()});
+            // robotSequence.prepend(LINE);
+//            LinesBuffer.prepend({endLinePoint,prev_circlePt.toVector3D()});
+//            robotSequence.prepend(LINE);
             initCirclePointsSpeedUp(angle_range);
         }
     }else{stopTimer_goHome();}
@@ -231,8 +250,8 @@ void RobotDraw::robot_setPoint(QVector3D position)
         _robotKinematik->WaitForPositionReached();
     }
 
-    if(moveAboveCounter<2){qDebug()<<"Doin MOV!";drawPoint_Widget(Robot2BasePoint(position),2,QColor(0,255,0));moveAboveCounter++;}
-    else                  {qDebug()<<"Doin MVS!";}
+    if(moveAboveCounter<2){/*qDebug()<<"Doin MOV!"*/;drawPoint_Widget(Robot2BasePoint(position),2,QColor(0,255,0));moveAboveCounter++;}
+    else                  {/*qDebug()<<"Doin MVS!";*/}
 }
 
 
@@ -330,7 +349,7 @@ void RobotDraw::calculateL1_new(QVector3D adjustPoint)
     QVector3D axisLift_3d        = QVector3D(0,0,277);
     adjustRobotRangeHeigth(Base2RobotPoint(adjustPoint).z());
     qDebug()<<Base2RobotPoint(adjustPoint).z();
-    qDebug()<<"rangeChanged"<<robotRange;
+    // qDebug()<<"rangeChanged"<<robotRange;
     float     prefRob_range      = robotRange;
     float     maxRob_range       = 1400;
     QVector <QVector3D> solutionVec_3d;
@@ -435,7 +454,7 @@ void RobotDraw::calculateL1_new(QVector3D adjustPoint)
 
 void RobotDraw::setL1(double val)
 {
-    qDebug()<<"newL1:"<<val;
+    // qDebug()<<"newL1:"<<val;
     diff_l1 = prev_l1 - val;
     l1=val;
     robotPosition = _l1BasePos + QVector3D(0,l1,0);
@@ -446,9 +465,9 @@ void RobotDraw::setL1(double val)
 
 void RobotDraw::moveTipAbove()
 {
-    QVector3D prev_linePt = endLinePoint;
+    QVector3D prev_linePt = ;
     QVector3D next_linePt = startLinePoint;
-
+    qDebug()<<"moving tip above";
     prev_linePt.setZ(50);next_linePt.setZ(50);
     PointsBuffer.prepend(next_linePt);robotSequence.prepend(POINT);
     PointsBuffer.prepend(prev_linePt);robotSequence.prepend(POINT);
@@ -469,7 +488,7 @@ void RobotDraw::CirclePreview(QVariantList circleList)
     prev_circlePt.setY(center.y() + (radius * qSin(qDegreesToRadians(end_angle))));
 
 
-    for (float angle = end_angle - angleStep; angle > start_angle;angle -= angleStep)
+    for (float angle = end_angle - angleStep; angle >= start_angle;angle -= angleStep)
     {
         QVector2D circlePt;
         circlePt.setX(center.x() + (radius * qCos(qDegreesToRadians(angle))));
@@ -478,9 +497,15 @@ void RobotDraw::CirclePreview(QVariantList circleList)
         prev_circlePt = circlePt;
     }
 
-    if(!LinesBuffer.isEmpty()){
-    QVector3D lastPoint_temp = LinesBuffer.last().last();
-        drawLine(Plane2BasePoint(prev_circlePt),Plane2BasePoint(lastPoint_temp));}
+<<<<<<< HEAD
+    // if(!LinesBuffer.isEmpty()){
+    // QVector3D lastPoint_temp = LinesBuffer.last().last();
+    //     drawLine(Plane2BasePoint(prev_circlePt),Plane2BasePoint(lastPoint_temp));}
+=======
+//    if(!LinesBuffer.isEmpty()){
+//    QVector3D lastPoint_temp = LinesBuffer.last().last();
+//        drawLine(Plane2BasePoint(prev_circlePt),Plane2BasePoint(lastPoint_temp));}
+>>>>>>> ba83f0bf4a22add3a0a1f60fd9d0cacb40218f98
 
 }
 

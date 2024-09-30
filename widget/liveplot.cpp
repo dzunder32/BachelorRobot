@@ -53,7 +53,8 @@ void LivePlot::addPts(QVector <double> values){
     int cnt=0;
     for (auto& GaussValues:GaussVec)
     {
-        double val=values[cnt];
+//        double val=values[cnt];
+        const auto& val = values[cnt];
         Values[cnt].append(val);
 
         if (GaussValues[0].isEmpty()){

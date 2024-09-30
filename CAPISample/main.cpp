@@ -37,15 +37,15 @@ int main(int argc, char *argv[])
 
 //In order to show the tool man!
 
-    // CoordinateSystem *CSystem=new CoordinateSystem();
-    // CSystem->setLength(100);
-    // CSystem->setNegativeAxis(false);
-    // CSystem->setTranslation(QVector3D(100,100,0));
-    // STLMesh* toolMesh= new STLMesh(CSystem);
-    // toolMesh->setSource("Tool.STL");
-    // widget3d->addObject(CSystem);
-    // widget3d->addTransTool(CSystem);
-    // static_cast<Qt3DCore::QTransform*>(CSystem->components()[1])->setTranslation(QVector3D(200,-200,0));
+    CoordinateSystem *CSystem=new CoordinateSystem();
+    CSystem->setLength(100);
+    CSystem->setNegativeAxis(false);
+    CSystem->setTranslation(QVector3D(1000,1000,0));
+    STLMesh* tool= new STLMesh(CSystem);
+    tool->setSource("Tool.STL");
+    widget3d->addObject(CSystem);
+    widget3d->addTransTool(CSystem);
+    static_cast<Qt3DCore::QTransform*>(CSystem->components()[1])->setTranslation(QVector3D(200,-200,0));
 
 
 //Adawakedawra

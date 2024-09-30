@@ -52,7 +52,11 @@ void Letters::createLetters()
     m_Letters.append(I);
 
     str_LetterVector.append('G');
-    addLine2Letter(G,QVector2D(2,2.5), QVector2D(2,2.5),factorB);
+<<<<<<< HEAD
+    // addLine2Letter(G,QVector2D(2,2.5), QVector2D(2,2.5),factorB);
+=======
+//    addLine2Letter(G,QVector2D(2,2.5), QVector2D(2,2.5),factorB);
+>>>>>>> ba83f0bf4a22add3a0a1f60fd9d0cacb40218f98
     addCircle2Letter(G,1 , QVector2D(1,2.5),QVector2D(0,180),factorB);
     addLine2Letter(G,QVector2D(0,2.5), QVector2D(0,1),factorB);
     addCircle2Letter(G,1 , QVector2D(1,1),QVector2D(180,360),factorB);

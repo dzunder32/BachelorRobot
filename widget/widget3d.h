@@ -66,7 +66,7 @@ private:
     Qt3DCore::QTransform *trans_polaris;
     Qt3DCore::QTransform *trans_position;
     Qt3DCore::QTransform *trans_point;
-    int meanVal=20,decimalPlaces;
+    int meanVal=1,decimalPlaces;
     QVector <QVector <double>> PolarisVals,ToolVals;
     QVector <double> meanDataT=QVector <double>(meanVal,0),meanDataP=QVector <double>(meanVal,0);
     QMatrix4x4 ToolMatrix,PolarisMatrix;

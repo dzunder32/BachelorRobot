@@ -55,6 +55,7 @@ void RobotDraw::DrawFirstPoint()
 {
     if (!robotSequence.isEmpty() && !dontDrawPoint){
         alreadyDrawn = false;
+        alreadyDrawn_2 = false;
         moveAboveCounter=1;
         // qDebug()<<"firstRobSequence:"<<robotSequence;
         switch (robotSequence.first())
@@ -100,7 +101,7 @@ void RobotDraw::robotDrawPoint()
 void RobotDraw::robotDrawLine()
 {
     if(!LinesBuffer.isEmpty())
-    {
+    {        
         QVector <QVector3D> line = LinesBuffer.takeFirst();
         //save first Point
         startLinePoint = line[0];
@@ -151,20 +152,26 @@ void RobotDraw::robotDrawCircle()
         prev_circlePt.setY(center.y() + (radius * qSin(qDegreesToRadians(end_angle))));
 
         QVector2D start_circlePt;
-        prev_circlePt.setX(center.x() + (radius * qCos(qDegreesToRadians(start_angle))));
-        prev_circlePt.setY(center.y() + (radius * qSin(qDegreesToRadians(start_angle))));
+        start_circlePt.setX(center.x() + (radius * qCos(qDegreesToRadians(start_angle))));
+        start_circlePt.setY(center.y() + (radius * qSin(qDegreesToRadians(start_angle))));
         startLinePoint = start_circlePt;
 
+
+
         // checkCircleDistance(start_circlePt);
-        if(cartDistance(endLinePoint,start_circlePt)>5 && alreadyDrawn)
+        if(cartDistance(endLinePoint,start_circlePt)>5 && alreadyDrawn_2)
         {
+            qDebug()<<"were moving the tip Circle";
+            CircleBuffer.prepend(currCircle);
+            robotSequence.prepend(CIRCLE);
             moveTipAbove();
-            alreadyDrawn = false;
+            // endLinePoint = start_circlePt;
+            alreadyDrawn_2 = false;
             return;
         }else
         {
             endLinePoint = prev_circlePt;
-            alreadyDrawn = true;
+            alreadyDrawn_2 = true;
         }
 
 
@@ -196,11 +203,11 @@ void RobotDraw::robotDrawCircle()
 
             calculateL1_new(Plane2BasePoint(center.toVector3D()));
 
-            endLinePoint = lastPoint;
-            PointsBuffer.prepend(end_circlePt);  robotSequence.prepend(POINT);
-            PointsBuffer.prepend(mid_circlePt);  robotSequence.prepend(POINT);
-            PointsBuffer.prepend(start_circlePt);robotSequence.prepend(POINT);
-
+            // endLinePoint = lastPoint;
+            // PointsBuffer.prepend(end_circlePt);  robotSequence.prepend(POINT);
+            // PointsBuffer.prepend(mid_circlePt);  robotSequence.prepend(POINT);
+            // PointsBuffer.prepend(start_circlePt);robotSequence.prepend(POINT);
+            CirclePreview(currCircle)   ;
             robot_moveCircular(robotCirclePts_vec);
             // _robotKinematik->WaitForPositionReached();
 //            PointsBuffer.prepend(lastPoint);robotSequence.prepend(POINT);
@@ -465,8 +472,9 @@ void RobotDraw::setL1(double val)
 
 void RobotDraw::moveTipAbove()
 {
-    QVector3D prev_linePt = ;
+    QVector3D prev_linePt = endLinePoint;
     QVector3D next_linePt = startLinePoint;
+    qDebug()<<"start:"<<startLinePoint<<"end:"<<endLinePoint;
     qDebug()<<"moving tip above";
     prev_linePt.setZ(50);next_linePt.setZ(50);
     PointsBuffer.prepend(next_linePt);robotSequence.prepend(POINT);
@@ -497,15 +505,12 @@ void RobotDraw::CirclePreview(QVariantList circleList)
         prev_circlePt = circlePt;
     }
 
-<<<<<<< HEAD
     // if(!LinesBuffer.isEmpty()){
     // QVector3D lastPoint_temp = LinesBuffer.last().last();
     //     drawLine(Plane2BasePoint(prev_circlePt),Plane2BasePoint(lastPoint_temp));}
-=======
 //    if(!LinesBuffer.isEmpty()){
 //    QVector3D lastPoint_temp = LinesBuffer.last().last();
 //        drawLine(Plane2BasePoint(prev_circlePt),Plane2BasePoint(lastPoint_temp));}
->>>>>>> ba83f0bf4a22add3a0a1f60fd9d0cacb40218f98
 
 }
 

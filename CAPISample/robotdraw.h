@@ -54,6 +54,7 @@ private:
     bool  plane_isFull     = false;
     bool  drawCircle       = false;
     bool  alreadyDrawn     = false;
+    bool  alreadyDrawn_2     = false;
     bool  lastPoint_drawn  = false;
 
     int   moveAboveCounter = 2;

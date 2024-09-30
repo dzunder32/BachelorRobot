@@ -410,7 +410,7 @@ void RobotDrawUi::addCircle(qreal x, qreal y)
             circles.append(circleItem);
             QVariantList circleVariant;
             circleVariant<<radius_plane<<pre_point2D<<QVector2D(0,360);
-            _robDraw->AddLine2Buffer(QVector3D(pre_point2D.x()+radius_plane,pre_point2D.y(),0),QVector3D(pre_point2D.x()+radius_plane,pre_point2D.y(),0));
+            // _robDraw->AddLine2Buffer(QVector3D(pre_point2D.x()+radius_plane,pre_point2D.y(),0),QVector3D(pre_point2D.x()+radius_plane,pre_point2D.y(),0));
             _robDraw->AddCircle2Buffer(circleVariant);
             insertRobotSequenceText("Circle: r=" + QString::number(radius_plane) + " center: (" + QString::number(pre_point2D.x()) + ", " + QString::number(pre_point2D.y())+ ")");
         }

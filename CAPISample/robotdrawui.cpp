@@ -432,6 +432,9 @@ void RobotDrawUi::addPressedPoint(qreal x, qreal y)
     {
         if(point_isDrawn){
             _robDraw->removeLastPoint();
+            _robDraw->removeLastPointUP();
+            _robDraw->removeLastPoint();
+
             point_isDrawn = false;
         }
         QPointF linePt1 = points[points.length()-2]->pos();
@@ -444,7 +447,9 @@ void RobotDrawUi::addPressedPoint(qreal x, qreal y)
                                 + "End("+ QString::number(lineVec2.x())+ "," + QString::number(lineVec2.y()) + ")" );
     }else
     {
+        _robDraw->AddPointUP2Buffer(QVector3D(x*plane_multiX,-y*plane_multiY,0));
         _robDraw->AddPoint2Buffer(QVector3D(x*plane_multiX,-y*plane_multiY,0));
+        _robDraw->AddPoint2Buffer(QVector3D(x*plane_multiX,-y*plane_multiY,50));
         insertRobotSequenceText("P:(" + QString::number(x) + ", " + QString::number(-y)+ ")");
         point_isDrawn = true;
     }

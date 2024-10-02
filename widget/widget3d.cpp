@@ -45,7 +45,7 @@ Widget3D::Widget3D(QWidget *parent) : QWidget(parent)
     trans_point    = new Qt3DCore::QTransform();
 
     //LivePlot tracking------------------------------------------------------------------------------
-    if (true)
+    if (false)
     {
         livePlot = new LivePlot();
         connect(this,&Widget3D::updatePlt,livePlot,&LivePlot::addPts);

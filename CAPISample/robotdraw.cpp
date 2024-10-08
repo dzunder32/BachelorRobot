@@ -10,6 +10,8 @@ RobotDraw::RobotDraw(Kinematik *robotKinematik, Robot *robot, QVector3D sled_pos
     _robotKinematik = robotKinematik;
     _robotKinematik->setJoints(0,0,90,0,90,0,0);
 
+    _timer->setInterval(1000);
+    _timer->setSingleShot(false);
     connect(_timer, &QTimer::timeout,this, &RobotDraw::robDraw_onTimeout);
     setL1(0);
     robotMat.rotate(90,QVector3D(0,0,1));
@@ -57,6 +59,7 @@ void RobotDraw::robDraw_onTimeout()
 
 void RobotDraw::DrawFirstPoint()
 {
+    qDebug()<<"Drawing First Point";
     if (!robotSequence.isEmpty() && !dontDrawPoint){
         alreadyDrawn = false;
         alreadyDrawn_2 = false;
@@ -282,12 +285,15 @@ void RobotDraw::robot_setPoint(QVector3D position)
     {
         if(moveAboveCounter<2){_robot->UpdatePosition();}
         else                  {_robot->UpdatePositionLinear();}
-
+        qDebug()<<"also waiting";
         _robotKinematik->WaitForPositionReached();
+        qDebug()<<"done waiting";
     }
 
     if(moveAboveCounter<2){qDebug()<<"Doin MOV!";drawPoint_Widget(Robot2BasePoint(position),2,QColor(0,255,0));moveAboveCounter++;}
     else                  {qDebug()<<"Doin MVS!";}
+    qDebug()<<"IM OUT";
+    qDebug()<<"TimerStatus:"<<_timer->isActive();
 }
 
 

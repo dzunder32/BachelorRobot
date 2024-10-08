@@ -93,11 +93,11 @@ void Letters::createLetters()
     m_Letters.append(Q);
 
     str_LetterVector.append('S');
-    addLine2Letter(S,QVector2D(0,0), QVector2D(1.125,0),factorB);
-    addCircle2Letter(S,0.875 , QVector2D(1.125,0.875),QVector2D(-90,90),factorB);
-    addLine2Letter(S,QVector2D(2,3.5), QVector2D(0.875,3.5),factorB);
-    addCircle2Letter(S,0.875,QVector2D(0.875,2.625), QVector2D(90,270),factorB);
-    addLine2Letter(S,QVector2D(0.875,1.75), QVector2D(1.125,1.75),factorB);
+    addLine2Letter(S, QVector2D(0,0), QVector2D(1.125,0), factorB);
+    addCircle2Letter(S, 0.875 , QVector2D(1.125,0.875), QVector2D(-90,90),factorB);
+    addLine2Letter(S, QVector2D(1.125,1.75), QVector2D(0.875,1.75), factorB);
+    addCircle2Letter(S, 0.875, QVector2D(0.875,2.625), QVector2D(270,90), factorB);
+    addLine2Letter(S, QVector2D(0.875,3.5), QVector2D(2,3.5), factorB);
     m_Letters.append(S);
 
     str_LetterVector.append('U');

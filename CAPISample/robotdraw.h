@@ -15,6 +15,7 @@
 #define POINT    1
 #define LINE     2
 #define CIRCLE   3
+#define POINT_UP 4
 
 class RobotDraw : public QObject
 {
@@ -24,24 +25,24 @@ public:
     QTimer *_timer = new QTimer(this);
 
     bool dontDrawPoint = false;
-
     int prev_timerTime;
     int toolTipDistance = 0;
-
     double robotRange = 1000;
 
     void stopTimer_goHome();
-    void AddPoint2Buffer   (QVector3D planePoint);
-    void AddLine2Buffer    (QVector3D linePlane1, QVector3D linePlane2);
-    void AddCircle2Buffer  (QVariantList circleList);
+    void AddPoint2Buffer  (QVector3D planePoint);
+    void AddLine2Buffer   (QVector3D linePlane1, QVector3D linePlane2);
+    void AddCircle2Buffer (QVariantList circleList);
+    void AddPointUP2Buffer(QVector3D planePoint);
     void robDraw_onTimeout();
-    void constructLetters(QString letter_Str);
-    void resetShiftVector();
-    void initLetterSize(float sizeFactor);
+    void constructLetters (QString letter_Str);
+    void resetShiftVector ();
+    void initLetterSize   (float sizeFactor);
     void drawGrid();
     void clearBuffers(){CircleBuffer.clear();PointsBuffer.clear();LinesBuffer.clear();robotSequence.clear();line_isTrue=false;}
     void UpdatePlanePosition();
     void removeLastPoint(){qDebug()<<"here man";robotSequence.removeLast();PointsBuffer.removeLast();}
+    void removeLastPointUP(){qDebug()<<"here man";robotSequence.removeLast();PointsUPBuffer.removeLast();}
 
 private:
     Letters   *_letters;
@@ -54,7 +55,7 @@ private:
     bool  plane_isFull     = false;
     bool  drawCircle       = false;
     bool  alreadyDrawn     = false;
-    bool  alreadyDrawn_2     = false;
+    bool  alreadyDrawn_2   = false;
     bool  lastPoint_drawn  = false;
 
     int   moveAboveCounter = 2;
@@ -78,7 +79,7 @@ private:
     QMatrix4x4 robotMat,planeRobot_T;
 
     QVector <QVector <QVector3D>> LinesBuffer;
-    QVector<QVector3D> PointsBuffer;
+    QVector<QVector3D> PointsBuffer,PointsUPBuffer;
     QVector <QVariantList> CircleBuffer;
     QVector <QVariantList> currentLetter;
     QList <int> robotSequence;
@@ -111,6 +112,7 @@ private:
     void DrawFirstPoint();
     void adjustRobotRangeHeigth(float height);
 
+    void robotdrawPointUP();
 public slots:
     void startDrawTimer(){DrawFirstPoint();_timer->start();}
     void stopDrawTimer(){_timer->stop();dontDrawPoint = true;emit clearGW();}

@@ -23,7 +23,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_RobotDrawUi_t {
     QByteArrayData data[39];
-    char stringdata0[811];
+    char stringdata0[806];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -36,45 +36,45 @@ QT_MOC_LITERAL(0, 0, 11), // "RobotDrawUi"
 QT_MOC_LITERAL(1, 12, 12), // "startDrawing"
 QT_MOC_LITERAL(2, 25, 0), // ""
 QT_MOC_LITERAL(3, 26, 11), // "stopDrawing"
-QT_MOC_LITERAL(4, 38, 16), // "changeTimerSpeed"
-QT_MOC_LITERAL(5, 55, 14), // "removeAllItems"
-QT_MOC_LITERAL(6, 70, 26), // "on_pushButtonStart_clicked"
-QT_MOC_LITERAL(7, 97, 25), // "on_pushButtonStop_clicked"
-QT_MOC_LITERAL(8, 123, 31), // "on_timerSpeedSlider_sliderMoved"
-QT_MOC_LITERAL(9, 155, 8), // "position"
-QT_MOC_LITERAL(10, 164, 27), // "on_pushButton_setP1_clicked"
-QT_MOC_LITERAL(11, 192, 27), // "on_pushButton_setP2_clicked"
-QT_MOC_LITERAL(12, 220, 29), // "on_pushButton_addLine_clicked"
-QT_MOC_LITERAL(13, 250, 27), // "on_pushButton_addP1_clicked"
-QT_MOC_LITERAL(14, 278, 15), // "widgetDrawPoint"
-QT_MOC_LITERAL(15, 294, 5), // "point"
-QT_MOC_LITERAL(16, 300, 9), // "thickness"
-QT_MOC_LITERAL(17, 310, 5), // "color"
-QT_MOC_LITERAL(18, 316, 31), // "on_pushButton_addCircle_clicked"
-QT_MOC_LITERAL(19, 348, 26), // "on_pushButton_draw_clicked"
-QT_MOC_LITERAL(20, 375, 34), // "on_spinBox_letterSize_valueCh..."
-QT_MOC_LITERAL(21, 410, 4), // "arg1"
-QT_MOC_LITERAL(22, 415, 33), // "on_horizontalSlider_x_sliderM..."
-QT_MOC_LITERAL(23, 449, 33), // "on_horizontalSlider_y_sliderM..."
-QT_MOC_LITERAL(24, 483, 33), // "on_horizontalSlider_z_sliderM..."
-QT_MOC_LITERAL(25, 517, 36), // "on_horizontalSlider_xRot_slid..."
-QT_MOC_LITERAL(26, 554, 36), // "on_horizontalSlider_yRot_slid..."
-QT_MOC_LITERAL(27, 591, 36), // "on_horizontalSlider_zRot_slid..."
-QT_MOC_LITERAL(28, 628, 28), // "on_spinBox_dist_valueChanged"
-QT_MOC_LITERAL(29, 657, 29), // "on_pushButton_History_clicked"
-QT_MOC_LITERAL(30, 687, 14), // "onMousePressed"
-QT_MOC_LITERAL(31, 702, 9), // "globalPos"
-QT_MOC_LITERAL(32, 712, 26), // "on_pushButton_lift_clicked"
-QT_MOC_LITERAL(33, 739, 14), // "drawLineWidget"
-QT_MOC_LITERAL(34, 754, 5), // "start"
-QT_MOC_LITERAL(35, 760, 3), // "end"
-QT_MOC_LITERAL(36, 764, 16), // "adjustRobotRange"
-QT_MOC_LITERAL(37, 781, 5), // "range"
-QT_MOC_LITERAL(38, 787, 23) // "onCursorPositionChanged"
+QT_MOC_LITERAL(4, 38, 11), // "changeSpeed"
+QT_MOC_LITERAL(5, 50, 14), // "removeAllItems"
+QT_MOC_LITERAL(6, 65, 26), // "on_pushButtonStart_clicked"
+QT_MOC_LITERAL(7, 92, 25), // "on_pushButtonStop_clicked"
+QT_MOC_LITERAL(8, 118, 31), // "on_timerSpeedSlider_sliderMoved"
+QT_MOC_LITERAL(9, 150, 8), // "position"
+QT_MOC_LITERAL(10, 159, 27), // "on_pushButton_setP1_clicked"
+QT_MOC_LITERAL(11, 187, 27), // "on_pushButton_setP2_clicked"
+QT_MOC_LITERAL(12, 215, 29), // "on_pushButton_addLine_clicked"
+QT_MOC_LITERAL(13, 245, 27), // "on_pushButton_addP1_clicked"
+QT_MOC_LITERAL(14, 273, 15), // "widgetDrawPoint"
+QT_MOC_LITERAL(15, 289, 5), // "point"
+QT_MOC_LITERAL(16, 295, 9), // "thickness"
+QT_MOC_LITERAL(17, 305, 5), // "color"
+QT_MOC_LITERAL(18, 311, 31), // "on_pushButton_addCircle_clicked"
+QT_MOC_LITERAL(19, 343, 26), // "on_pushButton_draw_clicked"
+QT_MOC_LITERAL(20, 370, 34), // "on_spinBox_letterSize_valueCh..."
+QT_MOC_LITERAL(21, 405, 4), // "arg1"
+QT_MOC_LITERAL(22, 410, 33), // "on_horizontalSlider_x_sliderM..."
+QT_MOC_LITERAL(23, 444, 33), // "on_horizontalSlider_y_sliderM..."
+QT_MOC_LITERAL(24, 478, 33), // "on_horizontalSlider_z_sliderM..."
+QT_MOC_LITERAL(25, 512, 36), // "on_horizontalSlider_xRot_slid..."
+QT_MOC_LITERAL(26, 549, 36), // "on_horizontalSlider_yRot_slid..."
+QT_MOC_LITERAL(27, 586, 36), // "on_horizontalSlider_zRot_slid..."
+QT_MOC_LITERAL(28, 623, 28), // "on_spinBox_dist_valueChanged"
+QT_MOC_LITERAL(29, 652, 29), // "on_pushButton_History_clicked"
+QT_MOC_LITERAL(30, 682, 14), // "onMousePressed"
+QT_MOC_LITERAL(31, 697, 9), // "globalPos"
+QT_MOC_LITERAL(32, 707, 26), // "on_pushButton_lift_clicked"
+QT_MOC_LITERAL(33, 734, 14), // "drawLineWidget"
+QT_MOC_LITERAL(34, 749, 5), // "start"
+QT_MOC_LITERAL(35, 755, 3), // "end"
+QT_MOC_LITERAL(36, 759, 16), // "adjustRobotRange"
+QT_MOC_LITERAL(37, 776, 5), // "range"
+QT_MOC_LITERAL(38, 782, 23) // "onCursorPositionChanged"
 
     },
     "RobotDrawUi\0startDrawing\0\0stopDrawing\0"
-    "changeTimerSpeed\0removeAllItems\0"
+    "changeSpeed\0removeAllItems\0"
     "on_pushButtonStart_clicked\0"
     "on_pushButtonStop_clicked\0"
     "on_timerSpeedSlider_sliderMoved\0"
@@ -189,7 +189,7 @@ void RobotDrawUi::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         switch (_id) {
         case 0: _t->startDrawing(); break;
         case 1: _t->stopDrawing(); break;
-        case 2: _t->changeTimerSpeed((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 2: _t->changeSpeed((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 3: _t->removeAllItems(); break;
         case 4: _t->on_pushButtonStart_clicked(); break;
         case 5: _t->on_pushButtonStop_clicked(); break;
@@ -235,7 +235,7 @@ void RobotDrawUi::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         }
         {
             using _t = void (RobotDrawUi::*)(int );
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&RobotDrawUi::changeTimerSpeed)) {
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&RobotDrawUi::changeSpeed)) {
                 *result = 2;
                 return;
             }
@@ -296,7 +296,7 @@ void RobotDrawUi::stopDrawing()
 }
 
 // SIGNAL 2
-void RobotDrawUi::changeTimerSpeed(int _t1)
+void RobotDrawUi::changeSpeed(int _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
     QMetaObject::activate(this, &staticMetaObject, 2, _a);

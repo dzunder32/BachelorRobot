@@ -22,7 +22,7 @@ RobotDrawUi::RobotDrawUi(Kinematik *robotKinematik,Robot *robot, QVector3D sled_
 //    connect(_robDraw, &RobotDraw::changeTimerSpeed,this, &RobotDrawUi::increaseTimerSpeed);
     connect(this,&RobotDrawUi::startDrawing,_robDraw,&RobotDraw::startDrawTimer);
     connect(this,&RobotDrawUi::stopDrawing,_robDraw,&RobotDraw::stopDrawTimer);
-    connect(this,&RobotDrawUi::changeTimerSpeed,_robDraw,&RobotDraw::setTimerTime);
+    connect(this,&RobotDrawUi::changeSpeed,_robDraw,&RobotDraw::setTimerTime);
     connect(_robDraw, &RobotDraw::robotRangeChanged,this, &RobotDrawUi::adjustRobotRange);
 
     mouseFilter = new MousePositionFilter(ui->graphicsView->viewport());
@@ -71,8 +71,9 @@ void RobotDrawUi::on_pushButtonStart_clicked()
         _widget3d->deleteAllPoints();
         preview_isDrawn = false;
     }
+
     emit startDrawing();
-    _robDraw->setTimerTime(ui->timerSpeedSlider->value());
+//    _robDraw->setTimerTime(ui->timerSpeedSlider->value());
     _robDraw->UpdatePlanePosition();
 }
 
@@ -86,7 +87,7 @@ void RobotDrawUi::on_pushButtonStop_clicked()
 
 void RobotDrawUi::on_timerSpeedSlider_sliderMoved(int position)
 {
-    emit changeTimerSpeed(position);
+    emit changeSpeed(position);
     qDebug()<<position;
 }
 
@@ -410,7 +411,7 @@ void RobotDrawUi::addCircle(qreal x, qreal y)
             circles.append(circleItem);
             QVariantList circleVariant;
             circleVariant<<radius_plane<<pre_point2D<<QVector2D(0,360);
-            _robDraw->AddLine2Buffer(QVector3D(pre_point2D.x()+radius_plane,pre_point2D.y(),0),QVector3D(pre_point2D.x()+radius_plane,pre_point2D.y(),0));
+            // _robDraw->AddLine2Buffer(QVector3D(pre_point2D.x()+radius_plane,pre_point2D.y(),0),QVector3D(pre_point2D.x()+radius_plane,pre_point2D.y(),0));
             _robDraw->AddCircle2Buffer(circleVariant);
             insertRobotSequenceText("Circle: r=" + QString::number(radius_plane) + " center: (" + QString::number(pre_point2D.x()) + ", " + QString::number(pre_point2D.y())+ ")");
         }
@@ -432,6 +433,9 @@ void RobotDrawUi::addPressedPoint(qreal x, qreal y)
     {
         if(point_isDrawn){
             _robDraw->removeLastPoint();
+            _robDraw->removeLastPointUP();
+            _robDraw->removeLastPoint();
+
             point_isDrawn = false;
         }
         QPointF linePt1 = points[points.length()-2]->pos();
@@ -444,7 +448,9 @@ void RobotDrawUi::addPressedPoint(qreal x, qreal y)
                                 + "End("+ QString::number(lineVec2.x())+ "," + QString::number(lineVec2.y()) + ")" );
     }else
     {
+        _robDraw->AddPointUP2Buffer(QVector3D(x*plane_multiX,-y*plane_multiY,0));
         _robDraw->AddPoint2Buffer(QVector3D(x*plane_multiX,-y*plane_multiY,0));
+        _robDraw->AddPoint2Buffer(QVector3D(x*plane_multiX,-y*plane_multiY,50));
         insertRobotSequenceText("P:(" + QString::number(x) + ", " + QString::number(-y)+ ")");
         point_isDrawn = true;
     }

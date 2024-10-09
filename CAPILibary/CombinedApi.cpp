@@ -634,7 +634,7 @@ int CombinedApi::sendCommand(std::string command) const
 	}
 
 	// Display the command that we're sending
-	std::cout << "Sending command: " << command << " ..." << std::endl;
+    std::cout << "Sending command: " << command << " ..." << std::endl;
 
 	// Add CR character to command and write the command to the socket
 	command += CR;

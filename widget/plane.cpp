@@ -134,7 +134,7 @@ QVector3D Plane::getToolTranslation()
     return this->translation() + toolPos;
 }
 
-QVector3D Plane::adjustToolOffset(float offset)
+void Plane::adjustToolOffset(float offset)
 {
     toolPos.setZ(offset);
     QMatrix4x4 toolBase_T = this->matrix() * planeToolTransform->matrix();

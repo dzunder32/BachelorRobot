@@ -74,7 +74,7 @@ private:
 signals:
     void startDrawing();
     void stopDrawing();
-    void changeTimerSpeed(int);
+    void changeSpeed(int);
 
 public slots:
     void drawLineWidget(QVector3D start,QVector3D end){_widget3d->addCylinderBetweenPoints(start,end);}

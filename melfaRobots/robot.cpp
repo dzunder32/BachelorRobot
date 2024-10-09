@@ -391,4 +391,5 @@ void Robot::_alternativeCommand(QString command)
             _position->Reached();}
         _connetedRobotChangePosition=false;
     }
+    qDebug()<<"out of robot";
 }

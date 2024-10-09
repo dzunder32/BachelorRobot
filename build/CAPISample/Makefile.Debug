@@ -10294,7 +10294,7 @@ debug/robotdrawui.o: ../../CAPISample/robotdrawui.cpp ../../CAPISample/robotdraw
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QApplication \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QTextEdit \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DInput/QMouseEvent \
-		ui_robotdrawui.h \
+		../../CAPISample/ui_robotdrawui.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QCheckBox \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QGraphicsView \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QHBoxLayout \

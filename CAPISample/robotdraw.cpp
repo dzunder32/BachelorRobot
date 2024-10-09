@@ -213,7 +213,7 @@ void RobotDraw::robotDrawCircle()
             // PointsBuffer.prepend(mid_circlePt);  robotSequence.prepend(POINT);
             // PointsBuffer.prepend(start_circlePt);robotSequence.prepend(POINT);
 
-            CirclePreview(currCircle)   ;
+            CirclePreview(currCircle);
             robot_moveCircular(robotCirclePts_vec);
             // _robotKinematik->WaitForPositionReached();
 //            PointsBuffer.prepend(lastPoint);robotSequence.prepend(POINT);
@@ -389,7 +389,7 @@ void RobotDraw::calculateL1_new(QVector3D adjustPoint)
     QVector3D line_direction_3d  = robotMat.column(0).toVector3D();
     QVector3D axisLift_3d        = QVector3D(0,0,277);
     adjustRobotRangeHeigth(Base2RobotPoint(adjustPoint).z());
-    qDebug()<<Base2RobotPoint(adjustPoint).z();
+    // qDebug()<<Base2RobotPoint(adjustPoint).z();
     // qDebug()<<"rangeChanged"<<robotRange;
     float     prefRob_range      = robotRange;
     float     maxRob_range       = 1400;

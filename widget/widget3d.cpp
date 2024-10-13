@@ -120,7 +120,7 @@ void Widget3D::addPlane(Plane *plane)
 void Widget3D::addTransPolaris(Qt3DCore::QEntity *entity)
 {
     entity->addComponent(trans_polaris);
-    trans_polaris->setTranslation(QVector3D(0,0,0));
+    trans_polaris->setTranslation(QVector3D(2000,700,800));
 }
 
 void Widget3D::setPosMatrix(Qt3DCore::QTransform *pos)

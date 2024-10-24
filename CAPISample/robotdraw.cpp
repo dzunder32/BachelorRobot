@@ -171,7 +171,7 @@ void RobotDraw::robotDrawCircle()
         start_circlePt.setY(center.y() + (radius * qSin(qDegreesToRadians(start_angle))));
         startLinePoint = start_circlePt;
 
-        if(!_robot->IsConnected())
+        if(_robot->IsConnected())
         {
             if(cartDistance(endLinePoint,start_circlePt)>5 && alreadyDrawn)
             {
@@ -268,7 +268,7 @@ void RobotDraw::robotdrawPointUP()
 }
 
 
-void RobotDraw::robot_setPoint(QVector3D position)
+void RobotDraw:: robot_setPoint(QVector3D position)
 {
     calculateL1_new(Robot2BasePoint(position));
     position+=QVector3D(diff_l1,0,0);

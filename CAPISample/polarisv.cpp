@@ -73,9 +73,9 @@ PolarisV::PolarisV()
 //        }else{
 //            configurePassiveTools(passiveTool);
 //        }
-        configurePassiveTools("3_332.rom");
+//        configurePassiveTools("3_332.rom");
 //        fileName = "5_1280_3.5mm";
-//        configurePassiveTools("5_1280_3.5mm.rom");
+        configurePassiveTools("5_1280_3.5mm.rom");
 
 //        configurePassiveTools("3_161.rom");
 //        configurePassiveTools("SLen_350_18.rom");
@@ -123,7 +123,7 @@ void PolarisV::onErrorPrintDebugMessage(std::string methodName, int errorCode)
 {
     if (errorCode < 0)
     {
-        std::cout << methodName << " failed: " << capi.errorToString(errorCode) << std::endl;
+//        std::cout << methodName << " failed: " << capi.errorToString(errorCode) << std::endl;
     }
 }
 
@@ -195,7 +195,7 @@ void PolarisV::writeCSV(std::string fileName, int numberOfLines)
     std::vector<PortHandleInfo> portHandles = capi.portHandleSearchRequest(PortHandleSearchRequestOption::Enabled);
     if (portHandles.size() < 1)
     {
-        std::cout << "Cannot write CSV file when no tools are enabled!" << std::endl;
+//        std::cout << "Cannot write CSV file when no tools are enabled!" << std::endl;
         return;
     }
 
@@ -209,11 +209,11 @@ void PolarisV::writeCSV(std::string fileName, int numberOfLines)
     }
 
     // Start tracking
-    std::cout << std::endl << "Entering tracking mode and collecting data for CSV file..." << std::endl;
+//    std::cout << std::endl << "Entering tracking mode and collecting data for CSV file..." << std::endl;
     onErrorPrintDebugMessage("capi.startTracking()", capi.startTracking());
 
     // Print header information to the first line of the output file
-    std::cout << std::endl << "Writing CSV file..." << std::endl;
+//    std::cout << std::endl << "Writing CSV file..." << std::endl;
     std::ofstream csvFile(fileName.c_str());
     csvFile << "#Tools,ToolInfo,Frame#,PortHandle,Face#,TransformStatus,Q0,Qx,Qy,Qz,Tx,Ty,Tz,Error,Markers,State,Tx,Ty,Tz" << std::endl;
 
@@ -299,24 +299,24 @@ void PolarisV::printToolData(const ToolData& toolData)
 {
     if (toolData.systemAlerts.size() > 0)
     {
-        std::cout << "[" << toolData.systemAlerts.size() << " alerts] ";
+//        std::cout << "[" << toolData.systemAlerts.size() << " alerts] ";
         for (int a = 0; a < toolData.systemAlerts.size(); a++)
         {
-            std::cout << toolData.systemAlerts[a].toString() << std::endl;
+//            std::cout << toolData.systemAlerts[a].toString() << std::endl;
         }
     }
 
     if (toolData.buttons.size() > 0)
     {
-        std::cout << "[buttons: ";
+//        std::cout << "[buttons: ";
         for (int b = 0; b < toolData.buttons.size(); b++)
         {
-            std::cout << ButtonState::toString(toolData.buttons[b]) << " ";
+//            std::cout << ButtonState::toString(toolData.buttons[b]) << " ";
         }
-        std::cout << "] ";
+//        std::cout << "] ";
     }
     std::string temp=toolDataToCSV(toolData);
-    std::cout << temp << std::endl;
+//    std::cout << temp << std::endl;
     emit sendToolData(toolData);
     emit sendData(QString::fromStdString(temp));
 
@@ -329,13 +329,13 @@ void PolarisV::printTrackingData()
 {
 
     // Demonstrate TX command: ASCII command sent, ASCII reply received
-    std::cout << capi.getTrackingDataTX() << std::endl;
+//    std::cout << capi.getTrackingDataTX() << std::endl;
 
     // Demonstrate BX or BX2 command
     std::vector<ToolData> toolData =  apiSupportsBX2 ? capi.getTrackingDataBX2() : capi.getTrackingDataBX();
 
     // Print to stdout in similar format to CSV
-    std::cout << "[alerts] [buttons] Frame#,ToolHandle,Face#,TransformStatus,Q0,Qx,Qy,Qz,Tx,Ty,Tz,Error,#Markers,State,Tx,Ty,Tz" << std::endl;
+//    std::cout << "[alerts] [buttons] Frame#,ToolHandle,Face#,TransformStatus,Q0,Qx,Qy,Qz,Tx,Ty,Tz,Error,#Markers,State,Tx,Ty,Tz" << std::endl;
     for (int i = 0; i < toolData.size(); i++)
     {
         printToolData(toolData[i]);
@@ -351,7 +351,7 @@ void PolarisV::printTrackingData()
  */
 void PolarisV::initializeAndEnableTools()
 {
-    std::cout << std::endl << "Initializing and enabling tools..." << std::endl;
+//    std::cout << std::endl << "Initializing and enabling tools..." << std::endl;
 
     // Initialize and enable tools
     std::vector<PortHandleInfo> portHandles = capi.portHandleSearchRequest(PortHandleSearchRequestOption::NotInit);
@@ -365,7 +365,7 @@ void PolarisV::initializeAndEnableTools()
     portHandles = capi.portHandleSearchRequest(PortHandleSearchRequestOption::Enabled);
     for (int i = 0; i < portHandles.size(); i++)
     {
-        std::cout << portHandles[i].toString() << std::endl;
+//        std::cout << portHandles[i].toString() << std::endl;
     }
 }
 
@@ -397,7 +397,7 @@ void PolarisV::loadTool(QString fileName)
 void PolarisV::configurePassiveTools(QString fileName)
 {
     // Load a few passive tool definitions from a .rom files
-    std::cout << std::endl << "Configuring Passive Tools - Loading .rom Files..." << std::endl;
+//    std::cout << std::endl << "Configuring Passive Tools - Loading .rom Files..." << std::endl;
     loadTool(fileName);
 }
 
@@ -408,19 +408,19 @@ void PolarisV::configurePassiveTools(QString fileName)
 void PolarisV::configureActiveTools(std::string scuHostname)
 {
     // Setup the SCU connection for demonstrating active tools
-    std::cout << std::endl << "Configuring Active Tools - Setup SCU Connection" << std::endl;
+//    std::cout << std::endl << "Configuring Active Tools - Setup SCU Connection" << std::endl;
     onErrorPrintDebugMessage("capi.setUserParameter()", capi.setUserParameter("Param.Connect.SCU Hostname", scuHostname));
-    std::cout << capi.getUserParameter("Param.Connect.SCU Hostname") << std::endl;
+//    std::cout << capi.getUserParameter("Param.Connect.SCU Hostname") << std::endl;
 
     // Wait a few seconds for the SCU to detect any wired tools plugged in
-    std::cout << std::endl << "Demo Active Tools - Detecting Tools..." << std::endl;
+//    std::cout << std::endl << "Demo Active Tools - Detecting Tools..." << std::endl;
     sleepSeconds(2);
 
     // Print all port handles
     std::vector<PortHandleInfo> portHandles = capi.portHandleSearchRequest(PortHandleSearchRequestOption::NotInit);
     for (int i = 0; i < portHandles.size(); i++)
     {
-        std::cout << portHandles[i].toString() << std::endl;
+//        std::cout << portHandles[i].toString() << std::endl;
     }
 }
 
@@ -431,7 +431,7 @@ void PolarisV::configureActiveTools(std::string scuHostname)
 void PolarisV::configureActiveWirelessTools()
 {
     // Load an active wireless tool definitions from a .rom files
-    std::cout << std::endl << "Configuring an Active Wireless Tool - Loading .rom File..." << std::endl;
+//    std::cout << std::endl << "Configuring an Active Wireless Tool - Loading .rom File..." << std::endl;
     loadTool("sroms/active-wireless.rom");
 }
 
@@ -443,7 +443,7 @@ void PolarisV::configureActiveWirelessTools()
  */
 void PolarisV::configureDummyTools()
 {
-    std::cout << std::endl << "Loading passive, active-wireless, and active dummy tools..." << std::endl;
+//    std::cout << std::endl << "Loading passive, active-wireless, and active dummy tools..." << std::endl;
     onErrorPrintDebugMessage("capi.loadPassiveDummyTool()", capi.loadPassiveDummyTool());
     onErrorPrintDebugMessage("capi.loadActiveWirelessDummyTool()", capi.loadActiveWirelessDummyTool());
     onErrorPrintDebugMessage("capi.loadActiveDummyTool()", capi.loadActiveDummyTool());
@@ -454,9 +454,9 @@ void PolarisV::configureDummyTools()
  */
 void PolarisV::configureUserParameters()
 {
-    std::cout << capi.getUserParameter("Param.User.String0") << std::endl;
+//    std::cout << capi.getUserParameter("Param.User.String0") << std::endl;
     onErrorPrintDebugMessage("capi.setUserParameter(Param.User.String0, customString)", capi.setUserParameter("Param.User.String0", "customString"));
-    std::cout << capi.getUserParameter("Param.User.String0") << std::endl;
+//    std::cout << capi.getUserParameter("Param.User.String0") << std::endl;
     onErrorPrintDebugMessage("capi.setUserParameter(Param.User.String0, emptyString)", capi.setUserParameter("Param.User.String0", ""));
 }
 
@@ -497,7 +497,7 @@ int PolarisV::startStreaming()
 
     // Once the system is put into tracking mode, data is returned for whatever tools are enabled
     // Start tracking, output a few frames of data, and stop tracking
-    std::cout << std::endl << "Entering tracking mode and collecting data..." << std::endl;
+//    std::cout << std::endl << "Entering tracking mode and collecting data..." << std::endl;
     onErrorPrintDebugMessage("capi.startTracking()", capi.startTracking());
     _streaming=true;
     while(_streaming)
@@ -506,12 +506,12 @@ int PolarisV::startStreaming()
     }
 
     // Stop tracking (back to configuration mode)
-    std::cout << std::endl << "Leaving tracking mode and returning to configuration mode..." << std::endl;
+//    std::cout << std::endl << "Leaving tracking mode and returning to configuration mode..." << std::endl;
     onErrorPrintDebugMessage("capi.stopTracking()", capi.stopTracking());
     emit streamingStopped();
 
     // Give the user a chance to view the output in the terminal before exiting
-    std::cout << "CAPI complete." << std::endl;
+//    std::cout << "CAPI complete." << std::endl;
     return 0;
 }
 
@@ -520,7 +520,7 @@ int PolarisV::getFrame()
 
     // Once the system is put into tracking mode, data is returned for whatever tools are enabled
     // Start tracking, output a few frames of data, and stop tracking
-    std::cout << std::endl << "Entering tracking mode and collecting data..." << std::endl;
+//    std::cout << std::endl << "Entering tracking mode and collecting data..." << std::endl;
     _singleFrame = true;
     _tools.clear();
     onErrorPrintDebugMessage("capi.startTracking()", capi.startTracking());
@@ -529,7 +529,7 @@ int PolarisV::getFrame()
 
     _singleFrame = false;
     // Stop tracking (back to configuration mode)
-    std::cout << std::endl << "Leaving tracking mode and returning to configuration mode..." << std::endl;
+//    std::cout << std::endl << "Leaving tracking mode and returning to configuration mode..." << std::endl;
     onErrorPrintDebugMessage("capi.stopTracking()", capi.stopTracking());
     emit streamingStopped();
 
@@ -539,7 +539,7 @@ int PolarisV::getFrame()
 //    }
 
     // Give the user a chance to view the output in the terminal before exiting
-    std::cout << "CAPI complete." << std::endl;
+//    std::cout << "CAPI complete." << std::endl;
     return 0;
 }
 

@@ -22,7 +22,7 @@ RobotDrawUi::RobotDrawUi(Kinematik *robotKinematik,Robot *robot, QVector3D sled_
 //    connect(_robDraw, &RobotDraw::changeTimerSpeed,this, &RobotDrawUi::increaseTimerSpeed);
     connect(this,&RobotDrawUi::startDrawing,_robDraw,&RobotDraw::startDrawTimer);
     connect(this,&RobotDrawUi::stopDrawing,_robDraw,&RobotDraw::stopDrawTimer);
-    connect(this,&RobotDrawUi::changeTimerSpeed,_robDraw,&RobotDraw::setTimerTime);
+    connect(this,&RobotDrawUi::changeSpeed,_robDraw,&RobotDraw::setTimerTime);
     connect(_robDraw, &RobotDraw::robotRangeChanged,this, &RobotDrawUi::adjustRobotRange);
 
     mouseFilter = new MousePositionFilter(ui->graphicsView->viewport());
@@ -71,8 +71,9 @@ void RobotDrawUi::on_pushButtonStart_clicked()
         _widget3d->deleteAllPoints();
         preview_isDrawn = false;
     }
+
     emit startDrawing();
-    _robDraw->setTimerTime(ui->timerSpeedSlider->value());
+//    _robDraw->setTimerTime(ui->timerSpeedSlider->value());
     _robDraw->UpdatePlanePosition();
 }
 
@@ -86,7 +87,7 @@ void RobotDrawUi::on_pushButtonStop_clicked()
 
 void RobotDrawUi::on_timerSpeedSlider_sliderMoved(int position)
 {
-    emit changeTimerSpeed(position);
+    emit changeSpeed(position);
     qDebug()<<position;
 }
 

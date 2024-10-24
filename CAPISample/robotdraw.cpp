@@ -10,8 +10,8 @@ RobotDraw::RobotDraw(Kinematik *robotKinematik, Robot *robot, QVector3D sled_pos
     _robotKinematik = robotKinematik;
     _robotKinematik->setJoints(0,0,90,0,90,0,0);
 
-    _timer->setInterval(1000);
-    _timer->setSingleShot(false);
+    // _timer->setInterval(1000);
+    // _timer->setSingleShot(false);
     connect(_timer, &QTimer::timeout,this, &RobotDraw::robDraw_onTimeout);
     setL1(0);
     robotMat.rotate(90,QVector3D(0,0,1));
@@ -171,7 +171,7 @@ void RobotDraw::robotDrawCircle()
         start_circlePt.setY(center.y() + (radius * qSin(qDegreesToRadians(start_angle))));
         startLinePoint = start_circlePt;
 
-        if(!_robot->IsConnected())
+        if(_robot->IsConnected())
         {
             if(cartDistance(endLinePoint,start_circlePt)>5 && alreadyDrawn)
             {
@@ -268,7 +268,7 @@ void RobotDraw::robotdrawPointUP()
 }
 
 
-void RobotDraw::robot_setPoint(QVector3D position)
+void RobotDraw:: robot_setPoint(QVector3D position)
 {
     calculateL1_new(Robot2BasePoint(position));
     position+=QVector3D(diff_l1,0,0);

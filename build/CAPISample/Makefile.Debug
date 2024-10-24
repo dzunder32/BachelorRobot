@@ -10292,7 +10292,18 @@ debug/robotdrawui.o: ../../CAPISample/robotdrawui.cpp ../../CAPISample/robotdraw
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QApplication \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QTextEdit \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DInput/QMouseEvent \
-		ui_robotdrawui.h
+		../../CAPISample/ui_robotdrawui.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QCheckBox \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QGraphicsView \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QHBoxLayout \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QMenuBar \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QPushButton \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QSlider \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QSpacerItem \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QSpinBox \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QStatusBar \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QToolBar \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QVBoxLayout
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\robotdrawui.o ..\..\CAPISample\robotdrawui.cpp
 
 debug/moc_draw.o: debug/moc_draw.cpp 

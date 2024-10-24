@@ -10,8 +10,8 @@ RobotDraw::RobotDraw(Kinematik *robotKinematik, Robot *robot, QVector3D sled_pos
     _robotKinematik = robotKinematik;
     _robotKinematik->setJoints(0,0,90,0,90,0,0);
 
-    _timer->setInterval(1000);
-    _timer->setSingleShot(false);
+    // _timer->setInterval(1000);
+    // _timer->setSingleShot(false);
     connect(_timer, &QTimer::timeout,this, &RobotDraw::robDraw_onTimeout);
     setL1(0);
     robotMat.rotate(90,QVector3D(0,0,1));

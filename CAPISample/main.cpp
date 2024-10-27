@@ -81,11 +81,18 @@ int main(int argc, char *argv[])
     //Polaris als Koordinatensystem --------------------------------------------------------------
     CoordinateSystem *polaris=new CoordinateSystem;
     polaris->setLength(200);
+    polaris->setCoordLabel("Polaris",'X');
     polaris->setNegativeAxis(false);
     widget3d->addObject(polaris);
     widget3d->addTransPolaris(polaris);
 
 
+    CoordinateSystem *calibrator=new CoordinateSystem;
+    calibrator->setLength(100);
+    calibrator->setCoordLabel("Calibrator",'X');
+    calibrator->setNegativeAxis(false);
+    widget3d->addObject(calibrator);
+    widget3d->addTransCalibrator(calibrator);
 
 //     CoordinateSystem *CSystem=new CoordinateSystem();
 //     CSystem->setLength(100);
@@ -141,6 +148,7 @@ int main(int argc, char *argv[])
     // xMeasureEntity->addComponent(cylinderTransformX);
     // xMeasureEntity->addComponent(MeasureMaterial);
 
+    //position of ref tool, 300 in y , 40 in x
     widget3d->addCylinderBetweenPoints(QVector3D(980,380,712),QVector3D(980,740,712));
     widget3d->addCylinderBetweenPoints(QVector3D(980,740,712),QVector3D(940,740,712));
 

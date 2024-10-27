@@ -39,10 +39,11 @@ Widget3D::Widget3D(QWidget *parent) : QWidget(parent)
     _camController->setLookSpeed( -2000.0f );
     _camController->setCamera(_cameraEntity);
 
-    trans_tool     = new Qt3DCore::QTransform();
-    trans_polaris  = new Qt3DCore::QTransform();
-    trans_position = new Qt3DCore::QTransform();
-    trans_point    = new Qt3DCore::QTransform();
+    trans_tool        = new Qt3DCore::QTransform();
+    trans_polaris     = new Qt3DCore::QTransform();
+    trans_calibrator  = new Qt3DCore::QTransform();
+    trans_position    = new Qt3DCore::QTransform();
+    trans_point       = new Qt3DCore::QTransform();
 
     //LivePlot tracking------------------------------------------------------------------------------
     if (false)
@@ -121,6 +122,13 @@ void Widget3D::addTransPolaris(Qt3DCore::QEntity *entity)
 {
     entity->addComponent(trans_polaris);
     trans_polaris->setTranslation(QVector3D(2000,700,800));
+    trans_polaris->setRotationY(90);
+}
+
+void Widget3D::addTransCalibrator(Qt3DCore::QEntity *entity)
+{
+    entity->addComponent(trans_calibrator);
+    trans_calibrator->setTranslation(QVector3D(980,700,712));
 }
 
 void Widget3D::setPosMatrix(Qt3DCore::QTransform *pos)
@@ -179,6 +187,12 @@ void Widget3D::getPolarisData(QVector <double> data)
 
     PolarisMatrix = DataMatrix(PolarisVals,data);
     trans_polaris->setMatrix(trans_position->matrix()*PolarisMatrix.inverted());
+}
+
+void Widget3D::getCalibratorData(QVector <double> data)
+{
+    CalibratorMatrix = DataMatrix(CalibratorVals,data);
+    trans_calibrator->setMatrix(trans_position->matrix()*CalibratorMatrix.inverted());
 }
 
 

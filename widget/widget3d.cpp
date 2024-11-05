@@ -64,6 +64,7 @@ Widget3D::Widget3D(QWidget *parent) : QWidget(parent)
 
     ToolVals=QVector <QVector <double>>(meanVal,QVector <double>(7,0));
     PolarisVals=ToolVals;
+    CalibratorVals=ToolVals;
 
     // Create a new entity
     // Qt3DCore::QEntity *planeToolEntity = new Qt3DCore::QEntity(_rootEntity);
@@ -192,7 +193,7 @@ void Widget3D::getPolarisData(QVector <double> data)
 void Widget3D::getCalibratorData(QVector <double> data)
 {
     CalibratorMatrix = DataMatrix(CalibratorVals,data);
-    trans_calibrator->setMatrix(trans_position->matrix()*CalibratorMatrix.inverted());
+    trans_calibrator->setMatrix(trans_polaris->matrix()*CalibratorMatrix);
 }
 
 

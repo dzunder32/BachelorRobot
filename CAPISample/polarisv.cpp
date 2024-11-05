@@ -75,14 +75,14 @@ PolarisV::PolarisV()
 //        }
 //        configurePassiveTools("3_332.rom");
 //        fileName = "5_1280_3.5mm";
-        configurePassiveTools("5_1280_3.5mm.rom");
+        configurePassiveTools("5_1190.rom");
 
 //        configurePassiveTools("3_161.rom");
 //        configurePassiveTools("SLen_350_18.rom");
 //        configurePassiveTools("kurze_Spitze_Test.rom");
         configurePassiveTools("NDI_Tracker4.rom");
 
-        configurePassiveTools("NDI_Tracker3.rom");
+        configurePassiveTools("NDI_Tracker2.rom");
 
         //configureActiveWirelessTools();
         //if (scu_hostname.length() > 0)

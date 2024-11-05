@@ -49,6 +49,8 @@ signals:
     void getFrame();
     void writeCSV(std::string name,int lines);
     void getLines(int lines);
+
+    void sendCalibratorData(QVector <double> data);
     void sendToolData(QVector <double> data);
     void sendPolarisData(QVector <double> data);
     void sendRom(QString rom);

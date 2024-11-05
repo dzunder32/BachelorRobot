@@ -42,7 +42,7 @@ protected:
     double _oldJ1,_oldJ2,_oldJ3,_oldJ4,_oldJ5,_oldJ6,_oldJ7;
     double _oldX,_oldY,_oldZ,_oldA,_oldB,_oldC,_oldL1;
     unsigned int _oldFlg1,_oldFlg2;
-    bool _positionReached=true;
+    volatile bool _positionReached;/*bool _positionReached=true;*/
     QMatrix4x4 _toolTransformationMatrix;
     void _updateJoints();
     void _updateKart();

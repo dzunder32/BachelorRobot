@@ -125,10 +125,11 @@ int main(int argc, char *argv[])
     STLMesh* toolMesh= new STLMesh(position);
     toolMesh->setSource("RefTool_C.STL");
     toolMesh->setRotationZ(90);
-    toolMesh->setTranslation(QVector3D(-8.77,-72.5,-7));
+    toolMesh->setTranslation(QVector3D(-8.77,-92.5,-12));
     //Pos 1
-    widget3d->addObject(position,QVector3D(980,380,712),/*QQuaternion(1,0,0,0) * */QQuaternion::fromAxisAndAngle(QVector3D(0,0,1),45)/**//*QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180)*/);
+    widget3d->addObject(position,QVector3D(980,380,717),/*QQuaternion(1,0,0,0) * */QQuaternion::fromAxisAndAngle(QVector3D(0,0,1),45)/**//*QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180)*/);
     //Pos 2
+    widget3d->addObject(position);
     // widget3d->addObject(position,QVector3D(1360,360,712),/*QQuaternion(1,0,0,0) * */QQuaternion::fromAxisAndAngle(QVector3D(0,0,1),45)/**//*QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180)*/);
     widget3d->setPosMatrix(static_cast<Qt3DCore::QTransform*>(position->components()[1]));
 

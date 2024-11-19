@@ -42,7 +42,7 @@ Widget3D::Widget3D(QWidget *parent) : QWidget(parent)
     trans_tool        = new Qt3DCore::QTransform();
     trans_polaris     = new Qt3DCore::QTransform();
     trans_calibrator  = new Qt3DCore::QTransform();
-    trans_position    = new Qt3DCore::QTransform();
+    trans_ref         = new Qt3DCore::QTransform();
     trans_point       = new Qt3DCore::QTransform();
 
     //LivePlot tracking------------------------------------------------------------------------------
@@ -64,6 +64,7 @@ Widget3D::Widget3D(QWidget *parent) : QWidget(parent)
 
     ToolVals=QVector <QVector <double>>(meanVal,QVector <double>(7,0));
     PolarisVals=ToolVals;
+    CalibratorVals=ToolVals;
 
     // Create a new entity
     // Qt3DCore::QEntity *planeToolEntity = new Qt3DCore::QEntity(_rootEntity);
@@ -129,11 +130,15 @@ void Widget3D::addTransCalibrator(Qt3DCore::QEntity *entity)
 {
     entity->addComponent(trans_calibrator);
     trans_calibrator->setTranslation(QVector3D(980,700,712));
+    float dotProduct =QVector3D::dotProduct(trans_calibrator->matrix().column(0).toVector3D(),trans_ref->matrix().column(0).toVector3D());
+    float CaliRef_angle =qRadiansToDegrees(qAcos(dotProduct));
+    qDebug()<<"CaliRef_angle"<<CaliRef_angle;
+    sendAngle(CaliRef_angle);
 }
 
-void Widget3D::setPosMatrix(Qt3DCore::QTransform *pos)
+void Widget3D::setRefMatrix(Qt3DCore::QTransform *ref)
 {
-    trans_position = pos;
+    trans_ref = ref;
 }
 
 
@@ -186,13 +191,15 @@ void Widget3D::getPolarisData(QVector <double> data)
     //    emit updatePlt2({data[4],data[5],data[6]});
 
     PolarisMatrix = DataMatrix(PolarisVals,data);
-    trans_polaris->setMatrix(trans_position->matrix()*PolarisMatrix.inverted());
+    trans_polaris->setMatrix(trans_ref->matrix()*PolarisMatrix.inverted());
 }
 
 void Widget3D::getCalibratorData(QVector <double> data)
 {
     CalibratorMatrix = DataMatrix(CalibratorVals,data);
-    trans_calibrator->setMatrix(trans_position->matrix()*CalibratorMatrix.inverted());
+    trans_calibrator->setMatrix(trans_polaris->matrix()*CalibratorMatrix);
+    float dotProduct =QVector3D::dotProduct(trans_calibrator->matrix().column(0).toVector3D(),trans_ref->matrix().column(0).toVector3D());
+    float CaliRef_angle =qRadiansToDegrees(qAcos(dotProduct));
 }
 
 

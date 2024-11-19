@@ -818,6 +818,7 @@ release/moc_controlpanel.cpp: ../../melfaRobots/controlpanel.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DExtras/qtorusgeometry.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DExtras/qtorusmesh.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DExtras/qt3dextrasversion.h \
+		C:/Qt/5.15.2/mingw81_64/include/Qt3DExtras/QText2DEntity \
 		release/moc_predefs.h \
 		C:/Qt/5.15.2/mingw81_64/bin/moc.exe
 	C:\Qt\5.15.2\mingw81_64\bin\moc.exe $(DEFINES) --include C:/Users/wolfd/Desktop/Git/BachelorRobot/build/melfaRobots/release/moc_predefs.h -IC:/Qt/5.15.2/mingw81_64/mkspecs/win32-g++ -IC:/Users/wolfd/Desktop/Git/BachelorRobot/melfaRobots -IC:/Users/wolfd/Desktop/Git/BachelorRobot/widget -IC:/Qt/5.15.2/mingw81_64/include -IC:/Qt/5.15.2/mingw81_64/include/QtWidgets -IC:/Qt/5.15.2/mingw81_64/include/Qt3DExtras -IC:/Qt/5.15.2/mingw81_64/include/Qt3DRender -IC:/Qt/5.15.2/mingw81_64/include/Qt3DInput -IC:/Qt/5.15.2/mingw81_64/include/Qt3DLogic -IC:/Qt/5.15.2/mingw81_64/include/Qt3DCore -IC:/Qt/5.15.2/mingw81_64/include/QtGamepad -IC:/Qt/5.15.2/mingw81_64/include/QtGui -IC:/Qt/5.15.2/mingw81_64/include/QtANGLE -IC:/Qt/5.15.2/mingw81_64/include/QtNetwork -IC:/Qt/5.15.2/mingw81_64/include/QtCore -I. -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed -IC:/Qt/Tools/mingw810_64/x86_64-w64-mingw32/include ..\..\melfaRobots\controlpanel.h -o release\moc_controlpanel.cpp
@@ -3512,6 +3513,7 @@ release/controlpanel.o: ../../melfaRobots/controlpanel.cpp ../../melfaRobots/con
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DExtras/qtorusgeometry.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DExtras/qtorusmesh.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DExtras/qt3dextrasversion.h \
+		C:/Qt/5.15.2/mingw81_64/include/Qt3DExtras/QText2DEntity \
 		../../melfaRobots/ui_controlpanel.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QApplication \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/qapplication.h \

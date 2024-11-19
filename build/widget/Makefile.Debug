@@ -2413,6 +2413,7 @@ debug/moc_widget3d.cpp: ../../widget/widget3d.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/qmdisubwindow.h \
 		../../widget/plane.h \
 		../../widget/coordinatesystem.h \
+		C:/Qt/5.15.2/mingw81_64/include/Qt3DExtras/QText2DEntity \
 		../../widget/liveplot2.h \
 		../../widget/liveplot.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QMainWindow \
@@ -5629,7 +5630,8 @@ debug/coordinatesystem.o: ../../widget/coordinatesystem.cpp ../../widget/coordin
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DExtras/qtexturematerial.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DExtras/qtorusgeometry.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DExtras/qtorusmesh.h \
-		C:/Qt/5.15.2/mingw81_64/include/Qt3DExtras/qt3dextrasversion.h
+		C:/Qt/5.15.2/mingw81_64/include/Qt3DExtras/qt3dextrasversion.h \
+		C:/Qt/5.15.2/mingw81_64/include/Qt3DExtras/QText2DEntity
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\coordinatesystem.o ..\..\widget\coordinatesystem.cpp
 
 debug/kinectcamera.o: ../../widget/kinectcamera.cpp ../../widget/kinectcamera.h \
@@ -6290,6 +6292,7 @@ debug/kinectcamera.o: ../../widget/kinectcamera.cpp ../../widget/kinectcamera.h 
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DExtras/qtorusgeometry.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DExtras/qtorusmesh.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DExtras/qt3dextrasversion.h \
+		C:/Qt/5.15.2/mingw81_64/include/Qt3DExtras/QText2DEntity \
 		../../widget/stlmesh.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\kinectcamera.o ..\..\widget\kinectcamera.cpp
 
@@ -6949,7 +6952,8 @@ debug/linearaxisrv6sl.o: ../../widget/linearaxisrv6sl.cpp ../../widget/linearaxi
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DExtras/qtorusgeometry.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DExtras/qtorusmesh.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DExtras/qt3dextrasversion.h \
-		../../widget/coordinatesystem.h
+		../../widget/coordinatesystem.h \
+		C:/Qt/5.15.2/mingw81_64/include/Qt3DExtras/QText2DEntity
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\linearaxisrv6sl.o ..\..\widget\linearaxisrv6sl.cpp
 
 debug/liveplot.o: ../../widget/liveplot.cpp ../../widget/liveplot.h \
@@ -8668,6 +8672,7 @@ debug/penholder.o: ../../widget/penholder.cpp ../../widget/penholder.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DExtras/qtorusgeometry.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DExtras/qtorusmesh.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DExtras/qt3dextrasversion.h \
+		C:/Qt/5.15.2/mingw81_64/include/Qt3DExtras/QText2DEntity \
 		../../widget/stlmesh.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\penholder.o ..\..\widget\penholder.cpp
 
@@ -9325,7 +9330,8 @@ debug/plane.o: ../../widget/plane.cpp ../../widget/plane.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DExtras/qtorusgeometry.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DExtras/qtorusmesh.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DExtras/qt3dextrasversion.h \
-		../../widget/coordinatesystem.h
+		../../widget/coordinatesystem.h \
+		C:/Qt/5.15.2/mingw81_64/include/Qt3DExtras/QText2DEntity
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\plane.o ..\..\widget\plane.cpp
 
 debug/qcustomplot.o: ../../widget/qcustomplot.cpp ../../widget/qcustomplot.h \
@@ -10504,6 +10510,7 @@ debug/rv4fl.o: ../../widget/rv4fl.cpp ../../widget/rv4fl.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DExtras/qtorusgeometry.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DExtras/qtorusmesh.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DExtras/qt3dextrasversion.h \
+		C:/Qt/5.15.2/mingw81_64/include/Qt3DExtras/QText2DEntity \
 		../../widget/linearaxis.h \
 		../../widget/stlmesh.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\rv4fl.o ..\..\widget\rv4fl.cpp
@@ -11167,6 +11174,7 @@ debug/rv6sl.o: ../../widget/rv6sl.cpp ../../widget/rv6sl.h \
 		../../widget/sixjointrobot.h \
 		../../widget/tool.h \
 		../../widget/coordinatesystem.h \
+		C:/Qt/5.15.2/mingw81_64/include/Qt3DExtras/QText2DEntity \
 		../../widget/linearaxis.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\rv6sl.o ..\..\widget\rv6sl.cpp
 
@@ -11826,6 +11834,7 @@ debug/sixjointrobot.o: ../../widget/sixjointrobot.cpp ../../widget/sixjointrobot
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DExtras/qtorusgeometry.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DExtras/qtorusmesh.h \
 		C:/Qt/5.15.2/mingw81_64/include/Qt3DExtras/qt3dextrasversion.h \
+		C:/Qt/5.15.2/mingw81_64/include/Qt3DExtras/QText2DEntity \
 		../../widget/linearaxis.h \
 		../../widget/stlmesh.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\sixjointrobot.o ..\..\widget\sixjointrobot.cpp
@@ -13155,6 +13164,7 @@ debug/widget3d.o: ../../widget/widget3d.cpp ../../widget/widget3d.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/qmdisubwindow.h \
 		../../widget/plane.h \
 		../../widget/coordinatesystem.h \
+		C:/Qt/5.15.2/mingw81_64/include/Qt3DExtras/QText2DEntity \
 		../../widget/liveplot2.h \
 		../../widget/liveplot.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QMainWindow \

@@ -77,6 +77,74 @@ int main(int argc, char *argv[])
     widget3d->addTransPolaris(polaris);
 
 
+<<<<<<< HEAD
+=======
+    CoordinateSystem *calibrator=new CoordinateSystem;
+    calibrator->setLength(100);
+    calibrator->setCoordLabel("Calibrator",'Z');
+    calibrator->setNegativeAxis(false);
+    widget3d->addObject(calibrator);
+    widget3d->addTransCalibrator(calibrator);
+
+//     CoordinateSystem *CSystem=new CoordinateSystem();
+//     CSystem->setLength(100);
+//     CSystem->setNegativeAxis(false);
+//     CSystem->setTranslation(QVector3D(0,100,1000));
+
+//     STLMesh* toolMesh= new STLMesh(CSystem);
+//     toolMesh->setSource("RefTool_C.STL");
+//     toolMesh->setRotationZ(90);
+////     toolMesh->setTranslation(QVector3D(-8.77,62.5,-7));
+//     toolMesh->setTranslation(QVector3D(-8.77,-72.5,-7));
+
+////     CSystem->setRotationZ(90);
+////     toolMesh->setRotationX(180);
+//     widget3d->addObject(CSystem);
+
+//    Tool *refTool = new Tool;
+//    STLMesh *refToolMesh = new STLMesh(refTool);
+//    refToolMesh->setSource("RefTool.STL");
+//    refToolMesh->Qt3DCore::QEntity::setEnabled(true);
+//    refToolMesh->setRotationX()
+//    refTool->setTranslation(QVector3D(0,0,1000));
+//    widget3d->addObject(refTool);
+
+    //Position des Polaris-Tools
+    CoordinateSystem *position=new CoordinateSystem;
+    position->setLength(100);
+    position->setNegativeAxis(false);
+    //Mesh des Referenz Tools
+    STLMesh* toolMesh= new STLMesh(position);
+    toolMesh->setSource("RefTool_C.STL");
+    toolMesh->setRotationZ(90);
+    toolMesh->setTranslation(QVector3D(-8.77,-92.5,-12));
+    //Pos 1
+    widget3d->addObject(position,QVector3D(980,380,717),/*QQuaternion(1,0,0,0) * */QQuaternion::fromAxisAndAngle(QVector3D(0,0,1),45)/**//*QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180)*/);
+    //Pos 2
+    widget3d->addObject(position);
+    // widget3d->addObject(position,QVector3D(1360,360,712),/*QQuaternion(1,0,0,0) * */QQuaternion::fromAxisAndAngle(QVector3D(0,0,1),45)/**//*QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180)*/);
+    widget3d->setPosMatrix(static_cast<Qt3DCore::QTransform*>(position->components()[1]));
+
+    // Qt3DExtras::QCylinderMesh *xMeasureCylinder =new Qt3DExtras::QCylinderMesh;
+    // xMeasureCylinder->setLength(100);
+    // xMeasureCylinder->setRadius(1);
+    // Qt3DExtras::QCylinderMesh *yMeasureCylinder =new Qt3DExtras::QCylinderMesh;
+    // Qt3DCore::QTransform *cylinderTransformX = new Qt3DCore::QTransform();
+    // Qt3DCore::QTransform *cylinderTransformY = new Qt3DCore::QTransform();
+    // Qt3DExtras::QPhongMaterial *MeasureMaterial =new Qt3DExtras::QPhongMaterial();
+
+    // MeasureMaterial->setAmbient(QColor(255,0,0));
+    // cylinderTransformX->setRotationZ(-90);
+
+    // Qt3DCore::QEntity *xMeasureEntity = new Qt3DCore::QEntity();
+    // xMeasureEntity->addComponent(xMeasureCylinder);
+    // xMeasureEntity->addComponent(cylinderTransformX);
+    // xMeasureEntity->addComponent(MeasureMaterial);
+
+    //position of ref tool, 300 in y , 40 in x
+    widget3d->addCylinderBetweenPoints(QVector3D(980,380,712),QVector3D(980,740,712));
+    widget3d->addCylinderBetweenPoints(QVector3D(980,740,712),QVector3D(940,740,712));
+>>>>>>> f203c4d86048339ca9b77b61e97f457778a2c072
 
 
     //Ebene zu Zeichnen

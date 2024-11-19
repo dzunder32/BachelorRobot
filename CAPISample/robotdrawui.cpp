@@ -37,7 +37,7 @@ RobotDrawUi::RobotDrawUi(Kinematik *robotKinematik,Robot *robot, QVector3D sled_
     ui->graphicsView->setScene(scene);
 
     connect(_robDraw,&RobotDraw::clearGW,this,&RobotDrawUi::removeAllItems);
-
+    _robDraw->setTimerTime(500);
     robotThread.start();
 }
 

@@ -96,10 +96,14 @@ void MainWindow::getData(QString data)
              emit sendPolarisData(RotTransData);
 //            qDebug()<<"worked";
         }
-        else
+        else if(dataList[1]=="Port:2")
         {
             emit sendToolData(RotTransData);
 //        qDebug()<<"also worked!";
+        }
+        else if(dataList[1]=="Port:3")
+        {
+            emit sendCalibratorData(RotTransData);
         }
 //        qDebug()<<"the Data:"<<RotTransData;
     }
@@ -117,6 +121,8 @@ void MainWindow::connectWidget(Widget3D* w)
 //    widget->setFileName(polaris->getFileName());
     connect(this,&MainWindow::sendToolData,widget,&Widget3D::getToolData);
     connect(this,&MainWindow::sendPolarisData,widget,&Widget3D::getPolarisData);
+    connect(this,&MainWindow::sendCalibratorData,widget,&Widget3D::getCalibratorData);
+
 }
 
 void MainWindow::addRomFile()

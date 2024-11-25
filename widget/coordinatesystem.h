@@ -5,6 +5,7 @@
 #include <Qt3DCore>
 #include <Qt3DExtras>
 #include <Qt3DRender>
+#include <Qt3DExtras/QText2DEntity>
 
 class CoordinateSystem: public Qt3DCore::QEntity,public Qt3DCore::QTransform
 {
@@ -13,7 +14,9 @@ public:
 
     void setLength(float length);
     void thinOut(float factor);
-
+    void setText(const QString& text);
+    void setTextProperties(const QFont& font, float height, const QColor& color);
+    void setCoordLabel(QString string,char axis);
     Qt3DCore::QEntity * AxisZ;
     Qt3DCore::QEntity * AxisX;
     Qt3DCore::QEntity * AxisY;
@@ -33,6 +36,9 @@ private:
     Qt3DExtras::QPhongMaterial *_materialX;
     Qt3DExtras::QPhongMaterial *_materialY;
     Qt3DExtras::QPhongMaterial *_materialZ;
+    Qt3DExtras::QText2DEntity *_textLabel,*_textLabel1;
+    float textOffset = 10;
+    float _length=100;
     bool _negativeAxis=true;
 
 

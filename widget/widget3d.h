@@ -30,6 +30,8 @@ public:
 //    void addObject(Qt3DCore::QEntity *entity,const bool& arg);
     void addTransTool(Qt3DCore::QEntity *entity);
     void addTransPolaris(Qt3DCore::QEntity *entity);
+    void addTransCalibrator(Qt3DCore::QEntity *entity);
+
     void setPosMatrix(Qt3DCore::QTransform *pos);
     int toolPlaneDistance = 8;
     QMatrix4x4 DataMatrix(QVector <QVector <double>> &vals,QVector <double> data);
@@ -48,6 +50,8 @@ public:
 public slots:
     void getToolData(QVector <double>);
     void getPolarisData(QVector <double>);
+    void getCalibratorData(QVector <double>);
+
     void drawPoint(QVector3D position, float size, QColor color);
     void deleteAllPoints();
     void deleteAllLines();
@@ -64,12 +68,13 @@ private:
     // Qt3DCore::QTransform *planeToolTransform = new Qt3DCore::QTransform();
     Qt3DCore::QTransform *trans_tool;
     Qt3DCore::QTransform *trans_polaris;
+    Qt3DCore::QTransform *trans_calibrator;
     Qt3DCore::QTransform *trans_position;
     Qt3DCore::QTransform *trans_point;
     int meanVal=20,decimalPlaces;
-    QVector <QVector <double>> PolarisVals,ToolVals;
+    QVector <QVector <double>> PolarisVals,ToolVals,CalibratorVals;
     QVector <double> meanDataT=QVector <double>(meanVal,0),meanDataP=QVector <double>(meanVal,0);
-    QMatrix4x4 ToolMatrix,PolarisMatrix;
+    QMatrix4x4 ToolMatrix,PolarisMatrix,CalibratorMatrix;
     LivePlot* livePlot;
     LivePlot2* livePlot2;
     QVector<Qt3DCore::QEntity*> pointEntities,lineEntities;

@@ -82,6 +82,8 @@ PolarisV::PolarisV()
 //        configurePassiveTools("kurze_Spitze_Test.rom");
         configurePassiveTools("NDI_Tracker4.rom");
 
+        configurePassiveTools("NDI_Tracker3.rom");
+
         //configureActiveWirelessTools();
         //if (scu_hostname.length() > 0)
         //{

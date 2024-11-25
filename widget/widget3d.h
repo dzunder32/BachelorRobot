@@ -32,7 +32,7 @@ public:
     void addTransPolaris(Qt3DCore::QEntity *entity);
     void addTransCalibrator(Qt3DCore::QEntity *entity);
 
-    void setPosMatrix(Qt3DCore::QTransform *pos);
+    void setRefMatrix(Qt3DCore::QTransform *ref);
     int toolPlaneDistance = 8;
     QMatrix4x4 DataMatrix(QVector <QVector <double>> &vals,QVector <double> data);
 
@@ -69,7 +69,7 @@ private:
     Qt3DCore::QTransform *trans_tool;
     Qt3DCore::QTransform *trans_polaris;
     Qt3DCore::QTransform *trans_calibrator;
-    Qt3DCore::QTransform *trans_position;
+    Qt3DCore::QTransform *trans_ref;
     Qt3DCore::QTransform *trans_point;
     int meanVal=20,decimalPlaces;
     QVector <QVector <double>> PolarisVals,ToolVals,CalibratorVals;
@@ -85,6 +85,7 @@ private:
 signals:
     void updatePlt(QVector <double> values);
     void updatePlt2(QVector <double> values);
+    void sendAngle(float angle);
 
 };
 

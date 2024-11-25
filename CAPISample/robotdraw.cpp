@@ -17,13 +17,14 @@ RobotDraw::RobotDraw(Kinematik *robotKinematik, Robot *robot, QVector3D sled_pos
     robotMat.rotate(90,QVector3D(0,0,1));
     UpdatePlanePosition();
     initLetterSize(1);
+//    setTimerTime(500);
 }
 
 
 void RobotDraw::robDraw_onTimeout()
 {
     runAgain:
-    qDebug()<<"roboSeq"<<robotSequence;
+//    qDebug()<<"roboSeq"<<robotSequence;
     UpdatePlanePosition();
     if(!robotSequence.isEmpty())
     {
@@ -292,8 +293,8 @@ void RobotDraw:: robot_setPoint(QVector3D position)
 
     if(moveAboveCounter<2){qDebug()<<"Doin MOV!";drawPoint_Widget(Robot2BasePoint(position),2,QColor(0,255,0));moveAboveCounter++;}
     else                  {qDebug()<<"Doin MVS!";}
-    qDebug()<<"IM OUT";
-    qDebug()<<"TimerStatus:"<<_timer->isActive();
+//    qDebug()<<"IM OUT";
+//    qDebug()<<"TimerStatus:"<<_timer->isActive();
 }
 
 
@@ -410,8 +411,8 @@ void RobotDraw::calculateL1_new(QVector3D adjustPoint)
     QVector2D xzProjectionPlane_2d   = QVector2D(plane_position_3d.x(),plane_position_3d.z());
     QVector2D xzProjection_dist_2d   = xzProjectionCenter_2d - xzProjectionPlane_2d;
 //    qDebug()<<"line_position:"<<line_position_3d;
-    float rectBorderY_min = line_position_3d.y() - 800;
-    float rectBorderY_max = line_position_3d.y() + 800;
+    float rectBorderY_min = line_position_3d.y() - 780;
+    float rectBorderY_max = line_position_3d.y() + 780;
     float rectBorderZ_min = line_position_3d.z() - prefRob_range;
     float rectBorderZ_max = line_position_3d.z() + prefRob_range;
 
@@ -472,9 +473,9 @@ void RobotDraw::calculateL1_new(QVector3D adjustPoint)
     for(QVector3D &vec:solutionVec_3d){
 //        qDebug()<<"solution:"<<vec;
         if(vec.y() > rectBorderY_max){
-            vec.setY(line_position_3d.y()+800);
+            vec.setY(line_position_3d.y()+780);
         }else if( vec.y() < rectBorderY_min){
-            vec.setY(line_position_3d.y()-800);}
+            vec.setY(line_position_3d.y()-780);}
     }
 
     if(solutionVec_3d.isEmpty()){

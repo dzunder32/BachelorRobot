@@ -7,7 +7,7 @@
 *****************************************************************************/
 
 #include <memory>
-#include "../../../../BachelorRobot - Kopie/widget/qcustomplot.h"
+#include "../../../widget/qcustomplot.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #include <QtCore/QSharedPointer>

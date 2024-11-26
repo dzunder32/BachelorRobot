@@ -19,6 +19,8 @@ RobotDrawUi::RobotDrawUi(Kinematik *robotKinematik,Robot *robot, QVector3D sled_
     connect(_robDraw, &RobotDraw::drawLine,_widget3d, &Widget3D::addCylinderBetweenPoints);
 //    connect(_robDraw, &RobotDraw::drawPoint_Widget,this, &RobotDrawUi::widgetDrawPoint);
     connect(_robDraw, &RobotDraw::drawPoint_Widget,_widget3d, &Widget3D::drawPoint);
+    connect(_widget3d, &Widget3D::sendAngle,this, &RobotDrawUi::displayAngleReference);
+
 //    connect(_robDraw, &RobotDraw::changeTimerSpeed,this, &RobotDrawUi::increaseTimerSpeed);
     connect(this,&RobotDrawUi::startDrawing,_robDraw,&RobotDraw::startDrawTimer);
     connect(this,&RobotDrawUi::stopDrawing,_robDraw,&RobotDraw::stopDrawTimer);
@@ -46,23 +48,34 @@ RobotDrawUi::~RobotDrawUi()
     delete ui;
 }
 
+void RobotDrawUi::displayAngleReference(float angle)
+{
+    QTextCursor cursor = ui->textEdit_Sequence->textCursor();
+
+    // Move cursor to the beginning of the document
+    cursor.movePosition(QTextCursor::Start);
+
+    // Select the first line
+    cursor.select(QTextCursor::LineUnderCursor);
+
+    // Remove the selected text (first line)
+    cursor.removeSelectedText();
+    qDebug()<<"angle"<<angle;
+    // Insert new text at the current cursor position
+    // ui->textEdit_Sequence->insertPlainText("RobotSequence: Your Mam"+QString::number(angle));
+    cursor.insertText("RobotSequence: Your Mam"+QString::number(angle));
+
+    // Update the text edit with the modified cursor
+    ui->textEdit_Sequence->setTextCursor(cursor);
+
+
+}
+
 void RobotDrawUi::adjustRobotRange(float range)
 {
     ui->lineEdit_Range->setText(QString::number(range));
 }
 
-void RobotDrawUi::onCursorPositionChanged()
-{
-    int position = ui->textEdit_textInput->textCursor().position();
-    qDebug() << "Cursor position changed to:" << position;
-
-    // Get selected text if any
-    if (ui->textEdit_textInput->textCursor().hasSelection()) {
-        QString selectedText = ui->textEdit_textInput->textCursor().selectedText();
-        qDebug() << "Selected text:" << selectedText;
-    }
-
-}
 void RobotDrawUi::on_pushButtonStart_clicked()
 {
     // _robDraw->robotRange = ui->lineEdit_Range->text().toDouble();
@@ -135,6 +148,7 @@ void RobotDrawUi::on_pushButton_addP1_clicked()
 void RobotDrawUi::insertRobotSequenceText(QString str)
 {
     ui->textEdit_Sequence->moveCursor(QTextCursor::End);
+    // ui->textEdit_Sequence.
     ui->textEdit_Sequence->insertPlainText("\n");
     ui->textEdit_Sequence->insertPlainText(str);
 }
@@ -144,7 +158,7 @@ void RobotDrawUi::insertRobotSequenceText(QString str)
 void RobotDrawUi::on_pushButton_addCircle_clicked()
 {
     QVariantList circleList;
-    float radius =ui->lineEdit_Radius->text().toFloat();
+    float radius = ui->lineEdit_Radius->text().toFloat();
     circleList.append(radius);
     circleList.append(P1);
     circleList.append(QVector2D(0,360));

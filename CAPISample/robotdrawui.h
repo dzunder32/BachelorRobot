@@ -79,7 +79,7 @@ signals:
 public slots:
     void drawLineWidget(QVector3D start,QVector3D end){_widget3d->addCylinderBetweenPoints(start,end);}
     void adjustRobotRange(float range);
-    void onCursorPositionChanged();
+    void displayAngleReference(float angle);
 };
 
 #endif // ROBOTDRAWUI_H

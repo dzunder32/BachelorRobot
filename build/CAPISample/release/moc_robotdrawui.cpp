@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_RobotDrawUi_t {
-    QByteArrayData data[39];
-    char stringdata0[806];
+    QByteArrayData data[40];
+    char stringdata0[810];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -70,7 +70,8 @@ QT_MOC_LITERAL(34, 749, 5), // "start"
 QT_MOC_LITERAL(35, 755, 3), // "end"
 QT_MOC_LITERAL(36, 759, 16), // "adjustRobotRange"
 QT_MOC_LITERAL(37, 776, 5), // "range"
-QT_MOC_LITERAL(38, 782, 23) // "onCursorPositionChanged"
+QT_MOC_LITERAL(38, 782, 21), // "displayAngleReference"
+QT_MOC_LITERAL(39, 804, 5) // "angle"
 
     },
     "RobotDrawUi\0startDrawing\0\0stopDrawing\0"
@@ -97,7 +98,7 @@ QT_MOC_LITERAL(38, 782, 23) // "onCursorPositionChanged"
     "onMousePressed\0globalPos\0"
     "on_pushButton_lift_clicked\0drawLineWidget\0"
     "start\0end\0adjustRobotRange\0range\0"
-    "onCursorPositionChanged"
+    "displayAngleReference\0angle"
 };
 #undef QT_MOC_LITERAL
 
@@ -144,7 +145,7 @@ static const uint qt_meta_data_RobotDrawUi[] = {
       32,    0,  206,    2, 0x08 /* Private */,
       33,    2,  207,    2, 0x0a /* Public */,
       36,    1,  212,    2, 0x0a /* Public */,
-      38,    0,  215,    2, 0x0a /* Public */,
+      38,    1,  215,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void,
@@ -176,7 +177,7 @@ static const uint qt_meta_data_RobotDrawUi[] = {
     QMetaType::Void,
     QMetaType::Void, QMetaType::QVector3D, QMetaType::QVector3D,   34,   35,
     QMetaType::Void, QMetaType::Float,   37,
-    QMetaType::Void,
+    QMetaType::Void, QMetaType::Float,   39,
 
        0        // eod
 };
@@ -214,7 +215,7 @@ void RobotDrawUi::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 24: _t->on_pushButton_lift_clicked(); break;
         case 25: _t->drawLineWidget((*reinterpret_cast< QVector3D(*)>(_a[1])),(*reinterpret_cast< QVector3D(*)>(_a[2]))); break;
         case 26: _t->adjustRobotRange((*reinterpret_cast< float(*)>(_a[1]))); break;
-        case 27: _t->onCursorPositionChanged(); break;
+        case 27: _t->displayAngleReference((*reinterpret_cast< float(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {

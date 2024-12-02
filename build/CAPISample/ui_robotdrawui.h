@@ -85,6 +85,7 @@ public:
     QSlider *horizontalSlider_xRot;
     QSlider *horizontalSlider_yRot;
     QSlider *horizontalSlider_zRot;
+    QLineEdit *lineEdit_2;
     QLineEdit *lineEdit_Range;
     QHBoxLayout *horizontalLayout_2;
     QVBoxLayout *verticalLayout_2;
@@ -358,6 +359,11 @@ public:
 
         horizontalLayout_4->addWidget(horizontalSlider_zRot);
 
+        lineEdit_2 = new QLineEdit(centralwidget);
+        lineEdit_2->setObjectName(QString::fromUtf8("lineEdit_2"));
+
+        horizontalLayout_4->addWidget(lineEdit_2);
+
         lineEdit_Range = new QLineEdit(centralwidget);
         lineEdit_Range->setObjectName(QString::fromUtf8("lineEdit_Range"));
 
@@ -486,6 +492,7 @@ public:
         pushButton_History->setText(QCoreApplication::translate("RobotDrawUi", "PushButton", nullptr));
         pushButtonStart->setText(QCoreApplication::translate("RobotDrawUi", "Start", nullptr));
         pushButtonStop->setText(QCoreApplication::translate("RobotDrawUi", "Stop", nullptr));
+        lineEdit_2->setText(QCoreApplication::translate("RobotDrawUi", "0,0", nullptr));
         lineEdit_Range->setText(QCoreApplication::translate("RobotDrawUi", "0,0", nullptr));
         lineEdit_5->setText(QCoreApplication::translate("RobotDrawUi", "Speed", nullptr));
         lineEdit_12->setText(QCoreApplication::translate("RobotDrawUi", "x", nullptr));

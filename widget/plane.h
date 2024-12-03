@@ -28,6 +28,7 @@ public:
     QVector3D lowerPosX;
     QVector3D rightPosY;
     QVector3D leftPosY;
+
     float offsetX_plane=0;
     float offsetY_plane=0;
 
@@ -38,7 +39,7 @@ public:
     QVector3D getToolTranslation();
     void adjustToolOffset(float offset);
     void setToolMatrix(QMatrix4x4 toolBase_T);
-    void setToolOffset();
+    void setToolOffset(float off1Y,float off2Y, float off1,float off2);
 
 
 private:

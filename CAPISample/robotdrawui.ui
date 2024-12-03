@@ -301,6 +301,13 @@ p, li { white-space: pre-wrap; }
              </widget>
             </item>
             <item>
+             <widget class="QLineEdit" name="lineEdit_2">
+              <property name="text">
+               <string>0,0</string>
+              </property>
+             </widget>
+            </item>
+            <item>
              <widget class="QLineEdit" name="lineEdit_Range">
               <property name="text">
                <string>0,0</string>

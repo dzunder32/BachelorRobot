@@ -151,36 +151,63 @@ void Plane::setToolMatrix(QMatrix4x4 toolBase_T)
     this->setMatrix(toolBase_T*planeToolTransform->matrix().inverted());
 }
 
-void Plane::setToolOffset()
+void Plane::setToolOffset(float off1Y,float off2Y,float off1,float off2)
 {
-    QVector2D P_offY1=QVector2D(-100,0);
-    QVector2D P_offY2=QVector2D(100,offsetY_plane);
+    float plane_off = toolPos.z()+off1;
+    adjustToolOffset(plane_off);
+    float opposite = abs(off1-off2);
+    float adjacent = 100;
+    float alpha =  atan2(opposite,adjacent);
+    if(off2>off1)
+    {
+        planeToolTransform->setRotationY(qRadiansToDegrees(alpha));
+    }
+    else{
+        planeToolTransform->setRotationY(qRadiansToDegrees(-alpha));
+    }
 
-    QVector2D ry=P_offY2-P_offY1;
-//    float k_0=-(P_offY1.x()/ry.x());
 
-//    float offsetY = P_offY1.y() + k_0*ry.y();
-//    qDebug()<<"offset"<<offsetY;
-    // QVector2D P_diff = P_off2-P_off1;
+    float plane_off2 = toolPos.z()+off1Y;
+    adjustToolOffset(plane_off2);
+    float opposite1 = abs(off1Y-off2Y);
+    float adjacent1 = 100;
+    float alpha1 =  atan2(opposite1,adjacent1);
+    if(off2Y>off1Y)
+    {
+        planeToolTransform->setRotationX(qRadiansToDegrees(alpha1));
+    }
+    else{
+        planeToolTransform->setRotationX(qRadiansToDegrees(-alpha1));
+    }
 
-    // float angle = atan2(P_diff.y(),P_diff.x());
+//     QVector2D P_offY1=QVector2D(-100,0);
+//     QVector2D P_offY2=QVector2D(100,offsetY_plane);
 
-    float angleY =  atan2(ry.y(),ry.x());
+//     QVector2D ry=P_offY2-P_offY1;
+// //    float k_0=-(P_offY1.x()/ry.x());
 
-    qDebug()<<"angle"<<qRadiansToDegrees(angleY);
+// //    float offsetY = P_offY1.y() + k_0*ry.y();
+// //    qDebug()<<"offset"<<offsetY;
+//     // QVector2D P_diff = P_off2-P_off1;
 
-    // adjustToolOffset(toolPos.z()-offset);
-    planeToolTransform->setRotationY(qRadiansToDegrees(angleY));
+//     // float angle = atan2(P_diff.y(),P_diff.x());
 
-    QVector2D P_offX1=QVector2D(-100,0);
-    QVector2D P_offX2=QVector2D(100,offsetX_plane);
-    QVector2D rx=P_offX2-P_offX1;
-    float angleX =  atan2(rx.y(),rx.x());
+//     float angleY =  atan2(ry.y(),ry.x());
 
-    qDebug()<<"angle"<<qRadiansToDegrees(angleX);
-    planeToolTransform->setRotationX(qRadiansToDegrees(angleX));
+//     qDebug()<<"angle"<<qRadiansToDegrees(angleY);
 
-    // this->setRotation(this->rotation()*QQuaternion::fromAxisAndAngle(this->matrix().column(2).toVector3D(),-qRadiansToDegrees(angle)));
-    // this->setRotation(this->rotation()*QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),-qRadiansToDegrees(angle)));
+//     // adjustToolOffset(toolPos.z()-offset);
+//     planeToolTransform->setRotationY(qRadiansToDegrees(angleY));
+
+//     QVector2D P_offX1=QVector2D(-100,0);
+//     QVector2D P_offX2=QVector2D(100,offsetX_plane);
+//     QVector2D rx=P_offX2-P_offX1;
+//     float angleX =  atan2(rx.y(),rx.x());
+
+//     qDebug()<<"angle"<<qRadiansToDegrees(angleX);
+//     planeToolTransform->setRotationX(qRadiansToDegrees(angleX));
+
+//     // this->setRotation(this->rotation()*QQuaternion::fromAxisAndAngle(this->matrix().column(2).toVector3D(),-qRadiansToDegrees(angle)));
+//     // this->setRotation(this->rotation()*QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),-qRadiansToDegrees(angle)));
 
 }

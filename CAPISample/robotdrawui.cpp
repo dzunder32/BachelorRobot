@@ -287,20 +287,23 @@ void RobotDrawUi::on_pushButton_History_clicked()
     QString text = ui->lineEdit_Range->text();
     QStringList list = text.split(",");
 
+
+    QString text1 = ui->lineEdit_2->text();
+    QStringList list1 = text1.split(",");
+
     if(!list.isEmpty()){
-        _plane->offsetX_plane=list[0].toFloat();
-        if(list.length()>1)
-        {
-            qDebug()<<list,list[0],list[1];
-            _plane->offsetY_plane=list[1].toFloat();
-        }
-    }else{
-        _plane->offsetX_plane=text.toFloat();
-        qDebug()<<text.toFloat();
+        _plane->setToolOffset(list1[0].toFloat(),list1[1].toFloat(),list[0].toFloat(),list[1].toFloat());
+    //     _plane->offsetX_plane=list[0].toFloat();
+    //     if(list.length()>1)
+    //     {
+    //         qDebug()<<list,list[0],list[1];
+    //         _plane->offsetY_plane=list[1].toFloat();
+    //     }
+    // }else{
+    //     _plane->offsetX_plane=text.toFloat();
+    //     qDebug()<<text.toFloat();
+    // }
     }
-
-    _plane->setToolOffset();
-
 }
 
 

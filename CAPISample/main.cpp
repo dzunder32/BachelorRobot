@@ -85,8 +85,6 @@ int main(int argc, char *argv[])
     widget3d->addObject(calibrator);
     widget3d->addTransCalibrator(calibrator);
 
-
-
     //Ebene zu Zeichnen
     Plane *plane = new Plane(650.0,850.0);
     widget3d->addObject(plane);

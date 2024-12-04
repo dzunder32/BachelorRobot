@@ -214,7 +214,7 @@ void RobotDraw::robotDrawCircle()
             // PointsBuffer.prepend(mid_circlePt);  robotSequence.prepend(POINT);
             // PointsBuffer.prepend(start_circlePt);robotSequence.prepend(POINT);
 
-            CirclePreview(currCircle)   ;
+            CirclePreview(currCircle);
             robot_moveCircular(robotCirclePts_vec);
             // _robotKinematik->WaitForPositionReached();
 //            PointsBuffer.prepend(lastPoint);robotSequence.prepend(POINT);

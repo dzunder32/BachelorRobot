@@ -149,6 +149,7 @@ void Robot::MoveCircularJ(QVector <double> joints1,QVector <double> joints2,QVec
 
 }
 
+
 // void Robot::MoveInCircleJ(QVector <double> joints1,QVector <double> joints2,QVector <double> joints3,double joint7)
 // {
 //     Write("1;1;EXECJ1=(" +QString::number(joints1.at(0))+","

@@ -58,6 +58,8 @@ public:
     // void MoveInArcJ(QVector<double> joints1, QVector<double> joints2, QVector<double> joints3, double joint7);
     void MoveCircularJ(QVector<double> joints1, QVector<double> joints2, QVector<double> joints3, double joint7, bool drawCirc);
     void MoveInLine();
+    void speedUp(){Write("1;1;OVRD=10");};
+    void slowDown(){Write("1;1;OVRD=5");};
 signals:
     void robotAnswer(QString);
     void robotCommand(QString);

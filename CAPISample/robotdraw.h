@@ -55,7 +55,6 @@ private:
     bool  plane_isFull     = false;
     bool  drawCircle       = false;
     bool  alreadyDrawn     = false;
-    bool  alreadyDrawn_2   = false;
     bool  lastPoint_drawn  = false;
 
     int   moveAboveCounter = 2;
@@ -96,6 +95,7 @@ private:
     void robotDrawCircle();
     void robotDrawPoint();
     void robotDrawLine();
+    void robotdrawPointUP();
 
     void addLetter2Buffer();
     void getLetterData(QChar char_letter);
@@ -103,6 +103,9 @@ private:
     void moveTipAbove();
 
     void robot_moveCircular(QVector<QVector2D> circlePoints);
+    void speedUpRobot(){_robot->speedUp();};
+    void slowDownRobot(){_robot->slowDown();};
+
     void initCirclePointsSpeedUp(float range);
     void setL1(double val);
     float calculateAngleBetweenVectors(QVector3D vectorA, QVector3D vectorB);
@@ -112,7 +115,6 @@ private:
     void DrawFirstPoint();
     void adjustRobotRangeHeigth(float height);
 
-    void robotdrawPointUP();
 public slots:
     void startDrawTimer(){DrawFirstPoint();_timer->start();}
     void stopDrawTimer(){_timer->stop();dontDrawPoint = true;emit clearGW();}

@@ -42,16 +42,15 @@ void RobotDraw::robDraw_onTimeout()
     }
     else
     {
-        if(!lastPoint_drawn)
-        {
-            qDebug()<<"yysas";
-            // moveAboveCounter = 1;
-            PointsBuffer.prepend(lastPoint+QVector3D(0,0,150));
-            robotSequence.prepend(POINT);
-            lastPoint_drawn = true;
-            goto runAgain;
-        }
-
+        // if(!lastPoint_drawn)
+        // {
+        //     qDebug()<<"yysas";
+        //     // moveAboveCounter = 1;
+        //     PointsBuffer.prepend(lastPoint+QVector3D(0,0,150));
+        //     robotSequence.prepend(POINT);
+        //     lastPoint_drawn = true;
+        //     goto runAgain;
+        // }
         qDebug()<<"main Home";
         stopTimer_goHome();
     }
@@ -60,25 +59,26 @@ void RobotDraw::robDraw_onTimeout()
 
 void RobotDraw::DrawFirstPoint()
 {
-    qDebug()<<"Drawing First Point";
     if (!robotSequence.isEmpty() && !dontDrawPoint){
+        qDebug()<<"Drawing First Point";
         alreadyDrawn = false;
-        alreadyDrawn_2 = false;
-        moveAboveCounter=1;
+        // moveAboveCounter=1;
+        speedUpRobot();
+        qDebug()<<"speed!";
         // qDebug()<<"firstRobSequence:"<<robotSequence;
         switch (robotSequence.first())
         {
         case POINT:
             if(!PointsBuffer.isEmpty()){
                 QVector3D point = PointsBuffer.first();
-                point.setZ(50);
-                PointsBuffer.prepend(point);robotSequence.prepend(POINT);}
+                // point.setZ(50);
+                PointsUPBuffer.prepend(point);robotSequence.prepend(POINT_UP);}
             break;
         case LINE:
             if(!LinesBuffer.isEmpty()){
                 QVector3D point = LinesBuffer.first().first();
-                point.setZ(50);
-                PointsBuffer.prepend(point);robotSequence.prepend(POINT);}
+                // point.setZ(50);
+                PointsUPBuffer.prepend(point);robotSequence.prepend(POINT_UP);}
             break;
         case CIRCLE:
             if(!CircleBuffer.isEmpty()){
@@ -86,11 +86,12 @@ void RobotDraw::DrawFirstPoint()
                 float        radius = circle[0].toFloat();
                 QVector2D    center = circle[1].value<QVector2D>();
                 QVector3D    point  = (center + QVector2D(radius,0)).toVector3D();
-                point.setZ(50);
-                PointsBuffer.prepend(point);robotSequence.prepend(POINT);}
+                // point.setZ(50);
+                PointsUPBuffer.prepend(point);robotSequence.prepend(POINT_UP);}
             break;
         }
-    }else{lastPoint_drawn = true;}
+    }
+    // }else{lastPoint_drawn = true;}
 }
 
 
@@ -129,6 +130,7 @@ void RobotDraw::robotDrawLine()
                 robot_setPoint(Plane2RobotPoint(startLinePoint));
             }
             endLinePoint   = line[1];
+            lastPoint=endLinePoint;
             //add second Line Point to Buffer as a Point
             PointsBuffer.prepend(endLinePoint);
             robotSequence.prepend(POINT);
@@ -207,14 +209,14 @@ void RobotDraw::robotDrawCircle()
 
             robotCirclePts_vec.append(end_circlePt);
             calculateL1_new(Plane2BasePoint(center.toVector3D()));
-            // endLinePoint = lastPoint;
+            lastPoint = endLinePoint;
 
             // if(drawCircle){PointsBuffer.prepend(start_circlePt);robotSequence.prepend(POINT);}
             // PointsBuffer.prepend(end_circlePt);  robotSequence.prepend(POINT);
             // PointsBuffer.prepend(mid_circlePt);  robotSequence.prepend(POINT);
             // PointsBuffer.prepend(start_circlePt);robotSequence.prepend(POINT);
 
-            CirclePreview(currCircle)   ;
+            CirclePreview(currCircle);
             robot_moveCircular(robotCirclePts_vec);
             // _robotKinematik->WaitForPositionReached();
 //            PointsBuffer.prepend(lastPoint);robotSequence.prepend(POINT);
@@ -263,6 +265,8 @@ void RobotDraw::robotdrawPointUP()
         planePoint.setZ(50);
         moveAboveCounter=1;
         robot_setPoint(Plane2RobotPoint(planePoint));
+        slowDownRobot();
+        qDebug()<<"slowing Down";
         lastPoint = planePoint;
     }
     else {stopTimer_goHome();}
@@ -717,13 +721,19 @@ void RobotDraw::AddCircle2Buffer(QVariantList circleList)
 
 void RobotDraw::stopTimer_goHome()
 {
+
     stopDrawTimer();
+    lastPoint.setZ(50);
+    robot_setPoint(Plane2RobotPoint(lastPoint));
+    // qDebug()<<"sleeping;";
+    // std::this_thread::sleep_for(std::chrono::seconds(1));
+    // qDebug()<<"sleepingdone";
     dontDrawPoint = false;
-    lastPoint_drawn = false;
+    // lastPoint_drawn = false;
     while(_timer->isActive()){}/* {qDebug()<<"inWhile!";}*/
     _robotKinematik->setJoints(0,0,90,0,90,0,0);
     qDebug()<<"imHome";
-    if(_robot->IsConnected()) {_robot->UpdatePosition();}
+    if(_robot->IsConnected()){speedUpRobot();_robot->UpdatePosition();slowDownRobot();}
 }
 
 

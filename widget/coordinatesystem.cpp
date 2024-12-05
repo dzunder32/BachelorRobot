@@ -61,45 +61,6 @@ CoordinateSystem::CoordinateSystem(Qt3DCore::QEntity* parent) :Qt3DCore::QEntity
     _arrowheadAxisY->addComponent(_materialY);
     _arrowheadAxisY->setEnabled(true);
 
-    //For Label
-
-
-
-    // _textLabel = new Qt3DExtras::QText2DEntity(static_cast<Qt3DCore::QEntity*>(this));
-    // _textLabel1 = new Qt3DExtras::QText2DEntity(static_cast<Qt3DCore::QEntity*>(this));
-    // // auto *material = new Qt3DExtras::QPhongMaterial();
-    // // material.setTra
-    // // material->setTwoSided(true);
-    // // _textLabel->addComponent(material);
-    // _textLabel->setFont(QFont("Arial"));
-    // _textLabel->setHeight(_length/8);
-    // _textLabel->setWidth(_length/4);
-    // _textLabel->setColor(Qt::yellow);
-    // _textLabel1->setFont(QFont("Arial"));
-    // _textLabel1->setHeight(_length/8);
-    // _textLabel1->setWidth(_length/8);
-    // _textLabel1->setColor(Qt::yellow);
-    // // _textLabel1=_textLabel;
-    // auto *textTransform  = new Qt3DCore::QTransform(_textLabel);
-    // auto *textTransform1 = new Qt3DCore::QTransform(_textLabel1);
-
-    // textTransform->setScale(1.0f);
-    // textTransform->setTranslation(QVector3D(-25,-25,100));
-    // //-----------------------------------------------------(    X,   Y,     Z) rot in zxy
-    // // textTransform->setRotation(QQuaternion::fromEulerAngles(45.0f, 0.0f, 45.0f));
-    // // textTransform->setRotationX(90);
-    // // textTransform->setRotationZ(45);
-    // textTransform->setRotation(QQuaternion::fromAxisAndAngle(QVector3D(1,0,0),90) * QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),-45));
-    // textTransform1->setScale(1.0f);
-    // textTransform1->setTranslation(QVector3D(0,0,0));
-    // textTransform1->setRotation(QQuaternion::fromEulerAngles(-90.0f,180.0f,0.0f));
-    // // textTransform->setRotationX(90);    // Position above the origin
-
-    // _textLabel->addComponent(textTransform);
-    // _textLabel1->addComponent(textTransform1);
-
-    // setText("Coordinate System");
-
 }
 void CoordinateSystem::setCoordLabel(QString string,char axis)
 {
@@ -111,12 +72,12 @@ void CoordinateSystem::setCoordLabel(QString string,char axis)
     // material->setTwoSided(true);
     // _textLabel->addComponent(material);
     _textLabel->setFont(QFont("Arial"));
-    _textLabel->setHeight(_length/4);
-    _textLabel->setWidth(_length/1.5);
+    _textLabel->setHeight(_length/3);
+    _textLabel->setWidth(_length*1.5);
     _textLabel->setColor(Qt::yellow);
     _textLabel1->setFont(QFont("Arial"));
-    _textLabel1->setHeight(_length/4);
-    _textLabel1->setWidth(_length);
+    _textLabel1->setHeight(_length/3);
+    _textLabel1->setWidth(_length*1.5);
     _textLabel1->setColor(Qt::yellow);
     // _textLabel1=_textLabel;
     auto *textTransform  = new Qt3DCore::QTransform(_textLabel);
@@ -124,25 +85,25 @@ void CoordinateSystem::setCoordLabel(QString string,char axis)
 
     float width45=_textLabel->width()/2*(qPow(2,0.5)/2);
     float coord_offset=_length/20;
-    textTransform->setScale(1.0f);
+    textTransform->setScale(_length/200);
     switch(axis)
     {
     case 'Z':
         textTransform->setTranslation(QVector3D(-width45-coord_offset,width45-coord_offset,_length/2));
         textTransform->setRotation(QQuaternion::fromAxisAndAngle(QVector3D(1,0,0),90) * QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),-45));
-        textTransform1->setScale(1.0f);
+        textTransform1->setScale(_length/200);
         textTransform1->setTranslation(QVector3D(width45+coord_offset,-width45+coord_offset,_length/2));
         textTransform1->setRotation(QQuaternion::fromAxisAndAngle(QVector3D(1,0,0),90) * QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),135));
         break;
     case 'X':
-        textTransform->setTranslation(QVector3D(_length/2,width45/*+coord_offset*/,width45/*+coord_offset*/));
-        textTransform->setRotation(QQuaternion::fromAxisAndAngle(QVector3D(0,0,1),90) * QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),45));
         textTransform->setTranslation(QVector3D(0,0,0));
-        textTransform1->setScale(1.0f);
+//        textTransform->setTranslation(QVector3D(/*_length/2*/0,width45/*+coord_offset*/,width45/*+coord_offset*/));
+        textTransform->setRotation(QQuaternion::fromAxisAndAngle(QVector3D(0,0,1),90) /** QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),45))*/);
+        textTransform1->setScale(_length/200);
 
-        textTransform1->setTranslation(QVector3D(_length/2,-width45/*-coord_offset*/,-width45/*-coord_offset*/));
-        textTransform1->setTranslation(QVector3D(0,0,0));
-        textTransform1->setRotation(QQuaternion::fromAxisAndAngle(QVector3D(0,0,1),90) * QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),235));
+        textTransform1->setTranslation(QVector3D(0,_length,0));
+//        textTransform1->setTranslation(QVector3D(/*_length/2*/0,-width45/*-coord_offset*/,-width45/*-coord_offset*/));
+        textTransform1->setRotation(QQuaternion::fromAxisAndAngle(QVector3D(1,0,0),180) * QQuaternion::fromAxisAndAngle(QVector3D(0,0,1),90));
         break;
     }
 

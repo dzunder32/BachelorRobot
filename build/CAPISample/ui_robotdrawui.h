@@ -76,6 +76,7 @@ public:
     QPushButton *pushButton_addCircle;
     QHBoxLayout *horizontalLayout_3;
     QPushButton *pushButton_History;
+    QPushButton *pushButton_Registrate;
     QPushButton *pushButtonStart;
     QPushButton *pushButtonStop;
     QVBoxLayout *verticalLayout_9;
@@ -314,6 +315,11 @@ public:
 
         horizontalLayout_3->addWidget(pushButton_History);
 
+        pushButton_Registrate = new QPushButton(centralwidget);
+        pushButton_Registrate->setObjectName(QString::fromUtf8("pushButton_Registrate"));
+
+        horizontalLayout_3->addWidget(pushButton_Registrate);
+
         pushButtonStart = new QPushButton(centralwidget);
         pushButtonStart->setObjectName(QString::fromUtf8("pushButtonStart"));
 
@@ -488,6 +494,7 @@ public:
         lineEdit_6->setText(QCoreApplication::translate("RobotDrawUi", "Circle Radius: ", nullptr));
         pushButton_addCircle->setText(QCoreApplication::translate("RobotDrawUi", "Add Circle", nullptr));
         pushButton_History->setText(QCoreApplication::translate("RobotDrawUi", "PushButton", nullptr));
+        pushButton_Registrate->setText(QCoreApplication::translate("RobotDrawUi", "Registrate", nullptr));
         pushButtonStart->setText(QCoreApplication::translate("RobotDrawUi", "Start", nullptr));
         pushButtonStop->setText(QCoreApplication::translate("RobotDrawUi", "Stop", nullptr));
         lineEdit_2->setText(QCoreApplication::translate("RobotDrawUi", "0,0", nullptr));

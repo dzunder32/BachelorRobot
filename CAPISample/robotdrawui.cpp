@@ -71,6 +71,18 @@ void RobotDrawUi::displayAngleReference(float angle)
 
 }
 
+void RobotDrawUi::planeRegistration()
+{
+    _robDraw->AddPointUP2Buffer(QVector3D(0,300,10));
+    _robDraw->AddPoint2Buffer(QVector3D(0,300,0));
+    _robDraw->AddPointUP2Buffer(QVector3D(0,300,10));
+
+    _robDraw->AddPointUP2Buffer(QVector3D(100,300,10));
+    _robDraw->AddPoint2Buffer(QVector3D(100,300,0));
+    _robDraw->AddPointUP2Buffer(QVector3D(100,300,10));
+
+}
+
 void RobotDrawUi::adjustRobotRange(float range)
 {
     ui->lineEdit_Range->setText(QString::number(range));
@@ -528,7 +540,10 @@ void RobotDrawUi::on_pushButton_lift_clicked()
         liftTip_isTrue = true;
         ui->pushButton_lift->setText("lower Tip");
     }
-
-
 }
 
+
+void RobotDrawUi::on_pushButton_Registrate_clicked()
+{
+
+}

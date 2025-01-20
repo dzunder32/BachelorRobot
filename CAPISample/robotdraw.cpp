@@ -1,3 +1,4 @@
+
 #include "robotdraw.h"
 
 RobotDraw::RobotDraw(Kinematik *robotKinematik, Robot *robot, QVector3D sled_pos, Plane* plane, Widget3D *widget3d)

@@ -82,9 +82,10 @@ Plane::Plane(double XSize,double YSize,Qt3DCore::QEntity* parent)
     // planeToolEntity->addComponent(material);
     // planeToolTransform=new Qt3DCore::QTransform();
     // planeToolEntity->addComponent(planeToolTransform);
-
-    toolPos = QVector3D(-xLimit/2,0,10);
     // planeToolTransform->setTranslation(toolPos);
+
+//     toolPos = QVector3D(-xLimit/2,0,10);
+    toolPos = QVector3D(xLimit/2,0,10);
 
     //Tool as CSystem
     planeToolTransform = new CoordinateSystem(static_cast<Qt3DCore::QEntity*>(this));
@@ -161,9 +162,13 @@ void Plane::setToolOffset(float off1Y,float off2Y,float off1,float off2)
     if(off2>off1)
     {
         planeToolTransform->setRotationY(qRadiansToDegrees(alpha));
+//        this->setRotationY(this->rotationY() + qRadiansToDegrees(-alpha));
+
     }
     else{
         planeToolTransform->setRotationY(qRadiansToDegrees(-alpha));
+//        this->setRotationY(this->rotationY() + qRadiansToDegrees(alpha));
+
     }
 
 
@@ -175,9 +180,11 @@ void Plane::setToolOffset(float off1Y,float off2Y,float off1,float off2)
     if(off2Y>off1Y)
     {
         planeToolTransform->setRotationX(qRadiansToDegrees(alpha1));
+//        this->setRotationX(this->rotationX()+ qRadiansToDegrees(-alpha1));
     }
     else{
         planeToolTransform->setRotationX(qRadiansToDegrees(-alpha1));
+//        this->setRotationX(this->rotationX() + qRadiansToDegrees(alpha1));
     }
 
 //     QVector2D P_offY1=QVector2D(-100,0);

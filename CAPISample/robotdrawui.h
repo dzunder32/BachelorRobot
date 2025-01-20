@@ -42,6 +42,8 @@ private slots:
     void onMousePressed(QPoint globalPos);
     void on_pushButton_lift_clicked();
 
+    void on_pushButton_Registrate_clicked();
+
 private:
     Ui::RobotDrawUi *ui;
     RobotDraw *_robDraw;
@@ -78,8 +80,10 @@ signals:
 
 public slots:
     void drawLineWidget(QVector3D start,QVector3D end){_widget3d->addCylinderBetweenPoints(start,end);}
-    void adjustRobotRange(float range);
+    void  adjustRobotRange(float range);
     void displayAngleReference(float angle);
+    void planeRegistration();
+
 };
 
 #endif // ROBOTDRAWUI_H

@@ -63,7 +63,7 @@ public:
     QLineEdit *lineEdit_P1Y;
     QLineEdit *lineEdit_P2Y;
     QVBoxLayout *verticalLayout_6;
-    QSpacerItem *horizontalSpacer_4;
+    QLineEdit *lineEdit_3;
     QPushButton *pushButton_setP1;
     QPushButton *pushButton_setP2;
     QVBoxLayout *verticalLayout_7;
@@ -76,6 +76,7 @@ public:
     QPushButton *pushButton_addCircle;
     QHBoxLayout *horizontalLayout_3;
     QPushButton *pushButton_History;
+    QPushButton *pushButton_Registrate;
     QPushButton *pushButtonStart;
     QPushButton *pushButtonStop;
     QVBoxLayout *verticalLayout_9;
@@ -248,9 +249,10 @@ public:
 
         verticalLayout_6 = new QVBoxLayout();
         verticalLayout_6->setObjectName(QString::fromUtf8("verticalLayout_6"));
-        horizontalSpacer_4 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        lineEdit_3 = new QLineEdit(centralwidget);
+        lineEdit_3->setObjectName(QString::fromUtf8("lineEdit_3"));
 
-        verticalLayout_6->addItem(horizontalSpacer_4);
+        verticalLayout_6->addWidget(lineEdit_3);
 
         pushButton_setP1 = new QPushButton(centralwidget);
         pushButton_setP1->setObjectName(QString::fromUtf8("pushButton_setP1"));
@@ -313,6 +315,11 @@ public:
         pushButton_History->setObjectName(QString::fromUtf8("pushButton_History"));
 
         horizontalLayout_3->addWidget(pushButton_History);
+
+        pushButton_Registrate = new QPushButton(centralwidget);
+        pushButton_Registrate->setObjectName(QString::fromUtf8("pushButton_Registrate"));
+
+        horizontalLayout_3->addWidget(pushButton_Registrate);
 
         pushButtonStart = new QPushButton(centralwidget);
         pushButtonStart->setObjectName(QString::fromUtf8("pushButtonStart"));
@@ -451,7 +458,7 @@ public:
         RobotDrawUi->setCentralWidget(centralwidget);
         menubar = new QMenuBar(RobotDrawUi);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 600, 20));
+        menubar->setGeometry(QRect(0, 0, 600, 21));
         RobotDrawUi->setMenuBar(menubar);
         statusbar = new QStatusBar(RobotDrawUi);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
@@ -469,10 +476,13 @@ public:
     {
         RobotDrawUi->setWindowTitle(QCoreApplication::translate("RobotDrawUi", "MainWindow", nullptr));
         textEdit_Sequence->setHtml(QCoreApplication::translate("RobotDrawUi", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Segoe UI'; font-size:9pt;\">Robot Sequence:</span></p></body></html>", nullptr));
+"hr { height: 1px; border-width: 0; }\n"
+"li.unchecked::marker { content: \"\\2610\"; }\n"
+"li.checked::marker { content: \"\\2612\"; }\n"
+"</style></head><body style=\" font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Robot Sequence:</p></body></html>", nullptr));
         lineEdit_10->setText(QCoreApplication::translate("RobotDrawUi", "Mouse Drawing", nullptr));
         pushButton_lift->setText(QCoreApplication::translate("RobotDrawUi", "Lift Tip", nullptr));
         checkBox_circle->setText(QCoreApplication::translate("RobotDrawUi", "Draw Circle", nullptr));
@@ -488,6 +498,7 @@ public:
         lineEdit_6->setText(QCoreApplication::translate("RobotDrawUi", "Circle Radius: ", nullptr));
         pushButton_addCircle->setText(QCoreApplication::translate("RobotDrawUi", "Add Circle", nullptr));
         pushButton_History->setText(QCoreApplication::translate("RobotDrawUi", "PushButton", nullptr));
+        pushButton_Registrate->setText(QCoreApplication::translate("RobotDrawUi", "Registrate", nullptr));
         pushButtonStart->setText(QCoreApplication::translate("RobotDrawUi", "Start", nullptr));
         pushButtonStop->setText(QCoreApplication::translate("RobotDrawUi", "Stop", nullptr));
         lineEdit_2->setText(QCoreApplication::translate("RobotDrawUi", "0,0", nullptr));

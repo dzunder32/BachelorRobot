@@ -85,7 +85,7 @@ void RobotDrawUi::planeRegistration()
 
 void RobotDrawUi::adjustRobotRange(float range)
 {
-    ui->lineEdit_Range->setText(QString::number(range));
+    ui->lineEdit_3->setText(QString::number(range));
 }
 
 void RobotDrawUi::on_pushButtonStart_clicked()
@@ -100,6 +100,7 @@ void RobotDrawUi::on_pushButtonStart_clicked()
     emit startDrawing();
 //    _robDraw->setTimerTime(ui->timerSpeedSlider->value());
     _robDraw->UpdatePlanePosition();
+    // _robDraw->robotRange = ui->lineEdit_3->text().toDouble();
 }
 
 

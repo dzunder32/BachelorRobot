@@ -75,7 +75,7 @@ private:
     QVector3D lastPoint;
     QVector3D _l1BasePos;
 
-    QMatrix4x4 robotMat,planeRobot_T;
+    QMatrix4x4 robotMat, planeRobot_T;
 
     QVector <QVector <QVector3D>> LinesBuffer;
     QVector<QVector3D> PointsBuffer,PointsUPBuffer;

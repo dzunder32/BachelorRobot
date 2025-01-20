@@ -59,10 +59,11 @@ int main(int argc, char *argv[])
     toolMesh->setSource("RefTool_C.STL");
     toolMesh->setRotationZ(90);
     toolMesh->setTranslation(QVector3D(-8.77,-72.5,-7));
-    widget3d->addObject(refTool,QVector3D(980,380,715),QQuaternion(1,0,0,0)/* * QQuaternion::fromAxisAndAngle(QVector3D(0,0,1),45)*//**//*QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180)*/);
+    // widget3d->addObject(refTool,QVector3D(980,380,715),QQuaternion(1,0,0,0)/* * QQuaternion::fromAxisAndAngle(QVector3D(0,0,1),45)*//**//*QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180)*/);
+    widget3d->addObject(refTool,QVector3D(988,3338.75+19.95,695.921+7+20),QQuaternion(1,0,0,0)/* * QQuaternion::fromAxisAndAngle(QVector3D(0,0,1),45)*//**//*QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180)*/);
     widget3d->setRefMatrix(static_cast<Qt3DCore::QTransform*>(refTool->components()[1]));
     //position of ref tool, 300 in y , 40 in x
-    widget3d->addCylinderBetweenPoints(QVector3D(980,380,712),QVector3D(980,740,712));
+    widget3d->addCylinderBetweenPoints(QVector3D(988,3338.75,695.921),QVector3D(988,3628.749,695.921));
     widget3d->addCylinderBetweenPoints(QVector3D(980,740,712),QVector3D(940,740,712));
 
     //Polaris als Koordinatensystem --------------------------------------------------------------

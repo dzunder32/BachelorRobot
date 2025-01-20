@@ -340,7 +340,8 @@ void RobotDraw::UpdatePlanePosition()
     if(sum_T>1)
     {
         planeRobot_T = curr_planeRobot_T;
-        QVector3D ew = CalculateEw(planeRobot_T * QMatrix4x4(QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180).toRotationMatrix()));
+        QQuaternion rotMatrix=QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180) * QQuaternion::fromAxisAndAngle(QVector3D(1,0,0),-20);
+        QVector3D ew = CalculateEw(planeRobot_T * QMatrix4x4(rotMatrix.toRotationMatrix()));
         a=ew.x();
         b=ew.y();
         c=ew.z();
@@ -381,7 +382,7 @@ void RobotDraw::adjustRobotRangeHeigth(float height)
         robotRange = max_range;
 
     }
-//    emit robotRangeChanged(robotRange);
+   emit robotRangeChanged(robotRange);
 
 }
 

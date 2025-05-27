@@ -19,13 +19,10 @@ RobotDrawUi::RobotDrawUi(Kinematik *robotKinematik,Robot *robot, QVector3D sled_
     connect(_robDraw, &RobotDraw::drawLine,_widget3d, &Widget3D::addCylinderBetweenPoints);
 //    connect(_robDraw, &RobotDraw::drawPoint_Widget,this, &RobotDrawUi::widgetDrawPoint);
     connect(_robDraw, &RobotDraw::drawPoint_Widget,_widget3d, &Widget3D::drawPoint);
-    connect(_widget3d, &Widget3D::sendAngle,this, &RobotDrawUi::displayAngleReference);
-
 //    connect(_robDraw, &RobotDraw::changeTimerSpeed,this, &RobotDrawUi::increaseTimerSpeed);
     connect(this,&RobotDrawUi::startDrawing,_robDraw,&RobotDraw::startDrawTimer);
     connect(this,&RobotDrawUi::stopDrawing,_robDraw,&RobotDraw::stopDrawTimer);
     connect(this,&RobotDrawUi::changeSpeed,_robDraw,&RobotDraw::setTimerTime);
-    connect(_robDraw, &RobotDraw::robotRangeChanged,this, &RobotDrawUi::adjustRobotRange);
 
     mouseFilter = new MousePositionFilter(ui->graphicsView->viewport());
     ui->graphicsView->viewport()->installEventFilter(mouseFilter);
@@ -48,28 +45,6 @@ RobotDrawUi::~RobotDrawUi()
     delete ui;
 }
 
-void RobotDrawUi::displayAngleReference(float angle)
-{
-    QTextCursor cursor = ui->textEdit_Sequence->textCursor();
-
-    // Move cursor to the beginning of the document
-    cursor.movePosition(QTextCursor::Start);
-
-    // Select the first line
-    cursor.select(QTextCursor::LineUnderCursor);
-
-    // Remove the selected text (first line)
-    cursor.removeSelectedText();
-    qDebug()<<"angle"<<angle;
-    // Insert new text at the current cursor position
-    // ui->textEdit_Sequence->insertPlainText("RobotSequence: Your Mam"+QString::number(angle));
-    cursor.insertText("RobotSequence: Your Mam"+QString::number(angle));
-
-    // Update the text edit with the modified cursor
-    ui->textEdit_Sequence->setTextCursor(cursor);
-
-
-}
 
 void RobotDrawUi::planeRegistration()
 {
@@ -83,10 +58,7 @@ void RobotDrawUi::planeRegistration()
 
 }
 
-void RobotDrawUi::adjustRobotRange(float range)
-{
-    ui->lineEdit_3->setText(QString::number(range));
-}
+
 
 void RobotDrawUi::on_pushButtonStart_clicked()
 {
@@ -117,55 +89,36 @@ void RobotDrawUi::on_timerSpeedSlider_sliderMoved(int position)
     qDebug()<<position;
 }
 
-void RobotDrawUi::on_pushButton_setP1_clicked()
-{
-    // ui->lineEdit_P1Data->setText("P1:(" + ui->lineEdit_P1X->text()+ "; " + ui->lineEdit_P1Y->text() + ")");
-    P1X_Str = ui->lineEdit_P1X->text();
-    P1Y_Str = ui->lineEdit_P1Y->text();
-    P1 = QVector2D(P1X_Str.toFloat(),P1Y_Str.toFloat());
-}
-
-
-void RobotDrawUi::on_pushButton_setP2_clicked()
-{
-    P2X_Str = ui->lineEdit_P2X->text();
-    P2Y_Str = ui->lineEdit_P2Y->text();
-    P2 = QVector2D(P2X_Str.toFloat(),P2Y_Str.toFloat());
-}
 
 
 void RobotDrawUi::on_pushButton_addLine_clicked()
 {
+
+    getP1fromStr();
+    P2X_Str = ui->lineEdit_P2X->text();
+    P2Y_Str = ui->lineEdit_P2Y->text();
+    P2 = QVector2D(P2X_Str.toFloat(),P2Y_Str.toFloat());
+
     _robDraw->AddLine2Buffer(P1,P2);
-    insertRobotSequenceText("Line: Start("+P1X_Str+ "," + P1Y_Str + ")"
-                            + "End("+ P2X_Str+ "," + P2Y_Str + ")" );
      _widget3d->addCylinderBetweenPoints(P1.toVector3D(),P2.toVector3D());
     _robDraw->dontDrawPoint = false;
      preview_isDrawn = true;
-
-
     // _widget3d->drawPoint(P2,5,QColor(0,255,255));
-
 }
 
 void RobotDrawUi::on_pushButton_addP1_clicked()
 {
-    // _robDraw->AddL1Adjust2Buffer(P1.toVector3D());
+     getP1fromStr();
     _robDraw->AddPoint2Buffer(P1.toVector3D());
     _robDraw->AddPoint2Buffer(P1.toVector3D()+QVector3D(0,0,50));
     // _widget3d->drawPoint(P1,5,QColor(255,0,255));
-    insertRobotSequenceText("P1:(" + P1X_Str + ", " + P1Y_Str + ")");
 }
-
-
-void RobotDrawUi::insertRobotSequenceText(QString str)
+void RobotDrawUi::getP1fromStr()
 {
-    ui->textEdit_Sequence->moveCursor(QTextCursor::End);
-    // ui->textEdit_Sequence.
-    ui->textEdit_Sequence->insertPlainText("\n");
-    ui->textEdit_Sequence->insertPlainText(str);
+    P1X_Str = ui->lineEdit_P1X->text();
+    P1Y_Str = ui->lineEdit_P1Y->text();
+    P1 = QVector2D(P1X_Str.toFloat(),P1Y_Str.toFloat());
 }
-
 
 
 void RobotDrawUi::on_pushButton_addCircle_clicked()
@@ -173,9 +126,9 @@ void RobotDrawUi::on_pushButton_addCircle_clicked()
     QVariantList circleList;
     float radius = ui->lineEdit_Radius->text().toFloat();
     circleList.append(radius);
+    getP1fromStr();
     circleList.append(P1);
     circleList.append(QVector2D(0,360));
-    insertRobotSequenceText("Circle: r=" + QString::number(radius) + " center: (" + P1X_Str + ", " + P1Y_Str + ")");
     _robDraw->AddLine2Buffer(QVector3D(P1.x()+radius,P1.y(),0),QVector3D(P1.x()+radius,P1.y(),0));
     _robDraw->AddCircle2Buffer(circleList);
     _robDraw->dontDrawPoint = false;
@@ -189,11 +142,8 @@ void RobotDrawUi::on_pushButton_draw_clicked()
     _widget3d->deleteAllPoints();
     _robDraw->resetShiftVector();
     _robDraw->clearBuffers();
-    ui->textEdit_Sequence->setText("RobotSequence:");
     QString textInput = ui->textEdit_textInput->toPlainText();
     qDebug()<<textInput;
-    if(ui->checkBox_grid->isChecked())
-        _robDraw->drawGrid();
     _robDraw->constructLetters(textInput);
     preview_isDrawn = true;
     _robDraw->dontDrawPoint = false;
@@ -295,30 +245,6 @@ void RobotDrawUi::on_spinBox_dist_valueChanged(int arg1)
     _plane->adjustToolOffset(float(arg1));
 }
 
-void RobotDrawUi::on_pushButton_History_clicked()
-{
-    QString text = ui->lineEdit_Range->text();
-    QStringList list = text.split(",");
-
-
-    QString text1 = ui->lineEdit_2->text();
-    QStringList list1 = text1.split(",");
-
-    if(!list.isEmpty()){
-        _plane->setToolOffset(list1[0].toFloat(),list1[1].toFloat(),list[0].toFloat(),list[1].toFloat());
-    //     _plane->offsetX_plane=list[0].toFloat();
-    //     if(list.length()>1)
-    //     {
-    //         qDebug()<<list,list[0],list[1];
-    //         _plane->offsetY_plane=list[1].toFloat();
-    //     }
-    // }else{
-    //     _plane->offsetX_plane=text.toFloat();
-    //     qDebug()<<text.toFloat();
-    // }
-    }
-}
-
 
 void RobotDrawUi::onMousePressed(QPoint globalPos)
 {
@@ -334,6 +260,7 @@ void RobotDrawUi::onMousePressed(QPoint globalPos)
         QPointF mid_localPos(gViewSize.width()/2,gViewSize.height()/2);
         QPointF curr_GWPos = localPos-mid_localPos;
         addPressedPoint(curr_GWPos.x(),curr_GWPos.y());
+        preview_isDrawn = true;
 }
 
 void RobotDrawUi::scaleItems()
@@ -366,12 +293,6 @@ void RobotDrawUi::scaleItems()
     }
 }
 
-// void RobotDrawUi::addLine(const QPointF &start, const QPointF &end)
-// {
-//     QLineF line(start, end);
-//     QGraphicsItem *lineItem = scene->addLine(line);
-//     lines.append(lineItem);
-// }
 
 void RobotDrawUi::addLine(const QPointF &start, const QPointF &end)
 {
@@ -443,7 +364,6 @@ void RobotDrawUi::addCircle(qreal x, qreal y)
             circleVariant<<radius_plane<<pre_point2D<<QVector2D(0,360);
             // _robDraw->AddLine2Buffer(QVector3D(pre_point2D.x()+radius_plane,pre_point2D.y(),0),QVector3D(pre_point2D.x()+radius_plane,pre_point2D.y(),0));
             _robDraw->AddCircle2Buffer(circleVariant);
-            insertRobotSequenceText("Circle: r=" + QString::number(radius_plane) + " center: (" + QString::number(pre_point2D.x()) + ", " + QString::number(pre_point2D.y())+ ")");
         }
     }
 }
@@ -455,7 +375,7 @@ void RobotDrawUi::addPressedPoint(qreal x, qreal y)
     float plane_multiY = _plane->yLimit/gViewSize.height();
 
 
-    if(ui->checkBox_circle->isChecked())
+    if(ui->checkBox_circle->isChecked()&& !liftTip_isTrue)
     {
         addCircle(x,y);
     }
@@ -474,14 +394,11 @@ void RobotDrawUi::addPressedPoint(qreal x, qreal y)
         QVector3D lineVec1 = QVector3D(qRound(linePt1.x()*plane_multiX),qRound(-linePt1.y()*plane_multiY),0);
         QVector3D lineVec2 = QVector3D(qRound(linePt2.x()*plane_multiX),qRound(-linePt2.y()*plane_multiY),0);
         _robDraw->AddLine2Buffer(lineVec1,lineVec2);
-        insertRobotSequenceText("Line: Start("+QString::number(lineVec1.x())+ "," + QString::number(lineVec1.y())+ ")"
-                                + "End("+ QString::number(lineVec2.x())+ "," + QString::number(lineVec2.y()) + ")" );
-    }else
+        }else
     {
         _robDraw->AddPointUP2Buffer(QVector3D(x*plane_multiX,-y*plane_multiY,0));
         _robDraw->AddPoint2Buffer(QVector3D(x*plane_multiX,-y*plane_multiY,0));
         _robDraw->AddPoint2Buffer(QVector3D(x*plane_multiX,-y*plane_multiY,50));
-        insertRobotSequenceText("P:(" + QString::number(x) + ", " + QString::number(-y)+ ")");
         point_isDrawn = true;
     }
 }
@@ -544,7 +461,13 @@ void RobotDrawUi::on_pushButton_lift_clicked()
 }
 
 
-void RobotDrawUi::on_pushButton_Registrate_clicked()
-{
 
+void RobotDrawUi::on_spinBox_xRot_valueChanged(int arg1)
+{
+    _plane->setToolOffset(0,ui->spinBox_yRot->value(),0,arg1);
+}
+
+void RobotDrawUi::on_spinBox_yRot_valueChanged(int arg1)
+{
+    _plane->setToolOffset(0,arg1,0,ui->spinBox_xRot->value());
 }

@@ -23,8 +23,6 @@ private slots:
     void on_pushButtonStart_clicked();
     void on_pushButtonStop_clicked();
     void on_timerSpeedSlider_sliderMoved(int position);
-    void on_pushButton_setP1_clicked();
-    void on_pushButton_setP2_clicked();
     void on_pushButton_addLine_clicked();
     void on_pushButton_addP1_clicked();
     void widgetDrawPoint(QVector3D point , float thickness, QColor color){_widget3d->drawPoint(point,thickness,color);}
@@ -38,11 +36,11 @@ private slots:
     void on_horizontalSlider_yRot_sliderMoved(int position);
     void on_horizontalSlider_zRot_sliderMoved(int position);
     void on_spinBox_dist_valueChanged(int arg1);
-    void on_pushButton_History_clicked();
     void onMousePressed(QPoint globalPos);
     void on_pushButton_lift_clicked();
 
-    void on_pushButton_Registrate_clicked();
+    void on_spinBox_xRot_valueChanged(int arg1);
+    void on_spinBox_yRot_valueChanged(int arg1);
 
 private:
     Ui::RobotDrawUi *ui;
@@ -56,7 +54,6 @@ private:
     bool preview_isDrawn = false;
     bool point_isDrawn   = false;
     bool liftTip_isTrue  = false;
-    void insertRobotSequenceText(QString str);
     MousePositionFilter *mouseFilter;
     QPoint localPos;
     QSize gViewSize;
@@ -73,6 +70,7 @@ private:
 
     void addCircle(qreal x, qreal y);
     bool circleInsidePlane(QPointF point, float radius);
+    void getP1fromStr();
 signals:
     void startDrawing();
     void stopDrawing();
@@ -80,8 +78,6 @@ signals:
 
 public slots:
     void drawLineWidget(QVector3D start,QVector3D end){_widget3d->addCylinderBetweenPoints(start,end);}
-    void  adjustRobotRange(float range);
-    void displayAngleReference(float angle);
     void planeRegistration();
 
 };

@@ -9,7 +9,6 @@ Draw::Draw(Kinematik *robotKinematik,Robot *robot, QVector3D sled_pos,Plane* pla
     _robot = robot;
     _plane = plane;
     _widget3d = widget3d;
-    //HELLO
     connect(timer_draw, &QTimer::timeout,this, &Draw::draw_onTimeout);
 
     robotMat.rotate(90,QVector3D(0,0,1));

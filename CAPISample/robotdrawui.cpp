@@ -177,12 +177,6 @@ void RobotDrawUi::setFontSizeForAllAndFutureText( qreal pointSize) {
 
 void RobotDrawUi::on_horizontalSlider_x_sliderMoved(int position)
 {
-    // if(position>ui->horizontalSlider_x->value()){
-    //     _plane->setTranslation(_plane->translation() + QVector3D(50,0,0));
-    // }else{
-    //     _plane->setTranslation(_plane->translation() - QVector3D(50,0,0));
-    // }
-    // _robDraw->UpdatePlanePosition();
     if(position>ui->horizontalSlider_x->value()){
         _plane->tool_setTranslation(_plane->getToolTranslation() + QVector3D(50,0,0));
     }else{

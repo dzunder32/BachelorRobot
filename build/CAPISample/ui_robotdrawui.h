@@ -516,7 +516,7 @@ public:
 
         retranslateUi(RobotDrawUi);
 
-        tabWidget->setCurrentIndex(2);
+        tabWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(RobotDrawUi);

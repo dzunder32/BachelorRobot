@@ -71,6 +71,7 @@ private:
     void addCircle(qreal x, qreal y);
     bool circleInsidePlane(QPointF point, float radius);
     void getP1fromStr();
+    void setFontSizeForAllAndFutureText(qreal pointSize);
 signals:
     void startDrawing();
     void stopDrawing();

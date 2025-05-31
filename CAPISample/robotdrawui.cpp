@@ -155,8 +155,25 @@ void RobotDrawUi::on_pushButton_draw_clicked()
 void RobotDrawUi::on_spinBox_letterSize_valueChanged(int arg1)
 {
     _robDraw->initLetterSize(float(arg1)/10);
+    setFontSizeForAllAndFutureText(arg1);
 }
 
+void RobotDrawUi::setFontSizeForAllAndFutureText( qreal pointSize) {
+    // 1. Bestehenden Text formatieren
+    QTextCursor allCursor = ui->textEdit_textInput->textCursor();
+    allCursor.select(QTextCursor::Document);
+
+    QTextCharFormat format;
+    format.setFontPointSize(pointSize);
+    allCursor.mergeCharFormat(format);
+
+    // 2. Format für zukünftigen Text setzen
+    QTextCursor cursor = ui->textEdit_textInput->textCursor();
+    format = cursor.charFormat();  // bestehendes Format holen
+    format.setFontPointSize(pointSize);
+    cursor.setCharFormat(format);
+    ui->textEdit_textInput->setTextCursor(cursor);
+}
 
 void RobotDrawUi::on_horizontalSlider_x_sliderMoved(int position)
 {

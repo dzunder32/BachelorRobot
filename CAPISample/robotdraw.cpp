@@ -362,7 +362,7 @@ float RobotDraw::calculateAngleBetweenVectors(QVector3D vectorA, QVector3D vecto
     return angleInRadians * (180.0 / M_PI); // Convert radians to degrees
 }
 
-
+//adjust the distance between the Robotbase and
 void RobotDraw::adjustRobotRangeHeigth(float height)
 {
     float max_range   = 1350;
@@ -387,7 +387,7 @@ void RobotDraw::adjustRobotRangeHeigth(float height)
 
 }
 
-
+//L1 Adjustments to cover more space in the Plane
 void RobotDraw::calculateL1_new(QVector3D adjustPoint)
 {
     QVector3D line_position_3d   = _l1BasePos;
@@ -555,12 +555,6 @@ void RobotDraw::CirclePreview(QVariantList circleList)
             prev_circlePt = circlePt;
         }
     }
-    // if(!LinesBuffer.isEmpty()){
-    // QVector3D lastPoint_temp = LinesBuffer.last().last();
-    //     drawLine(Plane2BasePoint(prev_circlePt),Plane2BasePoint(lastPoint_temp));}
-//    if(!LinesBuffer.isEmpty()){
-//    QVector3D lastPoint_temp = LinesBuffer.last().last();
-//        drawLine(Plane2BasePoint(prev_circlePt),Plane2BasePoint(lastPoint_temp));}
 }
 
 
@@ -582,19 +576,6 @@ void RobotDraw::initLetterSize(float sizeFactor)
     yBoxSize = _letters->LetterSizeY * 1.2;
 
     resetShiftVector();
-}
-
-
-void RobotDraw::drawGrid()
-{
-    double Nx = qRound(_plane->xLimit/xBoxSize);
-    double Ny = qRound(_plane->yLimit/yBoxSize);
-
-    for (float yi = _plane->yLimit/2-yBoxSize; yi>=-_plane->yLimit/2+yBoxSize;yi-=yBoxSize)
-    {AddLine2Buffer(QVector3D(-_plane->xLimit/2,yi,0),QVector3D(_plane->xLimit/2,yi,0));}
-
-    for(float xi =-_plane->xLimit/2+xBoxSize; xi<=_plane->xLimit/2-xBoxSize;xi+=xBoxSize)
-    {AddLine2Buffer(QVector3D(xi,-_plane->yLimit/2,0),QVector3D(xi,_plane->yLimit/2,0));}
 }
 
 

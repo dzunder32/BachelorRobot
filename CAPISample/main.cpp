@@ -35,20 +35,20 @@ int main(int argc, char *argv[])
     coordSystem->setNegativeAxis(true);
     widget3d->addObject(coordSystem,QVector3D(0,0,0),QQuaternion(0,0,0,0));
 
-    //2. Roboter Mesh -----------------------------------------------------------------------------------------------
-    RV6SL *robot2 =new RV6SL();
-    Rv6slKinematik *robot2Kinematik=new Rv6slKinematik(robot2);
+    // Roboter Mesh mit Linearachse-----------------------------------------------------------------------------------------------
+    RV6SL *robotMesh =new RV6SL();
+    Rv6slKinematik *robotKinematik=new Rv6slKinematik(robotMesh);
     //Hinzufügen eines Tools in die Grafik
     Tool* penHolder = new PenHolder();
     penHolder->CoordSystem->thinOut(0.5);
     //Hinzufügen einer Linearachse
-    LinearAxisRV6SL* linAxis2 = new LinearAxisRV6SL();
-    robot2->addTool(penHolder);
-    robot2->addLinearAxis(linAxis2);
-    robot2Kinematik->setTool(*static_cast<QMatrix4x4*>(penHolder));
-    linAxis2->set_sled_position(linAxis2->rotation().toRotationMatrix());
-    widget3d->setViewCenter(linAxis2->sled_position + QVector3D(0,0,500));
-    widget3d->addObject(robot2);
+    LinearAxisRV6SL* linAxis = new LinearAxisRV6SL();
+    robotMesh->addTool(penHolder);
+    robotMesh->addLinearAxis(linAxis);
+    robotKinematik->setTool(*static_cast<QMatrix4x4*>(penHolder));
+    linAxis->set_sled_position(linAxis->rotation().toRotationMatrix());
+    widget3d->setViewCenter(linAxis->sled_position + QVector3D(0,0,500));
+    widget3d->addObject(robotMesh);
 
     //Referenz-Tools
     CoordinateSystem *refTool=new CoordinateSystem;
@@ -85,16 +85,16 @@ int main(int argc, char *argv[])
     Plane *plane = new Plane(650.0,850.0);
     widget3d->addObject(plane);
     widget3d->addPlane(plane);
-    plane->setTranslation(linAxis2->sled_position+QVector3D(0,800,500));
+    plane->setTranslation(linAxis->sled_position+QVector3D(0,800,500));
     plane->setRotation(QQuaternion::fromEulerAngles(QVector3D(90.01,0,0)));
 
     Robot *robot = new Robot("143.93.135.15",10001);
     RobotControl *robControl = new RobotControl(robot);
     robControl->show();
-    ControlPanel *control = new ControlPanel(robot2Kinematik);
+    ControlPanel *control = new ControlPanel(robotKinematik);
     control->show();
-    robot->ConnectKinematik(robot2Kinematik);
-    RobotDrawUi *drawL = new RobotDrawUi(robot2Kinematik,robot,linAxis2->sled_position,plane,widget3d);
+    robot->ConnectKinematik(robotKinematik);
+    RobotDrawUi *drawL = new RobotDrawUi(robotKinematik,robot,linAxis->sled_position,plane,widget3d);
 
     drawL->show();
     return a.exec();

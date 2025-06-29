@@ -91,42 +91,30 @@ void RobotDrawUi::on_timerSpeedSlider_sliderMoved(int position)
 
 
 
-void RobotDrawUi::on_pushButton_addLine_clicked()
+void RobotDrawUi::on_pushButton_drawLinePoint_clicked()
 {
+    P1=QVector2D(ui->doubleSpinBox_x1->value(),ui->doubleSpinBox_y1->value());
+    P2=QVector2D(ui->doubleSpinBox_x2->value(),ui->doubleSpinBox_y2->value());
+    if(ui->radioButton_Point->isChecked()){
 
-    getP1fromStr();
-    P2X_Str = ui->lineEdit_P2X->text();
-    P2Y_Str = ui->lineEdit_P2Y->text();
-    P2 = QVector2D(P2X_Str.toFloat(),P2Y_Str.toFloat());
-
-    _robDraw->AddLine2Buffer(P1,P2);
-     _widget3d->addCylinderBetweenPoints(P1.toVector3D(),P2.toVector3D());
-    _robDraw->dontDrawPoint = false;
+        _robDraw->AddPoint2Buffer(P1.toVector3D());
+        _robDraw->AddPoint2Buffer(P1.toVector3D()+QVector3D(0,0,50));
+    }else{
+        _robDraw->AddLine2Buffer(P1,P2);
+        _widget3d->addCylinderBetweenPoints(P1.toVector3D(),P2.toVector3D());
+        _robDraw->dontDrawPoint = false;
+    }
      preview_isDrawn = true;
     // _widget3d->drawPoint(P2,5,QColor(0,255,255));
 }
 
-void RobotDrawUi::on_pushButton_addP1_clicked()
-{
-     getP1fromStr();
-    _robDraw->AddPoint2Buffer(P1.toVector3D());
-    _robDraw->AddPoint2Buffer(P1.toVector3D()+QVector3D(0,0,50));
-    // _widget3d->drawPoint(P1,5,QColor(255,0,255));
-}
-void RobotDrawUi::getP1fromStr()
-{
-    P1X_Str = ui->lineEdit_P1X->text();
-    P1Y_Str = ui->lineEdit_P1Y->text();
-    P1 = QVector2D(P1X_Str.toFloat(),P1Y_Str.toFloat());
-}
 
-
-void RobotDrawUi::on_pushButton_addCircle_clicked()
+void RobotDrawUi::on_pushButton_drawCircle_clicked()
 {
     QVariantList circleList;
-    float radius = ui->lineEdit_Radius->text().toFloat();
+    float radius = ui->doubleSpinBox_radius->value();
+    P1=QVector2D(ui->doubleSpinBox_x1->value(),ui->doubleSpinBox_y1->value());
     circleList.append(radius);
-    getP1fromStr();
     circleList.append(P1);
     circleList.append(QVector2D(0,360));
     _robDraw->AddLine2Buffer(QVector3D(P1.x()+radius,P1.y(),0),QVector3D(P1.x()+radius,P1.y(),0));
@@ -134,6 +122,7 @@ void RobotDrawUi::on_pushButton_addCircle_clicked()
     _robDraw->dontDrawPoint = false;
     preview_isDrawn = true;
 }
+
 
 
 void RobotDrawUi::on_pushButton_draw_clicked()
@@ -173,80 +162,6 @@ void RobotDrawUi::setFontSizeForAllAndFutureText( qreal pointSize) {
     format.setFontPointSize(pointSize);
     cursor.setCharFormat(format);
     ui->textEdit_textInput->setTextCursor(cursor);
-}
-
-void RobotDrawUi::on_horizontalSlider_x_sliderMoved(int position)
-{
-    if(position>ui->horizontalSlider_x->value()){
-        _plane->tool_setTranslation(_plane->getToolTranslation() + QVector3D(50,0,0));
-    }else{
-        _plane->tool_setTranslation(_plane->getToolTranslation() - QVector3D(50,0,0));
-    }
-    _robDraw->UpdatePlanePosition();
-
-}
-
-
-void RobotDrawUi::on_horizontalSlider_y_sliderMoved(int position)
-{
-    if(position>ui->horizontalSlider_y->value()){
-        _plane->setTranslation(_plane->translation() + QVector3D(0,50,0));
-    }else{
-        _plane->setTranslation(_plane->translation() - QVector3D(0,50,0));
-    }
-
-    _robDraw->UpdatePlanePosition();
-
-}
-
-
-void RobotDrawUi::on_horizontalSlider_z_sliderMoved(int position)
-{
-    if(position>ui->horizontalSlider_z->value()){
-        _plane->setTranslation(_plane->translation() + QVector3D(0,0,50));
-    }else{
-        _plane->setTranslation(_plane->translation() - QVector3D(0,0,50));
-    }
-
-    _robDraw->UpdatePlanePosition();
-}
-
-
-
-
-void RobotDrawUi::on_horizontalSlider_xRot_sliderMoved(int position)
-{
-    if(position>ui->horizontalSlider_xRot->value()){
-        _plane->setRotation(_plane->rotation() * QQuaternion::fromAxisAndAngle(QVector3D(1,0,0),10));
-    }else{
-        _plane->setRotation(_plane->rotation() * QQuaternion::fromAxisAndAngle(QVector3D(1,0,0),-10));
-    }
-    _robDraw->UpdatePlanePosition();
-
-}
-
-
-void RobotDrawUi::on_horizontalSlider_yRot_sliderMoved(int position)
-{
-    if(position>ui->horizontalSlider_yRot->value()){
-        _plane->setRotation(_plane->rotation() * QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),10));
-    }else{
-        _plane->setRotation(_plane->rotation() * QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),-10));
-    }
-    _robDraw->UpdatePlanePosition();
-
-}
-
-
-void RobotDrawUi::on_horizontalSlider_zRot_sliderMoved(int position)
-{
-    if(position>ui->horizontalSlider_zRot->value()){
-        _plane->setRotation(_plane->rotation() * QQuaternion::fromAxisAndAngle(QVector3D(0,0,1),10));
-    }else{
-        _plane->setRotation(_plane->rotation() * QQuaternion::fromAxisAndAngle(QVector3D(0,0,1),-10));
-    }
-    _robDraw->UpdatePlanePosition();
-
 }
 
 
@@ -482,3 +397,20 @@ void RobotDrawUi::on_spinBox_yRot_valueChanged(int arg1)
 {
     _plane->setToolOffset(0,arg1,0,ui->spinBox_xRot->value());
 }
+
+
+void RobotDrawUi::on_pushButton_testX_clicked()
+{
+    QVector3D firstPt  =QVector3D(_plane->xLimit/2-50,0,0);
+    QVector3D secondPt =QVector3D(50,0,0);
+    _robDraw->AddLine2Buffer(firstPt,secondPt);
+}
+
+
+void RobotDrawUi::on_pushButton_testY_clicked()
+{
+    QVector3D firstPt  =QVector3D(0,0,0);
+    QVector3D secondPt =QVector3D(0,-150,0);
+    _robDraw->AddLine2Buffer(firstPt,secondPt);
+}
+

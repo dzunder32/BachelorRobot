@@ -1,4 +1,4 @@
-#include "widget3d.h"
+ #include "widget3d.h"
 
 Widget3D::Widget3D(QWidget *parent) : QWidget(parent)
 {
@@ -122,8 +122,8 @@ void Widget3D::addPlane(Plane *plane)
 void Widget3D::addTransPolaris(Qt3DCore::QEntity *entity)
 {
     entity->addComponent(trans_polaris);
-    trans_polaris->setTranslation(QVector3D(2000,700,800));
-    trans_polaris->setRotationY(90);
+    trans_polaris->setTranslation(QVector3D(2300,3200,1000));
+    trans_polaris->setRotationY(100);
 }
 
 void Widget3D::addTransCalibrator(Qt3DCore::QEntity *entity)
@@ -285,7 +285,7 @@ void Widget3D::addCylinderBetweenPoints(const QVector3D& startPoint, const QVect
     auto cylinder = new Qt3DExtras::QCylinderMesh(cylinderEntity);
 
     cylinder->setLength(endPoint.distanceToPoint(startPoint)); // Set the length based on the distance between the points
-    cylinder->setRadius(1.0f); // Set the radius of the cylinder
+    cylinder->setRadius(1.5f); // Set the radius of the cylinder
 
     // Calculate the midpoint and rotation angles
     auto midPoint = (startPoint + endPoint) / 2;
@@ -304,7 +304,8 @@ void Widget3D::addCylinderBetweenPoints(const QVector3D& startPoint, const QVect
 
     // Add material to the cylinder
     auto material = new Qt3DExtras::QPhongMaterial(cylinderEntity);
-    material->setDiffuse("#ffff00"); // Set the color of the cylinder
+    // material->setDiffuse("#ffff00");
+    material->setDiffuse(QColor(100,0,0));// Set the color of the cylinder
 
     // Add components to the entity
     cylinderEntity->addComponent(cylinder);

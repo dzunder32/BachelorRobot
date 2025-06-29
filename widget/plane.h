@@ -6,7 +6,7 @@
 #include <Qt3DExtras>
 //#include <widget3d.h>
 #include "coordinatesystem.h"
-
+#include "stlmesh.h""
 
 class Plane : public CoordinateSystem
 {
@@ -19,7 +19,7 @@ public:
     Qt3DCore::QEntity * rightBorderY;
 
     // Qt3DCore::QTransform *planeToolTransform;
-
+    STLMesh *planeMesh;
     CoordinateSystem *planeToolTransform;
     QVector3D toolPos;
     double xLimit,yLimit;
@@ -56,7 +56,7 @@ private:
     Qt3DCore::QTransform *_rightTransformY;
 
     void DrawPlaneLimits();
-
+    double prevAlpha=0,prevAlpha1=0;
 };
 
 #endif // PLANE_H

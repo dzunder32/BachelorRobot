@@ -23,24 +23,23 @@ private slots:
     void on_pushButtonStart_clicked();
     void on_pushButtonStop_clicked();
     void on_timerSpeedSlider_sliderMoved(int position);
-    void on_pushButton_addLine_clicked();
-    void on_pushButton_addP1_clicked();
     void widgetDrawPoint(QVector3D point , float thickness, QColor color){_widget3d->drawPoint(point,thickness,color);}
-    void on_pushButton_addCircle_clicked();
     void on_pushButton_draw_clicked();
     void on_spinBox_letterSize_valueChanged(int arg1);
-    void on_horizontalSlider_x_sliderMoved(int position);
-    void on_horizontalSlider_y_sliderMoved(int position);
-    void on_horizontalSlider_z_sliderMoved(int position);
-    void on_horizontalSlider_xRot_sliderMoved(int position);
-    void on_horizontalSlider_yRot_sliderMoved(int position);
-    void on_horizontalSlider_zRot_sliderMoved(int position);
     void on_spinBox_dist_valueChanged(int arg1);
     void onMousePressed(QPoint globalPos);
     void on_pushButton_lift_clicked();
 
     void on_spinBox_xRot_valueChanged(int arg1);
     void on_spinBox_yRot_valueChanged(int arg1);
+
+    void on_pushButton_drawLinePoint_clicked();
+
+    void on_pushButton_drawCircle_clicked();
+
+    void on_pushButton_testX_clicked();
+
+    void on_pushButton_testY_clicked();
 
 private:
     Ui::RobotDrawUi *ui;

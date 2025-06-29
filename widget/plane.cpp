@@ -71,19 +71,6 @@ Plane::Plane(double XSize,double YSize,Qt3DCore::QEntity* parent)
     leftBorderY->addComponent(_materialY);
     leftBorderY->setEnabled(true);
 
-
-    // // Tool as point
-    // Qt3DCore::QEntity *planeToolEntity = new Qt3DCore::QEntity(static_cast<Qt3DCore::QEntity*>(this));
-    // Qt3DExtras::QSphereMesh *sphere = new Qt3DExtras::QSphereMesh();
-    // sphere->setRadius(10);
-    // planeToolEntity->addComponent(sphere);
-    // Qt3DExtras::QPhongMaterial *material = new Qt3DExtras::QPhongMaterial();
-    // material->setDiffuse(QColor(255,0,0));
-    // planeToolEntity->addComponent(material);
-    // planeToolTransform=new Qt3DCore::QTransform();
-    // planeToolEntity->addComponent(planeToolTransform);
-    // planeToolTransform->setTranslation(toolPos);
-
 //     toolPos = QVector3D(-xLimit/2,0,10);
     toolPos = QVector3D(xLimit/2,0,10);
 
@@ -93,7 +80,9 @@ Plane::Plane(double XSize,double YSize,Qt3DCore::QEntity* parent)
     planeToolTransform->setNegativeAxis(false);
     planeToolTransform->setTranslation(toolPos);
 
-
+    planeMesh= new STLMesh(this);
+    planeMesh->setSource("Flipchart.stl");
+    planeMesh->setTranslation(QVector3D(0,0,-10));
 }
 
 QVector <QVector3D> Plane::getCornerPoints()
@@ -159,62 +148,22 @@ void Plane::setToolOffset(float off1Y,float off2Y,float off1,float off2)
     float opposite = abs(off1-off2);
     float adjacent = 100;
     float alpha =  atan2(opposite,adjacent);
-    if(off2>off1)
-    {
-        planeToolTransform->setRotationY(qRadiansToDegrees(alpha));
-//        this->setRotationY(this->rotationY() + qRadiansToDegrees(-alpha));
+    if(off2>off1){}else{alpha=-alpha;}
 
-    }
-    else{
-        planeToolTransform->setRotationY(qRadiansToDegrees(-alpha));
-//        this->setRotationY(this->rotationY() + qRadiansToDegrees(alpha));
-
-    }
-
+    planeToolTransform->setRotationY(qRadiansToDegrees(alpha));
+    this->setRotationX(qRadiansToDegrees(alpha));
+    this->setTranslation(this->translation()+QVector3D(this->xLimit/2*sin(prevAlpha-alpha),0,0));
+    prevAlpha=alpha;
 
     float plane_off2 = toolPos.z()+off1Y;
     adjustToolOffset(plane_off2);
     float opposite1 = abs(off1Y-off2Y);
     float adjacent1 = 100;
     float alpha1 =  atan2(opposite1,adjacent1);
-    if(off2Y>off1Y)
-    {
-        planeToolTransform->setRotationX(qRadiansToDegrees(alpha1));
-//        this->setRotationX(this->rotationX()+ qRadiansToDegrees(-alpha1));
-    }
-    else{
-        planeToolTransform->setRotationX(qRadiansToDegrees(-alpha1));
-//        this->setRotationX(this->rotationX() + qRadiansToDegrees(alpha1));
-    }
+    if(off2Y<off1Y){alpha1=-alpha1;}
 
-//     QVector2D P_offY1=QVector2D(-100,0);
-//     QVector2D P_offY2=QVector2D(100,offsetY_plane);
-
-//     QVector2D ry=P_offY2-P_offY1;
-// //    float k_0=-(P_offY1.x()/ry.x());
-
-// //    float offsetY = P_offY1.y() + k_0*ry.y();
-// //    qDebug()<<"offset"<<offsetY;
-//     // QVector2D P_diff = P_off2-P_off1;
-
-//     // float angle = atan2(P_diff.y(),P_diff.x());
-
-//     float angleY =  atan2(ry.y(),ry.x());
-
-//     qDebug()<<"angle"<<qRadiansToDegrees(angleY);
-
-//     // adjustToolOffset(toolPos.z()-offset);
-//     planeToolTransform->setRotationY(qRadiansToDegrees(angleY));
-
-//     QVector2D P_offX1=QVector2D(-100,0);
-//     QVector2D P_offX2=QVector2D(100,offsetX_plane);
-//     QVector2D rx=P_offX2-P_offX1;
-//     float angleX =  atan2(rx.y(),rx.x());
-
-//     qDebug()<<"angle"<<qRadiansToDegrees(angleX);
-//     planeToolTransform->setRotationX(qRadiansToDegrees(angleX));
-
-//     // this->setRotation(this->rotation()*QQuaternion::fromAxisAndAngle(this->matrix().column(2).toVector3D(),-qRadiansToDegrees(angle)));
-//     // this->setRotation(this->rotation()*QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),-qRadiansToDegrees(angle)));
-
+    planeToolTransform->setRotationX(qRadiansToDegrees(alpha1));
+    this->setRotationY(90-qRadiansToDegrees(alpha1));
+    // this->setTranslation(this->translation()+QVector3D(this->xLimit/2*sin(prevAlpha1-alpha1),0,0));
+    prevAlpha1=alpha1;
 }

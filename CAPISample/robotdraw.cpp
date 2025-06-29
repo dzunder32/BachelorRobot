@@ -25,7 +25,7 @@ RobotDraw::RobotDraw(Kinematik *robotKinematik, Robot *robot, QVector3D sled_pos
 void RobotDraw::robDraw_onTimeout()
 {
     runAgain:
-//    qDebug()<<"roboSeq"<<robotSequence;
+   qDebug()<<"roboSeq"<<robotSequence;
     UpdatePlanePosition();
     if(!robotSequence.isEmpty())
     {
@@ -43,17 +43,18 @@ void RobotDraw::robDraw_onTimeout()
     }
     else
     {
-        // if(!lastPoint_drawn)
-        // {
-        //     qDebug()<<"yysas";
-        //     // moveAboveCounter = 1;
-        //     PointsBuffer.prepend(lastPoint+QVector3D(0,0,150));
-        //     robotSequence.prepend(POINT);
-        //     lastPoint_drawn = true;
-        //     goto runAgain;
-        // }
+        if(!lastPoint_drawn)
+        {
+            qDebug()<<"yysas";
+            // moveAboveCounter = 1;
+            PointsBuffer.prepend(lastPoint+QVector3D(0,0,150));
+            robotSequence.prepend(POINT);
+            lastPoint_drawn = true;
+            goto runAgain;
+        }
         qDebug()<<"main Home";
         stopTimer_goHome();
+        lastPoint_drawn = false;
     }
 }
 
@@ -296,8 +297,8 @@ void RobotDraw:: robot_setPoint(QVector3D position)
         qDebug()<<"done waiting";
     }
 
-    if(moveAboveCounter<2){qDebug()<<"Doin MOV!";drawPoint_Widget(Robot2BasePoint(position),2,QColor(0,255,0));moveAboveCounter++;}
-    else                  {qDebug()<<"Doin MVS!";}
+    // if(moveAboveCounter<2){qDebug()<<"Doin MOV!";drawPoint_Widget(Robot2BasePoint(position),2,QColor(0,255,0));moveAboveCounter++;}
+    // else                  {qDebug()<<"Doin MVS!";}
 //    qDebug()<<"IM OUT";
 //    qDebug()<<"TimerStatus:"<<_timer->isActive();
 }
@@ -570,7 +571,7 @@ void RobotDraw::initLetterSize(float sizeFactor)
     qDebug()<<"init"<<QThread::currentThreadId();
     _letters->changeLetterSize(sizeFactor);
 
-    xSpace = _letters->LetterSizeX *0.1;
+    xSpace = _letters->LetterSizeX *0.6;
     ySpace = _letters->LetterSizeY *0.1;
     xBoxSize = _letters->LetterSizeX * 1.2;
     yBoxSize = _letters->LetterSizeY * 1.2;

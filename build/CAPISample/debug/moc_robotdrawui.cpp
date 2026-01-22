@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_RobotDrawUi_t {
-    QByteArrayData data[31];
-    char stringdata0[571];
+    QByteArrayData data[33];
+    char stringdata0[629];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -59,10 +59,12 @@ QT_MOC_LITERAL(23, 403, 35), // "on_pushButton_drawLinePoint_c..."
 QT_MOC_LITERAL(24, 439, 32), // "on_pushButton_drawCircle_clicked"
 QT_MOC_LITERAL(25, 472, 27), // "on_pushButton_testX_clicked"
 QT_MOC_LITERAL(26, 500, 27), // "on_pushButton_testY_clicked"
-QT_MOC_LITERAL(27, 528, 14), // "drawLineWidget"
-QT_MOC_LITERAL(28, 543, 5), // "start"
-QT_MOC_LITERAL(29, 549, 3), // "end"
-QT_MOC_LITERAL(30, 553, 17) // "planeRegistration"
+QT_MOC_LITERAL(27, 528, 22), // "on_radioButton_clicked"
+QT_MOC_LITERAL(28, 551, 34), // "on_pushButton_testDistance_cl..."
+QT_MOC_LITERAL(29, 586, 14), // "drawLineWidget"
+QT_MOC_LITERAL(30, 601, 5), // "start"
+QT_MOC_LITERAL(31, 607, 3), // "end"
+QT_MOC_LITERAL(32, 611, 17) // "planeRegistration"
 
     },
     "RobotDrawUi\0startDrawing\0\0stopDrawing\0"
@@ -81,8 +83,10 @@ QT_MOC_LITERAL(30, 553, 17) // "planeRegistration"
     "on_pushButton_drawLinePoint_clicked\0"
     "on_pushButton_drawCircle_clicked\0"
     "on_pushButton_testX_clicked\0"
-    "on_pushButton_testY_clicked\0drawLineWidget\0"
-    "start\0end\0planeRegistration"
+    "on_pushButton_testY_clicked\0"
+    "on_radioButton_clicked\0"
+    "on_pushButton_testDistance_clicked\0"
+    "drawLineWidget\0start\0end\0planeRegistration"
 };
 #undef QT_MOC_LITERAL
 
@@ -92,7 +96,7 @@ static const uint qt_meta_data_RobotDrawUi[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      21,   14, // methods
+      23,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -100,29 +104,31 @@ static const uint qt_meta_data_RobotDrawUi[] = {
        3,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,  119,    2, 0x06 /* Public */,
-       3,    0,  120,    2, 0x06 /* Public */,
-       4,    1,  121,    2, 0x06 /* Public */,
+       1,    0,  129,    2, 0x06 /* Public */,
+       3,    0,  130,    2, 0x06 /* Public */,
+       4,    1,  131,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       5,    0,  124,    2, 0x0a /* Public */,
-       6,    0,  125,    2, 0x08 /* Private */,
-       7,    0,  126,    2, 0x08 /* Private */,
-       8,    1,  127,    2, 0x08 /* Private */,
-      10,    3,  130,    2, 0x08 /* Private */,
-      14,    0,  137,    2, 0x08 /* Private */,
-      15,    1,  138,    2, 0x08 /* Private */,
-      17,    1,  141,    2, 0x08 /* Private */,
-      18,    1,  144,    2, 0x08 /* Private */,
-      20,    0,  147,    2, 0x08 /* Private */,
-      21,    1,  148,    2, 0x08 /* Private */,
-      22,    1,  151,    2, 0x08 /* Private */,
-      23,    0,  154,    2, 0x08 /* Private */,
-      24,    0,  155,    2, 0x08 /* Private */,
-      25,    0,  156,    2, 0x08 /* Private */,
-      26,    0,  157,    2, 0x08 /* Private */,
-      27,    2,  158,    2, 0x0a /* Public */,
-      30,    0,  163,    2, 0x0a /* Public */,
+       5,    0,  134,    2, 0x0a /* Public */,
+       6,    0,  135,    2, 0x08 /* Private */,
+       7,    0,  136,    2, 0x08 /* Private */,
+       8,    1,  137,    2, 0x08 /* Private */,
+      10,    3,  140,    2, 0x08 /* Private */,
+      14,    0,  147,    2, 0x08 /* Private */,
+      15,    1,  148,    2, 0x08 /* Private */,
+      17,    1,  151,    2, 0x08 /* Private */,
+      18,    1,  154,    2, 0x08 /* Private */,
+      20,    0,  157,    2, 0x08 /* Private */,
+      21,    1,  158,    2, 0x08 /* Private */,
+      22,    1,  161,    2, 0x08 /* Private */,
+      23,    0,  164,    2, 0x08 /* Private */,
+      24,    0,  165,    2, 0x08 /* Private */,
+      25,    0,  166,    2, 0x08 /* Private */,
+      26,    0,  167,    2, 0x08 /* Private */,
+      27,    0,  168,    2, 0x08 /* Private */,
+      28,    0,  169,    2, 0x08 /* Private */,
+      29,    2,  170,    2, 0x0a /* Public */,
+      32,    0,  175,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void,
@@ -146,7 +152,9 @@ static const uint qt_meta_data_RobotDrawUi[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QVector3D, QMetaType::QVector3D,   28,   29,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::QVector3D, QMetaType::QVector3D,   30,   31,
     QMetaType::Void,
 
        0        // eod
@@ -177,8 +185,10 @@ void RobotDrawUi::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 16: _t->on_pushButton_drawCircle_clicked(); break;
         case 17: _t->on_pushButton_testX_clicked(); break;
         case 18: _t->on_pushButton_testY_clicked(); break;
-        case 19: _t->drawLineWidget((*reinterpret_cast< QVector3D(*)>(_a[1])),(*reinterpret_cast< QVector3D(*)>(_a[2]))); break;
-        case 20: _t->planeRegistration(); break;
+        case 19: _t->on_radioButton_clicked(); break;
+        case 20: _t->on_pushButton_testDistance_clicked(); break;
+        case 21: _t->drawLineWidget((*reinterpret_cast< QVector3D(*)>(_a[1])),(*reinterpret_cast< QVector3D(*)>(_a[2]))); break;
+        case 22: _t->planeRegistration(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -236,13 +246,13 @@ int RobotDrawUi::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 21)
+        if (_id < 23)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 21;
+        _id -= 23;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 21)
+        if (_id < 23)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 21;
+        _id -= 23;
     }
     return _id;
 }

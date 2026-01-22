@@ -19,15 +19,15 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    MainWindow *w=new MainWindow;
+    MainWindow *PolarisGUI=new MainWindow;
 
     qDebug()<<"main Thread"<< QThread::currentThreadId();
 
-    w->show();
+    PolarisGUI->show();
     //Erstellen des Widgets -----------------------------------------------------------------------------------------
     Widget3D *widget3d = new Widget3D();
     widget3d->ShowAsSubWindow();
-    w->connectWidget(widget3d);
+    PolarisGUI->connectWidget(widget3d);
 
     //Welt-Koordinatensystem im Raum --------------------------------------------------------------------------------
     CoordinateSystem *coordSystem=new CoordinateSystem();
@@ -78,6 +78,55 @@ int main(int argc, char *argv[])
     widget3d->addTransPolaris(polaris);
     STLMesh* polarisMesh= new STLMesh(polaris);
     polarisMesh->setSource("PolarisDummy v7.stl");
+
+    STLMesh* mVolumeMesh= new STLMesh(polaris);
+    mVolumeMesh->setSource("mVolume.stl");
+    mVolumeMesh->setTranslation(QVector3D(0,0,-950));
+    mVolumeMesh->setRotationX(90);
+
+    Qt3DExtras::QDiffuseSpecularMaterial *material = new Qt3DExtras::QDiffuseSpecularMaterial();
+    material->setDiffuse(QColor(0, 0, 255, 200)); // semi-transparent red
+    material->setAlphaBlendingEnabled(true);
+    mVolumeMesh->addComponent(material);
+
+    material->setDiffuse(QColor(0,0,0,0));
+    // Create the material
+    // Qt3DExtras::QPhongMaterial *material = new Qt3DExtras::QPhongMaterial();
+    // material->setDiffuse(QColor(255, 0, 0, 0));
+    // // Red with alpha = 100
+    // Qt3DRender::QRenderSettings *renderSettings = new Qt3DRender::QRenderSettings();
+    // renderSettings->setRenderPolicy(Qt3DRender::QRenderSettings::OnDemand);
+
+    // // Create blend arguments
+    // Qt3DRender::QBlendEquationArguments *blendArgs = new Qt3DRender::QBlendEquationArguments();
+    // blendArgs->setSourceRgb(Qt3DRender::QBlendEquationArguments::SourceAlpha);
+    // blendArgs->setDestinationRgb(Qt3DRender::QBlendEquationArguments::OneMinusSourceAlpha);
+
+    // // Create blend equation
+    // Qt3DRender::QBlendEquation *blendEquation = new Qt3DRender::QBlendEquation();
+    // blendEquation->setBlendFunction(Qt3DRender::QBlendEquation::Add);
+
+    // // Create render pass
+    // Qt3DRender::QRenderPass *renderPass = new Qt3DRender::QRenderPass();
+    // renderPass->addRenderState(blendArgs);
+    // renderPass->addRenderState(blendEquation);
+
+    // // Create technique
+    // Qt3DRender::QTechnique *technique = new Qt3DRender::QTechnique();
+    // technique->addRenderPass(renderPass);
+
+    // // Create effect
+    // Qt3DRender::QEffect *effect = new Qt3DRender::QEffect();
+    // effect->addTechnique(technique);
+
+    // // Assign effect to material
+    // material->setEffect(effect);
+
+    // Apply material to mesh
+    mVolumeMesh->addComponent(material);
+
+
+
     // CoordinateSystem *calibrator=new CoordinateSystem;
     // calibrator->setLength(100);
     // calibrator->setCoordLabel("Calibrator",'Z');
@@ -101,5 +150,6 @@ int main(int argc, char *argv[])
     RobotDrawUi *drawL = new RobotDrawUi(robotKinematik,robot,linAxis->sled_position,plane,widget3d);
 
     drawL->show();
+    drawL->getMaterial(material);
     return a.exec();
 }

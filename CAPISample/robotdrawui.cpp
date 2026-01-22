@@ -45,7 +45,10 @@ RobotDrawUi::~RobotDrawUi()
     delete ui;
 }
 
-
+void RobotDrawUi::getMaterial(Qt3DExtras::QDiffuseSpecularMaterial* material)
+{
+    _material=material;
+}
 void RobotDrawUi::planeRegistration()
 {
     _robDraw->AddPointUP2Buffer(QVector3D(0,300,10));
@@ -57,7 +60,6 @@ void RobotDrawUi::planeRegistration()
     _robDraw->AddPointUP2Buffer(QVector3D(100,300,10));
 
 }
-
 
 
 void RobotDrawUi::on_pushButtonStart_clicked()
@@ -113,7 +115,7 @@ void RobotDrawUi::on_pushButton_drawCircle_clicked()
 {
     QVariantList circleList;
     float radius = ui->doubleSpinBox_radius->value();
-    P1=QVector2D(ui->doubleSpinBox_x1->value(),ui->doubleSpinBox_y1->value());
+    P1=QVector2D(ui->doubleSpinBox_XMid->value(),ui->doubleSpinBox_YMid->value());
     circleList.append(radius);
     circleList.append(P1);
     circleList.append(QVector2D(0,360));
@@ -143,8 +145,8 @@ void RobotDrawUi::on_pushButton_draw_clicked()
 
 void RobotDrawUi::on_spinBox_letterSize_valueChanged(int arg1)
 {
-    _robDraw->initLetterSize(float(arg1)/10);
-    setFontSizeForAllAndFutureText(arg1);
+    _robDraw->initLetterSize(float(arg1)/20);
+    setFontSizeForAllAndFutureText(arg1+40);
 }
 
 void RobotDrawUi::setFontSizeForAllAndFutureText( qreal pointSize) {
@@ -401,8 +403,8 @@ void RobotDrawUi::on_spinBox_yRot_valueChanged(int arg1)
 
 void RobotDrawUi::on_pushButton_testX_clicked()
 {
-    QVector3D firstPt  =QVector3D(_plane->xLimit/2-50,0,0);
-    QVector3D secondPt =QVector3D(50,0,0);
+    QVector3D firstPt  =QVector3D(0,0,0);
+    QVector3D secondPt =QVector3D(_plane->xLimit/2-50,0,0);
     _robDraw->AddLine2Buffer(firstPt,secondPt);
 }
 
@@ -412,5 +414,20 @@ void RobotDrawUi::on_pushButton_testY_clicked()
     QVector3D firstPt  =QVector3D(0,0,0);
     QVector3D secondPt =QVector3D(0,-150,0);
     _robDraw->AddLine2Buffer(firstPt,secondPt);
+}
+
+
+void RobotDrawUi::on_radioButton_clicked()
+{
+    if(ui->radioButton->isChecked()){_material->setDiffuse(QColor(0,0,255,200));}
+    else{_material->setDiffuse(QColor(0,0,0,0));}
+}
+
+void RobotDrawUi::on_pushButton_testDistance_clicked()
+{
+    _robDraw->AddPointUP2Buffer(QVector3D(0,0,0));
+    _robDraw->AddPoint2Buffer(QVector3D(0,0,0));
+    _robDraw->AddPointUP2Buffer(QVector3D(0,0,0));
+
 }
 

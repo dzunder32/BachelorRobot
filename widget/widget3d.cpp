@@ -123,7 +123,11 @@ void Widget3D::addTransPolaris(Qt3DCore::QEntity *entity)
 {
     entity->addComponent(trans_polaris);
     trans_polaris->setTranslation(QVector3D(2300,3200,1000));
-    trans_polaris->setRotationY(100);
+    // trans_polaris->setRotationY(90);
+    trans_polaris->setRotation(QQuaternion::fromEulerAngles(QVector3D(-20,90,0)));
+    // trans_polaris->setRotation(QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),90));
+    // trans_polaris->setRotationX(-10);
+
 }
 
 void Widget3D::addTransCalibrator(Qt3DCore::QEntity *entity)

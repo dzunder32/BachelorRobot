@@ -16,6 +16,7 @@ class RobotDrawUi : public QMainWindow
 public:
     explicit RobotDrawUi(Kinematik *robotKinematik, Robot *robot, QVector3D sled_pos, Plane* plane, Widget3D *widget3d, QWidget *parent = nullptr);
     ~RobotDrawUi();
+    void getMaterial(Qt3DExtras::QDiffuseSpecularMaterial *material);
 public slots:
     void removeAllItems();
 
@@ -41,6 +42,10 @@ private slots:
 
     void on_pushButton_testY_clicked();
 
+    void on_radioButton_clicked();
+
+    void on_pushButton_testDistance_clicked();
+
 private:
     Ui::RobotDrawUi *ui;
     RobotDraw *_robDraw;
@@ -49,7 +54,6 @@ private:
     Robot *_robot;
     Plane *_plane;
     QVector2D P1,P2;
-    QString P1X_Str,P1Y_Str,P2X_Str,P2Y_Str;
     bool preview_isDrawn = false;
     bool point_isDrawn   = false;
     bool liftTip_isTrue  = false;
@@ -71,6 +75,7 @@ private:
     bool circleInsidePlane(QPointF point, float radius);
     void getP1fromStr();
     void setFontSizeForAllAndFutureText(qreal pointSize);
+    Qt3DExtras::QDiffuseSpecularMaterial* _material;
 signals:
     void startDrawing();
     void stopDrawing();

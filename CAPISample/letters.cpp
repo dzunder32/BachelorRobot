@@ -14,6 +14,28 @@ void Letters::createLetters()
     float factorB =  LetterSizeY/3.5;
     float factorC =  LetterSizeY/2.5;
 
+
+    str_LetterVector.append('d');
+    addLine2Letter(d,QVector2D(0.5-0.5*1/sqrt(2),3-0.5*1/sqrt(2)), QVector2D(0.5-0.5*1/sqrt(2),0),factorB);
+    addLine2Letter(d,QVector2D(0.5-0.5*1/sqrt(2),0), QVector2D(0.5+0.5*1/sqrt(2),0),factorB);
+    addLine2Letter(d,QVector2D(0.5+0.5*1/sqrt(2),0), QVector2D(0.5+0.5*1/sqrt(2),3-0.5*1/sqrt(2)),factorB);
+    addCircle2Letter(d,0.5, QVector2D(0.5,3),QVector2D(-45,315),factorB);
+    addLine2Letter(d,QVector2D(0.5+0.5*1/sqrt(2),3-0.5*1/sqrt(2)), QVector2D(2-0.5*1/sqrt(2),3-0.5*1/sqrt(2)),factorB);
+    addCircle2Letter(d,0.5, QVector2D(2,3),QVector2D(-135,235),factorB);
+    addLine2Letter(d,QVector2D(0.5+0.5*1/sqrt(2),3+0.5*1/sqrt(2)), QVector2D(2-0.5*1/sqrt(2),3+0.5*1/sqrt(2)),factorB);
+    addLine2Letter(d,QVector2D(2+0.5*1/sqrt(2),3-0.5*1/sqrt(2)), QVector2D(2+0.5*1/sqrt(2),2.5-0.5*1/sqrt(2)),factorB);
+    addLine2Letter(d,QVector2D(2+0.5*1/sqrt(2),2.5-0.5*1/sqrt(2)), QVector2D(2+0.1,2.5-0.5*1/sqrt(2)),factorB);
+    addLine2Letter(d,QVector2D(2+0.1,2.5-0.5*1/sqrt(2)), QVector2D(2+0.1,2-0.5*1/sqrt(2)),factorB);
+    addLine2Letter(d,QVector2D(2+0.1,2-0.5*1/sqrt(2)), QVector2D(2-0.1,2-0.5*1/sqrt(2)),factorB);
+    addLine2Letter(d,QVector2D(2-0.1,2-0.5*1/sqrt(2)), QVector2D(2-0.1,3*1/sqrt(2)),factorB);
+
+
+
+
+
+
+    m_Letters.append(d);
+
     str_LetterVector.append('A');
     addLine2Letter(A,QVector2D(0,0), QVector2D(1,3.5),factorB);
     addLine2Letter(A,QVector2D(1,3.5), QVector2D(2,0),factorB);

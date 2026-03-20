@@ -72,7 +72,7 @@ Plane::Plane(double XSize,double YSize,Qt3DCore::QEntity* parent)
     leftBorderY->setEnabled(true);
 
 //     toolPos = QVector3D(-xLimit/2,0,10);
-    toolPos = QVector3D(xLimit/2,0,10);
+    toolPos = QVector3D(xLimit/2,0,0);
 
     //Tool as CSystem
     planeToolTransform = new CoordinateSystem(static_cast<Qt3DCore::QEntity*>(this));

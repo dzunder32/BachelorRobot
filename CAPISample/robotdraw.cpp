@@ -720,5 +720,22 @@ void RobotDraw::stopTimer_goHome()
     if(_robot->IsConnected()){speedUpRobot();_robot->UpdatePosition();slowDownRobot();}
 }
 
+void RobotDraw::setToolDist(float arg){
+    float zDP_x = _plane->xLimit/2-40;
+    QVector3D planePosPlane=Base2PlanePoint(_plane->translation());
+    robot_setPoint(Plane2RobotPoint(QVector3D(zDP_x,0,planePosPlane.z())));
+    _plane->adjustToolOffset(arg);
+}
 
+
+void RobotDraw::setXRotPt(float arg){
+    float zDP_x = _plane->xLimit/2-40;
+    QVector3D planePosPlane = Base2PlanePoint(_plane->translation());
+    QVector3D planePt = QVector3D(0,0,20+arg);
+    QVector3D xRotPt  = Plane2RobotPoint(planePt);
+    robot_setPoint(xRotPt);
+    float alpha = qRadiansToDegrees(qAtan2(planePt.z(),zDP_x));
+
+
+}
 

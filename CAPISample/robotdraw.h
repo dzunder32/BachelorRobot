@@ -43,6 +43,8 @@ public:
     void removeLastPoint(){qDebug()<<"here man";robotSequence.removeLast();PointsBuffer.removeLast();}
     void removeLastPointUP(){qDebug()<<"here man";robotSequence.removeLast();PointsUPBuffer.removeLast();}
 
+    void setToolDist(float arg);
+    void setXRotPt(float arg);
 private:
     Letters   *_letters;
     Widget3D  *_widget3d;
@@ -105,6 +107,7 @@ private:
     void speedUpRobot(){_robot->speedUp();};
     void slowDownRobot(){_robot->slowDown();};
 
+
     void initCirclePointsSpeedUp(float range);
     void setL1(double val);
     float calculateAngleBetweenVectors(QVector3D vectorA, QVector3D vectorB);
@@ -119,6 +122,7 @@ public slots:
     void stopDrawTimer(){_timer->stop();dontDrawPoint = true;emit clearGW();}
     void setTimerTime(int ms){_timer->setInterval(ms);last_timerTime = ms;}
     void changeTimerSpeed(float factor){_timer->setInterval(last_timerTime * factor);}
+    float getZDPx(){return _plane->xLimit/2-40;}
 
 signals:
 //    void changeTimerSpeed(float factor);

@@ -553,7 +553,7 @@
               <number>-99</number>
              </property>
              <property name="value">
-              <number>10</number>
+              <number>0</number>
              </property>
             </widget>
            </item>
@@ -566,7 +566,7 @@
               </sizepolicy>
              </property>
              <property name="text">
-              <string>Rot X-Axis [°]</string>
+              <string>Rot Y-Axis [°]</string>
              </property>
             </widget>
            </item>
@@ -579,7 +579,7 @@
               </sizepolicy>
              </property>
              <property name="text">
-              <string>Rot Y-Axis [°]</string>
+              <string>Rot X-Axis [°]</string>
              </property>
             </widget>
            </item>
@@ -627,6 +627,27 @@
             <widget class="QPushButton" name="pushButton_testDistance">
              <property name="text">
               <string>Test Tool Distance</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QPushButton" name="pushButton_distSet">
+             <property name="text">
+              <string>Set Tool Distance</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QPushButton" name="pushButton_xRotSet">
+             <property name="text">
+              <string>Set xRot</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="1">
+            <widget class="QPushButton" name="pushButton_3">
+             <property name="text">
+              <string>PushButton</string>
              </property>
             </widget>
            </item>

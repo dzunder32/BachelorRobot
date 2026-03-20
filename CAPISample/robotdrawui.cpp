@@ -170,7 +170,8 @@ void RobotDrawUi::setFontSizeForAllAndFutureText( qreal pointSize) {
 void RobotDrawUi::on_spinBox_dist_valueChanged(int arg1)
 {
     qDebug()<<arg1;
-    _plane->adjustToolOffset(float(arg1));
+    // _plane->adjustToolOffset(float(arg1));
+    _robDraw->setToolDist(arg1);
 }
 
 
@@ -392,7 +393,8 @@ void RobotDrawUi::on_pushButton_lift_clicked()
 
 void RobotDrawUi::on_spinBox_xRot_valueChanged(int arg1)
 {
-    _plane->setToolOffset(0,ui->spinBox_yRot->value(),0,arg1);
+    // _plane->setToolOffset(0,ui->spinBox_yRot->value(),0,arg1);
+    _robDraw->setXRotPt(arg1);
 }
 
 void RobotDrawUi::on_spinBox_yRot_valueChanged(int arg1)

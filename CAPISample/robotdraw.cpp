@@ -721,21 +721,37 @@ void RobotDraw::stopTimer_goHome()
 }
 
 void RobotDraw::setToolDist(float arg){
-    float zDP_x = _plane->xLimit/2-40;
-    QVector3D planePosPlane=Base2PlanePoint(_plane->translation());
-    robot_setPoint(Plane2RobotPoint(QVector3D(zDP_x,0,planePosPlane.z())));
+    float ToolDistPt_x = _plane->ToolDist_PtX;
     _plane->adjustToolOffset(arg);
+    robot_setPoint(Plane2RobotPoint(QVector3D(ToolDistPt_x,0,0)));
 }
 
 
 void RobotDraw::setXRotPt(float arg){
-    float zDP_x = _plane->xLimit/2-40;
-    QVector3D planePosPlane = Base2PlanePoint(_plane->translation());
-    QVector3D planePt = QVector3D(0,0,20+arg);
+    float dtRot=arg-prev_argX;
+    float ToolDistPt_x = _plane->ToolDist_PtX;
+    QVector3D planePt = QVector3D(0,0,dtRot);
+    float alpha = qRadiansToDegrees(qAtan2(planePt.z(),ToolDistPt_x));
     QVector3D xRotPt  = Plane2RobotPoint(planePt);
-    robot_setPoint(xRotPt);
-    float alpha = qRadiansToDegrees(qAtan2(planePt.z(),zDP_x));
+    QVector3D dtBase=Plane2BasePoint(planePt)-_plane->translation();
 
+    robot_setPoint(xRotPt);
+    _plane->planeToolTransform->setRotationY(_plane->planeToolTransform->rotationY()-alpha);
+    _plane->setTranslation(_plane->translation()+dtBase);
+    _plane->setRotationX(_plane->rotationX()-alpha);
+    prev_argX=arg;
+}
+
+void RobotDraw::setYRot(float arg){
+    // _plane->setToolOffset(0,arg,0,ui->spinBox_xRot->value());
+
+    float dtRot=arg-prev_argY;
+    float ToolDistPt_x = _plane->ToolDist_PtX;
+    QVector3D yRotPt = Plane2RobotPoint(QVector3D(ToolDistPt_x,-100,dtRot));
+    robot_setPoint(yRotPt);
+    qDebug()<<dtRot;
+
+    prev_argY=arg;
 
 }
 

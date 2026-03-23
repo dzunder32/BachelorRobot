@@ -31,16 +31,15 @@ public:
 
     float offsetX_plane=0;
     float offsetY_plane=0;
-
+    float ToolDist_PtX;
     void connectPlane2Polaris();
     void updatePlanePolaris();
     QVector<QVector3D> getCornerPoints();
     void tool_setTranslation(QVector3D pos);
     QVector3D getToolTranslation();
     void adjustToolOffset(float offset);
-    void setToolMatrix(QMatrix4x4 toolBase_T);
     void setToolOffset(float off1Y,float off2Y, float off1,float off2);
-
+    void setToolMatrix(QMatrix4x4 T);
 
 private:
     Qt3DExtras::QCylinderMesh *_upperCylinderX;

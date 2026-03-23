@@ -6,10 +6,12 @@ Plane::Plane(double XSize,double YSize,Qt3DCore::QEntity* parent)
     xLimit = XSize;
     yLimit = YSize;
 
+    ToolDist_PtX=xLimit/2-40;
     upperPosX = QVector3D(0,yLimit/2,0);
     lowerPosX = QVector3D(0,-yLimit/2,0);
     rightPosY = QVector3D(xLimit/2,0,0);
     leftPosY  = QVector3D(-xLimit/2,0,0);
+
 
 
     this->setLength(100);
@@ -130,18 +132,17 @@ void Plane::adjustToolOffset(float offset)
     QMatrix4x4 toolBase_T = this->matrix() * planeToolTransform->matrix();
 
     planeToolTransform->setTranslation(toolPos);
+
     this->setMatrix(toolBase_T*planeToolTransform->matrix().inverted());
 
     // this->setTranslation(this->translation()-this->matrix().column(2).toVector3D()*offset);
     // this->setTranslation(this->matrix()*toolPos);
 }
-
-void Plane::setToolMatrix(QMatrix4x4 toolBase_T)
-{
-    this->setMatrix(toolBase_T*planeToolTransform->matrix().inverted());
+void Plane::setToolMatrix(QMatrix4x4 T){
+     this->setMatrix(T*planeToolTransform->matrix().inverted());
 }
 
-void Plane::setToolOffset(float off1Y,float off2Y,float off1,float off2)
+void Plane:: setToolOffset(float off1Y,float off2Y,float off1,float off2)
 {
     float plane_off = toolPos.z()+off1;
     adjustToolOffset(plane_off);

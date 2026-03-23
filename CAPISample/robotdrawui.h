@@ -31,6 +31,7 @@ private slots:
     void onMousePressed(QPoint globalPos);
     void on_pushButton_lift_clicked();
 
+
     void on_spinBox_xRot_valueChanged(int arg1);
     void on_spinBox_yRot_valueChanged(int arg1);
 

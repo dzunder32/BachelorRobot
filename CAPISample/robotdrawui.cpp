@@ -393,13 +393,14 @@ void RobotDrawUi::on_pushButton_lift_clicked()
 
 void RobotDrawUi::on_spinBox_xRot_valueChanged(int arg1)
 {
-    // _plane->setToolOffset(0,ui->spinBox_yRot->value(),0,arg1);
     _robDraw->setXRotPt(arg1);
 }
 
 void RobotDrawUi::on_spinBox_yRot_valueChanged(int arg1)
 {
-    _plane->setToolOffset(0,arg1,0,ui->spinBox_xRot->value());
+    qDebug()<<arg1<<"next:"<<ui->spinBox_yRot->value();
+    _robDraw->setYRot(arg1);
+    _plane->setToolOffset(0,arg1,0,0);
 }
 
 

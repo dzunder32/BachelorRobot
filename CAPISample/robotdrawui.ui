@@ -610,14 +610,14 @@
             </widget>
            </item>
            <item row="4" column="0">
-            <widget class="QPushButton" name="pushButton_testY">
+            <widget class="QPushButton" name="pushButton_testX">
              <property name="text">
               <string>Test Rot X-Axis</string>
              </property>
             </widget>
            </item>
            <item row="5" column="0">
-            <widget class="QPushButton" name="pushButton_testX">
+            <widget class="QPushButton" name="pushButton_testY">
              <property name="text">
               <string>Test Rot Y-Axis</string>
              </property>

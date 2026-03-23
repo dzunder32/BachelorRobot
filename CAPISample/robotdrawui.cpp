@@ -398,7 +398,6 @@ void RobotDrawUi::on_spinBox_xRot_valueChanged(int arg1)
 
 void RobotDrawUi::on_spinBox_yRot_valueChanged(int arg1)
 {
-    qDebug()<<arg1<<"next:"<<ui->spinBox_yRot->value();
     _robDraw->setYRot(arg1);
     _plane->setToolOffset(0,arg1,0,0);
 }
@@ -407,15 +406,15 @@ void RobotDrawUi::on_spinBox_yRot_valueChanged(int arg1)
 void RobotDrawUi::on_pushButton_testX_clicked()
 {
     QVector3D firstPt  =QVector3D(0,0,0);
-    QVector3D secondPt =QVector3D(_plane->xLimit/2-50,0,0);
+    QVector3D secondPt =QVector3D(_plane->ToolDist_PtX,0,0);
     _robDraw->AddLine2Buffer(firstPt,secondPt);
 }
 
 
 void RobotDrawUi::on_pushButton_testY_clicked()
 {
-    QVector3D firstPt  =QVector3D(0,0,0);
-    QVector3D secondPt =QVector3D(0,-150,0);
+    QVector3D firstPt  =QVector3D(_plane->ToolDist_PtX,0,0);
+    QVector3D secondPt =QVector3D(_plane->ToolDist_PtX,-100,0);
     _robDraw->AddLine2Buffer(firstPt,secondPt);
 }
 

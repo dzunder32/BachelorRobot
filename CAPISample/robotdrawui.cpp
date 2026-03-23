@@ -427,9 +427,9 @@ void RobotDrawUi::on_radioButton_clicked()
 
 void RobotDrawUi::on_pushButton_testDistance_clicked()
 {
-    _robDraw->AddPointUP2Buffer(QVector3D(0,0,0));
-    _robDraw->AddPoint2Buffer(QVector3D(0,0,0));
-    _robDraw->AddPointUP2Buffer(QVector3D(0,0,0));
+    _robDraw->AddPointUP2Buffer(QVector3D(_plane->ToolDist_PtX,0,0));
+    _robDraw->AddPoint2Buffer(QVector3D(_plane->ToolDist_PtX,0,0));
+    _robDraw->AddPointUP2Buffer(QVector3D(_plane->ToolDist_PtX,0,0));
 
 }
 

@@ -65,6 +65,7 @@ private:
     Qt3DExtras::QAbstractCameraController* _camController;
     QWidget *_widget3D;
     Plane *_plane;
+    //My Stuff
     // Qt3DCore::QTransform *planeToolTransform = new Qt3DCore::QTransform();
     Qt3DCore::QTransform *trans_tool;
     Qt3DCore::QTransform *trans_polaris;

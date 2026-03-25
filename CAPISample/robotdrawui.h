@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include "robotdraw.h"
 #include <mousepositionfilter.h>
+#include "mainwindow.h"
+#include "robotcontrol.h"
 
 namespace Ui {
 class RobotDrawUi;
@@ -14,11 +16,12 @@ class RobotDrawUi : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit RobotDrawUi(Kinematik *robotKinematik, Robot *robot, QVector3D sled_pos, Plane* plane, Widget3D *widget3d, QWidget *parent = nullptr);
+    explicit RobotDrawUi(Kinematik *robotKinematik, Robot *robot, QVector3D sled_pos, Plane* plane, Widget3D *widget3d,MainWindow *polarisGUI,RobotControl *robControl, QWidget *parent = nullptr);
     ~RobotDrawUi();
     void getMaterial(Qt3DExtras::QDiffuseSpecularMaterial *material);
 public slots:
     void removeAllItems();
+    void getConnectionPolaris(bool connection);
 
 private slots:
     void on_pushButtonStart_clicked();
@@ -43,9 +46,9 @@ private slots:
 
     void on_pushButton_testY_clicked();
 
-    void on_radioButton_clicked();
-
     void on_pushButton_testDistance_clicked();
+
+    void on_checkBox_clicked();
 
 private:
     Ui::RobotDrawUi *ui;
@@ -54,6 +57,8 @@ private:
     QThread robotThread;
     Robot *_robot;
     Plane *_plane;
+    MainWindow *_polarisGUI;
+    RobotControl *_robControl;
     QVector2D P1,P2;
     bool preview_isDrawn = false;
     bool point_isDrawn   = false;
@@ -77,6 +82,7 @@ private:
     void getP1fromStr();
     void setFontSizeForAllAndFutureText(qreal pointSize);
     Qt3DExtras::QDiffuseSpecularMaterial* _material;
+    void statusRadioButton();
 signals:
     void startDrawing();
     void stopDrawing();
@@ -85,6 +91,7 @@ signals:
 public slots:
     void drawLineWidget(QVector3D start,QVector3D end){_widget3d->addCylinderBetweenPoints(start,end);}
     void planeRegistration();
+    void setRobotCheckbox(bool status);
 
 };
 

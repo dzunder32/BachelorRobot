@@ -725,10 +725,33 @@
               </widget>
              </item>
              <item>
-              <widget class="QRadioButton" name="radioButton">
+              <widget class="QCheckBox" name="checkBox">
                <property name="text">
                 <string>display Measurement Volume</string>
                </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QGroupBox" name="groupBox_9">
+               <property name="title">
+                <string>Connected Systems</string>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_14">
+                <item>
+                 <widget class="QCheckBox" name="checkBox_Polaris">
+                  <property name="text">
+                   <string>Polaris</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QCheckBox" name="checkBox_Robot">
+                  <property name="text">
+                   <string>Robot</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
               </widget>
              </item>
              <item>

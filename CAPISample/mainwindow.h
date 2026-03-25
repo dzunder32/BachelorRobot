@@ -11,6 +11,7 @@
 #include "QQuaternion"
 #include <QFileDialog>
 
+
 namespace Ui {
 class MainWindow;
 }
@@ -26,6 +27,8 @@ public:
     Widget3D* widget;
     QVector <double> RotTransData;
     void connectWidget(Widget3D*);
+    bool getStatusConnection();
+    bool connection=false;
 
 
 public slots:
@@ -44,12 +47,13 @@ private:
     bool isStreaming=false;
     QStringList dataList;
 
+    void checkConnection();
 signals:
     void startStreaming();
     void getFrame();
     void writeCSV(std::string name,int lines);
     void getLines(int lines);
-
+    void sendConnection(bool connection);
     void sendCalibratorData(QVector <double> data);
     void sendToolData(QVector <double> data);
     void sendPolarisData(QVector <double> data);

@@ -1,28 +1,37 @@
 #include "robotdrawui.h"
 #include "ui_robotdrawui.h"
 
-RobotDrawUi::RobotDrawUi(Kinematik *robotKinematik,Robot *robot, QVector3D sled_pos,Plane* plane,Widget3D *widget3d,QWidget *parent)
+RobotDrawUi::RobotDrawUi(Kinematik *robotKinematik,Robot *robot, QVector3D sled_pos,Plane* plane,Widget3D *widget3d,MainWindow *polarisGUI,RobotControl *robControl, QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::RobotDrawUi)
 {
     ui->setupUi(this);
-    _widget3d = widget3d;
-    _robot = robot;
-    _plane = plane;
-    _robDraw = new RobotDraw(robotKinematik,_robot,sled_pos,plane,widget3d);
+    _widget3d   = widget3d;
+    _robot      = robot;
+    _plane      = plane;
+    _polarisGUI = polarisGUI;
+    _robDraw    = new RobotDraw(robotKinematik,_robot,sled_pos,plane,widget3d);
+    _robControl = robControl;
+
     _robDraw->moveToThread(&robotThread);
     qDebug()<<"robotdrawui thread"<< QThread::currentThreadId();
-
     connect(&robotThread,  &QThread::finished, _robDraw,&QObject::deleteLater);
 //    connect(_robDraw, &RobotDraw::startTimer,this, &RobotDrawUi::startDrawTimer);
 //    connect(_robDraw, &RobotDraw::stopTimer,this, &RobotDrawUi::stopDrawTimer);
     connect(_robDraw, &RobotDraw::drawLine,_widget3d, &Widget3D::addCylinderBetweenPoints);
 //    connect(_robDraw, &RobotDraw::drawPoint_Widget,this, &RobotDrawUi::widgetDrawPoint);
     connect(_robDraw, &RobotDraw::drawPoint_Widget,_widget3d, &Widget3D::drawPoint);
+
 //    connect(_robDraw, &RobotDraw::changeTimerSpeed,this, &RobotDrawUi::increaseTimerSpeed);
     connect(this,&RobotDrawUi::startDrawing,_robDraw,&RobotDraw::startDrawTimer);
     connect(this,&RobotDrawUi::stopDrawing,_robDraw,&RobotDraw::stopDrawTimer);
     connect(this,&RobotDrawUi::changeSpeed,_robDraw,&RobotDraw::setTimerTime);
+    connect(this,&RobotDrawUi::startDrawing,_robDraw,&RobotDraw::startDrawTimer);
+    connect(_polarisGUI,&MainWindow::sendConnection,this,&RobotDrawUi::getConnectionPolaris);
+    connect(_robDraw, &RobotDraw::robotConnectionStatus,this, &RobotDrawUi::setRobotCheckbox);
+
+    connect(_robControl,&RobotControl::connectStatus,this, &RobotDrawUi::setRobotCheckbox);
+
 
     mouseFilter = new MousePositionFilter(ui->graphicsView->viewport());
     ui->graphicsView->viewport()->installEventFilter(mouseFilter);
@@ -36,6 +45,10 @@ RobotDrawUi::RobotDrawUi(Kinematik *robotKinematik,Robot *robot, QVector3D sled_
     connect(_robDraw,&RobotDraw::clearGW,this,&RobotDrawUi::removeAllItems);
     _robDraw->setTimerTime(500);
     robotThread.start();
+    ui->checkBox_Polaris->setAttribute(Qt::WA_TransparentForMouseEvents);
+    ui->checkBox_Polaris->setFocusPolicy(Qt::NoFocus);
+    ui->checkBox_Robot->setAttribute(Qt::WA_TransparentForMouseEvents);
+    ui->checkBox_Robot->setFocusPolicy(Qt::NoFocus);
 }
 
 RobotDrawUi::~RobotDrawUi()
@@ -44,6 +57,7 @@ RobotDrawUi::~RobotDrawUi()
     robotThread.wait();
     delete ui;
 }
+
 
 void RobotDrawUi::getMaterial(Qt3DExtras::QDiffuseSpecularMaterial* material)
 {
@@ -59,6 +73,11 @@ void RobotDrawUi::planeRegistration()
     _robDraw->AddPoint2Buffer(QVector3D(100,300,0));
     _robDraw->AddPointUP2Buffer(QVector3D(100,300,10));
 
+}
+
+void RobotDrawUi::setRobotCheckbox(bool status)
+{
+    ui->checkBox_Robot->setChecked(status);
 }
 
 
@@ -363,6 +382,11 @@ void RobotDrawUi::removeAllItems()
     drawGWBackground();
 }
 
+void RobotDrawUi::getConnectionPolaris(bool connection)
+{
+    ui->checkBox_Polaris->setChecked(connection);
+}
+
 void RobotDrawUi::adjustGWSliders()
 {
     int max_horizont = ui->graphicsView->horizontalScrollBar()->maximum();
@@ -419,11 +443,7 @@ void RobotDrawUi::on_pushButton_testY_clicked()
 }
 
 
-void RobotDrawUi::on_radioButton_clicked()
-{
-    if(ui->radioButton->isChecked()){_material->setDiffuse(QColor(0,0,255,200));}
-    else{_material->setDiffuse(QColor(0,0,0,0));}
-}
+
 
 void RobotDrawUi::on_pushButton_testDistance_clicked()
 {
@@ -431,5 +451,12 @@ void RobotDrawUi::on_pushButton_testDistance_clicked()
     _robDraw->AddPoint2Buffer(QVector3D(_plane->ToolDist_PtX,0,0));
     _robDraw->AddPointUP2Buffer(QVector3D(_plane->ToolDist_PtX,0,0));
 
+}
+
+
+void RobotDrawUi::on_checkBox_clicked()
+{
+    if(ui->checkBox->isChecked()){_material->setDiffuse(QColor(0,0,255,200));}
+    else{_material->setDiffuse(QColor(0,0,0,0));}
 }
 

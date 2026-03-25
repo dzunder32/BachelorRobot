@@ -133,6 +133,7 @@ signals:
     void drawPoint_Widget(QVector3D point , float thickness, QColor color);
     void robotRangeChanged(float);
     void clearGW();
+    void robotConnectionStatus(bool);
 };
 
 #endif // ROBOTDRAW_H

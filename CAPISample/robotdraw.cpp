@@ -25,8 +25,9 @@ RobotDraw::RobotDraw(Kinematik *robotKinematik, Robot *robot, QVector3D sled_pos
 void RobotDraw::robDraw_onTimeout()
 {
     runAgain:
-   qDebug()<<"roboSeq"<<robotSequence;
+    qDebug()<<"roboSeq"<<robotSequence;
     UpdatePlanePosition();
+
     if(!robotSequence.isEmpty())
     {
         switch (robotSequence.takeFirst())
@@ -56,6 +57,8 @@ void RobotDraw::robDraw_onTimeout()
         stopTimer_goHome();
         lastPoint_drawn = false;
     }
+
+    emit robotConnectionStatus(_robot->IsConnected());
 }
 
 

@@ -28,6 +28,8 @@ private:
     Robot* _robot;
     Ui::RobotControl *ui;
     void _disable(bool disable);
+signals:
+    void connectStatus(bool status);
 };
 
 #endif // ROBOTCONTROL_H

@@ -90,49 +90,13 @@ int main(int argc, char *argv[])
     mVolumeMesh->addComponent(material);
 
     material->setDiffuse(QColor(0,0,0,0));
-    // Create the material
-    // Qt3DExtras::QPhongMaterial *material = new Qt3DExtras::QPhongMaterial();
-    // material->setDiffuse(QColor(255, 0, 0, 0));
-    // // Red with alpha = 100
-    // Qt3DRender::QRenderSettings *renderSettings = new Qt3DRender::QRenderSettings();
-    // renderSettings->setRenderPolicy(Qt3DRender::QRenderSettings::OnDemand);
 
-    // // Create blend arguments
-    // Qt3DRender::QBlendEquationArguments *blendArgs = new Qt3DRender::QBlendEquationArguments();
-    // blendArgs->setSourceRgb(Qt3DRender::QBlendEquationArguments::SourceAlpha);
-    // blendArgs->setDestinationRgb(Qt3DRender::QBlendEquationArguments::OneMinusSourceAlpha);
-
-    // // Create blend equation
-    // Qt3DRender::QBlendEquation *blendEquation = new Qt3DRender::QBlendEquation();
-    // blendEquation->setBlendFunction(Qt3DRender::QBlendEquation::Add);
-
-    // // Create render pass
-    // Qt3DRender::QRenderPass *renderPass = new Qt3DRender::QRenderPass();
-    // renderPass->addRenderState(blendArgs);
-    // renderPass->addRenderState(blendEquation);
-
-    // // Create technique
-    // Qt3DRender::QTechnique *technique = new Qt3DRender::QTechnique();
-    // technique->addRenderPass(renderPass);
-
-    // // Create effect
-    // Qt3DRender::QEffect *effect = new Qt3DRender::QEffect();
-    // effect->addTechnique(technique);
-
-    // // Assign effect to material
-    // material->setEffect(effect);
 
     // Apply material to mesh
     mVolumeMesh->addComponent(material);
 
 
 
-    // CoordinateSystem *calibrator=new CoordinateSystem;
-    // calibrator->setLength(100);
-    // calibrator->setCoordLabel("Calibrator",'Z');
-    // calibrator->setNegativeAxis(false);
-    // widget3d->addObject(calibrator);
-    // widget3d->addTransCalibrator(calibrator);
 
     //Ebene zu Zeichnen
     Plane *plane = new Plane(650.0,850.0);
@@ -147,7 +111,7 @@ int main(int argc, char *argv[])
     ControlPanel *control = new ControlPanel(robotKinematik);
     control->show();
     robot->ConnectKinematik(robotKinematik);
-    RobotDrawUi *drawL = new RobotDrawUi(robotKinematik,robot,linAxis->sled_position,plane,widget3d);
+    RobotDrawUi *drawL = new RobotDrawUi(robotKinematik,robot,linAxis->sled_position,plane,widget3d,PolarisGUI,robControl);
 
     drawL->show();
     drawL->getMaterial(material);

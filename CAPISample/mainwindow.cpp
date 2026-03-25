@@ -18,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(this, &MainWindow::writeCSV, polaris, &PolarisV::writeCSV);
     connect(this, &MainWindow::getLines, polaris, &PolarisV::getData);
     connect(this, &MainWindow::getFrame, polaris, &PolarisV::getFrame);
+    connect(this, &MainWindow::startStreaming, polaris, &PolarisV::startStreaming);
     connect(ui->pbStreaming,&QPushButton::pressed,this,&MainWindow::streaming);
     connect(ui->pbMarkerposition,&QPushButton::pressed,this,&MainWindow::detektMarkers);
 //    QMenu *fileMenu = new QMenu("File", this);
@@ -46,10 +47,19 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+bool MainWindow::getStatusConnection()
+{
+    connection=ui->pbStreaming->isChecked();
+    return connection;
+}
+
+
 void MainWindow::streaming()
 {
+
     if(isStreaming==true)
     {
+
         polaris->stopStreaming();
         ui->pbStreaming->setDisabled(true);
     }
@@ -59,6 +69,7 @@ void MainWindow::streaming()
         emit startStreaming();
         ui->pbStreaming->setText("stop streaming");
         isStreaming=true;
+        emit sendConnection(true);
     }
 }
 
@@ -73,6 +84,8 @@ void MainWindow::threadFinished()
     ui->pbStreaming->setText("start streaming");
     isStreaming=false;
     ui->pbStreaming->setEnabled(true);
+    emit sendConnection(false);
+
 }
 
 void MainWindow::stopThread()
@@ -114,6 +127,7 @@ void MainWindow::on_pushButton_clicked()
 {
     ui->textEdit->clear();
 }
+
 
 void MainWindow::connectWidget(Widget3D* w)
 {

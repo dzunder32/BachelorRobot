@@ -102,7 +102,7 @@ int main(int argc, char *argv[])
     Plane *plane = new Plane(650.0,850.0);
     widget3d->addObject(plane);
     widget3d->addPlane(plane);
-    plane->setTranslation(linAxis->sled_position+QVector3D(-500,800,500));
+    plane->setTranslation(linAxis->sled_position+QVector3D(-500,300,500));
     plane->setRotation(QQuaternion::fromEulerAngles(QVector3D(90.01,0,0)));
     plane->setRotation(plane->rotation() * QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),90));
     Robot *robot = new Robot("143.93.135.15",10001);

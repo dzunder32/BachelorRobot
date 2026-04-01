@@ -27,9 +27,9 @@ void RobotDraw::robDraw_onTimeout()
     runAgain:
     qDebug()<<"roboSeq"<<robotSequence;
     UpdatePlanePosition();
-
     if(!robotSequence.isEmpty())
     {
+        start_2x = false;
         switch (robotSequence.takeFirst())
         {
         case POINT:
@@ -44,18 +44,19 @@ void RobotDraw::robDraw_onTimeout()
     }
     else
     {
-        if(!lastPoint_drawn)
+        if(!lastPoint_drawn && !start_2x)
         {
-            qDebug()<<"yysas";
+            qDebug()<<"drawing last Point";
             // moveAboveCounter = 1;
-            PointsBuffer.prepend(lastPoint+QVector3D(0,0,150));
-            robotSequence.prepend(POINT);
+            PointsUPBuffer.prepend(lastPoint+QVector3D(0,0,50));
+            robotSequence.prepend(POINT_UP);
             lastPoint_drawn = true;
             goto runAgain;
         }
         qDebug()<<"main Home";
         stopTimer_goHome();
         lastPoint_drawn = false;
+        start_2x=true;
     }
 
     emit robotConnectionStatus(_robot->IsConnected());
@@ -106,8 +107,10 @@ void RobotDraw::robotDrawPoint()
     {
         QVector3D planePoint = PointsBuffer.takeFirst();
         if(line_isTrue){drawLine(Plane2BasePoint(startLinePoint),Plane2BasePoint(planePoint));line_isTrue = false;}
+        else{drawPoint_Widget(Plane2BasePoint(planePoint));}
         robot_setPoint(Plane2RobotPoint(planePoint));
         lastPoint = planePoint;
+
     }
     else {stopTimer_goHome();}
 }
@@ -345,7 +348,7 @@ void RobotDraw::UpdatePlanePosition()
     if(sum_T>1)
     {
         planeRobot_T = curr_planeRobot_T;
-        QQuaternion rotMatrix=QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180) * QQuaternion::fromAxisAndAngle(QVector3D(1,0,0),-20);
+        QQuaternion rotMatrix=QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180) * QQuaternion::fromAxisAndAngle(QVector3D(1,0,0),-10);
         QVector3D ew = CalculateEw(planeRobot_T * QMatrix4x4(rotMatrix.toRotationMatrix()));
         a=ew.x();
         b=ew.y();
@@ -597,7 +600,6 @@ void RobotDraw::constructLetters(QString letter_Str)
             getLetterData(letter_Str.at(i));
         }
     }
-
 }
 
 
@@ -683,6 +685,7 @@ void RobotDraw::addLetter2Buffer()
 void RobotDraw::AddPoint2Buffer(QVector3D planePoint)
 {
     PointsBuffer.append(planePoint);robotSequence.append(POINT);
+    emit drawPoint_Widget(Plane2BasePoint(planePoint));
 }
 
 
@@ -726,7 +729,12 @@ void RobotDraw::stopTimer_goHome()
 void RobotDraw::setToolDist(float arg){
     float ToolDistPt_x = _plane->ToolDist_PtX;
     _plane->adjustToolOffset(arg);
-    robot_setPoint(Plane2RobotPoint(QVector3D(ToolDistPt_x,0,0)));
+    // robot_setPoint(Plane2RobotPoint(QVector3D(ToolDistPt_x,0,0)));
+    QVector3D pt=QVector3D(ToolDistPt_x,0,0);
+    AddPointUP2Buffer(pt);
+    AddPoint2Buffer(pt);
+    AddPointUP2Buffer(pt);
+
 }
 
 
@@ -738,10 +746,16 @@ void RobotDraw::setXRotPt(float arg){
     QVector3D xRotPt  = Plane2RobotPoint(planePt);
     QVector3D dtBase=Plane2BasePoint(planePt)-_plane->translation();
 
-    robot_setPoint(xRotPt);
+
+    // robot_setPoint(xRotPt);
     _plane->planeToolTransform->setRotationY(_plane->planeToolTransform->rotationY()-alpha);
     _plane->setTranslation(_plane->translation()+dtBase);
     _plane->setRotationX(_plane->rotationX()-alpha);
+
+    AddPointUP2Buffer(QVector3D(0,0,0));
+    AddPoint2Buffer(QVector3D(0,0,0));
+    AddPointUP2Buffer(QVector3D(0,0,0));
+
     prev_argX=arg;
 }
 
@@ -751,9 +765,12 @@ void RobotDraw::setYRot(float arg){
     float dtRot=arg-prev_argY;
     float ToolDistPt_x = _plane->ToolDist_PtX;
     QVector3D yRotPt = Plane2RobotPoint(QVector3D(ToolDistPt_x,-100,dtRot));
-    robot_setPoint(yRotPt);
+    // robot_setPoint(yRotPt);
     qDebug()<<dtRot;
 
+    AddPointUP2Buffer(QVector3D(ToolDistPt_x,-100,0));
+    AddPoint2Buffer(QVector3D(ToolDistPt_x,-100,0));
+    AddPointUP2Buffer(QVector3D(ToolDistPt_x,-100,0));
     prev_argY=arg;
 
 }

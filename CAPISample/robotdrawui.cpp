@@ -148,17 +148,10 @@ void RobotDrawUi::on_pushButton_drawCircle_clicked()
 
 void RobotDrawUi::on_pushButton_draw_clicked()
 {
-    _widget3d->deleteAllLines();
-    _widget3d->deleteAllPoints();
+    clearAll();
     _robDraw->resetShiftVector();
-    _robDraw->clearBuffers();
     QString textInput = ui->textEdit_textInput->toPlainText();
-    qDebug()<<textInput;
     _robDraw->constructLetters(textInput);
-    preview_isDrawn = true;
-    _robDraw->dontDrawPoint = false;
-    _robDraw->UpdatePlanePosition();
-    removeAllItems();
 }
 
 
@@ -189,6 +182,7 @@ void RobotDrawUi::setFontSizeForAllAndFutureText( qreal pointSize) {
 void RobotDrawUi::on_spinBox_dist_valueChanged(int arg1)
 {
     qDebug()<<arg1;
+    clearAll();
     // _plane->adjustToolOffset(float(arg1));
     _robDraw->setToolDist(arg1);
 }
@@ -332,11 +326,12 @@ void RobotDrawUi::addPressedPoint(qreal x, qreal y)
         if(point_isDrawn){
             _robDraw->removeLastPoint();
             _robDraw->removeLastPointUP();
-            _robDraw->removeLastPoint();
+            // _robDraw->removeLastPoint();
 
             point_isDrawn = false;
         }
         QPointF linePt1 = points[points.length()-2]->pos();
+
         QPointF linePt2(x,y);
         addLine(linePt1,linePt2);
         QVector3D lineVec1 = QVector3D(qRound(linePt1.x()*plane_multiX),qRound(-linePt1.y()*plane_multiY),0);
@@ -346,7 +341,7 @@ void RobotDrawUi::addPressedPoint(qreal x, qreal y)
     {
         _robDraw->AddPointUP2Buffer(QVector3D(x*plane_multiX,-y*plane_multiY,0));
         _robDraw->AddPoint2Buffer(QVector3D(x*plane_multiX,-y*plane_multiY,0));
-        _robDraw->AddPoint2Buffer(QVector3D(x*plane_multiX,-y*plane_multiY,50));
+        _robDraw->AddPointUP2Buffer(QVector3D(x*plane_multiX,-y*plane_multiY,0));
         point_isDrawn = true;
     }
 }
@@ -413,15 +408,27 @@ void RobotDrawUi::on_pushButton_lift_clicked()
     }
 }
 
+void RobotDrawUi::clearAll(){
+    _widget3d->deleteAllLines();
+    _widget3d->deleteAllPoints();
+    _robDraw->clearBuffers();
+    removeAllItems();
+    preview_isDrawn = true;
+    _robDraw->dontDrawPoint = false;
+    _robDraw->lastPoint_drawn = true;
+    // _robDraw->UpdatePlanePosition();
+}
 
 
 void RobotDrawUi::on_spinBox_xRot_valueChanged(int arg1)
 {
+    clearAll();
     _robDraw->setXRotPt(arg1);
 }
 
 void RobotDrawUi::on_spinBox_yRot_valueChanged(int arg1)
 {
+    clearAll();
     _robDraw->setYRot(arg1);
     _plane->setToolOffset(0,arg1,0,0);
 }
@@ -429,6 +436,7 @@ void RobotDrawUi::on_spinBox_yRot_valueChanged(int arg1)
 
 void RobotDrawUi::on_pushButton_testX_clicked()
 {
+    clearAll();
     QVector3D firstPt  =QVector3D(0,0,0);
     QVector3D secondPt =QVector3D(_plane->ToolDist_PtX,0,0);
     _robDraw->AddLine2Buffer(firstPt,secondPt);
@@ -437,6 +445,8 @@ void RobotDrawUi::on_pushButton_testX_clicked()
 
 void RobotDrawUi::on_pushButton_testY_clicked()
 {
+
+    clearAll();
     QVector3D firstPt  =QVector3D(_plane->ToolDist_PtX,0,0);
     QVector3D secondPt =QVector3D(_plane->ToolDist_PtX,-100,0);
     _robDraw->AddLine2Buffer(firstPt,secondPt);
@@ -447,6 +457,8 @@ void RobotDrawUi::on_pushButton_testY_clicked()
 
 void RobotDrawUi::on_pushButton_testDistance_clicked()
 {
+
+    clearAll();
     _robDraw->AddPointUP2Buffer(QVector3D(_plane->ToolDist_PtX,0,0));
     _robDraw->AddPoint2Buffer(QVector3D(_plane->ToolDist_PtX,0,0));
     _robDraw->AddPointUP2Buffer(QVector3D(_plane->ToolDist_PtX,0,0));

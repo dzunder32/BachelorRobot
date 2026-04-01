@@ -52,7 +52,7 @@ public slots:
     void getPolarisData(QVector <double>);
     void getCalibratorData(QVector <double>);
 
-    void drawPoint(QVector3D position, float size, QColor color);
+    void drawPoint(QVector3D position);
     void deleteAllPoints();
     void deleteAllLines();
     void addCylinderBetweenPoints(const QVector3D &startPoint, const QVector3D &endPoint);

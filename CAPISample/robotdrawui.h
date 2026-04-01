@@ -27,7 +27,7 @@ private slots:
     void on_pushButtonStart_clicked();
     void on_pushButtonStop_clicked();
     void on_timerSpeedSlider_sliderMoved(int position);
-    void widgetDrawPoint(QVector3D point , float thickness, QColor color){_widget3d->drawPoint(point,thickness,color);}
+    void widgetDrawPoint(QVector3D point){_widget3d->drawPoint(point);}
     void on_pushButton_draw_clicked();
     void on_spinBox_letterSize_valueChanged(int arg1);
     void on_spinBox_dist_valueChanged(int arg1);
@@ -83,6 +83,7 @@ private:
     void setFontSizeForAllAndFutureText(qreal pointSize);
     Qt3DExtras::QDiffuseSpecularMaterial* _material;
     void statusRadioButton();
+    void clearAll();
 signals:
     void startDrawing();
     void stopDrawing();

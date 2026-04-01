@@ -257,9 +257,11 @@ void Widget3D::setViewCenter(QVector3D point)
     _cameraEntity->setViewCenter(point);
 }
 
-void Widget3D::drawPoint(QVector3D position, float size, QColor color)
+void Widget3D::drawPoint(QVector3D position)
 {
     // Create a new entity
+    float size = 2;
+    QColor color = QColor(0,0,0);
     Qt3DCore::QEntity *entity = new Qt3DCore::QEntity(_rootEntity);
     pointEntities.append(entity);
     // Create a sphere mesh and set its radius

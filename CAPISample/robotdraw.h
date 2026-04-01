@@ -24,7 +24,8 @@ public:
     RobotDraw(Kinematik *robotKinematik,Robot *robot, QVector3D sled_pos,Plane* plane, Widget3D *widget3d);
     QTimer *_timer = new QTimer(this);
 
-    bool dontDrawPoint = false;
+    bool dontDrawPoint    = false;
+    bool lastPoint_drawn  = false;
     int prev_timerTime;
     int toolTipDistance = 0;
     double robotRange = 1000;
@@ -38,9 +39,9 @@ public:
     void constructLetters (QString letter_Str);
     void resetShiftVector ();
     void initLetterSize   (float sizeFactor);
-    void clearBuffers(){CircleBuffer.clear();PointsBuffer.clear();PointsBuffer.clear();LinesBuffer.clear();robotSequence.clear();line_isTrue=false;}
+    void clearBuffers(){CircleBuffer.clear();PointsBuffer.clear();PointsUPBuffer.clear();LinesBuffer.clear();robotSequence.clear();line_isTrue=false;}
     void UpdatePlanePosition();
-    void removeLastPoint(){qDebug()<<"here man";robotSequence.removeLast();PointsBuffer.removeLast();}
+    void removeLastPoint(){qDebug()<<robotSequence;robotSequence.removeLast();PointsBuffer.removeLast();}
     void removeLastPointUP(){qDebug()<<"here man";robotSequence.removeLast();PointsUPBuffer.removeLast();}
 
     void setToolDist(float arg);
@@ -59,7 +60,7 @@ private:
     bool  plane_isFull     = false;
     bool  drawCircle       = false;
     bool  alreadyDrawn     = false;
-    bool  lastPoint_drawn  = false;
+    bool start_2x = true;
 
     int   moveAboveCounter = 2;
     int circlePoints_counter;
@@ -130,7 +131,7 @@ public slots:
 signals:
 //    void changeTimerSpeed(float factor);
     void drawLine(QVector3D start,QVector3D end);
-    void drawPoint_Widget(QVector3D point , float thickness, QColor color);
+    void drawPoint_Widget(QVector3D point);
     void robotRangeChanged(float);
     void clearGW();
     void robotConnectionStatus(bool);

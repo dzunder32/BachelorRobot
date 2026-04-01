@@ -9,7 +9,6 @@
 #include "coordinatesystem.h"
 #include "kinectcamera.h"
 #include "controlpanel.h"
-#include "drawletters.h"
 #include "robotdrawui.h"
 #include "penholder.h"
 #include "plane.h"
@@ -58,16 +57,18 @@ int main(int argc, char *argv[])
     STLMesh* toolMesh= new STLMesh(refTool);
     toolMesh->setSource("RefTool_Complete.stl");
     toolMesh->setRotationZ(90);
-    toolMesh->setTranslation(QVector3D(-8.77,-72.5,-7));
+    toolMesh->setTranslation(QVector3D(-14.4,-72.5,-7));
     // toolMesh->Material->setDiffuse(QColor(0,0,0));
     // widget3d->addObject(refTool,QVector3D(980,380,715),QQuaternion(1,0,0,0)/* * QQuaternion::fromAxisAndAngle(QVector3D(0,0,1),45)*//**//*QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180)*/);
-    widget3d->addObject(refTool,QVector3D(988,3338.75+9.95,695.921+7+20),QQuaternion(1,0,0,0)/* * QQuaternion::fromAxisAndAngle(QVector3D(0,0,1),45)*//**//*QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180)*/);
+    widget3d->addObject(refTool,QVector3D(992.5,3338.75+9.95,695.921+7+20),QQuaternion(1,0,0,0)/* * QQuaternion::fromAxisAndAngle(QVector3D(0,0,1),45)*//**//*QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180)*/);
     widget3d->setRefMatrix(static_cast<Qt3DCore::QTransform*>(refTool->components()[1]));
     //position of ref tool, 300 in y , 40 in x
-    widget3d->addCylinderBetweenPoints(QVector3D(988,3328.75,695.921),QVector3D(988,3628.75,695.921));
-    widget3d->addCylinderBetweenPoints(QVector3D(988,3328.75,695.921),QVector3D(988,3328.75,695.921+20));
+    widget3d->addCylinderBetweenPoints(QVector3D(979.6+4.5,3328.75,695.921+27),QVector3D(979.6+4.5,3628.75,695.921+27));
+    widget3d->addCylinderBetweenPoints(QVector3D(979.6+4.5,3628.75,695.921-30),QVector3D(979.6+4.5,3628.75,695.921+27));
 
-    // widget3d->addCylinderBetweenPoints(QVector3D(980,740,712),QVector3D(940,740,712));
+    // widget3d->addCylinderBetweenPoints(QVector3D(988,3328.75,695.921+27),QVector3D(988,3328.75,695.921+20));
+
+    // widget3d->addCylinderBetweenPoints(QVector3D(980,000,732),QVector3D(940,740,732));
 
     //Polaris als Koordinatensystem --------------------------------------------------------------
     CoordinateSystem *polaris=new CoordinateSystem;
@@ -105,6 +106,7 @@ int main(int argc, char *argv[])
     plane->setTranslation(linAxis->sled_position+QVector3D(-500,300,500));
     plane->setRotation(QQuaternion::fromEulerAngles(QVector3D(90.01,0,0)));
     plane->setRotation(plane->rotation() * QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),90));
+
     Robot *robot = new Robot("143.93.135.15",10001);
     RobotControl *robControl = new RobotControl(robot);
     robControl->show();

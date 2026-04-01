@@ -6,7 +6,6 @@ CONFIG -= app_bundle
 
 SOURCES += \
         draw.cpp \
-        drawletters.cpp \
         letters.cpp \
         main.cpp \
         mainwindow.cpp \
@@ -18,7 +17,6 @@ SOURCES += \
 
 HEADERS += \
     draw.h \
-    drawletters.h \
     letters.h \
     mainwindow.h \
     mousepositionfilter.h \
@@ -53,7 +51,6 @@ DEPENDPATH += $$PWD/../melfaRobots
 
 
 FORMS += \
-    drawletters.ui \
     mainwindow.ui \
     robotdrawui.ui
 

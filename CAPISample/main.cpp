@@ -57,18 +57,19 @@ int main(int argc, char *argv[])
     STLMesh* toolMesh= new STLMesh(refTool);
     toolMesh->setSource("RefTool_Complete.stl");
     toolMesh->setRotationZ(90);
-    toolMesh->setTranslation(QVector3D(-14.4,-72.5,-7));
+    toolMesh->setTranslation(QVector3D(-14.4,-72.5-20,-7-5));
     // toolMesh->Material->setDiffuse(QColor(0,0,0));
     // widget3d->addObject(refTool,QVector3D(980,380,715),QQuaternion(1,0,0,0)/* * QQuaternion::fromAxisAndAngle(QVector3D(0,0,1),45)*//**//*QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180)*/);
-    widget3d->addObject(refTool,QVector3D(992.5,3338.75+9.95,695.921+7+20),QQuaternion(1,0,0,0)/* * QQuaternion::fromAxisAndAngle(QVector3D(0,0,1),45)*//**//*QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180)*/);
+    widget3d->addObject(refTool,QVector3D(992.5,3338.75+9.95+92+20,695.921+7+20+5),QQuaternion(1,0,0,0)/* * QQuaternion::fromAxisAndAngle(QVector3D(0,0,1),45)*//**//*QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180)*/);
     widget3d->setRefMatrix(static_cast<Qt3DCore::QTransform*>(refTool->components()[1]));
     //position of ref tool, 300 in y , 40 in x
-    widget3d->addCylinderBetweenPoints(QVector3D(979.6+4.5,3328.75,695.921+27),QVector3D(979.6+4.5,3628.75,695.921+27));
+    widget3d->addCylinderBetweenPoints(QVector3D(979.6+4.5,3328.75+92,695.921+27+10),QVector3D(979.6+4.5,3628.75,695.921+27+10));
     widget3d->addCylinderBetweenPoints(QVector3D(979.6+4.5,3628.75,695.921-30),QVector3D(979.6+4.5,3628.75,695.921+27));
 
     // widget3d->addCylinderBetweenPoints(QVector3D(988,3328.75,695.921+27),QVector3D(988,3328.75,695.921+20));
 
     // widget3d->addCylinderBetweenPoints(QVector3D(980,000,732),QVector3D(940,740,732));
+
 
     //Polaris als Koordinatensystem --------------------------------------------------------------
     CoordinateSystem *polaris=new CoordinateSystem;
@@ -80,22 +81,30 @@ int main(int argc, char *argv[])
     STLMesh* polarisMesh= new STLMesh(polaris);
     polarisMesh->setSource("PolarisDummy v7.stl");
 
-    STLMesh* mVolumeMesh= new STLMesh(polaris);
-    mVolumeMesh->setSource("mVolume.stl");
-    mVolumeMesh->setTranslation(QVector3D(0,0,-950));
-    mVolumeMesh->setRotationX(90);
+//    STLMesh* mVolumeMesh= new STLMesh(polaris);
+//    mVolumeMesh->setSource("mVolume.stl");
+//    mVolumeMesh->setTranslation(QVector3D(0,0,-950));
+//    mVolumeMesh->setRotationX(90);
 
-    Qt3DExtras::QDiffuseSpecularMaterial *material = new Qt3DExtras::QDiffuseSpecularMaterial();
-    material->setDiffuse(QColor(0, 0, 255, 200)); // semi-transparent red
-    material->setAlphaBlendingEnabled(true);
-    mVolumeMesh->addComponent(material);
+//    Qt3DExtras::QDiffuseSpecularMaterial *material = new Qt3DExtras::QDiffusecSpecularMaterial();
+//    material->setDiffuse(QColor(0, 0, 255, 200)); // semi-transparent red
+//    material->setAlphaBlendingEnabled(true);
+//    mVolumeMesh->addComponent(material);
 
-    material->setDiffuse(QColor(0,0,0,0));
+//    material->setDiffuse(QColor(0,0,0,0));
 
 
-    // Apply material to mesh
-    mVolumeMesh->addComponent(material);
+//    // Apply material to mesh
+//    mVolumeMesh->addComponent(material);
 
+
+    //Calibrator als Koordinatensystem --------------------------------------------------------------
+    CoordinateSystem *calibrator=new CoordinateSystem;
+    calibrator->setLength(100);
+    // polaris->setCoordLabel("Polaris",'X');
+    calibrator->setNegativeAxis(false);
+    widget3d->addObject(calibrator);
+    widget3d->addTransCalibrator(calibrator);
 
 
 
@@ -116,6 +125,6 @@ int main(int argc, char *argv[])
     RobotDrawUi *drawL = new RobotDrawUi(robotKinematik,robot,linAxis->sled_position,plane,widget3d,PolarisGUI,robControl);
 
     drawL->show();
-    drawL->getMaterial(material);
+//    drawL->getMaterial(material);
     return a.exec();
 }

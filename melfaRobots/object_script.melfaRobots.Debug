@@ -1,0 +1,16 @@
+debug/controlpanel.o
+debug/robotPosition.o
+debug/rv4flkinematik.o
+debug/rv6slkinematik.o
+debug/robot.o
+debug/mathfunktions.o
+debug/kinematik.o
+debug/robotcontrol.o
+debug/subwindow.o
+debug/moc_controlpanel.o
+debug/moc_robotPosition.o
+debug/moc_rv4flkinematik.o
+debug/moc_rv6slkinematik.o
+debug/moc_robot.o
+debug/moc_robotcontrol.o
+debug/moc_subwindow.o

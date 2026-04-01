@@ -35,13 +35,11 @@ void RobotControl::_connectClicked()
         _robot->Connect();
         ui->pb_connect->setText("disconnect");
         _disable(false);
-        emit connectStatus(true);
     }
     else{
         _robot->Disconnect();
         ui->pb_connect->setText("connect");
         _disable(true);
-        emit connectStatus(false);
     }
 
 

@@ -1454,7 +1454,7 @@ public:
 
         retranslateUi(ControlPanel);
 
-        MovementMethod->setCurrentIndex(0);
+        MovementMethod->setCurrentIndex(1);
         cb_Flg1->setCurrentIndex(7);
 
 

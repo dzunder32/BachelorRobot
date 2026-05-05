@@ -766,6 +766,11 @@ void RobotDraw::setYRot(float arg){
     float ToolDistPt_x = _plane->ToolDist_PtX;
     QVector3D yRotPt = Plane2RobotPoint(QVector3D(ToolDistPt_x,-100,dtRot));
     // robot_setPoint(yRotPt);
+    float opposite1 = arg;
+    float adjacent1 = 100;
+    float alpha1 =  atan2(opposite1,adjacent1);
+    _plane->planeToolTransform->setRotationX(qRadiansToDegrees(alpha1));
+    _plane->setRotationY(90-qRadiansToDegrees(alpha1));
     qDebug()<<dtRot;
 
     AddPointUP2Buffer(QVector3D(ToolDistPt_x,-100,0));

@@ -429,8 +429,8 @@ void RobotDrawUi::on_spinBox_xRot_valueChanged(int arg1)
 void RobotDrawUi::on_spinBox_yRot_valueChanged(int arg1)
 {
     clearAll();
+    // _plane->setToolOffset(0,arg1,0,0);
     _robDraw->setYRot(arg1);
-    _plane->setToolOffset(0,arg1,0,0);
 }
 
 

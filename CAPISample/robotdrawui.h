@@ -50,6 +50,8 @@ private slots:
 
     void on_checkBox_clicked();
 
+    void on_pushButton_reset_clicked();
+
 private:
     Ui::RobotDrawUi *ui;
     RobotDraw *_robDraw;

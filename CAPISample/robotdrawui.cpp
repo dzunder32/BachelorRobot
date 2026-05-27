@@ -472,3 +472,9 @@ void RobotDrawUi::on_checkBox_clicked()
     else{_material->setDiffuse(QColor(0,0,0,0));}
 }
 
+
+void RobotDrawUi::on_pushButton_reset_clicked()
+{
+    clearAll();
+    _robDraw->resetShiftVector();
+}

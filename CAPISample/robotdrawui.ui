@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>3</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab">
        <property name="toolTip">
@@ -78,6 +78,13 @@
            <widget class="QPushButton" name="pushButton_lift">
             <property name="text">
              <string>Lift Tip</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_reset">
+            <property name="text">
+             <string>Reset</string>
             </property>
            </widget>
           </item>
@@ -802,7 +809,7 @@
      <x>0</x>
      <y>0</y>
      <width>610</width>
-     <height>21</height>
+     <height>20</height>
     </rect>
    </property>
   </widget>

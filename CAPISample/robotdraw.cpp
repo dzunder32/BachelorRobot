@@ -108,6 +108,7 @@ void RobotDraw::robotDrawPoint()
         QVector3D planePoint = PointsBuffer.takeFirst();
         if(line_isTrue){drawLine(Plane2BasePoint(startLinePoint),Plane2BasePoint(planePoint));line_isTrue = false;}
         else{drawPoint_Widget(Plane2BasePoint(planePoint));}
+        moveAboveCounter=2;
         robot_setPoint(Plane2RobotPoint(planePoint));
         lastPoint = planePoint;
 
@@ -124,9 +125,10 @@ void RobotDraw::robotDrawLine()
         //save first Point
         startLinePoint = line[0];
         //check wether the distance between endPoint of current Line is bigger than 5
-
+        moveAboveCounter=2;
         if(cartDistance(endLinePoint,startLinePoint) > 5 && alreadyDrawn)
         {
+
             LinesBuffer.prepend(line);robotSequence.prepend(LINE);
             //when distance is too big, move Tip above the plane
             moveTipAbove();/*qDebug()<<"now!";*/
@@ -296,8 +298,9 @@ void RobotDraw:: robot_setPoint(QVector3D position)
 
     if(_robot->IsConnected())
     {
-        if(moveAboveCounter<2){_robot->UpdatePosition();}
-        else                  {_robot->UpdatePositionLinear();}
+        qDebug()<<"mpveAbove"<<moveAboveCounter;
+        if(moveAboveCounter<2){_robot->UpdatePosition();qDebug()<<"MOV";}
+        else                  {_robot->UpdatePositionLinear();qDebug()<<"MVS";}
         qDebug()<<"also waiting";
         _robotKinematik->WaitForPositionReached();
         qDebug()<<"done waiting";

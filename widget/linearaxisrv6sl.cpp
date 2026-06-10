@@ -13,10 +13,10 @@ LinearAxisRV6SL::LinearAxisRV6SL(Qt3DCore::QEntity* parent)
     _substructure->Qt3DCore::QEntity::setEnabled(true);
 
     //TischPlatte auf Unterbau
-    _tableTop = new STLMesh(_substructure);
-    _tableTop->setSource("TischPlatte.STL");
-    _tableTop->setRotationZ(90);
-    _tableTop->setTranslation(QVector3D(1608,28.8+2846.2,695.92));
+    // _tableTop = new STLMesh(_substructure);
+    // _tableTop->setSource("TischPlatte.STL");
+    // _tableTop->setRotationZ(90);
+    // _tableTop->setTranslation(QVector3D(1608,28.8+2846.2,695.92));
 
 
     //Linearachse

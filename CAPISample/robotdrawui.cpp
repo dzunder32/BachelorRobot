@@ -59,6 +59,7 @@ RobotDrawUi::~RobotDrawUi()
 }
 
 
+
 void RobotDrawUi::getMaterial(Qt3DExtras::QDiffuseSpecularMaterial* material)
 {
     _material=material;
@@ -440,6 +441,7 @@ void RobotDrawUi::on_pushButton_testX_clicked()
     QVector3D firstPt  =QVector3D(0,0,0);
     QVector3D secondPt =QVector3D(_plane->ToolDist_PtX,0,0);
     _robDraw->AddLine2Buffer(firstPt,secondPt);
+
 }
 
 
@@ -450,6 +452,8 @@ void RobotDrawUi::on_pushButton_testY_clicked()
     QVector3D firstPt  =QVector3D(_plane->ToolDist_PtX,0,0);
     QVector3D secondPt =QVector3D(_plane->ToolDist_PtX,-100,0);
     _robDraw->AddLine2Buffer(firstPt,secondPt);
+
+
 }
 
 
@@ -478,3 +482,20 @@ void RobotDrawUi::on_pushButton_reset_clicked()
     clearAll();
     _robDraw->resetShiftVector();
 }
+
+void RobotDrawUi::on_pushButton_save_clicked()
+{
+    _robDraw->saveSettings();
+}
+
+
+void RobotDrawUi::on_pushButton_load_clicked()
+{
+
+    _robDraw->loadSettings();
+    ui->spinBox_dist->setValue(_robDraw->startZ);
+    ui->spinBox_xRot->setValue(_robDraw->startX);
+    ui->spinBox_yRot->setValue(_robDraw->startY);
+
+}
+

@@ -22,13 +22,16 @@ class RobotDraw : public QObject
       Q_OBJECT
 public:
     RobotDraw(Kinematik *robotKinematik,Robot *robot, QVector3D sled_pos,Plane* plane, Widget3D *widget3d);
+    ~RobotDraw();
     QTimer *_timer = new QTimer(this);
+
 
     bool dontDrawPoint    = false;
     bool lastPoint_drawn  = false;
     int prev_timerTime;
     int toolTipDistance = 0;
     double robotRange = 1000;
+    float startX=0,startY=0,startZ=0;
 
     void stopTimer_goHome();
     void AddPoint2Buffer  (QVector3D planePoint);
@@ -70,6 +73,7 @@ private:
     float xBoxSize,yBoxSize,xSpace,ySpace;
     float circlePoints_number;
     float prev_argX=0,prev_argY=0;
+
 
     double prev_l1=0,diff_l1=0;
     double a,b,c,l1;
@@ -127,6 +131,9 @@ public slots:
     void setTimerTime(int ms){_timer->setInterval(ms);last_timerTime = ms;}
     void changeTimerSpeed(float factor){_timer->setInterval(last_timerTime * factor);}
     float getZDPx(){return _plane->xLimit/2-40;}
+    void saveSettings();
+    void loadSettings();
+
 
 signals:
 //    void changeTimerSpeed(float factor);

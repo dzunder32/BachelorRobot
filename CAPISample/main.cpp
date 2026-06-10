@@ -55,16 +55,16 @@ int main(int argc, char *argv[])
     refTool->setNegativeAxis(false);
     //Mesh des Referenz Tools
     STLMesh* toolMesh= new STLMesh(refTool);
-    toolMesh->setSource("RefTool_Complete.stl");
+    toolMesh->setSource("RefTool_Completev10.stl");
     toolMesh->setRotationZ(90);
     toolMesh->setTranslation(QVector3D(-14.4,-72.5-20,-7-5));
     // toolMesh->Material->setDiffuse(QColor(0,0,0));
     // widget3d->addObject(refTool,QVector3D(980,380,715),QQuaternion(1,0,0,0)/* * QQuaternion::fromAxisAndAngle(QVector3D(0,0,1),45)*//**//*QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180)*/);
-    widget3d->addObject(refTool,QVector3D(992.5,3338.75+9.95+92+20,695.921+7+20+5),QQuaternion(1,0,0,0)/* * QQuaternion::fromAxisAndAngle(QVector3D(0,0,1),45)*//**//*QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180)*/);
+    widget3d->addObject(refTool,QVector3D(1212.5+54,2745,695.921+12),QQuaternion(1,0,0,0)/* * QQuaternion::fromAxisAndAngle(QVector3D(0,0,1),45)*//**//*QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180)*/);
     widget3d->setRefMatrix(static_cast<Qt3DCore::QTransform*>(refTool->components()[1]));
     //position of ref tool, 300 in y , 40 in x
-    widget3d->addCylinderBetweenPoints(QVector3D(979.6+4.5,3328.75+92,695.921+27+10),QVector3D(979.6+4.5,3628.75,695.921+27+10));
-    widget3d->addCylinderBetweenPoints(QVector3D(979.6+4.5,3628.75,695.921-30),QVector3D(979.6+4.5,3628.75,695.921+27));
+    widget3d->addCylinderBetweenPoints(QVector3D(1212.5-3,2745-50,695.921+12),QVector3D(1212.5-3,2745-50,695.921-20));
+    // widget3d->addCylinderBetweenPoints(QVector3D(979.6+4.5,3628.75,695.921-30),QVector3D(979.6+4.5,3628.75,695.921+27));
 
     // widget3d->addCylinderBetweenPoints(QVector3D(988,3328.75,695.921+27),QVector3D(988,3328.75,695.921+20));
 

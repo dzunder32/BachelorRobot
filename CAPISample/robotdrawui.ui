@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="tab">
        <property name="toolTip">
@@ -82,13 +82,6 @@
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_reset">
-            <property name="text">
-             <string>Reset</string>
-            </property>
-           </widget>
-          </item>
-          <item>
            <spacer name="verticalSpacer_5">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
@@ -100,6 +93,13 @@
              </size>
             </property>
            </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_reset">
+            <property name="text">
+             <string>Reset</string>
+            </property>
+           </widget>
           </item>
           <item>
            <spacer name="verticalSpacer_7">
@@ -622,6 +622,20 @@
                 </property>
                </widget>
               </item>
+              <item row="3" column="0">
+               <widget class="QPushButton" name="pushButton_save">
+                <property name="text">
+                 <string>save Settings</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="1">
+               <widget class="QPushButton" name="pushButton_load">
+                <property name="text">
+                 <string>load Settings</string>
+                </property>
+               </widget>
+              </item>
              </layout>
             </widget>
            </item>
@@ -809,7 +823,7 @@
      <x>0</x>
      <y>0</y>
      <width>610</width>
-     <height>20</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

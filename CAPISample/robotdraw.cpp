@@ -18,10 +18,14 @@ RobotDraw::RobotDraw(Kinematik *robotKinematik, Robot *robot, QVector3D sled_pos
     robotMat.rotate(90,QVector3D(0,0,1));
     UpdatePlanePosition();
     initLetterSize(1);
-//    setTimerTime(500);
+
+    //    setTimerTime(500);
 }
 
-
+RobotDraw::~RobotDraw()
+{
+    saveSettings();
+}
 void RobotDraw::robDraw_onTimeout()
 {
     runAgain:
@@ -737,6 +741,7 @@ void RobotDraw::setToolDist(float arg){
     AddPointUP2Buffer(pt);
     AddPoint2Buffer(pt);
     AddPointUP2Buffer(pt);
+    startZ=arg;
 
 }
 
@@ -760,7 +765,9 @@ void RobotDraw::setXRotPt(float arg){
     AddPointUP2Buffer(QVector3D(0,0,0));
 
     prev_argX=arg;
+    startX=arg;
 }
+
 
 void RobotDraw::setYRot(float arg){
     // _plane->setToolOffset(0,arg,0,ui->spinBox_xRot->value());
@@ -781,5 +788,50 @@ void RobotDraw::setYRot(float arg){
     AddPointUP2Buffer(QVector3D(ToolDistPt_x,-100,0));
     prev_argY=arg;
 
+    startY=arg;
+
+}
+
+
+void RobotDraw::saveSettings()
+{
+    QSettings s("DenisFirma", "RobotDrawApp");
+
+    // Tool Distanz
+    s.setValue("tool/startZ", startZ);
+
+    // X‑Rotation
+    s.setValue("tool/startX",    startX);
+
+    // Y‑Rotation
+    s.setValue("tool/startY",    startY);
+
+    // Plane Position
+    s.setValue("plane/pos", _plane->translation());
+    qDebug()<<"saved";
+}
+
+
+void RobotDraw::loadSettings()
+{
+    QSettings s("DenisFirma", "RobotDrawApp");
+
+    // Tool Distanz
+    startZ = s.value("tool/startZ", 0.0f).toFloat();
+    setToolDist(startZ);
+
+    // X‑Rotation
+    startX    = s.value("tool/startX",    0.0f).toFloat();
+    setXRotPt(startX);
+
+    // Y‑Rotation
+    startY    = s.value("tool/startY",    0.0f).toFloat();
+    setYRot(startY);
+
+    // Plane Position
+    QVector3D pos = s.value("plane/pos", QVector3D(0,0,0)).value<QVector3D>();
+    _plane->setTranslation(pos);
+    qDebug()<<"loaded";
+    qDebug()<<startZ;
 }
 

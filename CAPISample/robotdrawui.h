@@ -52,6 +52,10 @@ private slots:
 
     void on_pushButton_reset_clicked();
 
+    void on_pushButton_save_clicked();
+
+    void on_pushButton_load_clicked();
+
 private:
     Ui::RobotDrawUi *ui;
     RobotDraw *_robDraw;

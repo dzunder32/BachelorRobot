@@ -60,7 +60,7 @@ int main(int argc, char *argv[])
     toolMesh->setTranslation(QVector3D(-14.4,-72.5-20,-7-5));
     // toolMesh->Material->setDiffuse(QColor(0,0,0));
     // widget3d->addObject(refTool,QVector3D(980,380,715),QQuaternion(1,0,0,0)/* * QQuaternion::fromAxisAndAngle(QVector3D(0,0,1),45)*//**//*QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180)*/);
-    widget3d->addObject(refTool,QVector3D(1212.5+54,2867.5-150-10,695.921+12),QQuaternion(1,0,0,0)/* * QQuaternion::fromAxisAndAngle(QVector3D(0,0,1),45)*//**//*QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180)*/);
+    widget3d->addObject(refTool,QVector3D(1212.5+54,2867.5+30,695.921+12),QQuaternion(1,0,0,0)/* * QQuaternion::fromAxisAndAngle(QVector3D(0,0,1),45)*//**//*QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),180)*/);
     widget3d->setRefMatrix(static_cast<Qt3DCore::QTransform*>(refTool->components()[1]));
     //position of ref tool, 300 in y , 40 in x
     widget3d->addCylinderBetweenPoints(QVector3D(1212.5-3,2745-50,695.921+25),QVector3D(1212.5-3,2745-50,695.921-20));

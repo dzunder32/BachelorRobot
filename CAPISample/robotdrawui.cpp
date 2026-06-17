@@ -49,6 +49,7 @@ RobotDrawUi::RobotDrawUi(Kinematik *robotKinematik,Robot *robot, QVector3D sled_
     ui->checkBox_Polaris->setFocusPolicy(Qt::NoFocus);
     ui->checkBox_Robot->setAttribute(Qt::WA_TransparentForMouseEvents);
     ui->checkBox_Robot->setFocusPolicy(Qt::NoFocus);
+    on_pushButton_load_clicked();
 }
 
 RobotDrawUi::~RobotDrawUi()

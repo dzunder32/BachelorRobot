@@ -150,38 +150,6 @@ void Robot::MoveCircularJ(QVector <double> joints1,QVector <double> joints2,QVec
 }
 
 
-// void Robot::MoveInCircleJ(QVector <double> joints1,QVector <double> joints2,QVector <double> joints3,double joint7)
-// {
-//     Write("1;1;EXECJ1=(" +QString::number(joints1.at(0))+","
-//           +QString::number(joints1.at(1))+","
-//           +QString::number(joints1.at(2))+","
-//           +QString::number(joints1.at(3))+","
-//           +QString::number(joints1.at(4))+","
-//           +QString::number(joints1.at(5))+","
-//           +QString::number(joint7)+")");
-
-//     Write("1;1;EXECJ2=(" +QString::number(joints2.at(0))+","
-//           +QString::number(joints2.at(1))+","
-//           +QString::number(joints2.at(2))+","
-//           +QString::number(joints2.at(3))+","
-//           +QString::number(joints2.at(4))+","
-//           +QString::number(joints2.at(5))+","
-//           +QString::number(joint7)+")");
-
-//     Write("1;1;EXECJ3=(" +QString::number(joints3.at(0))+","
-//           +QString::number(joints3.at(1))+","
-//           +QString::number(joints3.at(2))+","
-//           +QString::number(joints3.at(3))+","
-//           +QString::number(joints3.at(4))+","
-//           +QString::number(joints3.at(5))+","
-//           +QString::number(joint7)+")");
-
-//     Write("1;1;EXECMVC J1,J2,J3");
-//     // Write("1;1;EXECMVR J1,J2,J3");
-//     Write("USR:PositionChanged");
-
-// }
-
 void Robot::Connect()
 {
     this->start();
@@ -212,10 +180,7 @@ void Robot::EmergencyStop()
 
 void Robot::run()
 {
-    qDebug()<<"lets Go!";
-    qDebug()<<QThread::currentThreadId();
     _socket = new QTcpSocket;
-
     _socket->connectToHost(_ip,_port,QIODevice::ReadWrite);
     if( !_socket->waitForConnected(5000) )
     {
@@ -365,8 +330,7 @@ void Robot::stopRobot()
     }
     _emergencyStop = false;
 
-    emit robotCommand(command)
-            ;
+    emit robotCommand(command);
     emit robotAnswer(answer);
 }
 
@@ -389,7 +353,9 @@ void Robot::_alternativeCommand(QString command)
         qDebug()<<"position"<<_position;
         if(_position!=nullptr){
             qDebug()<<"reached the position!";
-            _position->Reached();}
+            _position->Reached();
+            emit positionReached();
+            }
         _connetedRobotChangePosition=false;
     }
     qDebug()<<"out of robot";

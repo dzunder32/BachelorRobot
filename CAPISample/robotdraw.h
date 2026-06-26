@@ -38,7 +38,7 @@ public:
     void AddLine2Buffer   (QVector3D linePlane1, QVector3D linePlane2);
     void AddCircle2Buffer (QVariantList circleList);
     void AddPointUP2Buffer(QVector3D planePoint);
-    void robDraw_onTimeout();
+    // void robDraw_onTimeout();
     void constructLetters (QString letter_Str);
     void resetShiftVector ();
     void initLetterSize   (float sizeFactor);
@@ -78,6 +78,12 @@ private:
     double prev_l1=0,diff_l1=0;
     double a,b,c,l1;
 
+    // --- Flags ---
+    bool _sequenceRunning = false;
+    bool _waitingForRobot = false;
+    bool _simulationMode = true;       // Simulation default
+
+    int _timerTime = 200;              // Simulationsverzögerung
 
     QVector2D shiftVector;
     QVector3D startLinePoint, endLinePoint;
@@ -126,15 +132,22 @@ private:
     void adjustRobotRangeHeigth(float height);
 
 public slots:
-    void startDrawTimer(){DrawFirstPoint();_timer->start();}
-    void stopDrawTimer(){_timer->stop();dontDrawPoint = true;emit clearGW();}
-    void setTimerTime(int ms){_timer->setInterval(ms);last_timerTime = ms;}
+    void startDrawTimer();      // Startet Sequenz (ohne Timer)
+    void stopDrawTimer();       // Stoppt Sequenz
+    void setTimerTime(int ms){_timerTime=ms;}  // Simulationsgeschwindigkeit
+
     void changeTimerSpeed(float factor){_timer->setInterval(last_timerTime * factor);}
     float getZDPx(){return _plane->xLimit/2-40;}
     void saveSettings();
     void loadSettings();
 
+    // Dynamischer Mode-Wechsel
+    void onRobotConnected();
+    void onRobotDisconnected();
 
+private slots:
+    void robDraw_onTimeout();          // State-Machine
+    void onRobotPositionReached();     // Roboter oder Simulation meldet "fertig"
 signals:
 //    void changeTimerSpeed(float factor);
     void drawLine(QVector3D start,QVector3D end);

@@ -13,7 +13,15 @@ RobotDraw::RobotDraw(Kinematik *robotKinematik, Robot *robot, QVector3D sled_pos
 
     // _timer->setInterval(1000);
     // _timer->setSingleShot(false);
-    connect(_timer, &QTimer::timeout,this, &RobotDraw::robDraw_onTimeout);
+    // Default: Simulation
+    _simulationMode = !_robot->IsConnected();
+
+    // Dynamischer Mode-Wechsel
+    connect(_robot, &Robot::Connect,
+            this,   &RobotDraw::onRobotConnected);
+
+    connect(_robot, &Robot::Disconnect,
+            this,   &RobotDraw::onRobotDisconnected);
     setL1(0);
     robotMat.rotate(90,QVector3D(0,0,1));
     UpdatePlanePosition();
@@ -26,44 +34,100 @@ RobotDraw::~RobotDraw()
 {
     saveSettings();
 }
+
+void RobotDraw::startDrawTimer()
+{
+    qDebug()<<"startet Timer";
+    if (_sequenceRunning)
+        return;
+    qDebug()<<"functional Start";
+    _sequenceRunning = true;
+    _waitingForRobot = false;
+
+    robDraw_onTimeout();   // erster Schritt
+}
+
+void RobotDraw::stopDrawTimer()
+{
+    qDebug()<<"stopping Sequence";
+    _sequenceRunning = false;
+    _waitingForRobot = false;
+
+}
+
+void RobotDraw::onRobotConnected()
+{
+    _simulationMode = false;
+
+    connect(_robot, &Robot::positionReached,
+            this,   &RobotDraw::onRobotPositionReached,
+            Qt::UniqueConnection);
+}
+
+void RobotDraw::onRobotDisconnected()
+{
+    _simulationMode = true;
+    qDebug()<<"ddddisconnected";
+    disconnect(_robot, &Robot::positionReached,
+               this,   &RobotDraw::onRobotPositionReached);
+}
+
+
 void RobotDraw::robDraw_onTimeout()
 {
+
+    if (!_sequenceRunning)
+        return;
+
+    if (_waitingForRobot)
+        return;
+
     runAgain:
+
     qDebug()<<"roboSeq"<<robotSequence;
     UpdatePlanePosition();
-    if(!robotSequence.isEmpty())
-    {
-        start_2x = false;
-        switch (robotSequence.takeFirst())
+
+        if (!robotSequence.isEmpty())
         {
-        case POINT:
-            robotDrawPoint();  break;
-        case LINE:
-            robotDrawLine();   break;
-        case CIRCLE:
-            robotDrawCircle(); break;
-        case POINT_UP:
-            robotdrawPointUP();break;
+            start_2x = false;
+
+            switch (robotSequence.takeFirst())
+            {
+            case POINT:     robotDrawPoint();  break;
+            case LINE:      robotDrawLine();   break;
+            case CIRCLE:    robotDrawCircle(); break;
+            case POINT_UP:  robotdrawPointUP();break;
+            }
+
+            return;
         }
-    }
-    else
-    {
-        if(!lastPoint_drawn && !start_2x)
+
+        // Letzter Punkt
+        if (!lastPoint_drawn && !start_2x)
         {
-            qDebug()<<"drawing last Point";
-            // moveAboveCounter = 1;
-            PointsUPBuffer.prepend(lastPoint+QVector3D(0,0,50));
+            PointsUPBuffer.prepend(lastPoint + QVector3D(0,0,50));
             robotSequence.prepend(POINT_UP);
             lastPoint_drawn = true;
             goto runAgain;
         }
-        qDebug()<<"main Home";
-        stopTimer_goHome();
+
+        // Home
+        stopDrawTimer();
         lastPoint_drawn = false;
-        start_2x=true;
-    }
+        start_2x = true;
+
+
 
     emit robotConnectionStatus(_robot->IsConnected());
+}
+
+void RobotDraw::onRobotPositionReached()
+{
+    if (!_sequenceRunning)
+        return;
+
+    _waitingForRobot = false;
+    robDraw_onTimeout();
 }
 
 
@@ -132,11 +196,17 @@ void RobotDraw::robotDrawLine()
         moveAboveCounter=2;
         if(cartDistance(endLinePoint,startLinePoint) > 5 && alreadyDrawn)
         {
-
             LinesBuffer.prepend(line);robotSequence.prepend(LINE);
             //when distance is too big, move Tip above the plane
             moveTipAbove();/*qDebug()<<"now!";*/
             alreadyDrawn = false;
+
+            if (!_waitingForRobot)
+            {
+                // sofort nächsten Schritt abarbeiten
+                robDraw_onTimeout();
+                return;
+            }
         }else
         {
             //save second Point
@@ -154,6 +224,13 @@ void RobotDraw::robotDrawLine()
             if(circlePoints_counter >= circlePoints_number)
             {changeTimerSpeed(1);}/*qDebug()<<"no speed!!"<<_timer->interval();*/
             else{circlePoints_counter++;}
+
+            if (!_waitingForRobot)
+            {
+                // sofort nächsten Schritt abarbeiten
+                robDraw_onTimeout();
+                return;
+            }
         }
     }
     else{stopTimer_goHome();}
@@ -266,6 +343,13 @@ void RobotDraw::robotDrawCircle()
 //            LinesBuffer.prepend({endLinePoint,prev_circlePt.toVector3D()});
 //            robotSequence.prepend(LINE);
             initCirclePointsSpeedUp(angle_range);
+
+            if (_simulationMode)
+            {
+                _waitingForRobot = false;
+                robDraw_onTimeout();
+                return;
+            }
         }
     }else{stopTimer_goHome();}
 }
@@ -282,6 +366,10 @@ void RobotDraw::robotdrawPointUP()
         slowDownRobot();
         qDebug()<<"slowing Down";
         lastPoint = planePoint;
+
+        _waitingForRobot = false;
+        robDraw_onTimeout();
+        return;
     }
     else {stopTimer_goHome();}
 }
@@ -289,6 +377,10 @@ void RobotDraw::robotdrawPointUP()
 
 void RobotDraw:: robot_setPoint(QVector3D position)
 {
+    qDebug() << "robot_setPoint: sim=" << _simulationMode
+             << "connected=" << _robot->IsConnected()
+             << "timerTime=" << _timerTime;
+
     calculateL1_new(Robot2BasePoint(position));
     position+=QVector3D(diff_l1,0,0);
 
@@ -300,20 +392,34 @@ void RobotDraw:: robot_setPoint(QVector3D position)
 
     _robotKinematik->ToolMovement(Transformations::C,-_robotKinematik->j6());
 
-    if(_robot->IsConnected())
+    // --- Realer Roboter ---
+    if (!_simulationMode && _robot->IsConnected())
     {
-        qDebug()<<"mpveAbove"<<moveAboveCounter;
         if(moveAboveCounter<2){_robot->UpdatePosition();qDebug()<<"MOV";}
         else                  {_robot->UpdatePositionLinear();qDebug()<<"MVS";}
-        qDebug()<<"also waiting";
-        _robotKinematik->WaitForPositionReached();
-        qDebug()<<"done waiting";
+        _waitingForRobot = true;
+        return;
     }
 
-    // if(moveAboveCounter<2){qDebug()<<"Doin MOV!";drawPoint_Widget(Robot2BasePoint(position),2,QColor(0,255,0));moveAboveCounter++;}
-    // else                  {qDebug()<<"Doin MVS!";}
-//    qDebug()<<"IM OUT";
-//    qDebug()<<"TimerStatus:"<<_timer->isActive();
+    // --- Simulation ---
+    // _widget3d->moveRobotTo(position);
+    _waitingForRobot = true;
+    QTimer::singleShot(_timerTime, this, &RobotDraw::onRobotPositionReached);
+    // --- Simulation ---
+
+    // if(_robot->IsConnected())
+    // {
+    //     qDebug()<<"mpveAbove"<<moveAboveCounter;
+    //     if(moveAboveCounter<2){_robot->UpdatePosition();qDebug()<<"MOV";}
+    //     else                  {_robot->UpdatePositionLinear();qDebug()<<"MVS";}
+    //     qDebug()<<"also waiting";
+
+    //     _robotKinematik->WaitForPositionReached();
+    //     qDebug()<<"done waiting";
+
+    // }
+
+
 }
 
 
@@ -332,10 +438,21 @@ void RobotDraw::robot_moveCircular(QVector <QVector2D> circlePoints)
         _robotKinematik->invers();
         J_Vec.append({_robotKinematik->j1(),_robotKinematik->j2(),_robotKinematik->j3(),_robotKinematik->j4(),_robotKinematik->j5(),0,_robotKinematik->j7()});
     }
-    // qDebug()<<"the Joints :D"<<J_Vec;
     qDebug()<<"Doin MVC/MVR";
-    _robot->MoveCircularJ(J_Vec[0],J_Vec[1],J_Vec[2],l1,drawCircle);
-    drawCircle = false;
+
+    if (!_simulationMode && _robot->IsConnected())
+    {
+        _robot->MoveCircularJ(J_Vec[0], J_Vec[1], J_Vec[2], l1, drawCircle);
+        drawCircle = false;
+        _waitingForRobot = true;
+        return;
+    }
+
+    // qDebug()<<"the Joints :D"<<J_Vec;
+    // _robot->MoveCircularJ(J_Vec[0],J_Vec[1],J_Vec[2],l1,drawCircle);
+    _waitingForRobot = true;
+
+    QTimer::singleShot(_timerTime, this, &RobotDraw::onRobotPositionReached);
 }
 
 
@@ -575,7 +692,7 @@ void RobotDraw::CirclePreview(QVariantList circleList)
 void RobotDraw::initCirclePointsSpeedUp(float angle_range){
     circlePoints_number = qRound(angle_range/angleStep);
     circlePoints_counter = 0;
-    changeTimerSpeed(0.1);
+    changeTimerSpeed(5 );
 }
 
 
@@ -716,21 +833,34 @@ void RobotDraw::AddCircle2Buffer(QVariantList circleList)
 }
 
 
+// void RobotDraw::stopTimer_goHome()
+// {
+
+//     stopDrawTimer();
+//     QCoreApplication::processEvents();
+//     lastPoint.setZ(50);
+//     robot_setPoint(Plane2RobotPoint(lastPoint));
+//     dontDrawPoint = false;
+//     /*while(_timer->isActive()){}*//* {qDebug()<<"inWhile!";}*/
+//     _robotKinematik->setJoints(0,0,90,0,90,0,0);
+//     qDebug()<<"imHome";
+//     if(_robot->IsConnected()){speedUpRobot();_robot->UpdatePosition();slowDownRobot();}
+// }
+
 void RobotDraw::stopTimer_goHome()
 {
-
     stopDrawTimer();
     lastPoint.setZ(50);
     robot_setPoint(Plane2RobotPoint(lastPoint));
-    // qDebug()<<"sleeping;";
-    // std::this_thread::sleep_for(std::chrono::seconds(1));
-    // qDebug()<<"sleepingdone";
-    dontDrawPoint = false;
-    // lastPoint_drawn = false;
-    while(_timer->isActive()){}/* {qDebug()<<"inWhile!";}*/
+
     _robotKinematik->setJoints(0,0,90,0,90,0,0);
-    qDebug()<<"imHome";
-    if(_robot->IsConnected()){speedUpRobot();_robot->UpdatePosition();slowDownRobot();}
+
+    if (_robot->IsConnected())
+    {
+        speedUpRobot();
+        _robot->UpdatePosition();
+        slowDownRobot();
+    }
 }
 
 void RobotDraw::setToolDist(float arg){
@@ -755,7 +885,6 @@ void RobotDraw::setXRotPt(float arg){
     QVector3D dtBase=Plane2BasePoint(planePt)-_plane->translation();
 
 
-    // robot_setPoint(xRotPt);
     _plane->planeToolTransform->setRotationY(_plane->planeToolTransform->rotationY()-alpha);
     _plane->setTranslation(_plane->translation()+dtBase);
     _plane->setRotationX(_plane->rotationX()-alpha);
@@ -775,7 +904,6 @@ void RobotDraw::setYRot(float arg){
     float dtRot=arg-prev_argY;
     float ToolDistPt_x = _plane->ToolDist_PtX;
     QVector3D yRotPt = Plane2RobotPoint(QVector3D(ToolDistPt_x,-100,dtRot));
-    // robot_setPoint(yRotPt);
     float opposite1 = arg;
     float adjacent1 = 100;
     float alpha1 =  atan2(opposite1,adjacent1);

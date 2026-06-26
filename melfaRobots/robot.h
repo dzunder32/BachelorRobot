@@ -47,6 +47,7 @@ public slots:
     void EmergencyStop();
     void UpdatePositionFromUi();
 
+
 public:
     bool DirectUpdating;
     Robot(QString ip,int port);
@@ -65,6 +66,7 @@ signals:
     void robotCommand(QString);
     void alternativeCommand(QString);
     void running(bool);
+    void positionReached();
 };
 
 #endif // ROBOT_H

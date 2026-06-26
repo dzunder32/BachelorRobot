@@ -31,7 +31,7 @@ RobotDrawUi::RobotDrawUi(Kinematik *robotKinematik,Robot *robot, QVector3D sled_
     connect(_robDraw, &RobotDraw::robotConnectionStatus,this, &RobotDrawUi::setRobotCheckbox);
 
     connect(_robControl,&RobotControl::connectStatus,this, &RobotDrawUi::setRobotCheckbox);
-
+    // connect(_robot, &Robot::positionReached, this, &RobotDraw::continueSequence);
 
     mouseFilter = new MousePositionFilter(ui->graphicsView->viewport());
     ui->graphicsView->viewport()->installEventFilter(mouseFilter);
@@ -43,7 +43,6 @@ RobotDrawUi::RobotDrawUi(Kinematik *robotKinematik,Robot *robot, QVector3D sled_
     ui->graphicsView->setScene(scene);
 
     connect(_robDraw,&RobotDraw::clearGW,this,&RobotDrawUi::removeAllItems);
-    _robDraw->setTimerTime(500);
     robotThread.start();
     ui->checkBox_Polaris->setAttribute(Qt::WA_TransparentForMouseEvents);
     ui->checkBox_Polaris->setFocusPolicy(Qt::NoFocus);
@@ -160,7 +159,7 @@ void RobotDrawUi::on_pushButton_draw_clicked()
 void RobotDrawUi::on_spinBox_letterSize_valueChanged(int arg1)
 {
     _robDraw->initLetterSize(float(arg1)/20);
-    setFontSizeForAllAndFutureText(arg1+40);
+    setFontSizeForAllAndFutureText(arg1+20);
 }
 
 void RobotDrawUi::setFontSizeForAllAndFutureText( qreal pointSize) {

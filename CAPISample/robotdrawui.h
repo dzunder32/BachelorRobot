@@ -16,7 +16,14 @@ class RobotDrawUi : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit RobotDrawUi(Kinematik *robotKinematik, Robot *robot, QVector3D sled_pos, Plane* plane, Widget3D *widget3d,MainWindow *polarisGUI,RobotControl *robControl, QWidget *parent = nullptr);
+    explicit RobotDrawUi(Kinematik *robotKinematik,
+                         Robot *robot,
+                         QVector3D sled_pos,
+                         Plane* plane,
+                         Widget3D *widget3d,
+                         MainWindow *polarisGUI,
+                         RobotControl *robControl,
+                         QWidget *parent = nullptr);
     ~RobotDrawUi();
     void getMaterial(Qt3DExtras::QDiffuseSpecularMaterial *material);
 public slots:

@@ -15,13 +15,14 @@ RobotDraw::RobotDraw(Kinematik *robotKinematik, Robot *robot, QVector3D sled_pos
     // _timer->setSingleShot(false);
     // Default: Simulation
     _simulationMode = !_robot->IsConnected();
-
+    qDebug()<<"NOw";
     // Dynamischer Mode-Wechsel
-    connect(_robot, &Robot::Connect,
+    connect(_robot, &Robot::Connected,
             this,   &RobotDraw::onRobotConnected);
 
-    connect(_robot, &Robot::Disconnect,
+    connect(_robot, &Robot::Disconnected,
             this,   &RobotDraw::onRobotDisconnected);
+    qDebug()<<"right here";
     setL1(0);
     robotMat.rotate(90,QVector3D(0,0,1));
     UpdatePlanePosition();
@@ -37,6 +38,11 @@ RobotDraw::~RobotDraw()
 
 void RobotDraw::startDrawTimer()
 {
+    qDebug()<<"checking";
+    if(_robot->IsConnected()){
+        onRobotConnected();
+    }else{
+        onRobotDisconnected();}
     qDebug()<<"startet Timer";
     if (_sequenceRunning)
         return;
@@ -60,8 +66,7 @@ void RobotDraw::onRobotConnected()
     _simulationMode = false;
 
     connect(_robot, &Robot::positionReached,
-            this,   &RobotDraw::onRobotPositionReached,
-            Qt::UniqueConnection);
+            this,   &RobotDraw::onRobotPositionReached);
 }
 
 void RobotDraw::onRobotDisconnected()
@@ -83,6 +88,7 @@ void RobotDraw::robDraw_onTimeout()
         return;
 
     runAgain:
+
 
     qDebug()<<"roboSeq"<<robotSequence;
     UpdatePlanePosition();
@@ -402,7 +408,6 @@ void RobotDraw:: robot_setPoint(QVector3D position)
     }
 
     // --- Simulation ---
-    // _widget3d->moveRobotTo(position);
     _waitingForRobot = true;
     QTimer::singleShot(_timerTime, this, &RobotDraw::onRobotPositionReached);
     // --- Simulation ---

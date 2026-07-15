@@ -31,7 +31,6 @@ RobotDrawUi::RobotDrawUi(Kinematik *robotKinematik,Robot *robot, QVector3D sled_
     connect(_robDraw, &RobotDraw::robotConnectionStatus,this, &RobotDrawUi::setRobotCheckbox);
 
     connect(_robControl,&RobotControl::connectStatus,this, &RobotDrawUi::setRobotCheckbox);
-    // connect(_robot, &Robot::positionReached, this, &RobotDraw::continueSequence);
 
     mouseFilter = new MousePositionFilter(ui->graphicsView->viewport());
     ui->graphicsView->viewport()->installEventFilter(mouseFilter);

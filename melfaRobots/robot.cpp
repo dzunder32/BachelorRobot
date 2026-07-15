@@ -153,11 +153,13 @@ void Robot::MoveCircularJ(QVector <double> joints1,QVector <double> joints2,QVec
 void Robot::Connect()
 {
     this->start();
+    emit Connected();
 }
 
 void Robot::Disconnect()
 {
     _connect=false;
+    emit Disconnect();
 }
 
 void Robot::Write(QString command)

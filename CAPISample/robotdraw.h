@@ -144,10 +144,10 @@ public slots:
     // Dynamischer Mode-Wechsel
     void onRobotConnected();
     void onRobotDisconnected();
+    void onRobotPositionReached();     // Roboter oder Simulation meldet "fertig"
 
 private slots:
     void robDraw_onTimeout();          // State-Machine
-    void onRobotPositionReached();     // Roboter oder Simulation meldet "fertig"
 signals:
 //    void changeTimerSpeed(float factor);
     void drawLine(QVector3D start,QVector3D end);

@@ -209,12 +209,12 @@ void RobotDraw::robotDrawLine()
             moveTipAbove();/*qDebug()<<"now!";*/
             alreadyDrawn = false;
 
-            if (!_waitingForRobot)
-            {
-                // sofort nächsten Schritt abarbeiten
-                robDraw_onTimeout();
-                return;
-            }
+//            if (!_waitingForRobot)
+//            {
+
+//                robDraw_onTimeout();
+//                return;
+//            }
         }else
         {
             //save second Point
@@ -235,7 +235,7 @@ void RobotDraw::robotDrawLine()
 
             if (!_waitingForRobot)
             {
-                // sofort nächsten Schritt abarbeiten
+                qDebug()<<"cause o dis?";
                 robDraw_onTimeout();
                 return;
             }
@@ -409,20 +409,24 @@ void RobotDraw:: robot_setPoint(QVector3D position)
             _robot->UpdatePositionLinear();
 
         _waitingForRobot = true;
-
+        qDebug()<<"waiting";
         // ⭐ NEU: Polling statt connect()
         while (_waitingForRobot)
         {
+
             if (_robot->positionReachedFlag)
             {
                 _robot->positionReachedFlag = false;
                 _waitingForRobot = false;
+                qDebug()<<"STOP Waiting";
             }
 
             QThread::msleep(5);   // CPU freundlich
             QCoreApplication::processEvents(); // UI bleibt responsive
+
         }
 
+        onRobotPositionReached();
         return;
     }
 

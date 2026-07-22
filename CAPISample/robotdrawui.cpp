@@ -26,7 +26,6 @@ RobotDrawUi::RobotDrawUi(Kinematik *robotKinematik,Robot *robot, QVector3D sled_
     connect(this,&RobotDrawUi::startDrawing,_robDraw,&RobotDraw::startDrawTimer);
     connect(this,&RobotDrawUi::stopDrawing,_robDraw,&RobotDraw::stopDrawTimer);
     connect(this,&RobotDrawUi::changeSpeed,_robDraw,&RobotDraw::setTimerTime);
-    connect(this,&RobotDrawUi::startDrawing,_robDraw,&RobotDraw::startDrawTimer);
     connect(_polarisGUI,&MainWindow::sendConnection,this,&RobotDrawUi::getConnectionPolaris);
     connect(_robDraw, &RobotDraw::robotConnectionStatus,this, &RobotDrawUi::setRobotCheckbox);
     qDebug()<<"another one";

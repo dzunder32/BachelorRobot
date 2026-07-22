@@ -17,12 +17,12 @@ RobotDraw::RobotDraw(Kinematik *robotKinematik, Robot *robot, QVector3D sled_pos
     _simulationMode = !_robot->IsConnected();
     qDebug()<<"NOw";
     // Dynamischer Mode-Wechsel
-    connect(_robot, &Robot::Connected,
-            this,   &RobotDraw::onRobotConnected);
+    // connect(_robot, &Robot::Connected,
+    //         this,   &RobotDraw::onRobotConnected);
 
-    connect(_robot, &Robot::Disconnected,
-            this,   &RobotDraw::onRobotDisconnected);
-    qDebug()<<"right here";
+    // connect(_robot, &Robot::Disconnected,
+    //         this,   &RobotDraw::onRobotDisconnected);
+    // qDebug()<<"right here";
     setL1(0);
     robotMat.rotate(90,QVector3D(0,0,1));
     UpdatePlanePosition();
@@ -38,11 +38,11 @@ RobotDraw::~RobotDraw()
 
 void RobotDraw::startDrawTimer()
 {
-    qDebug()<<"checking";
-    if(_robot->IsConnected()){
-        onRobotConnected();
-    }else{
-        onRobotDisconnected();}
+    // qDebug()<<"checking";
+    // if(_robot->IsConnected()){
+    //     onRobotConnected();
+    // }else{
+    //     onRobotDisconnected();}
     qDebug()<<"startet Timer";
     if (_sequenceRunning)
         return;
@@ -61,25 +61,27 @@ void RobotDraw::stopDrawTimer()
 
 }
 
-void RobotDraw::onRobotConnected()
-{
-    _simulationMode = false;
+// void RobotDraw::onRobotConnected()
+// {
+//     _simulationMode = false;
 
-    connect(_robot, &Robot::positionReached,
-            this,   &RobotDraw::onRobotPositionReached);
-}
+//     connect(_robot, &Robot::positionReached,
+//             this,   &RobotDraw::onRobotPositionReached);
+// }
 
-void RobotDraw::onRobotDisconnected()
-{
-    _simulationMode = true;
-    qDebug()<<"ddddisconnected";
-    disconnect(_robot, &Robot::positionReached,
-               this,   &RobotDraw::onRobotPositionReached);
-}
+// void RobotDraw::onRobotDisconnected()
+// {
+//     _simulationMode = true;
+//     qDebug()<<"ddddisconnected";
+//     disconnect(_robot, &Robot::positionReached,
+//                this,   &RobotDraw::onRobotPositionReached);
+// }
 
 
 void RobotDraw::robDraw_onTimeout()
 {
+
+    _simulationMode = !_robot->IsConnected();
 
     if (!_sequenceRunning)
         return;
@@ -399,11 +401,28 @@ void RobotDraw:: robot_setPoint(QVector3D position)
     _robotKinematik->ToolMovement(Transformations::C,-_robotKinematik->j6());
 
     // --- Realer Roboter ---
-    if (!_simulationMode && _robot->IsConnected())
+    if (!_simulationMode)
     {
-        if(moveAboveCounter<2){_robot->UpdatePosition();qDebug()<<"MOV";}
-        else                  {_robot->UpdatePositionLinear();qDebug()<<"MVS";}
+        if(moveAboveCounter < 2)
+            _robot->UpdatePosition();
+        else
+            _robot->UpdatePositionLinear();
+
         _waitingForRobot = true;
+
+        // ⭐ NEU: Polling statt connect()
+        while (_waitingForRobot)
+        {
+            if (_robot->positionReachedFlag)
+            {
+                _robot->positionReachedFlag = false;
+                _waitingForRobot = false;
+            }
+
+            QThread::msleep(5);   // CPU freundlich
+            QCoreApplication::processEvents(); // UI bleibt responsive
+        }
+
         return;
     }
 

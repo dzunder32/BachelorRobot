@@ -24,6 +24,7 @@ private:
     RobotPosition* _position=nullptr;
     bool _connetedRobotChangePosition=false;
 
+
     void readFromRobot(QString);
     void writeToRobot(QString);
     void stopRobot();
@@ -61,6 +62,9 @@ public:
     void MoveInLine();
     void speedUp(){Write("1;1;OVRD=15");};
     void slowDown(){Write("1;1;OVRD=10");};
+
+    bool positionReachedFlag = false;
+
 signals:
     void robotAnswer(QString);
     void robotCommand(QString);

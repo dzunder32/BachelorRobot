@@ -142,8 +142,8 @@ public slots:
     void loadSettings();
 
     // Dynamischer Mode-Wechsel
-    void onRobotConnected();
-    void onRobotDisconnected();
+    // void onRobotConnected();
+    // void onRobotDisconnected();
     void onRobotPositionReached();     // Roboter oder Simulation meldet "fertig"
 
 private slots:

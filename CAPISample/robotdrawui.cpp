@@ -29,9 +29,9 @@ RobotDrawUi::RobotDrawUi(Kinematik *robotKinematik,Robot *robot, QVector3D sled_
     connect(this,&RobotDrawUi::startDrawing,_robDraw,&RobotDraw::startDrawTimer);
     connect(_polarisGUI,&MainWindow::sendConnection,this,&RobotDrawUi::getConnectionPolaris);
     connect(_robDraw, &RobotDraw::robotConnectionStatus,this, &RobotDrawUi::setRobotCheckbox);
-
+    qDebug()<<"another one";
     connect(_robControl,&RobotControl::connectStatus,this, &RobotDrawUi::setRobotCheckbox);
-
+    qDebug()<<"Yes";
     mouseFilter = new MousePositionFilter(ui->graphicsView->viewport());
     ui->graphicsView->viewport()->installEventFilter(mouseFilter);
 

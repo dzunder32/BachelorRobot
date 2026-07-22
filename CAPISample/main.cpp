@@ -119,6 +119,7 @@ int main(int argc, char *argv[])
     plane->setRotation(plane->rotation() * QQuaternion::fromAxisAndAngle(QVector3D(0,1,0),90));
 
     Robot *robot = new Robot("143.93.135.15",10001);
+    robot->moveToThread(robot);
     RobotControl *robControl = new RobotControl(robot);
     robControl->show();
     ControlPanel *control = new ControlPanel(robotKinematik);

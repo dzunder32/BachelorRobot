@@ -11,6 +11,9 @@ Robot::Robot(QString ip, int port)
 
     connect(this,  &QThread::finished, this,&QObject::deleteLater);
 
+
+    qDebug() << "Has signal positionReached:"
+             << Robot::staticMetaObject.indexOfSignal("positionReached()");
 //    qDebug()<<"roboThread"<< QThread::currentThreadId();
 }
 
@@ -270,7 +273,7 @@ void Robot::writeToRobot(QString command)
     if(command.startsWith("USR:"))
     {
         _alternativeCommand(command);
-        alternativeCommand(command);
+        emit alternativeCommand(command);
     }
     else
     {
@@ -357,6 +360,7 @@ void Robot::_alternativeCommand(QString command)
             qDebug()<<"reached the position!";
             _position->Reached();
             emit positionReached();
+            positionReachedFlag = true;
             }
         _connetedRobotChangePosition=false;
     }

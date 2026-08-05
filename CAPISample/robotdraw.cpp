@@ -13,16 +13,16 @@ RobotDraw::RobotDraw(Kinematik *robotKinematik, Robot *robot, QVector3D sled_pos
 
     // _timer->setInterval(1000);
     // _timer->setSingleShot(false);
-    // Default: Simulation
-    _simulationMode = !_robot->IsConnected();
-    qDebug()<<"NOw";
-    // Dynamischer Mode-Wechsel
-    // connect(_robot, &Robot::Connected,
+    // Defa    // connect(_robot, &Robot::Connected,
     //         this,   &RobotDraw::onRobotConnected);
 
     // connect(_robot, &Robot::Disconnected,
     //         this,   &RobotDraw::onRobotDisconnected);
-    // qDebug()<<"right here";
+    // qDebug()<<"right here";ult: Simulation
+    _simulationMode = !_robot->IsConnected();
+    qDebug()<<"NOw";
+    // Dynamischer Mode-Wechsel
+
     setL1(0);
     robotMat.rotate(90,QVector3D(0,0,1));
     UpdatePlanePosition();

@@ -208,6 +208,8 @@ void RobotDraw::robotDrawLine()
             //when distance is too big, move Tip above the plane
             moveTipAbove();/*qDebug()<<"now!";*/
             alreadyDrawn = false;
+            qDebug()<<"changed!";
+            robDraw_onTimeout();
 
 //            if (!_waitingForRobot)
 //            {
@@ -677,6 +679,7 @@ void RobotDraw::moveTipAbove()
     PointsBuffer.prepend(next_linePt);robotSequence.prepend(POINT);
     PointsBuffer.prepend(prev_linePt);robotSequence.prepend(POINT);
     moveAboveCounter = 0;
+
 }
 
 

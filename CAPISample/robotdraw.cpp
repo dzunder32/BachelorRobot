@@ -14,7 +14,7 @@ RobotDraw::RobotDraw(Kinematik *robotKinematik, Robot *robot, QVector3D sled_pos
     // _timer->setInterval(1000);
     // _timer->setSingleShot(false);
     // Defa    // connect(_robot, &Robot::Connected,
-    //         this,   &RobotDraw::onRobotConnected);
+    //         this,   &RobotDraw::onRobotConnectedF);
 
     // connect(_robot, &Robot::Disconnected,
     //         this,   &RobotDraw::onRobotDisconnected);
@@ -80,9 +80,9 @@ void RobotDraw::stopDrawTimer()
 
 void RobotDraw::robDraw_onTimeout()
 {
-
-    _simulationMode = !_robot->IsConnected();
-
+//Later
+    // _simulationMode = !_robot->IsConnected();
+    _simulationMode=false;
     if (!_sequenceRunning)
         return;
 
@@ -420,12 +420,12 @@ void RobotDraw:: robot_setPoint(QVector3D position)
             {
                 _robot->positionReachedFlag = false;
                 _waitingForRobot = false;
-                qDebug()<<"STOP Waiting";
+                qDebug()<<"STOP _Waiting";
             }
 
             QThread::msleep(5);   // CPU freundlich
             QCoreApplication::processEvents(); // UI bleibt responsive
-
+            // qDebug()<<"loop waiting";
         }
 
         onRobotPositionReached();
@@ -988,8 +988,8 @@ void RobotDraw::loadSettings()
     setYRot(startY);
 
     // Plane Position
-    QVector3D pos = s.value("plane/pos", QVector3D(0,0,0)).value<QVector3D>();
-    _plane->setTranslation(pos);
+    // QVector3D pos = s.value("plane/pos", _plane->translation();
+    // _plane->setTranslation(pos);
     qDebug()<<"loaded";
     qDebug()<<startZ;
 }

@@ -470,8 +470,9 @@ void RobotDrawUi::on_pushButton_testDistance_clicked()
 
 void RobotDrawUi::on_checkBox_clicked()
 {
-    if(ui->checkBox->isChecked()){_material->setDiffuse(QColor(0,0,255,200));}
-    else{_material->setDiffuse(QColor(0,0,0,0));}
+    // if(ui->checkBox->isChecked()){_material->setDiffuse(QColor(0,0,255,200));}
+    // else{_material->setDiffuse(QColor(0,0,0,0));}
+    _robot->positionReachedFlag=true;
 }
 
 

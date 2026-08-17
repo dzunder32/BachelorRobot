@@ -83,21 +83,21 @@ int main(int argc, char *argv[])
     STLMesh* polarisMesh= new STLMesh(polaris);
     polarisMesh->setSource("PolarisDummy v7.stl");
 
-//    STLMesh* mVolumeMesh= new STLMesh(polaris);
-//    mVolumeMesh->setSource("mVolume.stl");
-//    mVolumeMesh->setTranslation(QVector3D(0,0,-950));
-//    mVolumeMesh->setRotationX(90);
+    STLMesh* mVolumeMesh= new STLMesh(polaris);
+    mVolumeMesh->setSource("mVolume.stl");
+    mVolumeMesh->setTranslation(QVector3D(0,0,-950));
+    mVolumeMesh->setRotationX(90);
 
-//    Qt3DExtras::QDiffuseSpecularMaterial *material = new Qt3DExtras::QDiffusecSpecularMaterial();
-//    material->setDiffuse(QColor(0, 0, 255, 200)); // semi-transparent red
-//    material->setAlphaBlendingEnabled(true);
-//    mVolumeMesh->addComponent(material);
+    Qt3DExtras::QDiffuseSpecularMaterial *material = new Qt3DExtras::QDiffuseSpecularMaterial();
+    material->setDiffuse(QColor(0, 0, 255, 200)); // semi-transparent red
+    material->setAlphaBlendingEnabled(true);
+    mVolumeMesh->addComponent(material);
 
-//    material->setDiffuse(QColor(0,0,0,0));
+    material->setDiffuse(QColor(0,0,0,0));
 
 
-//    // Apply material to mesh
-//    mVolumeMesh->addComponent(material);
+    // Apply material to mesh
+    mVolumeMesh->addComponent(material);
 
 
     //Calibrator als Koordinatensystem --------------------------------------------------------------
@@ -128,6 +128,6 @@ int main(int argc, char *argv[])
     RobotDrawUi *drawL = new RobotDrawUi(robotKinematik,robot,linAxis->sled_position,plane,widget3d,PolarisGUI,robControl);
 
     drawL->show();
-//    drawL->getMaterial(material);
+    drawL->getMaterial(material);
     return a.exec();
 }

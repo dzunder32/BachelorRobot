@@ -65,8 +65,8 @@ void RobotDraw::stopDrawTimer()
 void RobotDraw::robDraw_onTimeout()
 {
 //Later
-//     _simulationMode = !_robot->IsConnected();
-    _simulationMode=false;
+     _simulationMode = !_robot->IsConnected();
+//    _simulationMode=false;
     if (!_sequenceRunning)
         return;
 
@@ -95,18 +95,21 @@ void RobotDraw::robDraw_onTimeout()
         }
 
         // Letzter Punkt
-        if (!lastPoint_drawn && !start_2x)
+        if (!lastPoint_drawn /*&& !start_2x*/)
         {
+            qDebug()<<"LASTPoint";
             PointsUPBuffer.prepend(lastPoint + QVector3D(0,0,50));
             robotSequence.prepend(POINT_UP);
             lastPoint_drawn = true;
+            startDrawTimer();
             goto runAgain;
+        }else
+        {
+            // Home
+            stopDrawTimer();
+            lastPoint_drawn = false;
+            start_2x = true;
         }
-
-        // Home
-        stopDrawTimer();
-        lastPoint_drawn = false;
-        start_2x = true;
 
 
 
@@ -233,23 +236,117 @@ void RobotDraw::robotDrawPoint()
 //    }
 //    else{stopTimer_goHome();}
 //}
+//void RobotDraw::robotDrawLine()
+//{
+//    if (!LinesBuffer.isEmpty())
+//    {
+//        QVector<QVector3D> line = LinesBuffer.takeFirst();
+
+//        // =====================================================
+//        // Ersten Punkt der Linie speichern
+//        // =====================================================
+
+//        startLinePoint = line[0];
+
+//        moveAboveCounter = 2;
+
+
+//        // =====================================================
+//        // Prüfen, ob wir erst über die Linie fahren müssen
+//        // =====================================================
+
+//        if (cartDistance(endLinePoint, startLinePoint) > 5
+//            && alreadyDrawn)
+//        {
+//            LinesBuffer.prepend(line);
+//            robotSequence.prepend(LINE);
+
+//            moveTipAbove();
+
+//            alreadyDrawn = false;
+
+//            qDebug() << "changed!";
+
+//            // Wichtig:
+//            // Nicht rekursiv sofort weitermachen.
+//            // Die erzeugten POINTs werden über die Sequence
+//            // abgearbeitet.
+////            if (!_simulationMode)
+//            {
+//                robDraw_onTimeout();
+//            }
+
+//            return;
+//        }
+
+
+//        // =====================================================
+//        // Ersten Linienpunkt anfahren
+//        // =====================================================
+
+//        if (cartDistance(endLinePoint, startLinePoint) > 5)
+//        {
+//            qDebug() << "Moving to FIRST line point";
+
+//            robot_setPoint(
+//                Plane2RobotPoint(startLinePoint)
+//            );
+//        }
+
+
+//        // =====================================================
+//        // HIER sind wir jetzt am ersten Linienpunkt
+//        // =====================================================
+
+//        endLinePoint = line[1];
+
+//        lastPoint = endLinePoint;
+
+
+//        // Zweiten Punkt als normalen POINT vorbereiten
+
+//        PointsBuffer.prepend(endLinePoint);
+//        robotSequence.prepend(POINT);
+
+
+//        line_isTrue = true;
+//        alreadyDrawn = true;
+
+
+//        qDebug() << "FIRST line point reached";
+//        qDebug() << "Next sequence = POINT";
+//        qDebug() << "PointsBuffer size =" << PointsBuffer.size();
+
+
+//        // =====================================================
+//        // Beim echten Roboter direkt mit dem zweiten Punkt
+//        // weitermachen.
+//        // =====================================================
+
+////        if (!_simulationMode)
+//        {
+//            robDraw_onTimeout();
+//        }
+
+//        return;
+//    }
+
+
+//    // Keine Linien mehr
+//    stopTimer_goHome();
+//}
 void RobotDraw::robotDrawLine()
 {
     if (!LinesBuffer.isEmpty())
     {
         QVector<QVector3D> line = LinesBuffer.takeFirst();
 
-        // =====================================================
-        // Ersten Punkt der Linie speichern
-        // =====================================================
-
         startLinePoint = line[0];
 
         moveAboveCounter = 2;
 
-
         // =====================================================
-        // Prüfen, ob wir erst über die Linie fahren müssen
+        // Abstand zur vorherigen Linie
         // =====================================================
 
         if (cartDistance(endLinePoint, startLinePoint) > 5
@@ -264,21 +361,16 @@ void RobotDraw::robotDrawLine()
 
             qDebug() << "changed!";
 
-            // Wichtig:
-            // Nicht rekursiv sofort weitermachen.
-            // Die erzeugten POINTs werden über die Sequence
-            // abgearbeitet.
-            if (!_simulationMode)
-            {
-                robDraw_onTimeout();
-            }
+            // moveTipAbove() hat noch keine Roboterbewegung
+            // ausgelöst -> Sequenz direkt weiterverarbeiten
+            robDraw_onTimeout();
 
             return;
         }
 
 
         // =====================================================
-        // Ersten Linienpunkt anfahren
+        // Ersten Punkt der Linie anfahren
         // =====================================================
 
         if (cartDistance(endLinePoint, startLinePoint) > 5)
@@ -292,23 +384,17 @@ void RobotDraw::robotDrawLine()
 
 
         // =====================================================
-        // HIER sind wir jetzt am ersten Linienpunkt
+        // Ersten Linienpunkt erreicht
         // =====================================================
 
         endLinePoint = line[1];
-
         lastPoint = endLinePoint;
-
-
-        // Zweiten Punkt als normalen POINT vorbereiten
 
         PointsBuffer.prepend(endLinePoint);
         robotSequence.prepend(POINT);
 
-
         line_isTrue = true;
         alreadyDrawn = true;
-
 
         qDebug() << "FIRST line point reached";
         qDebug() << "Next sequence = POINT";
@@ -316,23 +402,32 @@ void RobotDraw::robotDrawLine()
 
 
         // =====================================================
-        // Beim echten Roboter direkt mit dem zweiten Punkt
-        // weitermachen.
+        // Weiter zur eigentlichen Linie
         // =====================================================
 
         if (!_simulationMode)
         {
+            // Beim echten Roboter ist robot_setPoint()
+            // bereits fertig und hat gewartet.
             robDraw_onTimeout();
         }
+
+        // In der Simulation übernimmt der QTimer aus
+        // robot_setPoint() den nächsten Aufruf.
 
         return;
     }
 
 
+    // =========================================================
     // Keine Linien mehr
+    // =========================================================
+
+    qDebug() << "robotDrawLine(): LinesBuffer EMPTY";
+    qDebug() << "robotSequence size:" << robotSequence.size();
+
     stopTimer_goHome();
 }
-
 void RobotDraw::robotDrawCircle()
 {
 
@@ -361,7 +456,7 @@ void RobotDraw::robotDrawCircle()
         start_circlePt.setY(center.y() + (radius * qSin(qDegreesToRadians(start_angle))));
         startLinePoint = start_circlePt;
 //Later
-        if(_robot->IsConnected()||true)
+        if(_robot->IsConnected()/*||true*/)
         {
             if(cartDistance(endLinePoint,start_circlePt)>5 && alreadyDrawn)
             {
@@ -475,7 +570,7 @@ void RobotDraw:: robot_setPoint(QVector3D position)
 {
     qDebug() << "robot_setPoint: sim=" << _simulationMode
                 //later
-             << "connected=" << _robot->IsConnected()<<true
+             << "connected=" << _robot->IsConnected()
              << "timerTime=" << _timerTime;
 
     calculateL1_new(Robot2BasePoint(position));
@@ -561,7 +656,7 @@ void RobotDraw::robot_moveCircular(QVector <QVector2D> circlePoints)
     }
     qDebug()<<"Doin MVC/MVR";
     //Later
-//    if (!_simulationMode && _robot->IsConnected()/*||true*/)
+    if (!_simulationMode && _robot->IsConnected())
     {
         _robot->MoveCircularJ(J_Vec[0], J_Vec[1], J_Vec[2], l1, drawCircle);
         drawCircle = false;
@@ -775,19 +870,40 @@ void RobotDraw::setL1(double val)
 //    moveAboveCounter = 0;
 
 //}
+//void RobotDraw::moveTipAbove()
+//{
+//    QVector3D next_linePt = startLinePoint;
+
+//    qDebug() << "moving tip above";
+//    qDebug() << "start:" << startLinePoint
+//             << "end:" << endLinePoint;
+
+//    next_linePt.setZ(50);
+
+//    // Nur über den neuen Startpunkt fahren
+//    PointsBuffer.prepend(next_linePt);
+//    robotSequence.prepend(POINT);
+
+//    moveAboveCounter = 0;
+//}
+
 void RobotDraw::moveTipAbove()
 {
-    QVector3D next_linePt = startLinePoint;
+    QVector3D currentPoint = endLinePoint;
+    QVector3D nextPoint = startLinePoint;
 
     qDebug() << "moving tip above";
-    qDebug() << "start:" << startLinePoint
-             << "end:" << endLinePoint;
+    qDebug() << "current:" << currentPoint;
+    qDebug() << "next:" << nextPoint;
 
-    next_linePt.setZ(50);
+    // 2. Über den Startpunkt der nächsten Linie fahren
+    PointsUPBuffer.prepend(nextPoint);
+    robotSequence.prepend(POINT_UP);
 
-    // Nur über den neuen Startpunkt fahren
-    PointsBuffer.prepend(next_linePt);
-    robotSequence.prepend(POINT);
+    // 1. Senkrecht über den aktuellen Endpunkt
+    PointsUPBuffer.prepend(currentPoint);
+    robotSequence.prepend(POINT_UP);
+
 
     moveAboveCounter = 0;
 }

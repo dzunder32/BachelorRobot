@@ -60,8 +60,8 @@ public:
     // void MoveInArcJ(QVector<double> joints1, QVector<double> joints2, QVector<double> joints3, double joint7);
     void MoveCircularJ(QVector<double> joints1, QVector<double> joints2, QVector<double> joints3, double joint7, bool drawCirc);
     void MoveInLine();
-    void speedUp(){Write("1;1;OVRD=15");};
-    void slowDown(){Write("1;1;OVRD=10");};
+    void speedUp(){Write("1;1;OVRD=17");};
+    void slowDown(){Write("1;1;OVRD=12");};
 
     bool positionReachedFlag = false;
 

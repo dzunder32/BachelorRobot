@@ -27,10 +27,10 @@ RobotDrawUi::RobotDrawUi(Kinematik *robotKinematik,Robot *robot, QVector3D sled_
     connect(this,&RobotDrawUi::stopDrawing,_robDraw,&RobotDraw::stopDrawTimer);
     connect(this,&RobotDrawUi::changeSpeed,_robDraw,&RobotDraw::setTimerTime);
     connect(_polarisGUI,&MainWindow::sendConnection,this,&RobotDrawUi::getConnectionPolaris);
-    connect(_robDraw, &RobotDraw::robotConnectionStatus,this, &RobotDrawUi::setRobotCheckbox);
-    qDebug()<<"another one";
-    connect(_robControl,&RobotControl::connectStatus,this, &RobotDrawUi::setRobotCheckbox);
-    qDebug()<<"Yes";
+//    connect(_robDraw, &RobotDraw::robotConnectionStatus,this, &RobotDrawUi::setRobotCheckbox);
+//    qDebug()<<"another one";
+//    connect(_robControl,&RobotControl::connectStatus,this, &RobotDrawUi::setRobotCheckbox);
+//    qDebug()<<"Yes";
     mouseFilter = new MousePositionFilter(ui->graphicsView->viewport());
     ui->graphicsView->viewport()->installEventFilter(mouseFilter);
 
@@ -74,10 +74,6 @@ void RobotDrawUi::planeRegistration()
 
 }
 
-void RobotDrawUi::setRobotCheckbox(bool status)
-{
-    ui->checkBox_Robot->setChecked(status);
-}
 
 
 void RobotDrawUi::on_pushButtonStart_clicked()
@@ -382,6 +378,12 @@ void RobotDrawUi::getConnectionPolaris(bool connection)
     ui->checkBox_Polaris->setChecked(connection);
 }
 
+
+void RobotDrawUi::setRobotCheckbox(bool status)
+{
+    ui->checkBox_Robot->setChecked(status);
+}
+
 void RobotDrawUi::adjustGWSliders()
 {
     int max_horizont = ui->graphicsView->horizontalScrollBar()->maximum();
@@ -470,9 +472,9 @@ void RobotDrawUi::on_pushButton_testDistance_clicked()
 
 void RobotDrawUi::on_checkBox_clicked()
 {
-    // if(ui->checkBox->isChecked()){_material->setDiffuse(QColor(0,0,255,200));}
-    // else{_material->setDiffuse(QColor(0,0,0,0));}
-    _robot->positionReachedFlag=true;
+     if(ui->checkBox->isChecked()){_material->setDiffuse(QColor(0,0,255,200));}
+     else{_material->setDiffuse(QColor(0,0,0,0));}
+//    _robot->positionReachedFlag=true;
 }
 
 

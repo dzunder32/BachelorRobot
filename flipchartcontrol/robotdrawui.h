@@ -29,6 +29,11 @@ public:
 public slots:
     void removeAllItems();
     void getConnectionPolaris(bool connection);
+    void setRobotCheckbox(bool status);
+    void drawLineWidget(QVector3D start,QVector3D end){_widget3d->addCylinderBetweenPoints(start,end);}
+    void planeRegistration();
+
+
 
 private slots:
     void on_pushButtonStart_clicked();
@@ -101,11 +106,6 @@ signals:
     void startDrawing();
     void stopDrawing();
     void changeSpeed(int);
-
-public slots:
-    void drawLineWidget(QVector3D start,QVector3D end){_widget3d->addCylinderBetweenPoints(start,end);}
-    void planeRegistration();
-    void setRobotCheckbox(bool status);
 
 };
 

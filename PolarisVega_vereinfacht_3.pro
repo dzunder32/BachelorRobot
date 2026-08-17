@@ -1,11 +1,11 @@
 TEMPLATE = subdirs
 
 SUBDIRS += \
-    CAPILibary \
-    CAPISample \
+    polarisinterface \
+    flipchartcontrol \
     widget \
     melfaRobots
 
-CAPISample.depens =lib CAPILibary
+flipchartcontrol.depends = polarisinterface
 
 

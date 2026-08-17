@@ -116,7 +116,7 @@ void RobotDraw::robDraw_onTimeout()
 void RobotDraw::onRobotPositionReached()
 {
     if (!_sequenceRunning)
-        return;
+    {return;qDebug()<<"sequenceRunning=false";}
 
     _waitingForRobot = false;
     robDraw_onTimeout();
@@ -500,23 +500,9 @@ void RobotDraw:: robot_setPoint(QVector3D position)
         _waitingForRobot = true;
         qDebug()<<"waiting";
         // ⭐ NEU: Polling statt connect()
-        while (_waitingForRobot)
-        {
-
-            if (_robot->positionReachedFlag)
-            {
-                _robot->positionReachedFlag = false;
-                _waitingForRobot = false;
-                qDebug()<<"STOP _Waiting";
-            }
-
-            QThread::msleep(5);   // CPU freundlich
-            QCoreApplication::processEvents(); // UI bleibt responsive
-            // qDebug()<<"loop waiting";
-        }
-
-//        onRobotPositionReached();
-//        robDraw_onTimeout();
+        waitingForPositionReached();
+        // robDraw_onTimeout();
+        _waitingForRobot = false;
         return;
     }
 
@@ -540,7 +526,24 @@ void RobotDraw:: robot_setPoint(QVector3D position)
 
 }
 
+void RobotDraw::waitingForPositionReached(){
+    qDebug()<<"waiting";
+    // ⭐ NEU: Polling statt connect()
+    while (_waitingForRobot)
+    {
 
+        if (_robot->positionReachedFlag)
+        {
+            _robot->positionReachedFlag = false;
+            _waitingForRobot = false;
+            qDebug()<<"STOP _Waiting";
+        }
+
+        QThread::msleep(5);   // CPU freundlich
+        QCoreApplication::processEvents(); // UI bleibt responsive
+        // qDebug()<<"loop waiting";
+    }
+}
 void RobotDraw::robot_moveCircular(QVector <QVector2D> circlePoints)
 {
     //Circle points 2 Joints
@@ -563,7 +566,10 @@ void RobotDraw::robot_moveCircular(QVector <QVector2D> circlePoints)
         _robot->MoveCircularJ(J_Vec[0], J_Vec[1], J_Vec[2], l1, drawCircle);
         drawCircle = false;
         _waitingForRobot = true;
+        waitingForPositionReached();
+        onRobotPositionReached();
         return;
+
     }
 
     // qDebug()<<"the Joints :D"<<J_Vec;

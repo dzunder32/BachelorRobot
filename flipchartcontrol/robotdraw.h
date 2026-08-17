@@ -131,6 +131,7 @@ private:
     void DrawFirstPoint();
     void adjustRobotRangeHeigth(float height);
 
+    void waitingForPositionReached();
 public slots:
     void startDrawTimer();      // Startet Sequenz (ohne Timer)
     void stopDrawTimer();       // Stoppt Sequenz

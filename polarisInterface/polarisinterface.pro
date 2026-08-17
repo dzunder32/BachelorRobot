@@ -3,7 +3,7 @@ QT       -= gui
 TARGET = capi
 TEMPLATE = lib
 
-DEFINES += CAPI_LIBRARY
+DEFINES += polarisinterface
 
 
 SOURCES += \

@@ -30,12 +30,12 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../CAPILibary/release/ -lcapi
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../CAPILibary/debug/ -lcapi
-else:unix: LIBS += -L$$OUT_PWD/../CAPILibary/ -lcapi
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../polarisinterface/release/ -lcapi
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../polarisinterface/debug/ -lcapi
+else:unix: LIBS += -L$$OUT_PWD/../polarisinterface/ -lcapi
 
-INCLUDEPATH += $$PWD/../CAPILibary
-DEPENDPATH += $$PWD/../CAPILibary
+INCLUDEPATH += $$PWD/../polarisinterface
+DEPENDPATH += $$PWD/../polarisinterface
 
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../widget/release/ -lwidget
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../widget/debug/ -lwidget

@@ -25,7 +25,7 @@ RobotDraw::RobotDraw(Kinematik *robotKinematik, Robot *robot, QVector3D sled_pos
     UpdatePlanePosition();
     initLetterSize(1);
     _sequenceRunning=false;
-    buildTestQueue();
+//    buildTestQueue();
 }
 
 RobotDraw::~RobotDraw()
@@ -89,24 +89,68 @@ void RobotDraw::buildTestQueue()
     qDebug() << "Queue Size =" << commandQueue.size();
 }
 
+
 void RobotDraw::startDrawTimer()
 {
     if(_sequenceRunning)
         return;
+
+    // Neue Zeichnung beginnt
+    trajectoryStarted = false;
+    currentTrajectoryEnd = QVector3D();
+
+    start_2x = true;
     _sequenceRunning = true;
 
+    _robot->slowDown();
     executeNext();
 }
+void RobotDraw::stopDrawTimer()
+{
+    commandQueue.clear();
+
+    trajectoryStarted = false;
+    currentTrajectoryEnd = QVector3D();
+
+    penDown = false;
+
+    _sequenceRunning = false;
+    _waitingForRobot = false;
+
+    qDebug() << "=== NEW TRAJECTORY READY ===";
+}
+
 
 void RobotDraw::executeNext()
 {
+
+    qDebug() << "========== executeNext ==========";
+        qDebug() << "sequenceRunning:" << _sequenceRunning;
+        qDebug() << "queue size:" << commandQueue.size();
+        qDebug() << "start_2x:" << start_2x;
+        qDebug() << "trajectoryStarted:" << trajectoryStarted;
+        qDebug() << "currentTrajectoryEnd:" << currentTrajectoryEnd;
+
     if(!_sequenceRunning)
         return;
-
+    here:
     if(commandQueue.isEmpty())
     {
         qDebug() << "Queue finished";
-
+        if(start_2x)
+        {
+            qDebug()<<"start2x";
+            commandQueue.enqueue({
+                CommandType::PenUp,
+                 currentTrajectoryEnd
+            });
+            commandQueue.enqueue({
+                CommandType::Home
+            });
+            start_2x=false;
+            goto here;
+        }
+        stopDrawTimer();
         _sequenceRunning = false;
         return;
     }
@@ -191,13 +235,14 @@ void RobotDraw::executeDraw(QVector3D point)
     QVector3D robotPoint = simulateMovement(point);
     qDebug()<<"robotPoint"<<point;
     if(penDown){
-        emit drawLine(Plane2BasePoint(currentPenPoint),Plane2BasePoint(point));
-        qDebug()<<"drawLine"<<currentPenPoint<<point;
+        emit drawLine(Plane2BasePoint(currentTrajectoryEnd),Plane2BasePoint(point));
+        qDebug()<<"drawLine"<<currentTrajectoryEnd<<point;
     }
 
-    currentPenPoint = point;
+    currentTrajectoryEnd = point;
     if(_robot->IsConnected()||_simulationMode)
     {
+        _robot->slowDown();
         _robot->UpdatePositionLinear();
     }
     else
@@ -230,7 +275,7 @@ void RobotDraw::executePenDown(QVector3D point)
 
     QVector3D robotPoint = simulateMovement(point);
     penDown = true;
-    currentPenPoint = point;
+    currentTrajectoryEnd = point;
 
     if(_robot->IsConnected()||_simulationMode)
     {
@@ -291,7 +336,7 @@ void RobotDraw::executeCircle(RobotCommand cmd)
 
     robotCirclePts_vec.append(end_circlePt);
 
-    currentPenPoint = end_circlePt.toVector3D();
+    currentTrajectoryEnd = end_circlePt.toVector3D();
 
     calculateL1_new(Plane2BasePoint(center.toVector3D()));
 
@@ -469,33 +514,8 @@ void RobotDraw::commandFinished()
     executeNext();
 }
 
-// void RobotDraw::startDrawTimer()
-// {
-//     // qDebug()<<"checking";
-//     // if(_robot->IsConnected()){
-//     //     onRobotConnected();
-//     // }else{
-//     //     onRobotDisconnected();}
-//     qDebug()<<"startet Timer";
-//     if (_sequenceRunning)
-//         return;
-//     qDebug()<<"functional Start";
-//     _sequenceRunning = true;
-//     _waitingForRobot = false;
 
-//     robDraw_onTimeout();   // erster Schritt
-// }
 
-void RobotDraw::stopDrawTimer()
-{
-    commandQueue.clear();
-
-    trajectoryStarted = false;
-    currentTrajectoryEnd = QVector3D();
-
-    // buildTestQueue();
-
-}
 void RobotDraw::enqueueLetter()
 {
     for(const QVariantList& list : currentLetter)

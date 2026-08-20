@@ -107,38 +107,125 @@ void RobotDrawUi::on_timerSpeedSlider_sliderMoved(int position)
 
 
 
+//void RobotDrawUi::on_pushButton_drawLinePoint_clicked()
+//{
+//    P1=QVector2D(ui->doubleSpinBox_x1->value(),ui->doubleSpinBox_y1->value());
+//    P2=QVector2D(ui->doubleSpinBox_x2->value(),ui->doubleSpinBox_y2->value());
+//    if(ui->radioButton_Point->isChecked()){
+
+//        _robDraw->AddPoint2Buffer(P1.toVector3D());
+//        _robDraw->AddPoint2Buffer(P1.toVector3D()+QVector3D(0,0,50));
+//    }else{
+//        _robDraw->AddLine2Buffer(P1,P2);
+//        _widget3d->addCylinderBetweenPoints(P1.toVector3D(),P2.toVector3D());
+//        _robDraw->dontDrawPoint = false;
+//    }
+//     preview_isDrawn = true;
+//    // _widget3d->drawPoint(P2,5,QColor(0,255,255));
+//}
+
 void RobotDrawUi::on_pushButton_drawLinePoint_clicked()
 {
-    P1=QVector2D(ui->doubleSpinBox_x1->value(),ui->doubleSpinBox_y1->value());
-    P2=QVector2D(ui->doubleSpinBox_x2->value(),ui->doubleSpinBox_y2->value());
-    if(ui->radioButton_Point->isChecked()){
+    P1 = QVector2D(
+        ui->doubleSpinBox_x1->value(),
+        ui->doubleSpinBox_y1->value());
 
-        _robDraw->AddPoint2Buffer(P1.toVector3D());
-        _robDraw->AddPoint2Buffer(P1.toVector3D()+QVector3D(0,0,50));
-    }else{
-        _robDraw->AddLine2Buffer(P1,P2);
-        _widget3d->addCylinderBetweenPoints(P1.toVector3D(),P2.toVector3D());
-        _robDraw->dontDrawPoint = false;
+    P2 = QVector2D(
+        ui->doubleSpinBox_x2->value(),
+        ui->doubleSpinBox_y2->value());
+
+    if (ui->radioButton_Point->isChecked())
+    {
+        QVector3D point = P1.toVector3D();
+
+        _robDraw->enqueuePoint(point);
+        _widget3d->drawPoint(
+            _robDraw->Plane2BasePoint(point)
+        );
     }
-     preview_isDrawn = true;
-    // _widget3d->drawPoint(P2,5,QColor(0,255,255));
-}
+    else
+    {
+        QVector3D start = P1.toVector3D();
+        QVector3D end   = P2.toVector3D();
 
+        _robDraw->enqueueLine(start, end);
 
-void RobotDrawUi::on_pushButton_drawCircle_clicked()
-{
-    QVariantList circleList;
-    float radius = ui->doubleSpinBox_radius->value();
-    P1=QVector2D(ui->doubleSpinBox_XMid->value(),ui->doubleSpinBox_YMid->value());
-    circleList.append(radius);
-    circleList.append(P1);
-    circleList.append(QVector2D(0,360));
-    _robDraw->AddLine2Buffer(QVector3D(P1.x()+radius,P1.y(),0),QVector3D(P1.x()+radius,P1.y(),0));
-    _robDraw->AddCircle2Buffer(circleList);
-    _robDraw->dontDrawPoint = false;
+        // Nur Preview
+        _widget3d->addCylinderBetweenPoints(
+            _robDraw->Plane2BasePoint(start),
+            _robDraw->Plane2BasePoint(end)
+        );
+    }
+
     preview_isDrawn = true;
 }
 
+
+//void RobotDrawUi::on_pushButton_drawCircle_clicked()
+//{
+//    QVariantList circleList;
+//    float radius = ui->doubleSpinBox_radius->value();
+//    P1=QVector2D(ui->doubleSpinBox_XMid->value(),ui->doubleSpinBox_YMid->value());
+//    circleList.append(radius);
+//    circleList.append(P1);
+//    circleList.append(QVector2D(0,360));
+//    _robDraw->AddLine2Buffer(QVector3D(P1.x()+radius,P1.y(),0),QVector3D(P1.x()+radius,P1.y(),0));
+//    _robDraw->AddCircle2Buffer(circleList);
+//    _robDraw->dontDrawPoint = false;
+//    preview_isDrawn = true;
+//}
+void RobotDrawUi::on_pushButton_drawCircle_clicked()
+{
+    float radius = ui->doubleSpinBox_radius->value();
+
+    QVector2D center(
+        ui->doubleSpinBox_XMid->value(),
+        ui->doubleSpinBox_YMid->value());
+
+    QVariantList circleData;
+    circleData << radius;
+    circleData << center;
+    circleData << QVector2D(0.0f, 360.0f);
+
+    _robDraw->enqueueCircle(circleData);
+
+    // -------------------------
+    // Preview
+    // -------------------------
+
+    float plane_multiX =
+        _plane->xLimit / gViewSize.width();
+
+    float plane_multiY =
+        _plane->yLimit / gViewSize.height();
+
+    float radius_gw =
+        radius / plane_multiX;
+
+    QPointF sceneCenter(
+        center.x() / plane_multiX,
+        -center.y() / plane_multiY);
+
+    QPainterPath path;
+    path.addEllipse(
+        QRectF(
+            -radius_gw,
+            -radius_gw,
+            radius_gw * 2,
+            radius_gw * 2));
+
+    QGraphicsPathItem* circleItem =
+        scene->addPath(
+            path,
+            QPen(Qt::black),
+            QBrush(Qt::transparent));
+
+    circleItem->setPos(sceneCenter);
+
+    circles.append(circleItem);
+
+    preview_isDrawn = true;
+}
 
 
 void RobotDrawUi::on_pushButton_draw_clicked()
@@ -492,10 +579,10 @@ void RobotDrawUi::on_pushButton_testDistance_clicked()
 
 void RobotDrawUi::on_checkBox_clicked()
 {
-     // if(ui->checkBox->isChecked()){_material->setDiffuse(QColor(0,0,255,200));}
-     // else{_material->setDiffuse(QColor(0,0,0,0));}
+      if(ui->checkBox->isChecked()){_material->setDiffuse(QColor(0,0,255,200));}
+      else{_material->setDiffuse(QColor(0,0,0,0));}
 //    _robot->positionReachedFlag=true;
-     _robot->test();
+//     _robot->test();
 }
 
 

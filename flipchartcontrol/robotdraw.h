@@ -54,6 +54,8 @@ public:
     void setYRot(float arg);
     void enqueueLine(const QVector3D &start, const QVector3D &end);
     void enqueueCircle(const QVariantList& circleData);
+    void enqueuePoint(QVector3D point);
+
 private:
     Letters   *_letters;
     Widget3D  *_widget3d;
@@ -169,10 +171,8 @@ private:
 
     QVector3D simulateMovement(QVector3D planePoint);
     void simulateRobot();
-    QVector3D currentPenPoint;
     bool penDown;
     void enqueueLetter();
-    void enqueuePoint(QVector3D point);
     QVector3D currentTrajectoryEnd;
     bool trajectoryStarted = false;
 public slots:

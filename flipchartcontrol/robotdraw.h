@@ -52,6 +52,8 @@ public:
     QVector3D Plane2BasePoint (QVector3D point3D){return QVector3D(_plane->matrix() * point3D);}
 
     void setYRot(float arg);
+    void enqueueLine(const QVector3D &start, const QVector3D &end);
+    void enqueueCircle(const QVariantList& circleData);
 private:
     Letters   *_letters;
     Widget3D  *_widget3d;
@@ -81,7 +83,7 @@ private:
     // --- Flags ---
     bool _sequenceRunning = false;
     bool _waitingForRobot = false;
-    bool _simulationMode = true;       // Simulation default
+    bool _simulationMode = false;       // Simulation default
 
     int _timerTime = 200;              // Simulationsverzögerung
 
@@ -130,8 +132,49 @@ private:
     void  CirclePreview(QVariantList circleList);
     void DrawFirstPoint();
     void adjustRobotRangeHeigth(float height);
-
     void waitingForPositionReached();
+
+    enum class CommandType
+    {
+        PenUp,
+        PenDown,
+        MoveTo,
+        DrawTo,
+        Circle,
+        Home
+    };
+
+    struct RobotCommand
+    {
+        CommandType type;
+
+        QVector3D point;
+
+        QVariantList circleData;
+
+        bool fullCircle;        // optional für Kreise
+    };
+
+    QQueue<RobotCommand> commandQueue;
+
+    void buildTestQueue();
+    void executeHome();
+    void executePenDown(QVector3D point);
+    void executePenUp(QVector3D point);
+    void executeDraw(QVector3D point);
+    void executeMove(QVector3D point);
+    void commandFinished();
+    void executeNext();
+    void executeCircle(RobotCommand cmd);
+
+    QVector3D simulateMovement(QVector3D planePoint);
+    void simulateRobot();
+    QVector3D currentPenPoint;
+    bool penDown;
+    void enqueueLetter();
+    void enqueuePoint(QVector3D point);
+    QVector3D currentTrajectoryEnd;
+    bool trajectoryStarted = false;
 public slots:
     void startDrawTimer();      // Startet Sequenz (ohne Timer)
     void stopDrawTimer();       // Stoppt Sequenz

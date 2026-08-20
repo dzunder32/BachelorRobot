@@ -102,6 +102,9 @@ private:
     Qt3DExtras::QDiffuseSpecularMaterial* _material;
     void statusRadioButton();
     void clearAll();
+    QVector3D pendingPoint;
+    QPointF pendingScenePoint;
+    bool hasPendingPoint = false;
 signals:
     void startDrawing();
     void stopDrawing();

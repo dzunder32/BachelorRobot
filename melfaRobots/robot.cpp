@@ -88,37 +88,6 @@ void Robot::MoveToPositionLinear(Position* pos)
     Write("1;1;EXECMVS J81");
 }
 
-// void Robot::MoveInCircle(QVector3D P1,QVector3D P2,QVector3D P3,double ew1, double ew2, double ew3, double l1)
-// {
-//     Write("1;1;EXECP1=(" +QString::number(P1.x())+","
-//                          +QString::number(P1.y())+","
-//                          +QString::number(P1.z())+","
-//                          +QString::number(ew1)+","
-//                          +QString::number(ew2)+","
-//                          +QString::number(ew3)+","
-//                          +QString::number(l1)+")");
-
-//     Write("1;1;EXECP2=(" +QString::number(P2.x())+","
-//                          +QString::number(P2.y())+","
-//                          +QString::number(P2.z())+","
-//                          +QString::number(ew1)+","
-//                          +QString::number(ew2)+","
-//                          +QString::number(ew3)+","
-//                          +QString::number(l1)+")");
-
-//     Write("1;1;EXECP3=(" +QString::number(P3.x())+","
-//                          +QString::number(P3.y())+","
-//                          +QString::number(P3.z())+","
-//                          +QString::number(ew1)+","
-//                          +QString::number(ew2)+","
-//                          +QString::number(ew3)+","
-//                          +QString::number(l1)+")");
-
-//     Write("1;1;EXECMVR P1,P2,P3");
-//     Write("USR:PositionChanged");
-
-// }
-
 void Robot::MoveCircularJ(QVector <double> joints1,QVector <double> joints2,QVector <double> joints3,double joint7,bool drawCirc)
 {
     Write("1;1;EXECJ1=(" +QString::number(joints1.at(0))+","

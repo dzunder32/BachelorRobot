@@ -64,7 +64,7 @@ public:
     void slowDown(){Write("1;1;OVRD=12");};
 
     bool positionReachedFlag = false;
-
+    void test(){emit positionReached();};
 signals:
     void robotAnswer(QString);
     void robotCommand(QString);

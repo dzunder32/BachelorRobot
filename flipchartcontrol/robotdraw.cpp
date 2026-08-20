@@ -11,24 +11,21 @@ RobotDraw::RobotDraw(Kinematik *robotKinematik, Robot *robot, QVector3D sled_pos
     _robotKinematik = robotKinematik;
     _robotKinematik->setJoints(0,0,90,0,90,0,0);
 
-    // _timer->setInterval(1000);
-    // _timer->setSingleShot(false);
-    // Defa    // connect(_robot, &Robot::Connected,
-    //         this,   &RobotDraw::onRobotConnectedF);
+    qDebug() << _robot->metaObject()->className();
+    int idx = _robot->metaObject()->indexOfSignal("positionReached()");
+        qDebug() << "Signal Index:" << idx;
 
-    // connect(_robot, &Robot::Disconnected,
-    //         this,   &RobotDraw::onRobotDisconnected);
-    // qDebug()<<"right here";ult: Simulation
-    _simulationMode = !_robot->IsConnected();
-    qDebug()<<"NOw";
     // Dynamischer Mode-Wechsel
+    qDebug()<<"NOw";
+
+    QObject::connect(_robot,SIGNAL(positionReached()),this,SLOT(onRobotPositionReached()));
 
     setL1(0);
     robotMat.rotate(90,QVector3D(0,0,1));
     UpdatePlanePosition();
     initLetterSize(1);
-
-    //    setTimerTime(500);
+    _sequenceRunning=false;
+    buildTestQueue();
 }
 
 RobotDraw::~RobotDraw()
@@ -36,31 +33,498 @@ RobotDraw::~RobotDraw()
     saveSettings();
 }
 
+void RobotDraw::buildTestQueue()
+{
+    commandQueue.clear();
+
+    commandQueue.enqueue({
+        CommandType::MoveTo,
+        QVector3D(000,100,50)
+    });
+
+    commandQueue.enqueue({
+        CommandType::PenDown,
+        QVector3D(0,100,0)
+    });
+
+    commandQueue.enqueue({
+        CommandType::DrawTo,
+        QVector3D(100,100,0)
+    });
+
+    commandQueue.enqueue({
+        CommandType::DrawTo,
+        QVector3D(200,100,0)
+    });
+
+    commandQueue.enqueue({
+        CommandType::DrawTo,
+        QVector3D(200,200,0)
+    });
+
+    commandQueue.enqueue({
+        CommandType::PenUp,
+         QVector3D(200,200,0)
+    });
+
+    QVariantList circleData;
+    circleData << 100;
+    circleData << QVector2D(0,0);
+    circleData << QVector2D(0,270);
+    commandQueue.enqueue({
+        CommandType::Circle,
+        QVector3D(),
+        circleData,
+        false
+    });
+
+
+
+    commandQueue.enqueue({
+        CommandType::Home,
+        QVector3D()
+    });
+
+
+    qDebug() << "Queue Size =" << commandQueue.size();
+}
+
 void RobotDraw::startDrawTimer()
 {
-    // qDebug()<<"checking";
-    // if(_robot->IsConnected()){
-    //     onRobotConnected();
-    // }else{
-    //     onRobotDisconnected();}
-    qDebug()<<"startet Timer";
-    if (_sequenceRunning)
+    if(_sequenceRunning)
         return;
-    qDebug()<<"functional Start";
     _sequenceRunning = true;
-    _waitingForRobot = false;
 
-    robDraw_onTimeout();   // erster Schritt
+    executeNext();
 }
+
+void RobotDraw::executeNext()
+{
+    if(!_sequenceRunning)
+        return;
+
+    if(commandQueue.isEmpty())
+    {
+        qDebug() << "Queue finished";
+
+        _sequenceRunning = false;
+        return;
+    }
+
+    RobotCommand cmd = commandQueue.dequeue();
+
+    switch(cmd.type)
+    {
+    case CommandType::PenUp:
+        executePenUp(cmd.point);
+        break;
+
+    case CommandType::PenDown:
+        executePenDown(cmd.point);
+        break;
+
+    case CommandType::MoveTo:
+        executeMove(cmd.point);
+        break;
+
+    case CommandType::DrawTo:
+        executeDraw(cmd.point);
+        break;
+
+    case CommandType::Circle:
+        executeCircle(cmd);
+        break;
+
+    case CommandType::Home:
+        executeHome();
+        break;
+    }
+}
+
+void RobotDraw::executeMove(QVector3D planePoint)
+{
+    qDebug() << "MOVE TO" << planePoint;
+
+    simulateMovement(planePoint);
+
+    if(_robot->IsConnected()||_simulationMode)
+    {
+        _robot->UpdatePosition();
+    }
+    else
+    {
+        simulateRobot();
+    }
+}
+
+void RobotDraw::simulateRobot()
+{
+    QTimer::singleShot(
+        1000,
+        this,
+        &RobotDraw::commandFinished
+        );
+}
+
+QVector3D RobotDraw::simulateMovement(QVector3D planePoint)
+{
+    calculateL1_new(Plane2BasePoint(planePoint));
+    QVector3D robotPoint = Plane2RobotPoint(planePoint);
+    // robotPoint+=QVector3D(diff_l1,0,0);
+
+
+    _robotKinematik->RobotPosition::setPoint(robotPoint.x(),
+                                             robotPoint.y(),
+                                             robotPoint.z(),
+                                             a,b,c,l1);
+    _robotKinematik->invers();
+
+    _robotKinematik->ToolMovement(Transformations::C,-_robotKinematik->j6());
+
+    return robotPoint;
+}
+
+void RobotDraw::executeDraw(QVector3D point)
+{
+    qDebug() << "DRAW TO" << point;
+
+    QVector3D robotPoint = simulateMovement(point);
+    qDebug()<<"robotPoint"<<point;
+    if(penDown){
+        emit drawLine(Plane2BasePoint(currentPenPoint),Plane2BasePoint(point));
+        qDebug()<<"drawLine"<<currentPenPoint<<point;
+    }
+
+    currentPenPoint = point;
+    if(_robot->IsConnected()||_simulationMode)
+    {
+        _robot->UpdatePositionLinear();
+    }
+    else
+    {
+        simulateRobot();
+    }
+
+}
+
+void RobotDraw::executePenUp(QVector3D point)
+{
+    qDebug() << "PEN UP";
+    point+=QVector3D(0,0,50);
+    // point.setZ(50);
+    QVector3D robotPoint = simulateMovement(point);
+    penDown = false;
+    if(_robot->IsConnected()||_simulationMode)
+    {
+        _robot->UpdatePositionLinear();
+    }
+    else
+    {
+        simulateRobot();
+    }
+}
+
+void RobotDraw::executePenDown(QVector3D point)
+{
+    qDebug() << "PEN DOWN"<< point;
+
+    QVector3D robotPoint = simulateMovement(point);
+    penDown = true;
+    currentPenPoint = point;
+
+    if(_robot->IsConnected()||_simulationMode)
+    {
+        _robot->UpdatePositionLinear();
+    }
+    else
+    {
+        simulateRobot();
+    }
+}
+
+void RobotDraw::executeHome()
+{
+    qDebug() << "HOME";
+
+    _robotKinematik->setJoints(0,0,90,0,90,0,0);
+    _robotKinematik->invers();
+
+    if(_robot->IsConnected()||_simulationMode)
+    {
+        _robot->UpdatePosition();
+    }
+    else
+    {
+        simulateRobot();
+    }
+}
+
+void RobotDraw::executeCircle(RobotCommand cmd)
+{
+    QVariantList currCircle = cmd.circleData;
+    QVector <QVector2D> robotCirclePts_vec;
+    float radius = currCircle[0].toFloat();
+    QVector2D center = currCircle[1].value<QVector2D>();
+    QVector2D angleLimits = currCircle[2].value<QVector2D>();
+    float start_angle  = angleLimits[0];
+    float end_angle   = angleLimits[1];
+    float angle_range = abs(end_angle - start_angle);
+    float mid_angle;
+    if(start_angle < end_angle)
+    {mid_angle = angle_range/2 + start_angle;}
+    else
+    {mid_angle = angle_range/2 + end_angle;}
+
+    QVector2D end_circlePt, mid_circlePt, start_circlePt;
+    start_circlePt.setX(center.x() + (radius * qCos(qDegreesToRadians(start_angle))));
+    start_circlePt.setY(center.y() + (radius * qSin(qDegreesToRadians(start_angle))));
+    robotCirclePts_vec.append(start_circlePt);
+
+    if(angle_range==360){end_angle = mid_angle; mid_angle = angle_range/4 + start_angle; drawCircle = true;}
+
+    mid_circlePt.setX(center.x() + (radius * qCos(qDegreesToRadians(mid_angle))));
+    mid_circlePt.setY(center.y() + (radius * qSin(qDegreesToRadians(mid_angle))));
+    robotCirclePts_vec.append(mid_circlePt);
+
+    end_circlePt.setX(center.x() + (radius * qCos(qDegreesToRadians(end_angle))));
+    end_circlePt.setY(center.y() + (radius * qSin(qDegreesToRadians(end_angle))));
+
+    robotCirclePts_vec.append(end_circlePt);
+
+    currentPenPoint = end_circlePt.toVector3D();
+
+    calculateL1_new(Plane2BasePoint(center.toVector3D()));
+
+    QVector <QVector <double>> J_Vec;
+
+    for(QVector2D point: robotCirclePts_vec)
+    {
+        QVector3D pointRobot = Plane2RobotPoint(point.toVector3D() );
+        _robotKinematik->RobotPosition::setPoint(pointRobot.x(),
+                                                 pointRobot.y(),
+                                                 pointRobot.z(),
+                                                 a,b,c,l1     );
+        _robotKinematik->invers();
+        J_Vec.append({_robotKinematik->j1(),_robotKinematik->j2(),_robotKinematik->j3(),_robotKinematik->j4(),_robotKinematik->j5(),0,_robotKinematik->j7()});
+    }
+
+    if(_robot->IsConnected()||_simulationMode)
+    {
+        _robot->MoveCircularJ(J_Vec[0], J_Vec[1], J_Vec[2], l1, cmd.fullCircle);
+    }
+    else
+    {
+        simulateRobot();
+    }
+    CirclePreview(currCircle);
+}
+
+void RobotDraw::enqueueLine(
+    const QVector3D& start,
+    const QVector3D& end)
+{
+    if(!trajectoryStarted)
+    {
+        commandQueue.enqueue({
+            CommandType::MoveTo,
+            start + QVector3D(0,0,50)
+        });
+
+        commandQueue.enqueue({
+            CommandType::PenDown,
+            start
+        });
+
+        trajectoryStarted = true;
+    }
+    else if((start - currentTrajectoryEnd).length() > 1.0)
+    {
+        commandQueue.enqueue({
+            CommandType::PenUp,
+            currentTrajectoryEnd
+        });
+
+        commandQueue.enqueue({
+            CommandType::MoveTo,
+            start + QVector3D(0,0,50)
+        });
+
+        commandQueue.enqueue({
+            CommandType::PenDown,
+            start
+        });
+    }
+
+    commandQueue.enqueue({
+        CommandType::DrawTo,
+        end
+    });
+
+    currentTrajectoryEnd = end;
+}
+
+void RobotDraw::enqueueCircle(const QVariantList& circleData)
+{
+    float radius =
+        circleData[0].toFloat();
+
+    QVector2D center =
+        circleData[1].value<QVector2D>();
+
+    QVector2D angleLimits =
+        circleData[2].value<QVector2D>();
+
+    float startAngle = angleLimits.x();
+    float endAngle   = angleLimits.y();
+
+    QVector3D startCirclePoint(
+        center.x() +
+            radius * qCos(qDegreesToRadians(startAngle)),
+        center.y() +
+            radius * qSin(qDegreesToRadians(startAngle)),
+        0);
+
+    QVector3D endCirclePoint(
+        center.x() +
+            radius * qCos(qDegreesToRadians(endAngle)),
+        center.y() +
+            radius * qSin(qDegreesToRadians(endAngle)),
+        0);
+
+    if(!trajectoryStarted)
+    {
+        commandQueue.enqueue({
+            CommandType::MoveTo,
+            startCirclePoint + QVector3D(0,0,50)
+        });
+
+        commandQueue.enqueue({
+            CommandType::PenDown,
+            startCirclePoint
+        });
+
+        trajectoryStarted = true;
+    }
+    else if((startCirclePoint - currentTrajectoryEnd).length() > 1.0)
+    {
+        commandQueue.enqueue({
+            CommandType::PenUp,
+            currentTrajectoryEnd
+        });
+
+        commandQueue.enqueue({
+            CommandType::MoveTo,
+            startCirclePoint + QVector3D(0,0,50)
+        });
+
+        commandQueue.enqueue({
+            CommandType::PenDown,
+            startCirclePoint
+        });
+    }
+
+    RobotCommand cmd;
+
+    cmd.type = CommandType::Circle;
+    cmd.circleData = circleData;
+
+    float angleRange =
+        qAbs(endAngle - startAngle);
+
+    cmd.fullCircle = (angleRange >= 359.0f);
+
+    commandQueue.enqueue(cmd);
+    if(cmd.fullCircle)
+    {
+        currentTrajectoryEnd = startCirclePoint;
+    }
+    else
+    {
+        currentTrajectoryEnd = endCirclePoint;
+    }
+}
+
+void RobotDraw::enqueuePoint(QVector3D point)
+{
+    commandQueue.enqueue({
+        CommandType::MoveTo,
+        point + QVector3D(0,0,50)
+    });
+
+    commandQueue.enqueue({
+        CommandType::PenDown,
+        point
+    });
+
+    commandQueue.enqueue({
+        CommandType::PenUp,
+        point
+    });
+}
+
+void RobotDraw::commandFinished()
+{
+    qDebug() << "COMMAND FINISHED";
+
+    executeNext();
+}
+
+// void RobotDraw::startDrawTimer()
+// {
+//     // qDebug()<<"checking";
+//     // if(_robot->IsConnected()){
+//     //     onRobotConnected();
+//     // }else{
+//     //     onRobotDisconnected();}
+//     qDebug()<<"startet Timer";
+//     if (_sequenceRunning)
+//         return;
+//     qDebug()<<"functional Start";
+//     _sequenceRunning = true;
+//     _waitingForRobot = false;
+
+//     robDraw_onTimeout();   // erster Schritt
+// }
 
 void RobotDraw::stopDrawTimer()
 {
-    qDebug()<<"stopping Sequence";
-    _sequenceRunning = false;
-    _waitingForRobot = false;
+    commandQueue.clear();
+
+    trajectoryStarted = false;
+    currentTrajectoryEnd = QVector3D();
+
+    // buildTestQueue();
 
 }
+void RobotDraw::enqueueLetter()
+{
+    for(const QVariantList& list : currentLetter)
+    {
+        int type = list[0].toInt();
 
+        if(type == LINE)
+        {
+            QVector3D start =
+                list[1].value<QVector2D>().toVector3D();
+
+            QVector3D end =
+                list[2].value<QVector2D>().toVector3D();
+
+            enqueueLine(start,end);
+        }
+
+        if(type == CIRCLE)
+        {
+            QVariantList circleData;
+
+            circleData << list[1];
+            circleData << list[2];
+            circleData << list[3];
+
+            enqueueCircle(circleData);
+        }
+    }
+}
 
 void RobotDraw::robDraw_onTimeout()
 {
@@ -118,11 +582,13 @@ void RobotDraw::robDraw_onTimeout()
 
 void RobotDraw::onRobotPositionReached()
 {
-    if (!_sequenceRunning)
-    {return;qDebug()<<"sequenceRunning=false";}
-
-    _waitingForRobot = false;
-    robDraw_onTimeout();
+    // if (!_sequenceRunning)
+    // {return;qDebug()<<"sequenceRunning=false";}
+    // qDebug()<<"reached the position";
+    // _waitingForRobot = false;
+    // // robDraw_onTimeout();<
+    qDebug()<<"Reached!";
+    commandFinished();
 }
 
 
@@ -184,157 +650,6 @@ void RobotDraw::robotDrawPoint()
 }
 
 
-//void RobotDraw::robotDrawLine()
-//{
-//    if(!LinesBuffer.isEmpty())
-//    {
-//        QVector <QVector3D> line = LinesBuffer.takeFirst();
-//        //save first Point
-//        startLinePoint = line[0];
-//        //check wether the distance between endPoint of current Line is bigger than 5
-//        moveAboveCounter=2;
-//        if(cartDistance(endLinePoint,startLinePoint) > 5 && alreadyDrawn)
-//        {
-//            LinesBuffer.prepend(line);robotSequence.prepend(LINE);
-//            //when distance is too big, move Tip above the plane
-//            moveTipAbove();/*qDebug()<<"now!";*/
-//            alreadyDrawn = false;
-//            qDebug()<<"changed!";
-//            robDraw_onTimeout();
-
-////            if (!_waitingForRobot)
-////            {
-
-////                robDraw_onTimeout();
-////                return;
-////            }
-//        }else
-//        {
-//            //save second Point
-//            if(cartDistance(endLinePoint,startLinePoint) > 5){
-//                robot_setPoint(Plane2RobotPoint(startLinePoint));
-//            }
-//            endLinePoint   = line[1];
-//            lastPoint=endLinePoint;
-//            //add second Line Point to Buffer as a Point
-//            PointsBuffer.prepend(endLinePoint);
-//            robotSequence.prepend(POINT);
-//            line_isTrue  = true;
-//            alreadyDrawn = true;
-//            //speed up, when currently drawing a circle
-//            if(circlePoints_counter >= circlePoints_number)
-//            {changeTimerSpeed(1);}/*qDebug()<<"no speed!!"<<_timer->interval();*/
-//            else{circlePoints_counter++;}
-
-//            if (!_waitingForRobot)
-//            {
-//                qDebug()<<"cause o dis?";
-//                robDraw_onTimeout();
-//                return;
-//            }
-//        }
-//    }
-//    else{stopTimer_goHome();}
-//}
-//void RobotDraw::robotDrawLine()
-//{
-//    if (!LinesBuffer.isEmpty())
-//    {
-//        QVector<QVector3D> line = LinesBuffer.takeFirst();
-
-//        // =====================================================
-//        // Ersten Punkt der Linie speichern
-//        // =====================================================
-
-//        startLinePoint = line[0];
-
-//        moveAboveCounter = 2;
-
-
-//        // =====================================================
-//        // Prüfen, ob wir erst über die Linie fahren müssen
-//        // =====================================================
-
-//        if (cartDistance(endLinePoint, startLinePoint) > 5
-//            && alreadyDrawn)
-//        {
-//            LinesBuffer.prepend(line);
-//            robotSequence.prepend(LINE);
-
-//            moveTipAbove();
-
-//            alreadyDrawn = false;
-
-//            qDebug() << "changed!";
-
-//            // Wichtig:
-//            // Nicht rekursiv sofort weitermachen.
-//            // Die erzeugten POINTs werden über die Sequence
-//            // abgearbeitet.
-////            if (!_simulationMode)
-//            {
-//                robDraw_onTimeout();
-//            }
-
-//            return;
-//        }
-
-
-//        // =====================================================
-//        // Ersten Linienpunkt anfahren
-//        // =====================================================
-
-//        if (cartDistance(endLinePoint, startLinePoint) > 5)
-//        {
-//            qDebug() << "Moving to FIRST line point";
-
-//            robot_setPoint(
-//                Plane2RobotPoint(startLinePoint)
-//            );
-//        }
-
-
-//        // =====================================================
-//        // HIER sind wir jetzt am ersten Linienpunkt
-//        // =====================================================
-
-//        endLinePoint = line[1];
-
-//        lastPoint = endLinePoint;
-
-
-//        // Zweiten Punkt als normalen POINT vorbereiten
-
-//        PointsBuffer.prepend(endLinePoint);
-//        robotSequence.prepend(POINT);
-
-
-//        line_isTrue = true;
-//        alreadyDrawn = true;
-
-
-//        qDebug() << "FIRST line point reached";
-//        qDebug() << "Next sequence = POINT";
-//        qDebug() << "PointsBuffer size =" << PointsBuffer.size();
-
-
-//        // =====================================================
-//        // Beim echten Roboter direkt mit dem zweiten Punkt
-//        // weitermachen.
-//        // =====================================================
-
-////        if (!_simulationMode)
-//        {
-//            robDraw_onTimeout();
-//        }
-
-//        return;
-//    }
-
-
-//    // Keine Linien mehr
-//    stopTimer_goHome();
-//}
 void RobotDraw::robotDrawLine()
 {
     if (!LinesBuffer.isEmpty())
@@ -1008,7 +1323,7 @@ void RobotDraw::getLetterData(QChar char_letter)
         else
         {
             _letters->shiftLetter(currentLetter,shiftVector);
-            addLetter2Buffer();
+            enqueueLetter();
             gotoNextBox();
         }
     }

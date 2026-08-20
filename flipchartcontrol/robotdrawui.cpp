@@ -21,7 +21,6 @@ RobotDrawUi::RobotDrawUi(Kinematik *robotKinematik,Robot *robot, QVector3D sled_
     connect(_robDraw, &RobotDraw::drawLine,_widget3d, &Widget3D::addCylinderBetweenPoints);
 //    connect(_robDraw, &RobotDraw::drawPoint_Widget,this, &RobotDrawUi::widgetDrawPoint);
     connect(_robDraw, &RobotDraw::drawPoint_Widget,_widget3d, &Widget3D::drawPoint);
-
 //    connect(_robDraw, &RobotDraw::changeTimerSpeed,this, &RobotDrawUi::increaseTimerSpeed);
     connect(this,&RobotDrawUi::startDrawing,_robDraw,&RobotDraw::startDrawTimer);
     connect(this,&RobotDrawUi::stopDrawing,_robDraw,&RobotDraw::stopDrawTimer);
@@ -96,6 +95,7 @@ void RobotDrawUi::on_pushButtonStop_clicked()
 {
     emit stopDrawing();
     qDebug()<<"TimerStopped";
+    clearAll();
 }
 
 
@@ -298,10 +298,11 @@ void RobotDrawUi::addCircle(qreal x, qreal y)
             // Store the item
             circles.append(circleItem);
             QVariantList circleVariant;
-            circleVariant<<radius_plane<<pre_point2D<<QVector2D(0,360);
-            _robDraw->AddLine2Buffer(QVector3D(pre_point2D.x()+radius_plane,pre_point2D.y(),0),QVector3D(pre_point2D.x()+radius_plane,pre_point2D.y(),0));
-            // _robDraw->AddLine2Buffer(pre_point2D,pre_point2D);
-            _robDraw->AddCircle2Buffer(circleVariant);
+            circleVariant << radius_plane
+                          << pre_point2D
+                          << QVector2D(0,360);
+
+            _robDraw->enqueueCircle(circleVariant);
         }
     }
 }
@@ -309,39 +310,56 @@ void RobotDrawUi::addCircle(qreal x, qreal y)
 void RobotDrawUi::addPressedPoint(qreal x, qreal y)
 {
     addPoint(x,y);
-    float plane_multiX = _plane->xLimit/gViewSize.width();
-    float plane_multiY = _plane->yLimit/gViewSize.height();
 
+    float plane_multiX = _plane->xLimit / gViewSize.width();
+    float plane_multiY = _plane->yLimit / gViewSize.height();
 
-    if(ui->checkBox_circle->isChecked()&& !liftTip_isTrue)
+    QVector3D clickedPoint(
+        qRound(x * plane_multiX),
+        qRound(-y * plane_multiY),
+        0);
+
+    // Kreis-Modus
+    if(ui->checkBox_circle->isChecked() && !liftTip_isTrue)
     {
         addCircle(x,y);
+        return;
     }
-    else if(points.length()>1 && !liftTip_isTrue)
-    {
-        if(point_isDrawn){
-            _robDraw->removeLastPoint();
-            _robDraw->removeLastPointUP();
-            // _robDraw->removeLastPoint();
 
-            point_isDrawn = false;
-        }
-        QPointF linePt1 = points[points.length()-2]->pos();
-
-        QPointF linePt2(x,y);
-        addLine(linePt1,linePt2);
-        QVector3D lineVec1 = QVector3D(qRound(linePt1.x()*plane_multiX),qRound(-linePt1.y()*plane_multiY),0);
-        QVector3D lineVec2 = QVector3D(qRound(linePt2.x()*plane_multiX),qRound(-linePt2.y()*plane_multiY),0);
-        _robDraw->AddLine2Buffer(lineVec1,lineVec2);
-        }else
+    if(liftTip_isTrue)
     {
-        _robDraw->AddPointUP2Buffer(QVector3D(x*plane_multiX,-y*plane_multiY,0));
-        _robDraw->AddPoint2Buffer(QVector3D(x*plane_multiX,-y*plane_multiY,0));
-        _robDraw->AddPointUP2Buffer(QVector3D(x*plane_multiX,-y*plane_multiY,0));
-        point_isDrawn = true;
+        hasPendingPoint = false;
+        return;
     }
+
+    //------------------------------------------------------------------
+    // Erster Punkt
+    //------------------------------------------------------------------
+
+    if(!hasPendingPoint)
+    {
+        pendingPoint = clickedPoint;
+        pendingScenePoint = QPointF(x,y);
+
+        hasPendingPoint = true;
+        return;
+    }
+
+    //------------------------------------------------------------------
+    // Ab zweitem Punkt
+    //------------------------------------------------------------------
+
+    addLine(
+        pendingScenePoint,
+        QPointF(x,y));
+
+    _robDraw->enqueueLine(
+        pendingPoint,
+        clickedPoint);
+
+    pendingPoint = clickedPoint;
+    pendingScenePoint = QPointF(x,y);
 }
-
 
 void RobotDrawUi::drawGWBackground()
 {
@@ -408,6 +426,7 @@ void RobotDrawUi::on_pushButton_lift_clicked()
         liftTip_isTrue = true;
         ui->pushButton_lift->setText("lower Tip");
     }
+    hasPendingPoint = false;
 }
 
 void RobotDrawUi::clearAll(){
@@ -418,6 +437,7 @@ void RobotDrawUi::clearAll(){
     preview_isDrawn = true;
     _robDraw->dontDrawPoint = false;
     _robDraw->lastPoint_drawn = true;
+    hasPendingPoint = false;
     // _robDraw->UpdatePlanePosition();
 }
 
@@ -472,9 +492,10 @@ void RobotDrawUi::on_pushButton_testDistance_clicked()
 
 void RobotDrawUi::on_checkBox_clicked()
 {
-     if(ui->checkBox->isChecked()){_material->setDiffuse(QColor(0,0,255,200));}
-     else{_material->setDiffuse(QColor(0,0,0,0));}
+     // if(ui->checkBox->isChecked()){_material->setDiffuse(QColor(0,0,255,200));}
+     // else{_material->setDiffuse(QColor(0,0,0,0));}
 //    _robot->positionReachedFlag=true;
+     _robot->test();
 }
 
 
